@@ -1,18 +1,70 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8">
-	<title>Estructura acad&eacute;mica</title>
-	<link rel="stylesheet" href="/static/jstree/themes/default/style.min.css" />
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="/static/jstree/jstree.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Estructura acad&eacute;mica</title>
+    <link rel="stylesheet" href="/static/jstree/themes/default/style.min.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="/static/jstree/jstree.min.js"></script>
 </head>
+
 <body>
-	<div id="cont1"></div>
-	<div id="cont2"></div>
-	<div id="cont3"></div>
-	<script type="text/javascript">
-	$('#cont1').jstree();
-	</script>
+    <div>
+        <div style="display: inline-block;width:30%;">
+            <div id="cont1"></div>
+        </div>
+        <div style="display: inline-block;width:30%;">
+            <div id="cont2"></div>
+        </div>
+        <div style="display: inline-block;width:30%;">
+            <div id="cont3"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function fillDivTree(selector, callbackSelect) {
+        $(selector).on('changed.jstree', callbackSelect)
+            // create the instance
+            .jstree({
+                'core': {
+                    'multiple': false,
+                    'data': [{
+                        "id": "ajson1",
+                        "parent": "#",
+                        "text": "Simple root node"
+                    }, {
+                        "id": "ajson2",
+                        "parent": "#",
+                        "text": "Root node 2"
+                    }, {
+                        "id": "ajson3",
+                        "parent": "ajson2",
+                        "text": "Child 1"
+                    }, {
+                        "id": "ajson4",
+                        "parent": "ajson2",
+                        "text": "Child 2"
+                    }, ]
+                }
+            });
+    }
+
+    function tree1Select(e, data) {
+        var selected = data.selected[0];
+        fillDivTree('#cont2', tree2Select);
+    }
+
+    function tree2Select(e, data) {
+        var selected = data.selected[0];
+        fillDivTree('#cont3', tree3Select);
+    }
+
+    function tree3Select(e, data) {
+        var selected = data.selected[0];
+    }
+    fillDivTree('#cont1', tree1Select);
+    </script>
 </body>
+
 </html>

@@ -16,7 +16,7 @@ class MyUser(User):
 	)
 	rol = models.IntegerField(choices=TIPO_CHOICES, default=PROFESOR)
 
-	def __str__(self):              # __unicode__ on Python 2
+	def __unicode__(self):              # __unicode__ on Python 2
 		return self.get_full_name()
 
 	def save(self, *args, **kwargs):
@@ -27,14 +27,14 @@ class MyUser(User):
 class Area(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
 
-	def __str__(self):              # __unicode__ on Python 2
+	def __unicode__(self):              # __unicode__ on Python 2
 		return self.nombre
 
 class Departamento(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
 	area = models.ForeignKey(Area)
 
-	def __str__(self):              # __unicode__ on Python 2
+	def __unicode__(self):              # __unicode__ on Python 2
 		return self.nombre
 
 class Asignatura(models.Model):
@@ -44,7 +44,7 @@ class Asignatura(models.Model):
 	departamento = models.ForeignKey(Departamento)
 	presidente = models.ForeignKey(MyUser, related_name="asignatura_presidente")
 
-	def __str__(self):              # __unicode__ on Python 2
+	def __unicode__(self):              # __unicode__ on Python 2
 		return self.nombre
 
 class Clases (models.Model):
@@ -60,7 +60,7 @@ class InstrumentoEvaluacion(models.Model):
 	oficial = models.BooleanField(default=False)
 	fecha_modif = models.DateTimeField(auto_now=True)
 
-	def __str__(self):              # __unicode__ on Python 2
+	def __unicode__(self):              # __unicode__ on Python 2
 		return self.titulo
 
 #####################
@@ -71,7 +71,7 @@ class CategoriaRubrica (models.Model):
 	texto = models.CharField(max_length=60, null=True, blank=True)
 	rubrica = models.ForeignKey(Rubrica)
 
-	def __str__(self):              # __unicode__ on Python 2
+	def __unicode__(self):              # __unicode__ on Python 2
 		return self.texto
 
 class PonderacionRubrica (models.Model):
@@ -79,7 +79,7 @@ class PonderacionRubrica (models.Model):
 	categoria = models.ForeignKey(CategoriaRubrica)
 	descripcion = models.CharField(max_length=60, null=True, blank=True)
 
-	def __str__(self):              # __unicode__ on Python 2
+	def __unicode__(self):              # __unicode__ on Python 2
 		return self.descripcion
 
 #####################
@@ -91,7 +91,7 @@ class IndicadorCotejo(models.Model):
 	texto = models.CharField(max_length=60, null=True, blank=True)
 	valor= models.IntegerField() #definir valor maximo y minimo #valor hecho, no realizado, pendiente
 
-	def __str__(self):              # __unicode__ on Python 2
+	def __unicode__(self):              # __unicode__ on Python 2
 		return self.texto
 
 #####################
@@ -102,7 +102,7 @@ class CategoriaListaObs(models.Model):
 	listaobs = models.ForeignKey(ListaObservacion)
 	texto = models.CharField(max_length=60, null=True, blank=True)
 
-	def __str__(self):              # __unicode__ on Python 2
+	def __unicode__(self):              # __unicode__ on Python 2
 		return self.texto
 
 class IndicadorListaObs(models.Model):
@@ -110,7 +110,7 @@ class IndicadorListaObs(models.Model):
 	texto = models.CharField(max_length=60, null=True, blank=True)
 	valor = models.IntegerField() 
 
-	def __str__(self):              # __unicode__ on Python 2
+	def __unicode__(self):              # __unicode__ on Python 2
 		return self.texto
 
 #####################
