@@ -57,3 +57,4 @@ def estructura_json(request):
             })
     serialized_data = json.dumps(res)
     return HttpResponse(serialized_data, mimetype="application/json")
+
