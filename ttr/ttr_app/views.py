@@ -9,7 +9,7 @@ from django.http import HttpResponse
 def estructura(request):
 	return render(request, 'estructura.html')
 
-def estructura_json(request):
+def get_estructura_json():
 	areas = Area.objects.all()
 	departamentos = Departamento.objects.all()
 	res = []
@@ -25,5 +25,8 @@ def estructura_json(request):
 			'parent' : 'area'+str(dep.area.pk),
 			'text' : dep.nombre
 			})
-	serialized_data = json.dumps(res)
+	return res
+
+def estructura_json(request):
+	serialized_data = json.dumps(get_estructura_json())
 	return HttpResponse(serialized_data, mimetype="application/json")
