@@ -93,10 +93,14 @@
         </div>
     </div>
     
-    <form method="post" action="index.html" class="login">
+    <form method="post"  class="login">
+        {% csrf_token %}
+                    {% if wrong_data %}
+                        <p style="color:red;">Revisa tus datos</p>
+                    {% endif %}
     <p>
       <label for="login">Email:</label>
-      <input type="text" name="login" id="login" value="name@example.com">
+      <input type="text" name="username" id="username" value="name@example.com">
     </p>
 
     <p>
@@ -109,6 +113,10 @@
     </p>
 
     <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
+
+    {% if next %}
+                        <input type="hidden" name="next" value="{{next}}" />
+                    {% endif %}
   </form>
 </body>
 </html>
