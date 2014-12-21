@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
-    # url(r'^estructura/', ''),
+    url(r'^estructura/', 'ttr_app.views.estructura'),
     # url(r'^instrumentos/', ''),
     # url(r'^instrumento/', ''),
     # url(r'^instrumento/agregar', ''),
