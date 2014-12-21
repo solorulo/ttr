@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^estructura/', 'ttr_app.views.estructura'),
+    url(r'^index/', 'ttr_app.views.index'),
+    url(r'^login/', 'ttr_app.views.login'),
     # url(r'^instrumentos/', ''),
     # url(r'^instrumento/', ''),
     # url(r'^instrumento/agregar', ''),
