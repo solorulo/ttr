@@ -35,3 +35,6 @@ def get_estructura_json():
 def estructura_json(request):
 	serialized_data = json.dumps(get_estructura_json())
 	return HttpResponse(serialized_data, mimetype="application/json")
+
+def newUser(request):
+	return render(request,'newUser.html')	
