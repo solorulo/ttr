@@ -7,17 +7,24 @@
     <link rel="stylesheet" href="/static/jstree/themes/default/style.min.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="/static/jstree/jstree.min.js"></script>
+    <style type="text/css">
+    	.treeColumn {
+    		display: inline-block;
+    		width:33%;
+    		vertical-align: top;
+    	}
+    </style>
 </head>
 
 <body>
     <div>
-        <div style="display: inline-block;width:30%;">
+        <div class="treeColumn">
             <div id="cont1"></div>
         </div>
-        <div style="display: inline-block;width:30%;">
+        <div class="treeColumn">
             <div id="cont2"></div>
         </div>
-        <div style="display: inline-block;width:30%;">
+        <div class="treeColumn">
             <div id="cont3"></div>
         </div>
     </div>
@@ -48,10 +55,15 @@
                     }, ]
                 }
             });
+
+		
+        
     }
 
     function tree1Select(e, data) {
         var selected = data.selected[0];
+        var node_selected = data.instance.get_node(selected)
+        console.log(node_selected);
         fillDivTree('#cont2', tree2Select);
     }
 
@@ -63,7 +75,18 @@
     function tree3Select(e, data) {
         var selected = data.selected[0];
     }
-    fillDivTree('#cont1', tree1Select);
+    // fillDivTree('#cont1', tree1Select);
+    $('#cont1').on('changed.jstree', tree1Select).jstree({
+                'core': {
+                    'multiple': false,
+                    'data': {
+						"url" : "/estructura/json",
+						"data" : function (node) {
+							return { "id" : node.id };
+						}
+					}
+                }
+            });
     </script>
 </body>
 
