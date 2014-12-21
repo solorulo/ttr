@@ -48,6 +48,9 @@
                     }, ]
                 }
             });
+
+		
+        
     }
 
     function tree1Select(e, data) {
@@ -63,7 +66,18 @@
     function tree3Select(e, data) {
         var selected = data.selected[0];
     }
-    fillDivTree('#cont1', tree1Select);
+    // fillDivTree('#cont1', tree1Select);
+    $('#cont1').on('changed.jstree', tree1Select).jstree({
+                'core': {
+                    'multiple': false,
+                    'data': {
+						"url" : "./json",
+						"data" : function (node) {
+							return { "id" : node.id };
+						}
+					}
+                }
+            });
     </script>
 </body>
 
