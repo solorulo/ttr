@@ -152,7 +152,7 @@ def registrarUsuario(request):
     nombres = request.POST.get("nombres",None)
     aPaterno = request.POST.get("aPaterno",None)
     aMaterno = request.POST.get("aMaterno", None)
-    asignaturas = request.POST.getlist("asignaturas[]", None)
+    asignaturas = request.POST.getlist("asignaturas", None)
     rol = request.POST.get("rol",None)
 
     new_user = MyUser(
@@ -168,9 +168,12 @@ def registrarUsuario(request):
         user=new_user
     )
     asignarAsignatura.save()
-
+    print ("asignaturas")
+    print ("asignaturas")
     for asignatura in asignaturas:
-        asignarAsignatura.asignaturas.add(int(asignaturas))
+        print (asignatura)
+        asignarAsignatura.asignaturas.add(int(asignatura))
+    # asignarAsignatura.asignaturas.save()
 
     return render(request,'newUser.html')
 
@@ -187,7 +190,9 @@ def eliminarUsuario(request):
 def consultarUsuario(request):
     id=request.GET.get("id",None)
     usuario=MyUser.objects.get(pk=id)
-    return render(request,"consultarUsuario.html", {"usuario": usuario})
+    listaAsignaturas=Asignatura.objects.all()
+    clases = Clases.objects.get(user_id=id)
+    return render(request,"consultarUsuario.html", {"usuario": usuario, "asignaturas": listaAsignaturas, "clases":clases.asignaturas.all()})
 
 def editarUsuario(request):
     return render(request,"consultarUsuario.html")
