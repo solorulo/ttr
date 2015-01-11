@@ -63,7 +63,26 @@ def estructura_json(request):
 
    
 def newAsignature(request):
-    return render(request,'newAsignature.html')
+    listaDepartamentos= Departamento.objects.all().values("pk","nombre")
+    listaUsuarios= MyUser.objects.all().values("pk","first_name")
+    return render(request,'newAsignature.html',{"departamentos": listaDepartamentos, "usuarios": listaUsuarios})
+
+def registrarAsignatura(request):
+    if not 'nombreA' in request.POST:
+        return render(request, 'newAsignature.html',{'wrong_data':True})
+    nombreAsignatura= request.POST.get("nombreA", None)
+    autor= request.POST.get("autorA",None)
+    departamento= request.POST.get("departamentoA",None)
+    presidente= request.POST.get("presidenteA", None)
+
+    new_asignatura= Asignatura(
+            nombre=nombreAsignatura,
+            autor_id= int(autor),
+            departamento_id= int(departamento),
+            presidente_id= int(presidente)
+        )
+    new_asignatura.save()
+    return render(request,"newAsignature.html")
 def newUser(request):
     listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
     return render(request,'newUser.html', {"asignaturas": listaAsignaturas})
