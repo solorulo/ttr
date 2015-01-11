@@ -114,7 +114,11 @@
                 <select data-placeholder="Departamento" name="departamentoA">
                     <option value></option>
                     {% for depto in departamentos %}
-                    <option value="{{ depto.pk }}">{{depto.nombre}}</option>    
+                        {% if asignatura.departamento_id == depto.pk  %}
+                            <option value="{{ depto.pk }}" selected>{{depto.nombre}}</option> 
+                        {% else %}
+                            <option value="{{ depto.pk }}">{{depto.nombre}}</option> 
+                        {% endif %} 
                     {% endfor %}
                 </select><br>
                 <!--<input type="text" id="asignatura" name="asignatura" required><br>-->
@@ -122,7 +126,13 @@
                 <select data-placeholder="Presidente" name="presidenteA">
                     <option value></option>
                     {% for presidente in usuarios %}
-                    <option value="{{ presidente.pk }}">{{presidente.first_name}}</option>    
+
+                      {% if asignatura.presidente_id == presidente.pk  %}
+                            <option value="{{ presidente.pk }}" selected>{{presidente.first_name}}</option> 
+                        {% else %}
+                            <option value="{{ presidente.pk }}">{{presidente.first_name}}</option> 
+                        {% endif %}  
+                        
                     {% endfor %}
                 </select><br>
                 <input type="submit" Value="Guardar Asignatura" id="btnRegistrarA">

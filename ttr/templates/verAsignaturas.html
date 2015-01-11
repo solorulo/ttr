@@ -106,8 +106,6 @@
                 <table>
                     <tr>
                         <td> Nombre: </td>
-                        <td> Autor: </td>
-                        <td> Departamento: </td>
                         <td> Presidente: </td>
                         <td></td>
                         <td></td>
@@ -115,8 +113,6 @@
                     {% for asigna in asignaturas %}
                     <tr>
                         <td>{{asigna.nombre}}</td>
-                        <td>{{asigna.autor}}</td>
-                        <td>{{asigna.departamento}}</td>
                         <td>{{asigna.presidente}}</td>
                         <td><button onclick="consultarAsignatura({{asigna.pk}});">Modificar</button></td>
                         <td><button onclick="eliminarAsignatura({{asigna.pk}});">Eliminar</button></td>
