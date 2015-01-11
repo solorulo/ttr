@@ -8,7 +8,7 @@
 		 <div id="contenido" align="center">
 		 	<form method="post" action="/usuario/consultar/modificar"  class="modificarUsuario">
 		 		{% csrf_token %}
-
+		 		<input type="hidden" id="id" name="id" value="{{usuario.pk}}">
 		 		<label for="username">Nombre de Usuario: </label>
 		 		<input type="text" id="username" name="username" required value="{{usuario.username}}"><br>
 		 		<label for="password">Contraseña: </label>

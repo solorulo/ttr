@@ -171,10 +171,7 @@ def registrarUsuario(request):
         user=new_user
     )
     asignarAsignatura.save()
-    print ("asignaturas")
-    print ("asignaturas")
     for asignatura in asignaturas:
-        print (asignatura)
         asignarAsignatura.asignaturas.add(int(asignatura))
     # asignarAsignatura.asignaturas.save()
 
@@ -199,5 +196,30 @@ def consultarUsuario(request):
     return render(request,"consultarUsuario.html", {"usuario": usuario, "asignaturas": listaAsignaturas, "clases":clases.asignaturas.all()})
 
 def editarUsuario(request):
-    return render(request,"consultarUsuario.html")
+    
+    nombreUser = request.POST.get("username", None)
+    password = request.POST.get("password", None) 
+    nombres = request.POST.get("nombres",None)
+    apellidos = request.POST.get("apellidos",None)
+    asignaturas = request.POST.getlist("asignaturas", None)
+    rol = request.POST.get("rol",None)    
+
+    id=request.POST.get("id",None)
+    usuario=MyUser.objects.get(pk=id)
+
+    usuario.username=nombreUser
+    usuario.first_name=nombres
+    usuario.last_name=apellidos
+    usuario.password=password
+    usuario.rol=int(rol)
+
+    usuario.save()
+
+    asignarAsignatura=Clases.objects.get(user_id=id)
+    asignarAsignatura.asignaturas.clear()
+    for asignatura in asignaturas:
+        asignarAsignatura.asignaturas.add(int(asignatura))
+
+    listaUsuarios=MyUser.objects.filter(rol=MyUser.PROFESOR)
+    return render(request,"visualizarUsuario.html", {"usuarios": listaUsuarios})
 
