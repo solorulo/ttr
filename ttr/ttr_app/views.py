@@ -102,7 +102,9 @@ def registrarAsignatura(request):
             presidente_id= int(presidente)
         )
     new_asignatura.save()
-    return render(request,"newAsignature.html")
+    listaDepartamentos= Departamento.objects.all().values("pk","nombre")
+    listaUsuarios= MyUser.objects.all().values("pk","first_name")
+    return render(request,'newAsignature.html',{"departamentos": listaDepartamentos, "usuarios": listaUsuarios})
 
 def verAsignaturas(request):
     listaAsignaturas= Asignatura.objects.all()
@@ -136,7 +138,8 @@ def registrarDepto(request):
             area_id=int(area)
         )
     new_Depto.save()
-    return render(request, 'newDept.html')
+    listaAreas= Area.objects.all()
+    return render(request, 'newDept.html', {"areas":listaAreas})
 
 
 def newUser(request):
@@ -172,7 +175,8 @@ def registrarUsuario(request):
     for asignatura in asignaturas:
         asignarAsignatura.asignaturas.add(int(asignaturas))
 
-    return render(request,'newUser.html')
+    listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
+    return render(request,'newUser.html', {"asignaturas": listaAsignaturas})
 
 def visualizarUsuario(request):
     listaUsuarios=MyUser.objects.filter(rol=MyUser.PROFESOR)
