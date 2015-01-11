@@ -39,26 +39,46 @@ def login(request):
 def index(request):
     return render(request, 'index.html')
 
-def get_estructura_json():
-    areas = Area.objects.all()
-    departamentos = Departamento.objects.all()
+def get_estructura_json(node, node_id):
     res = []
-    for area in areas:
-        res.append({
-            'id' : 'area' + str(area.pk),
-            'parent' : '#',
-            'text' : area.nombre
-            })
-    for dep in departamentos:
-        res.append({
-            'id' : 'depto' + str(dep.pk),
-            'parent' : 'area'+str(dep.area.pk),
-            'text' : dep.nombre
-            })
+    if node == 'base':
+        areas = Area.objects.all()
+        departamentos = Departamento.objects.all()
+        for area in areas:
+            res.append({
+                'id' : 'area' + str(area.pk),
+                'parent' : '#',
+                'text' : area.nombre
+                })
+        for dep in departamentos:
+            res.append({
+                'id' : 'depto' + str(dep.pk),
+                'parent' : 'area'+str(dep.area.pk),
+                'text' : dep.nombre
+                })
+    elif node == 'departamento':
+        # departamento = Departamento.objects.get(pk=int(node_id))
+        asignaturas = Asignatura.objects.filter(departamento__pk=int(node_id))
+        for asignatura in asignaturas:
+            res.append({
+                'id' : 'asignatura' + str(asignatura.pk),
+                'parent' : '#',
+                'text' : asignatura.nombre
+                })
+    elif node == 'asignatura':
+        # asignatura = Asignatura.objects.get(pk=int(node_id))
+        clases = Clases.objects.filter(asignaturas__id=int(node_id))
+        for clase in clases:
+            res.append({
+                'id' : 'user' + str(clase.user.pk),
+                'parent' : '#',
+                'text' : clase.user.get_full_name()
+                })
+
     return res
 
-def estructura_json(request):
-	serialized_data = json.dumps(get_estructura_json())
+def estructura_json(request, node, node_id):
+	serialized_data = json.dumps(get_estructura_json(node, node_id))
 	return HttpResponse(serialized_data, mimetype="application/json")
 
    
