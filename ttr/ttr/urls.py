@@ -15,8 +15,22 @@ urlpatterns = patterns('',
     url(r'^login/', 'ttr_app.views.login'),
 
     url(r'^estructura/$', 'ttr_app.views.estructura'),
+
+    url(r'^estructura/json/(?P<node>\w+)(/(?P<node_id>\d{1,5}))?$', 'ttr_app.views.estructura_json'),
+
     url(r'^estructura/json/$', 'ttr_app.views.estructura_json'),
-                       
+
+
+
+    url(r'^asignatura/$','ttr_app.views.newAsignature'),
+    url(r'^asignatura/agregar$','ttr_app.views.registrarAsignatura'),                       
+    url(r'^asignatura/ver$','ttr_app.views.verAsignaturas'),
+
+
+    url(r'^area/nueva$','ttr_app.views.newArea'),
+
+    url(r'^departamento/nuevo$','ttr_app.views.newDepto'),
+    url(r'^departamento/agregar$','ttr_app.views.registrarDepto'),
     # url(r'^instrumentos/', ''),
     # url(r'^instrumento/', ''),
     # url(r'^instrumento/agregar', ''),

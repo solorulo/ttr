@@ -39,27 +39,105 @@ def login(request):
 def index(request):
     return render(request, 'index.html')
 
-def get_estructura_json():
-    areas = Area.objects.all()
-    departamentos = Departamento.objects.all()
+def get_estructura_json(node, node_id):
     res = []
-    for area in areas:
-        res.append({
-            'id' : 'area' + str(area.pk),
-            'parent' : '#',
-            'text' : area.nombre
-            })
-    for dep in departamentos:
-        res.append({
-            'id' : 'depto' + str(dep.pk),
-            'parent' : 'area'+str(dep.area.pk),
-            'text' : dep.nombre
-            })
+    if node == 'base':
+        areas = Area.objects.all()
+        departamentos = Departamento.objects.all()
+        for area in areas:
+            res.append({
+                'id' : 'area' + str(area.pk),
+                'parent' : '#',
+                'text' : area.nombre
+                })
+        for dep in departamentos:
+            res.append({
+                'id' : 'depto' + str(dep.pk),
+                'parent' : 'area'+str(dep.area.pk),
+                'text' : dep.nombre
+                })
+    elif node == 'departamento':
+        # departamento = Departamento.objects.get(pk=int(node_id))
+        asignaturas = Asignatura.objects.filter(departamento__pk=int(node_id))
+        for asignatura in asignaturas:
+            res.append({
+                'id' : 'asignatura' + str(asignatura.pk),
+                'parent' : '#',
+                'text' : asignatura.nombre
+                })
+    elif node == 'asignatura':
+        # asignatura = Asignatura.objects.get(pk=int(node_id))
+        clases = Clases.objects.filter(asignaturas__id=int(node_id))
+        for clase in clases:
+            res.append({
+                'id' : 'user' + str(clase.user.pk),
+                'parent' : '#',
+                'text' : clase.user.get_full_name()
+                })
+
     return res
 
-def estructura_json(request):
-	serialized_data = json.dumps(get_estructura_json())
+def estructura_json(request, node, node_id):
+	serialized_data = json.dumps(get_estructura_json(node, node_id))
 	return HttpResponse(serialized_data, mimetype="application/json")
+
+   
+def newAsignature(request):
+    listaDepartamentos= Departamento.objects.all().values("pk","nombre")
+    listaUsuarios= MyUser.objects.all().values("pk","first_name")
+    return render(request,'newAsignature.html',{"departamentos": listaDepartamentos, "usuarios": listaUsuarios})
+
+def registrarAsignatura(request):
+    if not 'nombreA' in request.POST:
+        return render(request, 'newAsignature.html',{'wrong_data':True})
+    nombreAsignatura= request.POST.get("nombreA", None)
+    autor= request.POST.get("autorA",None)
+    departamento= request.POST.get("departamentoA",None)
+    presidente= request.POST.get("presidenteA", None)
+
+    new_asignatura= Asignatura(
+            nombre=nombreAsignatura,
+            autor_id= int(autor),
+            departamento_id= int(departamento),
+            presidente_id= int(presidente)
+        )
+    new_asignatura.save()
+    return render(request,"newAsignature.html")
+
+def verAsignaturas(request):
+    listaAsignaturas= Asignatura.objects.all()
+    return render(request,'verAsignaturas.html',{"asignaturas":listaAsignaturas})
+
+def newArea(request):
+    
+    if request.method == 'POST' and not 'nombreArea' in request.POST:
+        return render(request, 'newArea.html',{'wrong_data':True})
+
+    nombreAr= request.POST.get("nombreArea", None)
+
+    new_Area = Area(
+            nombre=nombreAr
+        )
+    new_Area.save()
+    return render(request,'newArea.html')
+    
+def newDepto(request):
+    listaAreas= Area.objects.all()
+    return render(request, 'newDept.html', {"areas":listaAreas})
+def registrarDepto(request):
+    if request.method == 'POST' and not 'nombreDepto' in request.POST:
+        return render(request, 'newDepto.html', {'wrong_data':True})
+
+    nombreDepartamento = request.POST.get("nombreDepto", None)
+    area = request.POST.get("area",None)
+
+    new_Depto= Departamento(
+            nombre=nombreDepartamento,
+            area_id=int(area)
+        )
+    new_Depto.save()
+    return render(request, 'newDept.html')
+
 
 def newUser(request):
     listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
@@ -113,8 +191,4 @@ def consultarUsuario(request):
 
 def editarUsuario(request):
     return render(request,"consultarUsuario.html")
-
-
-
-
 

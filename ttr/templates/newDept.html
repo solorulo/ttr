@@ -1,8 +1,8 @@
 <html>
     <head>
-        <title>Nombre del Proyecto Index</title>
+        <title>Registrar Asignatura</title>
         
-        <link rel="stylesheet" href="../static/css/style.css">
+        
     </head>
 <style>
     #header{
@@ -86,49 +86,35 @@
             </div>
             <div id="links">
                 HOME
-                <a href="login.html">login</a>
+                <a href="">login</a>
             </div>
         </div>
         <div id="logo3">
         </div>
     </div>
     
+   
+   <div id="contenido" align="center">
+            <!DOCTYPE html>
 
+         <div id="contenido" align="center">
+            <form method="post" action="/departamento/agregar"  class="nuevoDepartamento">
+                {% csrf_token %}
 
-    <form method="post"  class="login">
-        {% csrf_token %}
-            {% if wrong_data %}
-                <div>
-                    <p style="color:red;">Revisa tus datos</p>
-                </div>
-            {% endif %}
-     <div>
-        <div>
-            <p>
-                <label for="login">Email:</label>
-                <input type="text" name="username" id="username" value="name@example.com">
-            </p>
-        </div>
-        <div> 
-            <p>
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="password" value="4815162342">
-            </p>
-        </div>
-        <div>
-            <p class="login-submit">
-              <button type="submit" class="login-button">Login</button>
-            </p>
-        </div>
-        <div>
-            <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
-        </div>
+                <label for="nombreDepto">Nombre del Departamento: </label>
+                <input type="text" id="nombreDepto" name="nombreDepto" required><br>
+                <label for="asignatura">Area: </label>
+                <select data-placeholder="Areas"  name="area">
+                    <option value></option>
+                    {% for areaI in areas %}
+                    <option value="{{ areaI.pk }}">{{areaI.nombre}}</option>    
+                    {% endfor %}
+                </select><br>
+                <!--<input type="text" id="asignatura" name="asignatura" required><br>-->
+                <input type="submit" Value="Registrar Departamentoyy" id="btnSubmit">
+
+            </form>
+         </div>
     </div>
-
-
-    {% if next %}
-                        <input type="hidden" name="next" value="{{next}}" />
-                    {% endif %}
-  </form>
 </body>
 </html>
