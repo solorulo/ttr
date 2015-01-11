@@ -128,7 +128,24 @@ def consultarAsignatura(request):
     return render(request,'consultarAsignatura.html',{"departamentos": listaDepartamentos, "usuarios": listaUsuarios,"asignatura":asignatura},)
 
 def editarAsignatura(request):
-    return render(request,"consultarUsuario.html")
+    nombreAsignatura = request.POST.get("nombreA", None)
+    autor = request.POST.get("autorA", None) 
+    departamento = request.POST.get("departamentoA",None)
+    presidente = request.POST.get("presidenteA",None)
+    
+
+    id=request.POST.get("id",None)
+    asignatura=Asignatura.objects.get(pk=id)
+
+    asignatura.nombre=nombreAsignatura
+    asignatura.autor_id=int(autor)
+    asignatura.departamento_id=int(departamento)
+    asignatura.presidente_id=int(presidente)
+    
+
+    asignatura.save()
+    listaAsignaturas= Asignatura.objects.all()
+    return render(request,'verAsignaturas.html',{"asignaturas":listaAsignaturas})
 
 def newArea(request):
     

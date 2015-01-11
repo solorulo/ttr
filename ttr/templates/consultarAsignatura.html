@@ -106,6 +106,7 @@
                 <form method="post" action="/asignatura/consultar/modificar"  class="modificarAsignatura">
                 {% csrf_token %}
 
+                <input type="hidden" id="id" name="id" value="{{asignatura.pk}}">
                 <label for="nombreA">Nombre de Asignatura: </label>
                 <input type="text" id="nombreA" name="nombreA" required value="{{asignatura.nombre}}"><br>
                 <label for="autorA">Autor:</label>
