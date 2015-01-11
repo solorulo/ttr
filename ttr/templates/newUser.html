@@ -5,23 +5,30 @@
 		 <title>Crear Usuario</title>
 	</head>
 	<body>
-		 <div id="contenido">
-		 	<form>
+		 <div id="contenido" align="center">
+		 	<form method="post" action="/usuario/agregar/"  class="nuevoUsuario">
+		 		{% csrf_token %}
 
-		 		<label for="nombreUser">Nombre de Usuario: </label>
-		 		<input type="text" id="nombreUser" required><br>
+		 		<label for="username">Nombre de Usuario: </label>
+		 		<input type="text" id="username" name="username" required><br>
 		 		<label for="password">Contraseña: </label>
-		 		<input type="text" id="password" required><br>
+		 		<input type="text" id="password" name="password" required><br>
 		 		<label for="nombres">Nombre(s): </label>
-		 		<input type="text" id="nombres" required><br>
+		 		<input type="text" id="nombres" name="nombres" required><br>
 		 		<label for="aPaterno">Apellido Paterno: </label>
-		 		<input type="text" id="aPaterno" required><br>
+		 		<input type="text" id="aPaterno" name="aPaterno" required><br>
 		 		<label for="aMaterno">Apellido Materno: </label>
-		 		<input type="text" id="aMaterno" required><br>
+		 		<input type="text" id="aMaterno" name="aMaterno" required><br>
 		 		<label for="asignatura">Asignatura: </label>
-		 		<input type="text" id="asignatura" required><br>
+		 		<select data-placeholder="Asignaturas" multiple="true" name="asignaturas">
+		 			<option value></option>
+			 		{% for asignatura in asignaturas %}
+					<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option>    
+					{% endfor %}
+				</select><br>
+		 		<!--<input type="text" id="asignatura" name="asignatura" required><br>-->
 		 		<label for="rol">Rol: </label>
-		 		<input type="text" id="rol" required><br>
+		 		<input type="text" id="rol" name="rol" required><br>
 		 		<input type="submit" Value="Crear Usuario" id="btnSubmit">
 
 		 	</form>

@@ -16,6 +16,8 @@ urlpatterns = patterns('',
 
     url(r'^estructura/$', 'ttr_app.views.estructura'),
     url(r'^estructura/json/(?P<node>\w+)(/(?P<node_id>\d{1,5}))?$', 'ttr_app.views.estructura_json'),
+
+    url(r'^newAsignature/$','ttr_app.views.newAsignature'),
                        
     # url(r'^instrumentos/', ''),
     # url(r'^instrumento/', ''),
@@ -27,7 +29,7 @@ urlpatterns = patterns('',
     # url(r'^login/', ''),
     # url(r'^usuarios/', ''),
     url(r'^usuario/$', 'ttr_app.views.newUser'),
-    #url(r'^usuario/agregar/$', 'ttr_app.views.newUser'),
+    url(r'^usuario/agregar/$', 'ttr_app.views.registrarUsuario'),
     # url(r'^usuario/borrar', ''),
     # url(r'^areas/', ''),
     # url(r'^area/', ''),

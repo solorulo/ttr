@@ -81,5 +81,40 @@ def estructura_json(request, node, node_id):
 	serialized_data = json.dumps(get_estructura_json(node, node_id))
 	return HttpResponse(serialized_data, mimetype="application/json")
 
+   
+def newAsignature(request):
+    return render(request,'newAsignature.html')
 def newUser(request):
-	return render(request,'newUser.html')	
+    listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
+    return render(request,'newUser.html', {"asignaturas": listaAsignaturas})
+
+def registrarUsuario(request):
+    if not 'username' in request.POST or not 'password' in request.POST:
+        return render(request, 'newUser.html', {'wrong_data':True})
+    
+    nombreUser = request.POST.get("username", None)
+    password = request.POST.get("password", None) 
+    nombres = request.POST.get("nombres",None)
+    aPaterno = request.POST.get("aPaterno",None)
+    aMaterno = request.POST.get("aMaterno", None)
+    asignaturas = request.POST.getlist("asignaturas[]", None)
+    rol = request.POST.get("rol",None)
+
+    new_user = MyUser(
+            username=nombreUser,
+            first_name=nombres,
+            last_name=aPaterno +" "+ aMaterno,
+            password=password,
+            rol=int(rol)
+        )
+    new_user.save()
+
+    asignarAsignatura=Clases(
+        user=new_user
+    )
+    asignarAsignatura.save()
+
+    for asignatura in asignaturas:
+        asignarAsignatura.asignaturas.add(int(asignaturas))
+
+    return render(request,'newUser.html')
