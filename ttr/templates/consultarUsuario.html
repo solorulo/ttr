@@ -18,9 +18,16 @@
 		 		<label for="aPaterno">Apellidos: </label>
 		 		<input type="text" id="apellidos" name="apellidos" required value="{{usuario.last_name}}"><br>
 		 		<label for="asignatura">Asignatura: </label>
-		 		
-		 		
-		 		<label for="rol">Rol: </label>
+		 		<select data-placeholder="Asignaturas" multiple="true" name="asignaturas">
+			 		{% for asignatura in asignaturas %}
+				 		{% if asignatura in clases  %}
+				 		<option value="{{ asignatura.pk }}" selected>{{asignatura.nombre}}</option> 
+						{% else %}
+						<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option> 
+						{% endif %}  
+					{% endfor %}
+				</select><br>
+				<label for="rol">Rol: </label>
 		 		<input type="text" id="rol" name="rol" required value="{{usuario.rol}}"><br>
 		 		<input type="submit" Value="Editar" id="btnSubmit">
 
