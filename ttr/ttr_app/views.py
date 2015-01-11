@@ -109,6 +109,26 @@ def registrarAsignatura(request):
 def verAsignaturas(request):
     listaAsignaturas= Asignatura.objects.all()
     return render(request,'verAsignaturas.html',{"asignaturas":listaAsignaturas})
+def eliminarAsignatura(request):
+    id=request.POST.get("id",None)
+    deleteAsignatura = Asignatura.objects.get(pk=id)
+    deleteAsignatura.delete()
+    return HttpResponse("true")
+
+def consultarAsignatura(request):
+
+
+
+    id=request.GET.get("id",None)
+    asignatura=Asignatura.objects.get(pk=id)
+
+
+    listaDepartamentos= Departamento.objects.all().values("pk","nombre")
+    listaUsuarios= MyUser.objects.all().values("pk","first_name")
+    return render(request,'consultarAsignatura.html',{"departamentos": listaDepartamentos, "usuarios": listaUsuarios,"asignatura":asignatura},)
+
+def editarAsignatura(request):
+    return render(request,"consultarUsuario.html")
 
 def newArea(request):
     

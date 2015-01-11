@@ -25,6 +25,9 @@ urlpatterns = patterns('',
     url(r'^asignatura/$','ttr_app.views.newAsignature'),
     url(r'^asignatura/agregar$','ttr_app.views.registrarAsignatura'),                       
     url(r'^asignatura/ver$','ttr_app.views.verAsignaturas'),
+    url(r'^asignatura/delete$','ttr_app.views.eliminarAsignatura'),
+    url(r'^asignatura/consultar/$','ttr_app.views.consultarAsignatura'),
+    url(r'^asignatura/consultar/modificar','ttr_app.views.editarAsignatura'),
 
 
     url(r'^area/nueva$','ttr_app.views.newArea'),

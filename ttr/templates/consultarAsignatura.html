@@ -21,7 +21,7 @@
     border: 0px;
     }
     #logo1{
-    background: url(../static/img/logo_ipn.jpg) top left no-repeat;
+    background: url(/static/img/logo_ipn.jpg) top left no-repeat;
     background-size: contain;
     width: 10%;
     height: 100%;
@@ -31,7 +31,7 @@
 
     }
     #logo2{
-    background: url(../static/img/bg2.png) top left no-repeat;
+    background: url(/static/img/bg2.png) top left no-repeat;
     background-size: cover;
     width: 77%;
     height: 130px;
@@ -47,7 +47,7 @@
     float: left;
     }
     #logo3{
-    background: url(../static/img/logo_escom.png) top left no-repeat;
+    background: url(/static/img/logo_escom.png) top left no-repeat;
     background-size: contain;
     width: 13%;
     height: 100%;
@@ -103,26 +103,30 @@
                         <p style="color:red;">El tiempo de tu sesión ha acabado</p>
                     {% endif %}
 
-                <table>
-                    <tr>
-                        <td> Nombre: </td>
-                        <td> Autor: </td>
-                        <td> Departamento: </td>
-                        <td> Presidente: </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    {% for asigna in asignaturas %}
-                    <tr>
-                        <td>{{asigna.nombre}}</td>
-                        <td>{{asigna.autor}}</td>
-                        <td>{{asigna.departamento}}</td>
-                        <td>{{asigna.presidente}}</td>
-                        <td><button onclick="consultarAsignatura({{asigna.pk}});">Modificar</button></td>
-                        <td><button onclick="eliminarAsignatura({{asigna.pk}});">Eliminar</button></td>
-                    </tr>
+                <form method="post" action="/asignatura/consultar/modificar"  class="modificarAsignatura">
+                {% csrf_token %}
+
+                <label for="nombreA">Nombre de Asignatura: </label>
+                <input type="text" id="nombreA" name="nombreA" required value="{{asignatura.nombre}}"><br>
+                <label for="autorA">Autor:</label>
+                <input type="text" id="autorA" name="autorA" required value="{{asignatura.autor}}"><br>
+                <label for="departamentoA">Departamento: </label>
+                <select data-placeholder="Departamento" name="departamentoA">
+                    <option value></option>
+                    {% for depto in departamentos %}
+                    <option value="{{ depto.pk }}">{{depto.nombre}}</option>    
                     {% endfor %}
-                </table>
+                </select><br>
+                <!--<input type="text" id="asignatura" name="asignatura" required><br>-->
+                <label for="rol">Presidente: </label>
+                <select data-placeholder="Presidente" name="presidenteA">
+                    <option value></option>
+                    {% for presidente in usuarios %}
+                    <option value="{{ presidente.pk }}">{{presidente.first_name}}</option>    
+                    {% endfor %}
+                </select><br>
+                <input type="submit" Value="Guardar Asignatura" id="btnRegistrarA">
+            </form>
     </div>
 </body>
 </html>
