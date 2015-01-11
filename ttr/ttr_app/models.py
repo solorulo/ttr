@@ -28,7 +28,7 @@ class Area(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
 
 	def __unicode__(self):              # __unicode__ on Python 2
-		return self.nombre
+		return self.nombre or ''
 
 class Departamento(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)

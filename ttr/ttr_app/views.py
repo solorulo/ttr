@@ -108,6 +108,37 @@ def verAsignaturas(request):
     listaAsignaturas= Asignatura.objects.all()
     return render(request,'verAsignaturas.html',{"asignaturas":listaAsignaturas})
 
+def newArea(request):
+    
+    if request.method == 'POST' and not 'nombreArea' in request.POST:
+        return render(request, 'newArea.html',{'wrong_data':True})
+
+    nombreAr= request.POST.get("nombreArea", None)
+
+    new_Area = Area(
+            nombre=nombreAr
+        )
+    new_Area.save()
+    return render(request,'newArea.html')
+    
+def newDepto(request):
+    listaAreas= Area.objects.all()
+    return render(request, 'newDept.html', {"areas":listaAreas})
+def registrarDepto(request):
+    if request.method == 'POST' and not 'nombreDepto' in request.POST:
+        return render(request, 'newDepto.html', {'wrong_data':True})
+
+    nombreDepartamento = request.POST.get("nombreDepto", None)
+    area = request.POST.get("area",None)
+
+    new_Depto= Departamento(
+            nombre=nombreDepartamento,
+            area_id=int(area)
+        )
+    new_Depto.save()
+    return render(request, 'newDept.html')
+
+
 def newUser(request):
     listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
     return render(request,'newUser.html', {"asignaturas": listaAsignaturas})
