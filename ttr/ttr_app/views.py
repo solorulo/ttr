@@ -96,5 +96,25 @@ def registrarUsuario(request):
 
     return render(request,'newUser.html')
 
+def visualizarUsuario(request):
+    listaUsuarios=MyUser.objects.filter(rol=MyUser.PROFESOR)
+    return render(request,"visualizarUsuario.html", {"usuarios": listaUsuarios})
+
+def eliminarUsuario(request):
+    id=request.POST.get("id",None)
+    deleteUser = MyUser.objects.get(pk=id)
+    deleteUser.delete()
+    return HttpResponse("true")
+
+def consultarUsuario(request):
+    id=request.GET.get("id",None)
+    usuario=MyUser.objects.get(pk=id)
+    return render(request,"consultarUsuario.html", {"usuario": usuario})
+
+def editarUsuario(request):
+    return render(request,"consultarUsuario.html")
+
+
+
 
 
