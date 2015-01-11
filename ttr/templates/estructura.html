@@ -19,68 +19,81 @@
 <body>
     <div>
         <div class="treeColumn">
-            <div id="cont1"></div>
+            <div id="base"></div>
         </div>
         <div class="treeColumn">
-            <div id="cont2"></div>
+            <div id="depto"></div>
         </div>
         <div class="treeColumn">
-            <div id="cont3"></div>
+            <div id="sign"></div>
         </div>
     </div>
 
     <script type="text/javascript">
-    function fillDivTree(selector, callbackSelect) {
-        $(selector).on('changed.jstree', callbackSelect)
-            // create the instance
-            .jstree({
-                'core': {
-                    'multiple': false,
-                    'data': [{
-                        "id": "ajson1",
-                        "parent": "#",
-                        "text": "Simple root node"
-                    }, {
-                        "id": "ajson2",
-                        "parent": "#",
-                        "text": "Root node 2"
-                    }, {
-                        "id": "ajson3",
-                        "parent": "ajson2",
-                        "text": "Child 1"
-                    }, {
-                        "id": "ajson4",
-                        "parent": "ajson2",
-                        "text": "Child 2"
-                    }, ]
-                }
-            });
 
-		
-        
-    }
+    function startsWith (base, str){
+        return base.slice(0, str.length) == str;
+    };
 
-    function tree1Select(e, data) {
+    function baseSelect(e, data) {
         var selected = data.selected[0];
-        var node_selected = data.instance.get_node(selected)
-        console.log(node_selected);
-        fillDivTree('#cont2', tree2Select);
-    }
+        // var node_selected = data.instance.get_node(selected)
+        // console.log(node_selected);
+        console.log(selected);
+        // fillDivTree('#cont2', tree2Select);
 
-    function tree2Select(e, data) {
-        var selected = data.selected[0];
-        fillDivTree('#cont3', tree3Select);
-    }
-
-    function tree3Select(e, data) {
-        var selected = data.selected[0];
-    }
-    // fillDivTree('#cont1', tree1Select);
-    $('#cont1').on('changed.jstree', tree1Select).jstree({
+        if (!startsWith(selected, "depto")) {
+            return;
+        }
+        $('#depto').jstree("destroy").empty();
+        $('#sign').jstree("destroy").empty();
+        $('#depto').off('changed.jstree');
+        $('#depto').on('changed.jstree', deptoSelect).jstree({
                 'core': {
                     'multiple': false,
                     'data': {
-						"url" : "/estructura/json",
+                        "url" : "/estructura/json/departamento/"+selected.slice("depto".length),
+                        "data" : function (node) {
+                            return { "id" : node.id };
+                        }
+                    }
+                }
+            });
+    }
+
+    function deptoSelect(e, data) {
+        var selected = data.selected[0];
+        console.log(selected);
+        // fillDivTree('#cont3', tree3Select);
+
+        if (!startsWith(selected, "asignatura")) {
+            return;
+        }
+        $('#sign').jstree("destroy").empty();
+        $('#sign').off('changed.jstree');
+        $('#sign').on('changed.jstree', signSelect).jstree({
+                'core': {
+                    'multiple': false,
+                    'data': {
+                        "url" : "/estructura/json/asignatura/"+selected.slice("asignatura".length),
+                        "data" : function (node) {
+                            return { "id" : node.id };
+                        }
+                    }
+                }
+            });
+    }
+
+    function signSelect(e, data) {
+        var selected = data.selected[0];
+        console.log(selected);
+    }
+    // fillDivTree('#cont1', tree1Select);
+    $('#base').on('changed.jstree', baseSelect).jstree({
+                'core': {
+                    'multiple': false,
+                    'data': {
+						"url" : "/estructura/json/base",
 						"data" : function (node) {
 							return { "id" : node.id };
 						}
