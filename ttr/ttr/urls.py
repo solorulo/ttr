@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 
     url(r'^estructura/$', 'ttr_app.views.estructura'),
     url(r'^estructura/json/$', 'ttr_app.views.estructura_json'),
+    url(r'^newAsignature/$','ttr_app.views.newAsignature'),
                        
     # url(r'^instrumentos/', ''),
     # url(r'^instrumento/', ''),

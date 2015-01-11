@@ -63,3 +63,5 @@ def estructura_json(request):
 
 def newUser(request):
 	return render(request,'newUser.html')	
+def newAsignature(request):
+    return render(request,'newAsignature.html')
