@@ -103,6 +103,11 @@ def registrarAsignatura(request):
         )
     new_asignatura.save()
     return render(request,"newAsignature.html")
+
+def verAsignaturas(request):
+    listaAsignaturas= Asignatura.objects.all()
+    return render(request,'verAsignaturas.html',{"asignaturas":listaAsignaturas})
+
 def newUser(request):
     listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
     return render(request,'newUser.html', {"asignaturas": listaAsignaturas})
