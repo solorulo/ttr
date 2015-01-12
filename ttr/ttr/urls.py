@@ -31,6 +31,11 @@ urlpatterns = patterns('',
 
 
     url(r'^area/nueva$','ttr_app.views.newArea'),
+    url(r'^area/ver$','ttr_app.views.verAreas'),
+    url(r'^area/delete$','ttr_app.views.eliminarArea'),
+    url(r'^area/consultar/$','ttr_app.views.consultarArea'),
+    url(r'^area/consultar/modificar','ttr_app.views.editarArea'),
+
 
     url(r'^departamento/nuevo$','ttr_app.views.newDepto'),
     url(r'^departamento/agregar$','ttr_app.views.registrarDepto'),

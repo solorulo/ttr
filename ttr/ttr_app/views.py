@@ -160,6 +160,35 @@ def newArea(request):
         )
     new_Area.save()
     return render(request,'newArea.html')
+
+def verAreas(request):
+    listaAreas= Area.objects.all()
+    return render(request,'verAreas.html',{"listaAreas":listaAreas})
+def eliminarArea(request):
+    id=request.POST.get("id",None)
+    deleteArea = Area.objects.get(pk=id)
+    deleteArea.delete()
+    return HttpResponse("true")
+
+def consultarArea(request):
+
+
+
+    id=request.GET.get("id",None)
+    area=Area.objects.get(pk=id)
+    return render(request,'consultarArea.html',{"area":area})
+
+def editarArea(request):
+    nombreArea = request.POST.get("nombreA", None)    
+
+    id=request.POST.get("id",None)
+    area=Area.objects.get(pk=id)
+
+    area.nombre=nombreArea
+    area.save()
+
+    listaAreas= Area.objects.all()
+    return render(request,'verAreas.html',{"listaAreas":listaAreas})
     
 def newDepto(request):
     listaAreas= Area.objects.all()
@@ -195,7 +224,7 @@ def consultarDepto(request):
     depto=Departamento.objects.get(pk=id)
 
     listaAreas= Area.objects.all()
-    return render(request,'consultarDepto.html',{"listAreas": listaAreas,"depto":depto},)
+    return render(request,'consultarDepto.html',{"listAreas": listaAreas,"depto":depto})
 
 def editarDepto(request):
     nombreDepto = request.POST.get("nombreD", None)

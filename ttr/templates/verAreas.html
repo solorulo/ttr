@@ -1,0 +1,122 @@
+<html>
+    <head>
+        <title>Registrar Asignatura</title>
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <script type="text/javascript" src="/static/JS/FuncionesArea.js"></script>
+    </head>
+<style>
+    #header{
+    width: 80%;
+    height: 130px;
+    top: 0; 
+    left: 0;
+    margin: 0 auto;
+    padding: 0px;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    border: 0px;
+    }
+    #logo1{
+    background: url(/static/img/logo_ipn.jpg) top left no-repeat;
+    background-size: contain;
+    width: 10%;
+    height: 100%;
+    text-align: center;
+    float: left;
+    border: 0px;
+
+    }
+    #logo2{
+    background: url(/static/img/bg2.png) top left no-repeat;
+    background-size: cover;
+    width: 77%;
+    height: 130px;
+    top: 0; 
+    left: 0;
+    margin: 0 auto;
+    padding: 0px;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    border: 0px;
+    float: left;
+    }
+    #logo3{
+    background: url(/static/img/logo_escom.png) top left no-repeat;
+    background-size: contain;
+    width: 13%;
+    height: 100%;
+    text-align: center;
+    float: left;
+    border: 0px;
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    border: 0px;
+
+    }
+    #logoText{
+   
+    color: #ffffff;
+     font: bold 175% monospace; 
+    vertical-align: middle;
+    margin: 0 auto;
+ 
+    }
+    #links{ 
+   
+   color:#ffffff; 
+        width: 90%;
+        text-align: right;
+   }
+    
+</style>
+<body>
+    <div id="header">
+        <div id="logo1"></div>
+        <div id="logo2">
+          
+            <div id="logoText">
+                INSTITUTO POLITECNICO NACIONAL<br>
+                ESCUELA SUPERIOR DE COMPUTO<br>
+                GESTION DEL CONOCIMIENTO
+            </div>
+            <div id="links">
+                HOME
+                <a href="">login</a>
+            </div>
+        </div>
+        <div id="logo3">
+        </div>
+    </div>
+    
+   
+   <div id="contenido" align="center">
+            
+                {% csrf_token %}
+                {% if wrong_data %}
+                        <p style="color:red;">El tiempo de tu sesión ha acabado</p>
+                    {% endif %}
+
+                <table>
+                    <tr>
+                        <td> Nombre: </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% for area in listaAreas %}
+                    <tr>
+                        <td>{{area.nombre}}</td>
+                        <td><button onclick="consultarArea({{area.pk}});">Modificar</button></td>
+                        <td><button onclick="eliminarArea({{area.pk}});">Eliminar</button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+    </div>
+</body>
+</html>
