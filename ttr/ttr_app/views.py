@@ -147,6 +147,7 @@ def editarAsignatura(request):
     listaAsignaturas= Asignatura.objects.all()
     return render(request,'verAsignaturas.html',{"asignaturas":listaAsignaturas})
 
+
 def newArea(request):
     
     if request.method == 'POST' and not 'nombreArea' in request.POST:
@@ -177,7 +178,39 @@ def registrarDepto(request):
     new_Depto.save()
     listaAreas= Area.objects.all()
     return render(request, 'newDept.html', {"areas":listaAreas})
+def verDeptos(request):
+    listaDeptos= Departamento.objects.all()
+    return render(request,'verDepartamentos.html',{"listaDeptos":listaDeptos})
+def eliminarDepto(request):
+    id=request.POST.get("id",None)
+    deleteDepto = Departamento.objects.get(pk=id)
+    deleteDepto.delete()
+    return HttpResponse("true")
 
+def consultarDepto(request):
+
+
+
+    id=request.GET.get("id",None)
+    depto=Departamento.objects.get(pk=id)
+
+    listaAreas= Area.objects.all()
+    return render(request,'consultarDepto.html',{"listAreas": listaAreas,"depto":depto},)
+
+def editarDepto(request):
+    nombreDepto = request.POST.get("nombreD", None)
+    area = request.POST.get("areaD",None)
+    
+
+    id=request.POST.get("id",None)
+    depto=Departamento.objects.get(pk=id)
+
+    depto.nombre=nombreDepto
+    depto.area_id=int(area)
+
+    depto.save()
+    listaDeptos= Departamento.objects.all()
+    return render(request,'verDepartamentos.html',{"listaDeptos":listaDeptos})
 
 def newUser(request):
     listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
