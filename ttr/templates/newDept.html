@@ -19,7 +19,7 @@
     border: 0px;
     }
     #logo1{
-    background: url(/static/img/logo_ipn.jpg) top left no-repeat;
+    background: url(../static/img/logo_ipn.jpg) top left no-repeat;
     background-size: contain;
     width: 10%;
     height: 100%;
@@ -29,7 +29,7 @@
 
     }
     #logo2{
-    background: url(/static/img/bg2.png) top left no-repeat;
+    background: url(../static/img/bg2.png) top left no-repeat;
     background-size: cover;
     width: 77%;
     height: 130px;
@@ -45,7 +45,7 @@
     float: left;
     }
     #logo3{
-    background: url(/static/img/logo_escom.png) top left no-repeat;
+    background: url(../static/img/logo_escom.png) top left no-repeat;
     background-size: contain;
     width: 13%;
     height: 100%;
@@ -95,33 +95,26 @@
     
    
    <div id="contenido" align="center">
-            <form method="post" action="/asignatura/agregar"  class="nuevaAsignatura">
-                {% csrf_token %}
-                {% if wrong_data %}
-                        <p style="color:red;">El tiempo de tu sesión ha acabado</p>
-                    {% endif %}
+            <!DOCTYPE html>
 
-                <label for="nombreA">Nombre de Asignatura: </label>
-                <input type="text" id="nombreA" name="nombreA" required><br>
-                <label for="autorA">Autor:</label>
-                <input type="text" id="autorA" name="autorA" required><br>
-                <label for="departamentoA">Departamento: </label>
-                <select data-placeholder="Departamento" name="departamentoA">
+         <div id="contenido" align="center">
+            <form method="post" action="/departamento/agregar"  class="nuevoDepartamento">
+                {% csrf_token %}
+
+                <label for="nombreDepto">Nombre del Departamento: </label>
+                <input type="text" id="nombreDepto" name="nombreDepto" required><br>
+                <label for="asignatura">Area: </label>
+                <select data-placeholder="Areas"  name="area">
                     <option value></option>
-                    {% for depto in departamentos %}
-                    <option value="{{ depto.pk }}">{{depto.nombre}}</option>    
+                    {% for areaI in areas %}
+                    <option value="{{ areaI.pk }}">{{areaI.nombre}}</option>    
                     {% endfor %}
                 </select><br>
                 <!--<input type="text" id="asignatura" name="asignatura" required><br>-->
-                <label for="rol">Presidente: </label>
-                <select data-placeholder="Presidente" name="presidenteA">
-                    <option value></option>
-                    {% for presidente in usuarios %}
-                    <option value="{{ presidente.pk }}">{{presidente.first_name}}</option>    
-                    {% endfor %}
-                </select><br>
-                <input type="submit" Value="Registrar Asignatura" id="btnRegistrarA">
+                <input type="submit" Value="Registrar Departamentoyy" id="btnSubmit">
+
             </form>
          </div>
+    </div>
 </body>
 </html>
