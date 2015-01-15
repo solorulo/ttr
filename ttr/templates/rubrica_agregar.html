@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar rúbrica</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+
+<body>
+    <form>
+        <input name="titulo" type="text" placeholder="titulo" />
+        <input name="autor" type="text" placeholder="autor" />
+        <input name="asignatura" type="text" placeholder="asignatura" />
+        <input name="oficial" type="checkbox" placeholder="oficial" />
+        <table>
+            <thead>
+                <tr id="row_header">
+                    <th>Categoría</th>
+                    <th>
+                        <input name="pond[1]" type="text" value="4" />
+                        <button id="delete_column[1]">-</button>
+                    </th>
+                    <th>
+                        <input name="pond[2]" type="text" value="4" />
+                        <button id="delete_column[2]">-</button>
+                    </th>
+                    <th id="ac_cont"><button id="add_column">Agregar columna</button></th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr class="row" id="row1">
+                    <td>
+                        <button class="delete_row" meta:index="1">-</button>
+                        <input name="cat[1]" type="text"/>
+                    </td>
+                    <td><input name="pond_val[1][1]" type="text" value="4" /></td>
+                    <td><input name="pond_val[1][2]" type="text" value="4" /></td>
+                </tr>
+                <tr class="row" id="row2">
+                    <td>
+                        <button class="delete_row" meta:index="2">-</button>
+                        <input name="cat[2]" type="text"/>
+                    </td>
+                    <td><input name="pond_val[2][1]" type="text" value="4" /></td>
+                    <td><input name="pond_val[2][2]" type="text" value="4" /></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><button id="add_row">Agregar fila</button></td>
+                </tr>
+            </tfoot>
+        </table>
+    </form>
+    
+    <script type="text/javascript" src="/static/js/ttrgrid.js"></script>
+</body>
+
+</html>
