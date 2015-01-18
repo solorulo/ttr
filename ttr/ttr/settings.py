@@ -94,3 +94,10 @@ STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles/')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'static/'),
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.request",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.contrib.auth.context_processors.auth",
+)

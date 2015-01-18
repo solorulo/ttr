@@ -1,15 +1,13 @@
 var MAX_ROWS = 10;
 var MAX_COLUMNS = 5;
-var nrows = 2;
-var ncolumns = 2;
 function update_buttons() {
-    if (nrows >= MAX_ROWS) {
+    if ($('.row').length >= MAX_ROWS) {
         $('#add_row').attr("disabled", true);
     }
     else {
         $('#add_row').removeAttr("disabled");
     }
-    if (ncolumns >= MAX_COLUMNS) {
+    if ($('.column').length >= MAX_COLUMNS) {
         $('#add_column').attr("disabled", true);
     }
     else {
@@ -17,64 +15,112 @@ function update_buttons() {
     }
 }
 function add_row() {
-    if (nrows >= MAX_ROWS) {
+    if ($('.row').length >= MAX_ROWS) {
         return;
     }
-    ++nrows;
     var $tbody = $('#tbody');
-    var id = "row"+nrows;
-    var $new_row = $("<tr class=\"row\" id=\""+id+"\"></tr>");
+    var $new_row = $("<tr class=\"row\" meta:new=\"true\"></tr>");
 
     var $td = $('<td></td>');
-    var $button = $("<button class=\"delete_row\" meta:index=\"" + nrows + "\">-</button>");
+    var $button = $("<button class=\"delete_row\">-</button>").button();
     $button.click(function(event) {
         event.preventDefault();
         delete_row($(this));
     });
     $td.append($button);
-    $td.append("<input name=\"cat[" + nrows + "]\" type=\"text\"/>");
+    $td.append("<input type=\"text\"/ placeholder=\"Categoría\">");
 
     $new_row.append($td);
-    // var content = 
-    //     "<tr class=\"row\" id=\""+id+"\">" +
-    //         "<td>" +
-    //             "<button class=\"delete_row\" meta:index=\"" + nrows + "\">-</button>" +
-    //                 "<input name=\"cat[" + nrows + "]\" type=\"text\"/>" +
-    //         "</td>";
-    for (var i = 1; i <= ncolumns; i++) {
-        // content += 
-        //     "<td><input name=\"pond_val["+ nrows + "][" + i + "]\" type=\"text\" value=\"4\" /></td>";
-        $new_row.append("<td><input name=\"pond_val["+ nrows + "][" + i + "]\" type=\"text\" value=\"4\" /></td>");
-    }
-    // content += 
-    //     "</tr>";
+    $('.column').each(function(idx, val){
+        $new_row.append("<td><input type=\"text\" value=\"4\" /></td>");
+    });
     $tbody.append($new_row);
     update_buttons();
 }
 function add_column(){
-    if (ncolumns >= MAX_COLUMNS) {
+    if ($('.column').length >= MAX_COLUMNS) {
         return;
     }
-    ++ncolumns;
     var $tbody = $('#tbody');
-    var $ac_cont = $('#ac_cont');
-    var $new_colh = $('<th></th>');
-    $new_colh.append("<input name=\"pond[" + ncolumns + "]\" type=\"text\" value=\"4\" />");
-    var $bt_delete_column = $("<button id=\"delete_column[" + ncolumns + "]\">-</button>");
+    var $new_colh = $('<th class=\"column\" meta:new=\"true\"></th>');
+    var $bt_delete_column = $("<button class=\"delete_column\">-</button>").button();
+    $bt_delete_column.click(function(event) {
+        event.preventDefault();
+        delete_column($(this));
+    });
     $new_colh.append($bt_delete_column);
+    $new_colh.append("<br/><input type=\"text\" value=\"4\" />");
     
-    $new_colh.insertBefore($ac_cont);
+    $('#row_header').append($new_colh);
     $('.row').each(function(idx, val){
-        var $td = $('<td></td>');
-        $td.append("<input name=\"pond_val["+ nrows + "][" + ncolumns + "]\" type=\"text\" value=\"4\" />");
+        var $td = $('<td meta:new=\"true\"></td>');
+        $td.append("<input class=\"column_val\" type=\"text\" value=\"4\" />");
         $(this).append($td);
     });
     update_buttons();
 }
 function delete_row($obj) {
-    var element_id = $obj.attr("meta:index");
-    $('#row'+element_id).remove();
+    var parentRow = $obj.parent().parent();
+    parentRow.remove();
     update_buttons();
+}
+function delete_column($obj) {
+    // var meta_index = $obj.attr("meta:index");
+    // $('.row[meta:index='+meta_index+']').remove();
+    var parentTh = $obj.parent();
+    var index = parentTh.index() + 1;
+    parentTh.remove();
+    $(".row :nth-child("+index+")").remove();
+    update_buttons();
+}
+function send_rubrica() {
+    var poderaciones_vals = [];
+    var categorias = [];
+    var ponderaciones = [];
+    $('.column').each(function(idx, val){
+        var meta_index = $(this).attr('meta:index');
+        var meta_new = $(this).attr('meta:new');
+        var input_text = $(this).children('input[type=text]').val();
+        poderaciones_vals[idx] = {
+            'index_pod' : meta_index,
+            'meta_new' : meta_new,
+            'text' : input_text
+        };
+    });
+    $('.row .cat').each(function(idx1, val){
+        var cat = $(this).val();
+        var val_cat = {
+            'val' : cat
+        };
+        var parentRow = $(this).parent().parent();
+        var meta_index_cat = parentRow.attr('meta:index');
+        if (meta_index_cat) {
+            val_cat['index_cat'] = meta_index_cat;
+        }
+        categorias[idx1] = val_cat;
+
+        parentRow.children('.column_val').each(function(idx, val){
+            var val = $(this).children('input[type=text]').val();
+            ponderaciones[idx] = {
+                'cat' : idx1,
+                'val' : val
+            };
+        });
+    });
+    var obj = {
+        'titulo' : $('#titulo').val(),
+        'autor' : $('#autor').val(),
+        'asignatura' : $('#asignatura').val(),
+        'oficial' : $('#oficial').val(),
+        'pod_vals[]' : JSON.stringify(poderaciones_vals),
+        'cats[]' : JSON.stringify(categorias),
+        'pods[]' : JSON.stringify(ponderaciones),
+        "csrfmiddlewaretoken": $.cookie("csrftoken")
+    };
+    $.post('/instrumento/rubrica/agregar', obj, function(data){
+        if (data == "true")
+            window.location.href = "/index";
+    });
 }
 $(document).ready(function() {
     $('#add_row').click(function(event) {
@@ -86,6 +132,15 @@ $(document).ready(function() {
         add_column();
     });
     $(".delete_row").click(function() {
+        event.preventDefault();
         delete_row($(this));
     });
+    $(".delete_column").click(function() {
+        event.preventDefault();
+        delete_column($(this));
+    });
+    $('#save').click(function(event) {
+        send_rubrica();
+    });
+    $('button').button();
 });
