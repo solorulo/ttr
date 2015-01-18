@@ -2,58 +2,66 @@
 <html lang="es">
 
 <head>
-    
     {% include "includes/head.html" with title="Registrar Rúbrica" %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 </head>
 
 <body>
+    {% csrf_token %}
     {% include "includes/header.html" %}
-    <form>
-        <input name="titulo" type="text" placeholder="titulo" />
-        <input name="autor" type="text" placeholder="autor" />
-        <input name="asignatura" type="text" placeholder="asignatura" />
-        <input name="oficial" type="checkbox" placeholder="oficial" />
-        <table>
-            <thead>
-                <tr id="row_header">
-                    <th>Categoría</th>
-                    <th>
-                        <input name="pond[1]" type="text" value="4" />
-                        <button id="delete_column[1]">-</button>
-                    </th>
-                    <th>
-                        <input name="pond[2]" type="text" value="4" />
-                        <button id="delete_column[2]">-</button>
-                    </th>
-                    <th id="ac_cont"><button id="add_column">Agregar columna</button></th>
-                </tr>
-            </thead>
-            <tbody id="tbody">
-                <tr class="row" id="row1">
-                    <td>
-                        <button class="delete_row" meta:index="1">-</button>
-                        <input name="cat[1]" type="text"/>
-                    </td>
-                    <td><input name="pond_val[1][1]" type="text" value="4" /></td>
-                    <td><input name="pond_val[1][2]" type="text" value="4" /></td>
-                </tr>
-                <tr class="row" id="row2">
-                    <td>
-                        <button class="delete_row" meta:index="2">-</button>
-                        <input name="cat[2]" type="text"/>
-                    </td>
-                    <td><input name="pond_val[2][1]" type="text" value="4" /></td>
-                    <td><input name="pond_val[2][2]" type="text" value="4" /></td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td><button id="add_row">Agregar fila</button></td>
-                </tr>
-            </tfoot>
-        </table>
-    </form>
-    
+    <input id="titulo" type="text" placeholder="titulo" /><br/>
+    <input id="autor" type="text" placeholder="autor" /><br/>
+    <input id="asignatura" type="text" placeholder="unidad de apredizaje" /><br/>
+    <label>Oficial </label><input id="oficial" type="checkbox" placeholder="oficial" /><br/>
+    <button id="add_row">Agregar fila</button>
+    <button id="add_column">Agregar columna</button>
+    <table>
+        <thead>
+            <tr id="row_header">
+                <th>Categoría</th>
+                <th class="column" meta:index="1">
+                    <button class="delete_column">-</button>
+                    <br/>
+                    <input type="text" value="4" />
+
+                </th>
+                <th class="column" meta:index="2">
+                    <button class="delete_column">-</button>
+                    <br/>
+                    <input type="text" value="4" />
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr class="row" meta:index="1">
+                <td>
+                    <button class="delete_row" meta:index="1">-</button>
+                    <input class="cat" type="text" />
+                </td>
+                <td class="column_val">
+                    <input type="text" value="4" />
+                </td>
+                <td class="column_val">
+                    <input type="text" value="4" />
+                </td>
+            </tr>
+            <tr class="row" meta:index="2">
+                <td>
+                    <button class="delete_row" meta:index="2">-</button>
+                    <input class="cat" type="text" />
+                </td>
+                <td class="column_val">
+                    <input type="text" value="4" />
+                </td>
+                <td class="column_val">
+                    <input type="text" value="4" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <button id="save">Guardar</button>
+
     <script type="text/javascript" src="/static/js/ttrgrid.js"></script>
     {% include "includes/footer.html" %}
 </body>
