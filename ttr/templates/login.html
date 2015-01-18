@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <title>Nombre del Proyecto Index</title>
-        
-    </head>
+{% include "includes/head.html" %}
 <body>
     
 
-    {% include "header.html" %}
+    {% include "includes/header.html" %}
     <section>
         <form method="post"  class="login">
             {% csrf_token %}
@@ -46,8 +42,9 @@
             {% endif %}
         </form>
     </section>
-    <script src="/static/jquery/jquery.js"></script>
-    <script src="/static/jquery-ui/jquery-ui.js"></script>
-    {% include "footer.html" %}
+    <script type="text/javascript">
+    $('button').button();
+    </script>
+    {% include "includes/footer.html" %}
 </body>
 </html>
