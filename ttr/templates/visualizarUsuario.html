@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8"/>
-		<title>Visualizar Profesores</title>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		{% include "includes/head.html" with title="Visualización de Usuarios" %}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 		<script type="text/javascript" src="/static/JS/FuncionesUsuario.js"></script>
 	</head>
 	<body>
-		{% include "header.html" %}
+		{% include "includes/header.html" %}
 		<div id="contenido" align="center">
 			<table >
 				{%csrf_token%}
@@ -23,6 +21,6 @@
 				{% endfor %}
 			</table>
 		</div>
-		{% include "footer.html" %}
+		{% include "includes/footer.html" %}
 	</body>
 </html>

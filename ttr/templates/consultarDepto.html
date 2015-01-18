@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <title>Registrar Asignatura</title>
-        <meta charset="utf-8"/>
-        
-    </head>
-
-
+<head>    
+    {% include "includes/head.html" with title="Consultar Academia" %}
+</head>
 <body>
-    {% include "header.html" %}
+    {% include "includes/header.html" %}
     
    <div id="contenido" align="center">
             
@@ -37,6 +33,6 @@
                 <input type="submit" Value="Guardar Departamento" id="btnRegistrarD">
             </form>
     </div>
-    {% include "footer.html" %}
+    {% include "includes/footer.html" %}
 </body>
 </html>

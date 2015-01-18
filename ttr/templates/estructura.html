@@ -2,10 +2,8 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8"/>
-    <title>Estructura Académica</title>
-    <link rel="stylesheet" href="/static/jstree/themes/default/style.min.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    {% include "includes/head.html" with title="Estructura Académica" %}
+    <link rel="stylesheet" href="/static/jstree/themes/default/style.min.css"/>
     <script src="/static/jstree/jstree.min.js"></script>
     <style type="text/css">
     	.treeColumn {
@@ -17,7 +15,7 @@
 </head>
 
 <body>
-    {% include "header.html" %}
+    {% include "includes/header.html" %}
     <div>
         <div class="treeColumn">
             <div id="base"></div>
@@ -102,7 +100,7 @@
                 }
             });
     </script>
-    {% include "footer.html" %}
+    {% include "includes/footer.html" %}
 </body>
 
 </html>
