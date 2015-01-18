@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8"/>
-        <title>Registrar Asignatura</title>
-        
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-        
-    </head>
-
+<head>
+    {% include "includes/head.html" with title="Consultar Departamento" %}
+</head>
 <body>
   
-  {% include "header.html" %}  
+  {% include "includes/header.html" %} 
    
    <div id="contenido" align="center">
             
@@ -29,6 +23,6 @@
                 <input type="submit" Value="Guardar Area" id="btnRegistrarA">
             </form>
     </div>
-    {% include "footer.html" %}
+    {% include "includes/footer.html" %}
 </body>
 </html>

@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <title>Registrar Asignatura</title>
-        <meta charset="utf-8"/>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-        <script type="text/javascript" src="/static/JS/FuncionesAsignatura.js"></script>
-    </head>
-
+<head>
+    {% include "includes/head.html" with title="Consultar Unidad de Aprendizaje" %}
+</head>
 <body>
- {% include "header.html" %}
+    
+    {% include "includes/header.html" %}
    
    <div id="contenido" align="center">
             
@@ -54,6 +50,6 @@
                 <input type="submit" Value="Guardar Asignatura" id="btnRegistrarA">
             </form>
     </div>
-    {% include "footer.html" %}
+    {% include "includes/footer.html" %}
 </body>
 </html>
