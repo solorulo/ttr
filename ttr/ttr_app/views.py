@@ -13,8 +13,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 def general(request):
     if(request.user.is_authenticated()):
+
         return render(request, 'index_login.html')
     else:
+
         return render(request, 'general.html', {'navegacionG':1})
 def superior(request):
     return render(request, 'superior.html', {'navegacionG':1})
@@ -25,8 +27,13 @@ def estructura(request):
 
     return render(request, 'estructura.html')
 
+def indexInter(request):
+    id=request.GET.get("id",None)
+    request.session["plantel"]=id
+    nivel=request.GET.get("niv",None)
+    request.session["nivel"]=nivel
+    return HttpResponseRedirect("/index/")
 def index(request):
-    request.session["plantel"]=1
     return render(request, 'index.html')
 
 def logout(request):

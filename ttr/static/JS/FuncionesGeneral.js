@@ -1,3 +1,3 @@
-function iniciaEscuela(id){
-	window.location.href="/index/?id="+id;
+function iniciaEscuela(id,nivel){
+	window.location.href="/indexInter/?id="+id+"&niv="+nivel;
 }
