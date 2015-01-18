@@ -14,6 +14,8 @@ def general(request):
     return render(request, 'general.html', {'navegacionG':1})
 def superior(request):
     return render(request, 'superior.html', {'navegacionG':1})
+def mediosuperior(request):
+    return render(request, 'medioSuperior.html', {'navegacionG':1})
 
 def estructura(request):
     return render(request, 'estructura.html')

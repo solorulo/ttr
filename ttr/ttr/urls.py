@@ -14,6 +14,8 @@ urlpatterns = patterns('',
 
     url(r'^general/', 'ttr_app.views.general'),
     url(r'^superior', 'ttr_app.views.superior'),
+    url(r'^medioSuperior', 'ttr_app.views.mediosuperior'),
+
 
     url(r'^index/', 'ttr_app.views.index'),
     url(r'^login/', 'ttr_app.views.login'),
