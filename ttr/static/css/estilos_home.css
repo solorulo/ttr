@@ -69,3 +69,30 @@ nav ul li a
     padding: 0.5em;
     text-decoration: none;
 }
+footer
+{
+    background: #22BCE0;
+    color: rgba(255,255,255,0.7);
+    width: 100%;
+    padding: 0.001em;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+footer p:first-child
+{   
+    margin-bottom: 0;
+}
+footer p:last-child
+{
+    margin-top: 0;
+}
+footer p:last-child:after
+{
+    content: " -";
+}
+footer p:last-child:before
+{
+    content: "- ";
+}

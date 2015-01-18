@@ -8,6 +8,7 @@
 		<script type="text/javascript" src="/static/JS/FuncionesUsuario.js"></script>
 	</head>
 	<body>
+		{% include "header.html" %}
 		<div id="contenido" align="center">
 			<table >
 				{%csrf_token%}
@@ -22,6 +23,6 @@
 				{% endfor %}
 			</table>
 		</div>
-
+		{% include "footer.html" %}
 	</body>
 </html>

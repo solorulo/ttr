@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
     <head>
+        <meta charset="utf-8" />
         <title>Nombre del Proyecto Index</title>
         
     </head>
@@ -7,43 +9,45 @@
     
 
     {% include "header.html" %}
-
-    <form method="post"  class="login">
-        {% csrf_token %}
-            {% if wrong_data %}
+    <section>
+        <form method="post"  class="login">
+            {% csrf_token %}
+                {% if wrong_data %}
+                    <div>
+                        <p style="color:red;">Revisa tus datos</p>
+                    </div>
+                {% endif %}
+             <div>
                 <div>
-                    <p style="color:red;">Revisa tus datos</p>
+                    <p>
+                        <label for="login">Email:</label>
+                        <input type="text" name="username" id="username" value="name@example.com">
+                    </p>
                 </div>
+                <div> 
+                    <p>
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" value="4815162342">
+                    </p>
+                </div>
+                <div>
+                    <p class="login-submit">
+                      <button type="submit" class="login-button">Login</button>
+                    </p>
+                </div>
+                <div>
+                    <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
+                </div>
+            </div>
+
+
+            {% if next %}
+            <input type="hidden" name="next" value="{{next}}" />
             {% endif %}
-     <div>
-        <div>
-            <p>
-                <label for="login">Email:</label>
-                <input type="text" name="username" id="username" value="name@example.com">
-            </p>
-        </div>
-        <div> 
-            <p>
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="password" value="4815162342">
-            </p>
-        </div>
-        <div>
-            <p class="login-submit">
-              <button type="submit" class="login-button">Login</button>
-            </p>
-        </div>
-        <div>
-            <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
-        </div>
-    </div>
-
-
-    {% if next %}
-                        <input type="hidden" name="next" value="{{next}}" />
-                    {% endif %}
-  </form>
+        </form>
+    </section>
     <script src="/static/jquery/jquery.js"></script>
     <script src="/static/jquery-ui/jquery-ui.js"></script>
+    {% include "footer.html" %}
 </body>
 </html>
