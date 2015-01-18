@@ -48,23 +48,22 @@ def index(request):
 def get_estructura_json(node, node_id):
     res = []
     if node == 'base':
-        areas = Area.objects.all()
         departamentos = Departamento.objects.all()
-        for area in areas:
+        academias = Academia.objects.all()
+        for depto in departamentos:
             res.append({
-                'id' : 'area' + str(area.pk),
+                'id' : 'depto' + str(depto.pk),
                 'parent' : '#',
-                'text' : area.nombre
+                'text' : depto.nombre
                 })
-        for dep in departamentos:
+        for academia in academias:
             res.append({
-                'id' : 'depto' + str(dep.pk),
-                'parent' : 'area'+str(dep.area.pk),
-                'text' : dep.nombre
+                'id' : 'academia' + str(academia.pk),
+                'parent' : 'depto'+str(academia.depto.pk),
+                'text' : academia.nombre
                 })
-    elif node == 'departamento':
-        # departamento = Departamento.objects.get(pk=int(node_id))
-        asignaturas = Asignatura.objects.filter(departamento__pk=int(node_id))
+    elif node == 'academia':
+        asignaturas = Asignatura.objects.filter(academia__pk=int(node_id))
         for asignatura in asignaturas:
             res.append({
                 'id' : 'asignatura' + str(asignatura.pk),
@@ -72,7 +71,6 @@ def get_estructura_json(node, node_id):
                 'text' : asignatura.nombre
                 })
     elif node == 'asignatura':
-        # asignatura = Asignatura.objects.get(pk=int(node_id))
         clases = Clases.objects.filter(asignaturas__id=int(node_id))
         for clase in clases:
             res.append({
@@ -87,34 +85,35 @@ def estructura_json(request, node, node_id):
 	serialized_data = json.dumps(get_estructura_json(node, node_id))
 	return HttpResponse(serialized_data, mimetype="application/json")
 
+
    
 def newAsignature(request):
-    listaDepartamentos= Departamento.objects.all().values("pk","nombre")
+    listaAcademias= Academia.objects.all().values("pk","nombre")
     listaUsuarios= MyUser.objects.all().values("pk","first_name")
-    return render(request,'newAsignature.html',{"departamentos": listaDepartamentos, "usuarios": listaUsuarios})
+    return render(request,'Asignatura/newAsignature.html',{"listaAcademias": listaAcademias, "usuarios": listaUsuarios})
 
 def registrarAsignatura(request):
     if not 'nombreA' in request.POST:
         return render(request, 'newAsignature.html',{'wrong_data':True})
     nombreAsignatura= request.POST.get("nombreA", None)
     autor= request.POST.get("autorA",None)
-    departamento= request.POST.get("departamentoA",None)
+    academia= request.POST.get("academiaA",None)
     presidente= request.POST.get("presidenteA", None)
 
     new_asignatura= Asignatura(
             nombre=nombreAsignatura,
             autor_id= int(autor),
-            departamento_id= int(departamento),
+            academia_id= int(academia),
             presidente_id= int(presidente)
         )
     new_asignatura.save()
-    listaDepartamentos= Departamento.objects.all().values("pk","nombre")
+    listaAcademias= Academia.objects.all().values("pk","nombre")
     listaUsuarios= MyUser.objects.all().values("pk","first_name")
-    return render(request,'newAsignature.html',{"departamentos": listaDepartamentos, "usuarios": listaUsuarios})
+    return render(request,'Asignatura/newAsignature.html',{"listaAcademias": listaAcademias, "usuarios": listaUsuarios})
 
 def verAsignaturas(request):
     listaAsignaturas= Asignatura.objects.all()
-    return render(request,'verAsignaturas.html',{"asignaturas":listaAsignaturas})
+    return render(request,'Asignatura/verAsignaturas.html',{"asignaturas":listaAsignaturas})
 def eliminarAsignatura(request):
     id=request.POST.get("id",None)
     deleteAsignatura = Asignatura.objects.get(pk=id)
@@ -129,14 +128,14 @@ def consultarAsignatura(request):
     asignatura=Asignatura.objects.get(pk=id)
 
 
-    listaDepartamentos= Departamento.objects.all().values("pk","nombre")
+    listaAcademias= Academia.objects.all().values("pk","nombre")
     listaUsuarios= MyUser.objects.all().values("pk","first_name")
-    return render(request,'consultarAsignatura.html',{"departamentos": listaDepartamentos, "usuarios": listaUsuarios,"asignatura":asignatura},)
+    return render(request,'Asignatura/consultarAsignatura.html',{"listaAcademias": listaAcademias, "usuarios": listaUsuarios,"asignatura":asignatura})
 
 def editarAsignatura(request):
     nombreAsignatura = request.POST.get("nombreA", None)
     autor = request.POST.get("autorA", None) 
-    departamento = request.POST.get("departamentoA",None)
+    academia= request.POST.get("academiaA",None)
     presidente = request.POST.get("presidenteA",None)
     
 
@@ -145,115 +144,113 @@ def editarAsignatura(request):
 
     asignatura.nombre=nombreAsignatura
     asignatura.autor_id=int(autor)
-    asignatura.departamento_id=int(departamento)
+    asignatura.academia_id=int(academia)
     asignatura.presidente_id=int(presidente)
     
 
     asignatura.save()
     listaAsignaturas= Asignatura.objects.all()
-    return render(request,'verAsignaturas.html',{"asignaturas":listaAsignaturas})
+    return render(request,'Asignatura/verAsignaturas.html',{"asignaturas":listaAsignaturas})
 
 
-def newArea(request):
-    
-    if request.method == 'POST' and not 'nombreArea' in request.POST:
-        return render(request, 'newArea.html',{'wrong_data':True})
+def newDepartamento(request):
+    return render(request,'Departamento/newDepartamento.html')
 
-    nombreAr= request.POST.get("nombreArea", None)
+def registrarDepartamento(request):
+    plantel=request.POST.get("id",None)
+    nombreDepartamento= request.POST.get("nombreDepartamento", None)
 
-    new_Area = Area(
-            nombre=nombreAr
-        )
-    new_Area.save()
-    return render(request,'newArea.html')
-
-def verAreas(request):
-    listaAreas= Area.objects.all()
-    return render(request,'verAreas.html',{"listaAreas":listaAreas})
-def eliminarArea(request):
-    id=request.POST.get("id",None)
-    deleteArea = Area.objects.get(pk=id)
-    deleteArea.delete()
-    return HttpResponse("true")
-
-def consultarArea(request):
-
-
-
-    id=request.GET.get("id",None)
-    area=Area.objects.get(pk=id)
-    return render(request,'consultarArea.html',{"area":area})
-
-def editarArea(request):
-    nombreArea = request.POST.get("nombreA", None)    
-
-    id=request.POST.get("id",None)
-    area=Area.objects.get(pk=id)
-
-    area.nombre=nombreArea
-    area.save()
-
-    listaAreas= Area.objects.all()
-    return render(request,'verAreas.html',{"listaAreas":listaAreas})
-    
-def newDepto(request):
-    listaAreas= Area.objects.all()
-    return render(request, 'newDept.html', {"areas":listaAreas})
-def registrarDepto(request):
-    if request.method == 'POST' and not 'nombreDepto' in request.POST:
-        return render(request, 'newDepto.html', {'wrong_data':True})
-
-    nombreDepartamento = request.POST.get("nombreDepto", None)
-    area = request.POST.get("area",None)
-
-    new_Depto= Departamento(
+    new_Departamento = Departamento(
             nombre=nombreDepartamento,
-            area_id=int(area)
+            plantel_id=plantel
         )
-    new_Depto.save()
-    listaAreas= Area.objects.all()
-    return render(request, 'newDept.html', {"areas":listaAreas})
-def verDeptos(request):
-    listaDeptos= Departamento.objects.all()
-    return render(request,'verDepartamentos.html',{"listaDeptos":listaDeptos})
-def eliminarDepto(request):
+    new_Departamento.save()
+    return render(request,'Departamento/newDepartamento.html')
+
+def verDepartamentos(request):
+    listaDepartamento= Departamento.objects.all()
+    return render(request,'Departamento/verDepartamentos.html',{"listaDepartamentos":listaDepartamento})
+def eliminarDepartamento(request):
     id=request.POST.get("id",None)
-    deleteDepto = Departamento.objects.get(pk=id)
-    deleteDepto.delete()
+    deleteDepartamento = Departamento.objects.get(pk=id)
+    deleteDepartamento.delete()
     return HttpResponse("true")
 
-def consultarDepto(request):
-
-
-
+def consultarDepartamento(request):
     id=request.GET.get("id",None)
     depto=Departamento.objects.get(pk=id)
+    return render(request,'Departamento/consultarDepartamento.html',{"depto":depto})
 
-    listaAreas= Area.objects.all()
-    return render(request,'consultarDepto.html',{"listAreas": listaAreas,"depto":depto})
+def editarDepartamento(request):
+    nombreDepartamento = request.POST.get("nombreA", None)    
 
-def editarDepto(request):
-    nombreDepto = request.POST.get("nombreD", None)
-    area = request.POST.get("areaD",None)
+    id=request.POST.get("id",None)
+    departamento=Departamento.objects.get(pk=id)
+
+    departamento.nombre=nombreDepartamento
+    departamento.save()
+
+    listaDepartamentos= Departamento.objects.all()
+    return render(request,'Departamento/verDepartamentos.html',{"listaDepartamentos":listaDepartamentos})
+
+
+
+    
+def newAcademia(request):
+    listaDepartamentos= Departamento.objects.all()
+    return render(request, 'Academia/newAcademia.html', {"listaDepartamentos":listaDepartamentos})
+
+def registrarAcademia(request):
+
+    nombreAcademia = request.POST.get("nombreAcademia", None)
+    departamento = request.POST.get("departamento",None)
+
+    new_Academia= Academia(
+            nombre=nombreAcademia,
+            depto_id=int(departamento)
+        )
+    new_Academia.save()
+    listaDepartamentos= Departamento.objects.all()
+    return render(request, 'Academia/newAcademia.html', {"listaDepartamentos":listaDepartamentos})
+def verAcademias(request):
+    listaAcademias= Academia.objects.all()
+    return render(request,'Academia/verAcademias.html',{"listaAcademias":listaAcademias})
+def eliminarAcademia(request):
+    id=request.POST.get("id",None)
+    deleteAcademia = Academia.objects.get(pk=id)
+    deleteAcademia.delete()
+    return HttpResponse("true")
+
+def consultarAcademia(request):
+
+    id=request.GET.get("id",None)
+    academia=Academia.objects.get(pk=id)
+
+    listaDepartamentos= Departamento.objects.all()
+    return render(request,'Academia/consultarAcademia.html',{"listaDepartamentos": listaDepartamentos,"academia":academia})
+
+def editarAcademia(request):
+    nombreAcademia = request.POST.get("nombreD", None)
+    departamento = request.POST.get("departamentoD",None)
     
 
     id=request.POST.get("id",None)
-    depto=Departamento.objects.get(pk=id)
+    academia=Academia.objects.get(pk=id)
 
-    depto.nombre=nombreDepto
-    depto.area_id=int(area)
+    academia.nombre=nombreAcademia
+    academia.depto_id=int(departamento)
 
-    depto.save()
-    listaDeptos= Departamento.objects.all()
-    return render(request,'verDepartamentos.html',{"listaDeptos":listaDeptos})
+    academia.save()
+    listaAcademias= Academia.objects.all()
+    return render(request,'Academia/verAcademias.html',{"listaAcademias":listaAcademias})
+
+
 
 def newUser(request):
     listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
-    return render(request,'newUser.html', {"asignaturas": listaAsignaturas})
+    return render(request,'Usuario/newUser.html', {"asignaturas": listaAsignaturas})
 
 def registrarUsuario(request):
-    if not 'username' in request.POST or not 'password' in request.POST:
-        return render(request, 'newUser.html', {'wrong_data':True})
     
     nombreUser = request.POST.get("username", None)
     password = request.POST.get("password", None) 
@@ -281,11 +278,11 @@ def registrarUsuario(request):
     # asignarAsignatura.asignaturas.save()
 
     listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
-    return render(request,'newUser.html', {"asignaturas": listaAsignaturas})
+    return render(request,'Usuario/newUser.html', {"asignaturas": listaAsignaturas})
 
 def visualizarUsuario(request):
     listaUsuarios=MyUser.objects.filter(rol=MyUser.PROFESOR)
-    return render(request,"visualizarUsuario.html", {"usuarios": listaUsuarios})
+    return render(request,"Usuario/visualizarUsuario.html", {"usuarios": listaUsuarios})
 
 def eliminarUsuario(request):
     id=request.POST.get("id",None)
@@ -298,7 +295,7 @@ def consultarUsuario(request):
     usuario=MyUser.objects.get(pk=id)
     listaAsignaturas=Asignatura.objects.all()
     clases = Clases.objects.get(user_id=id)
-    return render(request,"consultarUsuario.html", {"usuario": usuario, "asignaturas": listaAsignaturas, "clases":clases.asignaturas.all()})
+    return render(request,"Usuario/consultarUsuario.html", {"usuario": usuario, "asignaturas": listaAsignaturas, "clases":clases.asignaturas.all()})
 
 def editarUsuario(request):
     
@@ -326,5 +323,5 @@ def editarUsuario(request):
         asignarAsignatura.asignaturas.add(int(asignatura))
 
     listaUsuarios=MyUser.objects.filter(rol=MyUser.PROFESOR)
-    return render(request,"visualizarUsuario.html", {"usuarios": listaUsuarios})
+    return render(request,"Usuario/visualizarUsuario.html", {"usuarios": listaUsuarios})
 

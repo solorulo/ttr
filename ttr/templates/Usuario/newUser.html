@@ -6,7 +6,7 @@
 	<body>
 		{% include "includes/header.html" %}
 		 <div id="contenido" align="center">
-		 	<form method="post" action="/usuario/agregar/"  class="nuevoUsuario">
+		 	<form method="post" action="/usuario/agregar"  class="nuevoUsuario">
 		 		{% csrf_token %}
 
 		 		<label for="username">Nombre de Usuario: </label>

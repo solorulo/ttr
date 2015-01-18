@@ -16,14 +16,13 @@
                 <input type="text" id="nombreA" name="nombreA" required><br>
                 <label for="autorA">Autor:</label>
                 <input type="text" id="autorA" name="autorA" required><br>
-                <label for="departamentoA">Departamento: </label>
-                <select data-placeholder="Departamento" name="departamentoA">
+                <label for="academiaA">Academia: </label>
+                <select data-placeholder="Departamento" name="academiaA">
                     <option value></option>
-                    {% for depto in departamentos %}
-                    <option value="{{ depto.pk }}">{{depto.nombre}}</option>    
+                    {% for academia in listaAcademias %}
+                    <option value="{{ academia.pk }}">{{academia.nombre}}</option>    
                     {% endfor %}
                 </select><br>
-                <!--<input type="text" id="asignatura" name="asignatura" required><br>-->
                 <label for="rol">Presidente: </label>
                 <select data-placeholder="Presidente" name="presidenteA">
                     <option value></option>

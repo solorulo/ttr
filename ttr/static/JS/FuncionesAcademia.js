@@ -1,5 +1,5 @@
-function eliminarArea( id ) {
-  $.post("/area/delete",
+function eliminarAcademia( id ) {
+  $.post("/academia/borrar",
     {
       "id":id,
       "csrfmiddlewaretoken": $.cookie("csrftoken")
@@ -11,6 +11,6 @@ function eliminarArea( id ) {
     });
 }
 
-function consultarArea(id){
-	window.location.href="/area/consultar/?id="+id;
+function consultarAcademia(id){
+	window.location.href="/academia/consultar/?id="+id;
 }

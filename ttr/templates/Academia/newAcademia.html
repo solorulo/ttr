@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>    
+    {% include "includes/head.html" with title="Registrar Nueva Academia" %}
+</head>
+<body>
+    {% include "includes/header.html" %}
+   
+   <div id="contenido" align="center">
+          
+
+         <div id="contenido" align="center">
+            <form method="post" action="/academia/agregar" >
+                {% csrf_token %}
+
+                <label for="nombreAcademia">Nombre de la Academia: </label>
+                <input type="text"  name="nombreAcademia" required><br>
+                <label for="departamento">Departamento: </label>
+                <select data-placeholder="Departamento"  name="departamento">
+                    <option value></option>
+                    {% for departamento in listaDepartamentos %}
+                    <option value="{{ departamento.pk }}">{{departamento.nombre}}</option>    
+                    {% endfor %}
+                </select><br>
+            
+                <input type="submit" Value="Registrar Academia" >
+
+            </form>
+         </div>
+    </div>
+    {% include "includes/footer.html" %}
+</body>
+</html>
