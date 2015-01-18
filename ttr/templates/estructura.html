@@ -10,7 +10,16 @@
     		display: inline-block;
     		width:33%;
     		vertical-align: top;
+            height: 30%;
     	}
+        #tree{
+            height: 200px;
+        }
+        #contenedor{
+            text-align: center;
+            border: 1px solid red;
+
+        }
     </style>
 </head>
 
@@ -21,7 +30,7 @@
     {% include "includes/header.html"  %}
     {%endif%}
     <section>
-        <div>
+        <div id="tree">
             <div class="treeColumn">
                 <div id="base"></div>
             </div>
@@ -46,7 +55,17 @@
         // console.log(node_selected);
         console.log(selected);
         // fillDivTree('#cont2', tree2Select);
+        if (startsWith(selected,"depto")) {
+            $(document).ready(function(){
+                  var button = $("<button>Aceptar</button>").click(function(){
+                    $("p").append(" <b>Appended text</b>");
+                  });
+                  $('#contenedor').append(button);
+                  
+             });
 
+
+        };
         if (!startsWith(selected, "academia")) {
             return;
         }
@@ -63,7 +82,16 @@
                         }
                     }
                 }
+
             });
+
+         $(document).ready(function(){
+                  var button = $("<button>Aceptar</button>").click(function(){
+                    $("p").append(" <b>Appended text</b>");
+                  });
+                  $('#contenedor').append(button);
+                  
+        });
     }
 
     function academiaSelect(e, data) {
@@ -86,12 +114,31 @@
                         }
                     }
                 }
+
             });
+
+         $(document).ready(function(){
+                  var button = $("<button>Asignatura</button>").click(function(){
+                    $("p").append(" <b>Appended text</b>");
+                  });
+                  $('#contenedor').empty();
+                  $('#contenedor').append(button);
+                  
+        });
+       
     }
 
     function signSelect(e, data) {
         var selected = data.selected[0];
         console.log(selected);
+        $(document).ready(function(){
+                  var button = $("<button>Profesor</button>").click(function(){
+                    $("p").append(" <b>Appended text</b>");
+                  });
+                  $('#contenedor').empty();
+                  $('#contenedor').append(button);
+                  
+                });
     }
     // fillDivTree('#cont1', tree1Select);
     $('#base').on('changed.jstree', baseSelect).jstree({
@@ -104,8 +151,12 @@
 						}
 					}
                 }
+                
             });
     </script>
+    <div id="contenedor">
+
+    </div>
     {% include "includes/footer.html" %}
 </body>
 
