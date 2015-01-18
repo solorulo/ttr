@@ -4,7 +4,11 @@
 	{% include "includes/head.html" with title="Consultar Usuario" %}
 	</head>
 	<body>
-		 {% include "includes/header.html" %}
+		 {%if user.myuser.is_authenticated %}
+	    {% include "includes/header_login.html"  %}
+	    {%else%}
+	    {% include "includes/header.html"  %}
+	    {%endif%}
 		 <div id="contenido" align="center">
 		 	<form method="post" action="/usuario/consultar/modificar"  class="modificarUsuario">
 		 		{% csrf_token %}

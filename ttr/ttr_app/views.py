@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from ttr_app.models import *
@@ -18,7 +19,17 @@ def mediosuperior(request):
     return render(request, 'medioSuperior.html', {'navegacionG':1})
 
 def estructura(request):
+
     return render(request, 'estructura.html')
+
+def index(request):
+    request.session["plantel"]=1
+    return render(request, 'index.html')
+
+def logout(request):
+    auth_logout(request)
+    # Redirect to a success page.
+    return HttpResponseRedirect("/index/")
 
 
 def login(request):
@@ -37,6 +48,7 @@ def login(request):
     try:
         if user is not None and user.is_active:
             auth_login(request, user)
+            return render(request, 'index_login.html')
             if next is not None:
                 return HttpResponseRedirect(next)
             return HttpResponseRedirect('/estructura')
@@ -44,8 +56,7 @@ def login(request):
         raise PermissionDenied
     return render(request, 'login.html', {'wrong_data':True, 'username':username})
 
-def index(request):
-    return render(request, 'index.html')
+
 
 def get_estructura_json(node, node_id):
     res = []
@@ -124,8 +135,6 @@ def eliminarAsignatura(request):
 
 def consultarAsignatura(request):
 
-
-
     id=request.GET.get("id",None)
     asignatura=Asignatura.objects.get(pk=id)
 
@@ -159,7 +168,7 @@ def newDepartamento(request):
     return render(request,'Departamento/newDepartamento.html')
 
 def registrarDepartamento(request):
-    plantel=request.POST.get("id",None)
+    plantel=request.session["plantel"]
     nombreDepartamento= request.POST.get("nombreDepartamento", None)
 
     new_Departamento = Departamento(

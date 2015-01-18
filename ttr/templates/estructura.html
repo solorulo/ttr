@@ -15,7 +15,12 @@
 </head>
 
 <body>
-    {% include "includes/header.html" %}
+    {%if user.myuser.is_authenticated %}
+    {% include "includes/header_login.html"  %}
+    {%else%}
+    {% include "includes/header.html"  %}
+    {%endif%}
+
     <div>
         <div class="treeColumn">
             <div id="base"></div>

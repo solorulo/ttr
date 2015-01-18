@@ -7,7 +7,11 @@
     </head>
 
 <body>
-    {% include "includes/header.html" %}
+    {%if user.myuser.is_authenticated %}
+    {% include "includes/header_login.html"  %}
+    {%else%}
+    {% include "includes/header.html"  %}
+    {%endif%}
    <div id="contenido" align="center">
             
                 {% csrf_token %}
