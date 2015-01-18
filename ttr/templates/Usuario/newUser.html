@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+	{% include "includes/head.html" with title="Registrar nuevo usuario" %}
+	</head>
+	<body>
+	{%if user.myuser.is_authenticated %}
+    {% include "includes/header_login.html"  %}
+    {%else%}
+    {% include "includes/header.html"  %}
+    {%endif%}
+    <section>
+		 <div id="contenido" align="center">
+		 	<form method="post" action="/usuario/agregar"  class="nuevoUsuario">
+		 		{% csrf_token %}
+
+		 		<label for="username">Nombre de Usuario: </label>
+		 		<input type="text" id="username" name="username" required><br>
+		 		<label for="password">Contraseña: </label>
+		 		<input type="password" id="password" name="password" required><br>
+		 		<label for="nombres">Nombre(s): </label>
+		 		<input type="text" id="nombres" name="nombres" required><br>
+		 		<label for="aPaterno">Apellido Paterno: </label>
+		 		<input type="text" id="aPaterno" name="aPaterno" required><br>
+		 		<label for="aMaterno">Apellido Materno: </label>
+		 		<input type="text" id="aMaterno" name="aMaterno" required><br>
+		 		<label for="asignatura">Asignatura: </label>
+		 		<select data-placeholder="Asignaturas" multiple="true" name="asignaturas">
+		 			<option value></option>
+			 		{% for asignatura in asignaturas %}
+					<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option>    
+					{% endfor %}
+				</select><br>
+		 		<label for="rol">Rol: </label>
+		 		<input type="text" id="rol" name="rol" required><br>
+		 		<input type="submit" Value="Crear Usuario" id="btnSubmit">
+
+		 	</form>
+		 </div>
+	</section>
+		 {% include "includes/footer.html" %}
+	 </body>
+</html>

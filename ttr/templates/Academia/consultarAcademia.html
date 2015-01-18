@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>    
+    {% include "includes/head.html" with title="Consultar Academia" %}
+</head>
+<body>
+    {%if user.myuser.is_authenticated %}
+    {% include "includes/header_login.html"  %}
+    {%else%}
+    {% include "includes/header.html"  %}
+    {%endif%}
+    <section>
+   <div id="contenido" align="center">
+            
+                {% csrf_token %}
+                {% if wrong_data %}
+                        <p style="color:red;">El tiempo de tu sesión ha acabado</p>
+                    {% endif %}
+
+                <form method="post" action="/academia/consultar/modificar" >
+                {% csrf_token %}
+
+                <input type="hidden" name="id" value="{{academia.pk}}">
+                <label for="nombreD">Nombre de la Academia: </label>
+                <input type="text"  name="nombreD" required value="{{academia.nombre}}"><br>
+                <label for="departamentoD">Departamento de la academia: </label>
+                <select data-placeholder="Departamento" name="departamentoD">
+                    <option value></option>
+                    {% for departamento in listaDepartamentos %}
+                        {% if academia.depto_id == departamento.pk  %}
+                            <option value="{{ departamento.pk }}" selected>{{departamento.nombre}}</option> 
+                        {% else %}
+                            <option value="{{ departamento.pk }}">{{departamento.nombre}}</option> 
+                        {% endif %} 
+                    {% endfor %}
+                </select><br>
+                <input type="submit" Value="Guardar Academia" >
+            </form>
+    </div>
+    </section>
+    {% include "includes/footer.html" %}
+</body>
+</html>

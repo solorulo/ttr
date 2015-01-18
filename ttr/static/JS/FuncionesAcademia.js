@@ -1,5 +1,5 @@
-function eliminarDepartamento( id ) {
-  $.post("/departamento/borrar/",
+function eliminarAcademia( id ) {
+  $.post("/academia/borrar",
     {
       "id":id,
       "csrfmiddlewaretoken": $.cookie("csrftoken")
@@ -11,6 +11,6 @@ function eliminarDepartamento( id ) {
     });
 }
 
-function consultarDepartamento(id){
-	window.location.href="/departamento/consultar/?id="+id;
+function consultarAcademia(id){
+	window.location.href="/academia/consultar/?id="+id;
 }

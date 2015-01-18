@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>    
+    {% include "includes/head.html" with title="Registrar Nuevo Departamento" %}
+</head>
+<body>
+    {%if user.myuser.is_authenticated %}
+    {% include "includes/header_login.html"  %}
+    {%else%}
+    {% include "includes/header.html"  %}
+    {%endif%}
+    <section>
+   <div id="contenido" align="center">
+            <form method="post" action="/departamento/agregar"  >
+                {% csrf_token %}
+                {% if wrong_data %}
+                        <p style="color:red;">El tiempo de tu sesión ha acabado</p>
+                    {% endif %}
+                <input type="hidden" name="id" value="{{plantel.pk}}">    
+                <label for="nombreDepartamento">Nombre del Departamento: </label>
+                <input type="text"  name="nombreDepartamento" required><br>
+               
+                <input type="submit" Value="Registrar Departamento" >
+            </form>
+    </div>
+    </section>
+    {% include "includes/footer.html" %}
+</body>
+</html>

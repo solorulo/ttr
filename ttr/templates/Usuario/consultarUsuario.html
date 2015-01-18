@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	{% include "includes/head.html" with title="Consultar Usuario" %}
+	</head>
+	<body>
+		 {%if user.myuser.is_authenticated %}
+	    {% include "includes/header_login.html"  %}
+	    {%else%}
+	    {% include "includes/header.html"  %}
+	    {%endif%}
+	    <section>
+		 <div id="contenido" align="center">
+		 	<form method="post" action="/usuario/consultar/modificar"  class="modificarUsuario">
+		 		{% csrf_token %}
+		 		<input type="hidden" id="id" name="id" value="{{usuario.pk}}">
+		 		<label for="username">Nombre de Usuario: </label>
+		 		<input type="text" id="username" name="username" required value="{{usuario.username}}"><br>
+		 		<label for="password">Contraseña: </label>
+		 		<input type="password" id="password" name="password" required value="{{usuario.password}}"><br>
+		 		<label for="nombres">Nombre(s): </label>
+		 		<input type="text" id="nombres" name="nombres" required value="{{usuario.first_name}}"><br>
+		 		<label for="aPaterno">Apellidos: </label>
+		 		<input type="text" id="apellidos" name="apellidos" required value="{{usuario.last_name}}"><br>
+		 		<label for="asignatura">Asignatura: </label>
+		 		<select data-placeholder="Asignaturas" multiple="true" name="asignaturas">
+			 		{% for asignatura in asignaturas %}
+				 		{% if asignatura in clases  %}
+				 		<option value="{{ asignatura.pk }}" selected>{{asignatura.nombre}}</option> 
+						{% else %}
+						<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option> 
+						{% endif %}  
+					{% endfor %}
+				</select><br>
+				<label for="rol">Rol: </label>
+		 		<input type="text" id="rol" name="rol" required value="{{usuario.rol}}"><br>
+		 		<input type="submit" Value="Editar" id="btnSubmit">
+
+		 	</form>
+		 </div>
+		 </section>
+		{% include "includes/footer.html" %}
+	 </body>
+</html>
