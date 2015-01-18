@@ -81,6 +81,7 @@ footer
     width: 100%;
     padding: 0.001em;
     text-align: center;
+    font-size: 0.9em;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -104,7 +105,7 @@ footer p:last-child:before
 section
 {   
     margin-top: 13em;
-    border: 1px solid red;
+    
     background: #ffffff;
     display: inline-block;
     position: relative;
