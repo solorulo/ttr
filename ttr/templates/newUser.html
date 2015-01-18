@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-		 <meta charset="utf-8" />
-		 <title>Crear Usuario</title>
+	{% include "includes/head.html" with title="Registrar nuevo usuario" %}
 	</head>
 	<body>
-		{% include "header.html" %}
+		{% include "includes/header.html" %}
 		 <div id="contenido" align="center">
 		 	<form method="post" action="/usuario/agregar/"  class="nuevoUsuario">
 		 		{% csrf_token %}
@@ -13,7 +12,7 @@
 		 		<label for="username">Nombre de Usuario: </label>
 		 		<input type="text" id="username" name="username" required><br>
 		 		<label for="password">Contraseña: </label>
-		 		<input type="text" id="password" name="password" required><br>
+		 		<input type="password" id="password" name="password" required><br>
 		 		<label for="nombres">Nombre(s): </label>
 		 		<input type="text" id="nombres" name="nombres" required><br>
 		 		<label for="aPaterno">Apellido Paterno: </label>
@@ -27,13 +26,12 @@
 					<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option>    
 					{% endfor %}
 				</select><br>
-		 		<!--<input type="text" id="asignatura" name="asignatura" required><br>-->
 		 		<label for="rol">Rol: </label>
 		 		<input type="text" id="rol" name="rol" required><br>
 		 		<input type="submit" Value="Crear Usuario" id="btnSubmit">
 
 		 	</form>
 		 </div>
-		 {% include "footer.html" %}
+		 {% include "includes/footer.html" %}
 	 </body>
 </html>

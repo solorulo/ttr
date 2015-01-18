@@ -24,15 +24,29 @@ class MyUser(User):
 			self.set_password(self.password)
 		super(MyUser, self).save(*args, **kwargs)
 
-class Area(models.Model):
+class Plantel(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
+	MEDIA_SUP = 1
+	SUPERIOR = 2
+	NIVEL_CHOICES = (
+		(MEDIA_SUP, "Media Superior"),
+		(SUPERIOR, "Superior"),
+	)
+	nivel = models.IntegerField(choices=NIVEL_CHOICES, default=SUPERIOR)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.nombre or ''
 
 class Departamento(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
-	area = models.ForeignKey(Area)
+	plantel = models.ForeignKey(Plantel)
+
+	def __unicode__(self):              # __unicode__ on Python 2
+		return self.nombre or ''
+
+class Academia(models.Model):
+	nombre = models.CharField(max_length=60, null=True, blank=True)
+	depto = models.ForeignKey(Departamento)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.nombre
@@ -41,7 +55,7 @@ class Asignatura(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
 	fecha_creacion = models.DateTimeField(auto_now_add=True)
 	autor = models.ForeignKey(MyUser, related_name="asignatura_autor")
-	departamento = models.ForeignKey(Departamento)
+	academia = models.ForeignKey(Academia)
 	presidente = models.ForeignKey(MyUser, related_name="asignatura_presidente")
 
 	def __unicode__(self):              # __unicode__ on Python 2

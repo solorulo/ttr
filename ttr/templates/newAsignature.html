@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8"/>
-        <title>Registrar Asignatura</title>
-        
-        
-    </head>
-
+<head>    
+    {% include "includes/head.html" with title="Registrar nueva unidad de aprendizaje" %}
+</head>
 <body>
-    {% include "header.html" %}
+    {% include "includes/header.html" %}
    <div id="contenido" align="center">
             <form method="post" action="/asignatura/agregar"  class="nuevaAsignatura">
                 {% csrf_token %}
@@ -38,6 +34,6 @@
                 <input type="submit" Value="Registrar Asignatura" id="btnRegistrarA">
             </form>
          </div>
-    {% include "footer.html" %}
+    {% include "includes/footer.html" %}
 </body>
 </html>
