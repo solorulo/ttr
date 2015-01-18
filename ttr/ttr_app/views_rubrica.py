@@ -62,4 +62,4 @@ def agregar(request):
                 descripcion=pod_val)
             new_pond.save()
         return HttpResponse('true')
-    return render(request,'rubrica_agregar.html')
+    return render(request,'Instrumento/Rubrica/rubrica_agregar.html')
