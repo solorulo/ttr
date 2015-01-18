@@ -9,7 +9,7 @@
     {%else%}
     {% include "includes/header.html"  %}
     {%endif%}
-
+    <section>
    <div id="contenido" align="center">
             <form method="post" action="/departamento/agregar"  >
                 {% csrf_token %}
@@ -23,6 +23,7 @@
                 <input type="submit" Value="Registrar Departamento" >
             </form>
     </div>
+    </section>
     {% include "includes/footer.html" %}
 </body>
 </html>
