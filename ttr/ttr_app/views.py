@@ -10,8 +10,12 @@ import json
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
+def general(request):
+    return render(request, 'general.html')
+
 def estructura(request):
     return render(request, 'estructura.html')
+
 
 def login(request):
     
