@@ -12,7 +12,7 @@
     {%else%}
     {% include "includes/header.html"  %}
     {%endif%}
-
+    <section>
    <div id="contenido" align="center">
             
                 {% csrf_token %}
@@ -35,6 +35,7 @@
                     {% endfor %}
                 </table>
     </div>
+    </section>
     {% include "includes/footer.html" %}
 </body>
 </html>

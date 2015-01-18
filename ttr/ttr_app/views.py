@@ -12,7 +12,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 def general(request):
-    return render(request, 'general.html', {'navegacionG':1})
+    if(request.user.is_authenticated()):
+        return render(request, 'index_login.html')
+    else:
+        return render(request, 'general.html', {'navegacionG':1})
 def superior(request):
     return render(request, 'superior.html', {'navegacionG':1})
 def mediosuperior(request):

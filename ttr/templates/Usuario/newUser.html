@@ -9,7 +9,7 @@
     {%else%}
     {% include "includes/header.html"  %}
     {%endif%}
-
+    <section>
 		 <div id="contenido" align="center">
 		 	<form method="post" action="/usuario/agregar"  class="nuevoUsuario">
 		 		{% csrf_token %}
@@ -37,6 +37,7 @@
 
 		 	</form>
 		 </div>
+	</section>
 		 {% include "includes/footer.html" %}
 	 </body>
 </html>
