@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        {% include "includes/head.html" with title="Visualización de Academias" %}
+        {% include "includes/head.html" with title="Visualización de Departamentos" %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
         <script type="text/javascript" src="/static/JS/FuncionesDepartamento.js"></script>
     </head>
 
 <body>
     {% include "includes/header.html" %}
+    
+   
    <div id="contenido" align="center">
             
                 {% csrf_token %}
@@ -18,14 +20,12 @@
                 <table>
                     <tr>
                         <td> Nombre: </td>
-                        <td> Area: </td>
                         <td></td>
                         <td></td>
                     </tr>
-                    {% for depto in listaDeptos %}
+                    {% for depto in listaDepartamentos %}
                     <tr>
                         <td>{{depto.nombre}}</td>
-                        <td>{{depto.area}}</td>
                         <td><button onclick="consultarDepartamento({{depto.pk}});">Modificar</button></td>
                         <td><button onclick="eliminarDepartamento({{depto.pk}});">Eliminar</button></td>
                     </tr>

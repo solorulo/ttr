@@ -17,23 +17,22 @@
                 <form method="post" action="/asignatura/consultar/modificar"  class="modificarAsignatura">
                 {% csrf_token %}
 
-                <input type="hidden" id="id" name="id" value="{{asignatura.pk}}">
+                <input type="hidden" name="id" value="{{asignatura.pk}}">
                 <label for="nombreA">Nombre de Asignatura: </label>
                 <input type="text" id="nombreA" name="nombreA" required value="{{asignatura.nombre}}"><br>
                 <label for="autorA">Autor:</label>
-                <input type="text" id="autorA" name="autorA" required value="{{asignatura.autor}}"><br>
-                <label for="departamentoA">Departamento: </label>
-                <select data-placeholder="Departamento" name="departamentoA">
+                <input type="text" id="autorA" name="autorA" required value="{{asignatura.autor_id}}"><br>
+                <label for="academiaA">Academia: </label>
+                <select data-placeholder="Academia" name="academiaA">
                     <option value></option>
-                    {% for depto in departamentos %}
-                        {% if asignatura.departamento_id == depto.pk  %}
-                            <option value="{{ depto.pk }}" selected>{{depto.nombre}}</option> 
+                    {% for academia in listaAcademias %}
+                        {% if asignatura.academia_id == academia.pk  %}
+                            <option value="{{ academia.pk }}" selected>{{academia.nombre}}</option> 
                         {% else %}
-                            <option value="{{ depto.pk }}">{{depto.nombre}}</option> 
+                            <option value="{{ academia.pk }}">{{academial.nombre}}</option> 
                         {% endif %} 
                     {% endfor %}
                 </select><br>
-                <!--<input type="text" id="asignatura" name="asignatura" required><br>-->
                 <label for="rol">Presidente: </label>
                 <select data-placeholder="Presidente" name="presidenteA">
                     <option value></option>

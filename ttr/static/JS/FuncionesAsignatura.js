@@ -1,5 +1,5 @@
 function eliminarAsignatura( id ) {
-  $.post("/asignatura/delete",
+  $.post("/asignatura/borrar",
     {
       "id":id,
       "csrfmiddlewaretoken": $.cookie("csrftoken")

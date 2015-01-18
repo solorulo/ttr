@@ -21,7 +21,7 @@
             <div id="base"></div>
         </div>
         <div class="treeColumn">
-            <div id="depto"></div>
+            <div id="academia"></div>
         </div>
         <div class="treeColumn">
             <div id="sign"></div>
@@ -41,17 +41,17 @@
         console.log(selected);
         // fillDivTree('#cont2', tree2Select);
 
-        if (!startsWith(selected, "depto")) {
+        if (!startsWith(selected, "academia")) {
             return;
         }
-        $('#depto').jstree("destroy").empty();
+        $('#academia').jstree("destroy").empty();
         $('#sign').jstree("destroy").empty();
-        $('#depto').off('changed.jstree');
-        $('#depto').on('changed.jstree', deptoSelect).jstree({
+        $('#academia').off('changed.jstree');
+        $('#academia').on('changed.jstree', academiaSelect).jstree({
                 'core': {
                     'multiple': false,
                     'data': {
-                        "url" : "/estructura/json/departamento/"+selected.slice("depto".length),
+                        "url" : "/estructura/json/academia/"+selected.slice("academia".length),
                         "data" : function (node) {
                             return { "id" : node.id };
                         }
@@ -60,7 +60,7 @@
             });
     }
 
-    function deptoSelect(e, data) {
+    function academiaSelect(e, data) {
         var selected = data.selected[0];
         console.log(selected);
         // fillDivTree('#cont3', tree3Select);
