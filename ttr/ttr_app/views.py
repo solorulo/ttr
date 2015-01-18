@@ -11,7 +11,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 def general(request):
-    return render(request, 'general.html')
+    return render(request, 'general.html', {'navegacionG':1})
+def superior(request):
+    return render(request, 'superior.html', {'navegacionG':1})
 
 def estructura(request):
     return render(request, 'estructura.html')

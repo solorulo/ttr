@@ -10,7 +10,8 @@ Aquí agregamos los modelos que se muestran en el administrador de Django (/admi
 admin.site.register(MyUser)
 
 # Register your models here.
-admin.site.register(Area)
+admin.site.register(Plantel)
+admin.site.register(Academia)
 admin.site.register(Departamento)
 admin.site.register(Asignatura)
 admin.site.register(Clases)

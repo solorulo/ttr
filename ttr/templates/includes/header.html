@@ -6,12 +6,20 @@
     <figure id="avatar">
         <img src="../static/img/logo_escom.png" />
     </figure>
+ {% ifequal navegacionG 1  %}
+        <nav>
+            <ul>
+                <li><a href="">BIENVENIDO</a></li>
+            </ul>
+        </nav>
+    {% else %}
+        <nav>
+            <ul>
+                <li><a href="/login/">Iniciar Sesión</a></li>
+                <li><a href="/usuarios/">Usuarios</a></li>
+                <li><a href="/estructura/">Estructura Académica</a></li>
+                <li><a href="/instrumento/rubrica/agregar/">Instrumentos de Evaluación</a></li>
+            </ul>
+        </nav>
+{% endifequal %} 
 </header>
-<nav>
-    <ul>
-        <li><a href="/login/">Iniciar Sesión</a></li>
-        <li><a href="/usuarios/">Usuarios</a></li>
-        <li><a href="/estructura/">Estructura Académica</a></li>
-        <li><a href="/instrumento/rubrica/agregar/">Instrumentos de Evaluación</a></li>
-    </ul>
-</nav>
