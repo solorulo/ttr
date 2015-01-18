@@ -1,5 +1,5 @@
 function eliminarDepartamento( id ) {
-  $.post("/departamento/borrar",
+  $.post("/departamento/borrar/",
     {
       "id":id,
       "csrfmiddlewaretoken": $.cookie("csrftoken")

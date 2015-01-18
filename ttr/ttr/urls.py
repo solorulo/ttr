@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 
     url(r'^index/', 'ttr_app.views.index'),
     url(r'^login/', 'ttr_app.views.login'),
+    url(r'^logout/', 'ttr_app.views.logout'),
 
     url(r'^estructura/$', 'ttr_app.views.estructura'),
     url(r'^estructura/json/(?P<node>\w+)(/(?P<node_id>\d{1,5}))?$', 'ttr_app.views.estructura_json'),
@@ -33,7 +34,7 @@ urlpatterns = patterns('',
     url(r'^departamento/nuevo$','ttr_app.views.newDepartamento'),
     url(r'^departamento/agregar$','ttr_app.views.registrarDepartamento'),
     url(r'^departamento/ver$','ttr_app.views.verDepartamentos'),
-    url(r'^departamento/borrar','ttr_app.views.eliminarDepartamento'),
+    url(r'^departamento/borrar/$','ttr_app.views.eliminarDepartamento'),
     url(r'^departamento/consultar/?$','ttr_app.views.consultarDepartamento'),
     url(r'^departamento/consultar/modificar/?$','ttr_app.views.editarDepartamento'),
 

@@ -4,7 +4,12 @@
     {% include "includes/head.html" with title="Registrar nueva unidad de aprendizaje" %}
 </head>
 <body>
-    {% include "includes/header.html" %}
+    {%if user.myuser.is_authenticated %}
+    {% include "includes/header_login.html"  %}
+    {%else%}
+    {% include "includes/header.html"  %}
+    {%endif%}
+
    <div id="contenido" align="center">
             <form method="post" action="/asignatura/agregar"  class="nuevaAsignatura">
                 {% csrf_token %}

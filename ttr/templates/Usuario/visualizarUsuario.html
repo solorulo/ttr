@@ -6,7 +6,12 @@
 		<script type="text/javascript" src="/static/JS/FuncionesUsuario.js"></script>
 	</head>
 	<body>
-		{% include "includes/header.html" %}
+	{%if user.myuser.is_authenticated %}
+    {% include "includes/header_login.html"  %}
+    {%else%}
+    {% include "includes/header.html"  %}
+    {%endif%}
+
 		<div id="contenido" align="center">
 			<table >
 				{%csrf_token%}
