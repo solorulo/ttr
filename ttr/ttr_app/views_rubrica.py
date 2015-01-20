@@ -60,6 +60,23 @@ def agregar(request):
                 valor=int(pod_vals[idx]['text']),
                 categoria=categorias[index_cat],
                 descripcion=pod_val)
-            new_pond.save()
+            new_pond.save() 
         return HttpResponse('true')
     return render(request,'Instrumento/Rubrica/rubrica_agregar.html')
+
+def ver(request):
+    idx = request.GET.get('id')
+    the_rubrica = Rubrica.objects.get(pk=int(idx))
+    the_cats = CategoriaRubrica.objects.filter(rubrica_id=the_rubrica)
+    the_pod_vals = PonderacionRubrica.objects.filter(categoria__in=the_cats)
+    fpods = []
+    if (the_cats.count() > 0):
+        fcat = the_cats.first()
+        fpod_vals = the_pod_vals.filter(categoria_id=fcat.pk)
+        for fpod_val in fpod_vals:
+            fpods.append({
+                'val' : fpod_val.valor
+                })
+    
+    return render(request,'Instrumento/Rubrica/rubrica_ver.html', 
+        { 'rubrica':the_rubrica, 'cats' : the_cats, 'pods' : fpods, 'pod_vals' : the_pod_vals })

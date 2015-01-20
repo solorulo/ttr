@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    {% include "includes/head.html" with title="Registrar Rúbrica" %}
+    {% include "includes/head.html" with title="Ver Rúbrica" %}
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
 </head>
 
@@ -10,17 +10,17 @@
     {% csrf_token %}
     {% include "includes/header.html" %}
     <section>
-        <label>Título </label><input id="titulo" type="text" placeholder="titulo" /><br/>
-        <label>Autor </label><input id="autor" type="text" placeholder="autor" /><br/>
-        <label>Unidad de aprendizaje </label><input id="asignatura" type="text" placeholder="unidad de apredizaje" /><br/>
-        <label>Oficial </label><input id="oficial" type="checkbox" placeholder="oficial" /><br/>
-        <button id="add_row">Agregar fila</button>
-        <button id="add_column">Agregar columna</button>
+        <label>Título </label><input id="titulo" type="text" placeholder="titulo" value="{{rubrica.titulo}}" /><br/>
+        <label>Autor </label><input id="autor" type="text" placeholder="autor" value="{{rubrica.autor.pk}}" /><br/>
+        <label>Unidad de aprendizaje </label><input id="asignatura" type="text" placeholder="unidad de apredizaje" value="{{rubrica.asignatura.pk}}" /><br/>
+        <label>Oficial </label><input id="oficial" type="checkbox" placeholder="oficial" {%if rubrica.oficial %}checked {% endif %}/><br/>
+        <!-- <button id="add_row">Agregar fila</button>
+        <button id="add_column">Agregar columna</button> -->
         <table>
             <thead>
                 <tr id="row_header">
                     <th>Categoría</th>
-                    <th class="column" meta:index="1">
+                    <!-- <th class="column" meta:index="1">
                         <button class="delete_column">-</button>
                         <br/>
                         <input type="text" value="4" />
@@ -30,38 +30,42 @@
                         <button class="delete_column">-</button>
                         <br/>
                         <input type="text" value="4" />
+                    </th> -->
+                    {% for pod in pods %}
+                    <th class="column">
+                        <button class="delete_column">-</button>
+                        <br/>
+                        <input type="text" value="{{pod.value}}" />
                     </th>
+                    {% endfor %}
                 </tr>
             </thead>
             <tbody id="tbody">
-                <tr class="row" meta:index="1">
+                {% for cat in cats %}
+                <tr class="row" meta:index="{{cat.pk}}">
                     <td>
-                        <button class="delete_row" meta:index="1">-</button>
-                        <input class="cat" type="text" />
+                        <button class="delete_row" meta:index="{{cat.pk}}">-</button>
+                        <input class="cat" type="text" value="{{cat.texto}}" />
                     </td>
-                    <td class="column_val">
+                    <!-- <td class="column_val">
                         <input type="text" value="4" />
                     </td>
                     <td class="column_val">
                         <input type="text" value="4" />
+                    </td> -->
+                    {% for pod_val in pod_vals %}
+                    {% ifequal pod_val.categoria.pk cat.pk%}
+                    <td class="column_val">
+                        <input type="text" value="{{pod_val.descripcion}}" />
                     </td>
+                    {% endifequal %}
+                    {% endfor %}
                 </tr>
-                <tr class="row" meta:index="2">
-                    <td>
-                        <button class="delete_row" meta:index="2">-</button>
-                        <input class="cat" type="text" />
-                    </td>
-                    <td class="column_val">
-                        <input type="text" value="4" />
-                    </td>
-                    <td class="column_val">
-                        <input type="text" value="4" />
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
         <br/>
-        <button id="save">Guardar</button>
+        <!-- <button id="save">Guardar</button> -->
         
     </section>
 
