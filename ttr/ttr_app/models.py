@@ -90,6 +90,14 @@ class CategoriaRubrica (models.Model):
 
 class PonderacionRubrica (models.Model):
 	valor = models.IntegerField()
+	rubrica = models.ForeignKey(Rubrica)
+
+	def __unicode__(self):              # __unicode__ on Python 2
+		return str(self.valor)
+
+class CriterioRubrica (models.Model):
+	rubrica = models.ForeignKey(Rubrica)
+	ponderación = models.ForeignKey(PonderacionRubrica)
 	categoria = models.ForeignKey(CategoriaRubrica)
 	descripcion = models.CharField(max_length=60, null=True, blank=True)
 

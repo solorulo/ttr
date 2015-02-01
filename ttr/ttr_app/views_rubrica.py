@@ -38,9 +38,14 @@ def agregar(request):
         new_rubrica.save()
 
         categorias = {}
+        ponderacion_vals = {}
         for idx1, cat in enumerate(cats):
             print ("nueva cat")
             print cat
+            """
+            'val' : cat,
+            'index_cat' : meta_index_cat
+            """
             cat_val = cat['val']
             cat_index = cat['index_cat']
             new_cat = CategoriaRubrica(
@@ -50,15 +55,39 @@ def agregar(request):
             new_cat.save()
             categorias[idx1] = new_cat
 
+        for idx, pod_val in enumerate(pod_vals):
+            print ("nueva pond_val")
+            print pod_val
+            """
+            'index_pod' : meta_index,
+            'meta_new' : meta_new,
+            'text' : input_text
+            """
+            index_pod = pod_val['index_pod']
+            pod_text = pod_val['text']
+
+            new_pond_val = PonderacionRubrica(
+                rubrica_id=new_rubrica.pk
+                valor=pod_text)
+            new_pond_val.save() 
+            ponderacion_vals[index_pod] = new_pond_val
+
         for idx, pod in enumerate(pods):
             print ("nueva pond")
             print pod
+            """
+            'index' : indexPond,
+            'cat' : indexRow,
+            'val' : val
+            """
             index_cat = pod['cat']
             pod_val = pod['val']
+            indexPond = pod['index']
 
-            new_pond = PonderacionRubrica(
-                valor=int(pod_vals[idx]['text']),
-                categoria=categorias[index_cat],
+            new_pond = CriterioRubrica(
+                rubrica_id=new_rubrica.pk,
+                ponderacion_id=ponderacion_vals[indexPond].pk,
+                categoria_id=categorias[index_cat].pk,
                 descripcion=pod_val)
             new_pond.save() 
         return HttpResponse('true')
@@ -68,15 +97,8 @@ def ver(request):
     idx = request.GET.get('id')
     the_rubrica = Rubrica.objects.get(pk=int(idx))
     the_cats = CategoriaRubrica.objects.filter(rubrica_id=the_rubrica)
-    the_pod_vals = PonderacionRubrica.objects.filter(categoria__in=the_cats)
-    fpods = []
-    if (the_cats.count() > 0):
-        fcat = the_cats.first()
-        fpod_vals = the_pod_vals.filter(categoria_id=fcat.pk)
-        for fpod_val in fpod_vals:
-            fpods.append({
-                'val' : fpod_val.valor
-                })
+    the_ponds = PonderacionRubrica.objects.filter(rubrica_id=the_rubrica)
+    fpods = CriterioRubrica.objects.filter(rubrica_id=the_rubrica)
     
     return render(request,'Instrumento/Rubrica/rubrica_ver.html', 
-        { 'rubrica':the_rubrica, 'cats' : the_cats, 'pods' : fpods, 'pod_vals' : the_pod_vals })
+        { 'rubrica':the_rubrica, 'cats' : the_cats, 'pods' : fpods, 'pod_vals' : the_ponds })

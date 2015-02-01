@@ -74,37 +74,35 @@ function delete_column($obj) {
     update_buttons();
 }
 function send_rubrica() {
-    var poderaciones_vals = [];
+    var ponderaciones_vals = [];
     var categorias = [];
     var ponderaciones = [];
-    $('.column').each(function(idx, val){
+    $('.column').each(function(indexPondVal, val){
         var meta_index = $(this).attr('meta:index');
         var meta_new = $(this).attr('meta:new');
         var input_text = $(this).children('input[type=text]').val();
-        poderaciones_vals[idx] = {
+        ponderaciones_vals[indexPondVal] = {
             'index_pod' : meta_index,
             'meta_new' : meta_new,
             'text' : input_text
         };
     });
-    $('.row .cat').each(function(idx1, val){
-        var cat = $(this).val();
-        var val_cat = {
-            'val' : cat
+    $('.row').each(function(indexRow, val){
+        var $thisRow = $(this);
+        var cat = $thisRow.children('.cat').val();
+        var meta_index_cat = $thisRow.attr('meta:index');
+        categorias[indexRow] = {
+            'val' : cat,
+            'index_cat' : meta_index_cat
         };
-        var parentRow = $(this).parent().parent();
-        var meta_index_cat = parentRow.attr('meta:index');
-        if (meta_index_cat) {
-            val_cat['index_cat'] = meta_index_cat;
-        }
-        categorias[idx1] = val_cat;
 
-        parentRow.children('.column_val').each(function(idx, val){
+        $thisRow.children('.column_val').each(function(indexPond, val){
             var val = $(this).children('input[type=text]').val();
-            ponderaciones[idx] = {
-                'cat' : idx1,
+            ponderaciones.push ({
+                'index' : indexPond,
+                'cat' : indexRow,
                 'val' : val
-            };
+            });
         });
     });
     var obj = {
@@ -112,7 +110,7 @@ function send_rubrica() {
         'autor' : $('#autor').val(),
         'asignatura' : $('#asignatura').val(),
         'oficial' : $('#oficial').val(),
-        'pod_vals[]' : JSON.stringify(poderaciones_vals),
+        'pod_vals[]' : JSON.stringify(ponderaciones_vals),
         'cats[]' : JSON.stringify(categorias),
         'pods[]' : JSON.stringify(ponderaciones),
         "csrfmiddlewaretoken": $.cookie("csrftoken")
