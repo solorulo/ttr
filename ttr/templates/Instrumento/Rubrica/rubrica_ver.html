@@ -31,11 +31,9 @@
                         <br/>
                         <input type="text" value="4" />
                     </th> -->
-                    {% for pod in pods %}
+                    {% for pod in pod_vals %}
                     <th class="column">
-                        <button class="delete_column">-</button>
-                        <br/>
-                        <input type="text" value="{{pod.value}}" />
+                        <input type="text" value="{{pod.valor}}" />
                     </th>
                     {% endfor %}
                 </tr>
@@ -44,7 +42,6 @@
                 {% for cat in cats %}
                 <tr class="row" meta:index="{{cat.pk}}">
                     <td>
-                        <button class="delete_row" meta:index="{{cat.pk}}">-</button>
                         <input class="cat" type="text" value="{{cat.texto}}" />
                     </td>
                     <!-- <td class="column_val">
@@ -53,7 +50,7 @@
                     <td class="column_val">
                         <input type="text" value="4" />
                     </td> -->
-                    {% for pod_val in pod_vals %}
+                    {% for pod_val in pods %}
                     {% ifequal pod_val.categoria.pk cat.pk%}
                     <td class="column_val">
                         <input type="text" value="{{pod_val.descripcion}}" />

@@ -97,7 +97,7 @@ class PonderacionRubrica (models.Model):
 
 class CriterioRubrica (models.Model):
 	rubrica = models.ForeignKey(Rubrica)
-	ponderación = models.ForeignKey(PonderacionRubrica)
+	ponderacion = models.ForeignKey(PonderacionRubrica)
 	categoria = models.ForeignKey(CategoriaRubrica)
 	descripcion = models.CharField(max_length=60, null=True, blank=True)
 
@@ -111,7 +111,7 @@ class ListaCotejo (InstrumentoEvaluacion):
 class IndicadorCotejo(models.Model):
 	listacotejo = models.ForeignKey(ListaCotejo)
 	texto = models.CharField(max_length=60, null=True, blank=True)
-	valor= models.IntegerField() #definir valor maximo y minimo #valor hecho, no realizado, pendiente
+	check = models.BooleanField(default=False) #definir valor maximo y minimo #valor hecho, no realizado, pendiente
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.texto

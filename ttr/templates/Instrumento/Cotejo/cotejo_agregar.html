@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% include "includes/head.html" with title="Registrar lista de cotejo" %}
+    <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+</head>
+
+<body>
+    {% csrf_token %}
+    {% include "includes/header.html" %}
+    <section>
+        <label>Título </label><input id="titulo" type="text" placeholder="titulo" /><br/>
+        <label>Autor </label><input id="autor" type="text" placeholder="autor" /><br/>
+        <label>Unidad de aprendizaje </label><input id="asignatura" type="text" placeholder="unidad de apredizaje" /><br/>
+        <label>Oficial </label><input id="oficial" type="checkbox" placeholder="oficial" /><br/>
+        <button id="add_row">Agregar fila</button>
+        <button id="add_column">Agregar columna</button>
+        <table>
+            <thead>
+                <tr id="row_header">
+                    <th>Descripción</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr class="row" meta:index="1">
+                    <td>
+                        <button class="delete_row">-</button>
+                    </td>
+                    <td>
+                        <input type="text" value="4" />
+                    </td>
+                    <td>
+                        <input type="checkbox" />
+                    </td>
+                </tr>
+                <tr class="row" meta:index="2">
+                    <td>
+                        <button class="delete_row">-</button>
+                    </td>
+                    <td>
+                        <input type="text" value="4" />
+                    </td>
+                    <td>
+                        <input type="checkbox" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+        <button id="save">Guardar</button>
+        
+    </section>
+
+    <script type="text/javascript" src="/static/js/FuncionesCotejo.js"></script>
+    {% include "includes/footer.html" %}
+</body>
+
+</html>

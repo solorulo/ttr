@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+from django.db import IntegrityError
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import render
+from ttr_app.models import *
+import json
+from django.http import HttpResponse, HttpResponseRedirect
+
+def agregar(request):
+    if request.method == "POST":
+        
+        return HttpResponse('true')
+    return render(request,'Instrumento/Cotejo/cotejo_agregar.html')
+
+def ver(request):
+    idx = request.GET.get('id')
+    the_cotejo = ListaCotejo.objects.get(pk=int(idx))
+    the_indicadores = IndicadorCotejo.objects.filter(listacotejo_id=the_cotejo.pk)
+    return render(request,'Instrumento/Cotejo/cotejo_ver.html', 
+        { 'cotejo':the_cotejo, 'indicadores' : the_indicadores })

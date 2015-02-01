@@ -63,14 +63,15 @@ def agregar(request):
             'meta_new' : meta_new,
             'text' : input_text
             """
-            index_pod = pod_val['index_pod']
+            # index_pod = pod_val['index_pod']
             pod_text = pod_val['text']
 
             new_pond_val = PonderacionRubrica(
-                rubrica_id=new_rubrica.pk
-                valor=pod_text)
+                rubrica_id=new_rubrica.pk,
+                valor=pod_text
+            )
             new_pond_val.save() 
-            ponderacion_vals[index_pod] = new_pond_val
+            ponderacion_vals[idx] = new_pond_val
 
         for idx, pod in enumerate(pods):
             print ("nueva pond")
@@ -96,9 +97,12 @@ def agregar(request):
 def ver(request):
     idx = request.GET.get('id')
     the_rubrica = Rubrica.objects.get(pk=int(idx))
-    the_cats = CategoriaRubrica.objects.filter(rubrica_id=the_rubrica)
-    the_ponds = PonderacionRubrica.objects.filter(rubrica_id=the_rubrica)
-    fpods = CriterioRubrica.objects.filter(rubrica_id=the_rubrica)
-    
+    the_cats = CategoriaRubrica.objects.filter(rubrica_id=the_rubrica.pk)
+    the_ponds = PonderacionRubrica.objects.filter(rubrica_id=the_rubrica.pk)
+    fpods = CriterioRubrica.objects.filter(rubrica_id=the_rubrica.pk)
+    print the_rubrica
+    print the_cats
+    print the_ponds
+    print fpods
     return render(request,'Instrumento/Rubrica/rubrica_ver.html', 
         { 'rubrica':the_rubrica, 'cats' : the_cats, 'pods' : fpods, 'pod_vals' : the_ponds })

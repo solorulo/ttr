@@ -1,13 +1,13 @@
-var MAX_ROWS = 10;
-var MAX_COLUMNS = 5;
+var RUBRICA_MAX_ROWS = 10;
+var RUBRICA_MAX_COLUMNS = 5;
 function update_buttons() {
-    if ($('.row').length >= MAX_ROWS) {
+    if ($('.row').length >= RUBRICA_MAX_ROWS) {
         $('#add_row').attr("disabled", true);
     }
     else {
         $('#add_row').removeAttr("disabled");
     }
-    if ($('.column').length >= MAX_COLUMNS) {
+    if ($('.column').length >= RUBRICA_MAX_COLUMNS) {
         $('#add_column').attr("disabled", true);
     }
     else {
@@ -15,7 +15,7 @@ function update_buttons() {
     }
 }
 function add_row() {
-    if ($('.row').length >= MAX_ROWS) {
+    if ($('.row').length >= RUBRICA_MAX_ROWS) {
         return;
     }
     var $tbody = $('#tbody');
@@ -38,7 +38,7 @@ function add_row() {
     update_buttons();
 }
 function add_column(){
-    if ($('.column').length >= MAX_COLUMNS) {
+    if ($('.column').length >= RUBRICA_MAX_COLUMNS) {
         return;
     }
     var $tbody = $('#tbody');
@@ -89,7 +89,7 @@ function send_rubrica() {
     });
     $('.row').each(function(indexRow, val){
         var $thisRow = $(this);
-        var cat = $thisRow.children('.cat').val();
+        var cat = $thisRow.find('td .cat').val();
         var meta_index_cat = $thisRow.attr('meta:index');
         categorias[indexRow] = {
             'val' : cat,
