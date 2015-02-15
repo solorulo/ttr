@@ -8,7 +8,7 @@
 
     {% include "includes/header.html" %}
     <section>
-        <form method="post"  class="login">
+        <form method="post"  class="usuario_form">
             {% csrf_token %}
                 {% if wrong_data %}
                     <div>

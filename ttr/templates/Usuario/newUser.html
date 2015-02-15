@@ -2,6 +2,11 @@
 <html lang="es">
 	<head>
 	{% include "includes/head.html" with title="Registrar nuevo usuario" %}
+	<link rel="stylesheet" href="/static/choosen/docsupport/style.css">
+    <link rel="stylesheet" href="/static/chosen/docsupport/prism.css">
+	<link rel="stylesheet" href="/static/chosen/chosen.css">
+
+
 	</head>
 	<body>
 	{%if user.myuser.is_authenticated %}
@@ -10,34 +15,118 @@
     {% include "includes/header.html"  %}
     {%endif%}
     <section>
-		 <div id="contenido" align="center">
-		 	<form method="post" action="/usuario/agregar"  class="nuevoUsuario">
-		 		{% csrf_token %}
-
-		 		<label for="username">Nombre de Usuario: </label>
-		 		<input type="text" id="username" name="username" required><br>
-		 		<label for="password">Contraseña: </label>
-		 		<input type="password" id="password" name="password" required><br>
-		 		<label for="nombres">Nombre(s): </label>
-		 		<input type="text" id="nombres" name="nombres" required><br>
-		 		<label for="aPaterno">Apellido Paterno: </label>
-		 		<input type="text" id="aPaterno" name="aPaterno" required><br>
-		 		<label for="aMaterno">Apellido Materno: </label>
-		 		<input type="text" id="aMaterno" name="aMaterno" required><br>
-		 		<label for="asignatura">Asignatura: </label>
-		 		<select data-placeholder="Asignaturas" multiple="true" name="asignaturas">
-		 			<option value></option>
-			 		{% for asignatura in asignaturas %}
-					<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option>    
-					{% endfor %}
-				</select><br>
-		 		<label for="rol">Rol: </label>
-		 		<input type="text" id="rol" name="rol" required><br>
-		 		<input type="submit" Value="Crear Usuario" id="btnSubmit">
-
-		 	</form>
-		 </div>
+		 
+	 	<form method="post" action="/usuario/agregar"  class="
+	 	usuario_form">
+	 		{% csrf_token %}
+	 		<center>
+	 		<fieldset align="center">
+   			<legend >Registro de Usuario:</legend>
+	 		<div id="contenido" align="center">
+	 			<table>
+	 				<tr>
+	 					<td>
+					 		<label for="username">Nombre de Usuario: </label>
+					 	</td>
+					  	<td>
+					 		<input type="email" id="username" name="username" placeholder="usuario@dominio.com" required>*
+					 		
+					 	</td>
+					</tr>
+					<tr>
+						<td>
+					 		<label for="password">Contraseña: </label>
+					 	</td>
+					  	<td>
+					 		<input type="password" id="password" name="password" required>*
+					 	</td>
+					</tr>
+					<tr>
+					 	<td>
+					 		<label for="nombres">Nombre(s): </label>
+					 	</td>
+					  	<td>
+					 		<input type="text" id="nombres" name="nombres" required>*
+					 	</td>
+					</tr>
+					<tr>
+					 	<td>
+					 		<label for="aPaterno">Apellido Paterno: </label>
+					 	</td>
+					  	<td>
+					 		<input type="text" id="aPaterno" name="aPaterno" required>
+					 	</td>
+					</tr>
+					<tr>
+					 	<td>
+					 		<label for="aMaterno">Apellido Materno: </label>
+					 	</td>
+					  	<td>
+					 		<input type="text" id="aMaterno" name="aMaterno" required>
+					 	</td>
+					</tr>
+					<tr>
+					 	<td>
+					 		<label for="asignatura">Asignatura: </label>
+					 	</td>
+					  	<td>
+					 		<select data-placeholder="Asignaturas"  class="chosen-select" multiple="true" name="asignaturas">
+					 			<option value></option>
+						 		{% for asignatura in asignaturas %}
+								<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option>    
+								{% endfor %}
+							</select>
+						</td>
+					</tr>
+					<tr>
+					 	<td>
+					 		<label for="rol">Rol: </label>
+					 	</td>
+					  	<td>
+							<select data-placeholder="Choose a Country..." class="chosen-select" multiple style="width:350px;" tabindex="4">
+					            <option value=""></option>
+					            <option value="United States">United States</option>
+					            <option value="United Kingdom">United Kingdom</option>
+					            <option value="Afghanistan">Afghanistan</option>
+					            <option value="Aland Islands">Aland Islands</option>
+					            <option value="Albania">Albania</option>
+					            <option value="Algeria">Algeria</option>
+					            <option value="American Samoa">American Samoa</option>
+					            <option value="Andorra">Andorra</option>
+					            <option value="Angola">Angola</option>
+					            <option value="Anguilla">Anguilla</option>
+					            <option value="Antarctica">Antarctica</option>
+					            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+							</select>
+					 	</td>
+					</tr>
+					<tr>
+					 	<td colspan=2 align="center">
+					 		<br>
+					 		<button id="btnSubmit" type="submit" class="submit">Crear Usuario </button>
+					 	</td>
+					</tr>
+				</table>
+		</div>
+		</fieldset>
+		<center>
+		</form>
 	</section>
 		 {% include "includes/footer.html" %}
+		 <script src="../static/chosen/chosen.jquery.js" type="text/javascript"></script>
+		 <script type="text/javascript">
+	
+	    /*var config = {
+	      '.chosen-select'           : {},
+	      '.chosen-select-deselect'  : {allow_single_deselect:true},
+	      '.chosen-select-no-single' : {disable_search_threshold:10},
+	      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+	      '.chosen-select-width'     : {width:"95%"}
+	    }
+	    for (var selector in config) {
+	      $(selector).chosen(config[selector]);
+    }*/
+  		$( '.chosen-select').chosen();
+	</script>
 	 </body>
 </html>
