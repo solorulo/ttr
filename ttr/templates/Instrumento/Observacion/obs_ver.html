@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% include "includes/head.html" with title="Ver lista de observación" %}
+    <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <script type="text/javascript">
+    var id_inst = {{obs.pk}};
+    </script>
+</head>
+
+<body>
+    {% csrf_token %}
+    {% include "includes/header.html" %}
+    <section>
+        <label>Título </label><input id="titulo" type="text" placeholder="titulo" value="{{obs.titulo}}" /><br/>
+        <label>Autor </label><input id="autor" type="text" placeholder="autor" value="{{obs.autor.pk}}" /><br/>
+        <label>Unidad de aprendizaje </label><input id="asignatura" type="text" placeholder="unidad de apredizaje" value="{{obs.asignatura.nombre}}" /><br/>
+        <label>Oficial </label><input id="oficial" type="checkbox" placeholder="oficial" {%if obs.oficial %}checked {% endif %}/><br/>
+        <!-- <button id="add_row">Agregar fila</button>
+        <button id="add_column">Agregar columna</button> -->
+        <table>
+            <thead>
+                <tr id="row_header">
+                    <th colspan="2">Descripción</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <!--
+
+                <tr class="row" meta:index="1">
+                    <td>
+                        <button class="delete_row">-</button>
+                    </td>
+                    <td>
+                        <input type="text" value="4" />
+                    </td>
+                    <td>
+                        <input type="checkbox" />
+                    </td>
+                </tr>
+                 -->
+                {% for ind in indicadores %}
+                <tr class="row" meta:index="{{ind.pk}}">
+                    <td>
+                    </td>
+                    <td>
+                        <input type="text" value="{{ ind.texto }}" />
+                    </td>
+                    <td>
+                        <input type="text" value="{{ ind.valor }}" />
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+        <!-- <button id="save">Guardar</button> -->
+        
+    </section>
+        <div id="comment_add">
+            <textarea placeholder="Comentario acerca del instrumento"></textarea><br/>
+            <button>Comentar</button>
+        </div>
+        <div id="comments_section">
+            
+        </div>
+
+    <script type="text/javascript" src="/static/js/FuncionesComentarios.js"></script>
+    {% include "includes/footer.html" %}
+</body>
+
+</html>

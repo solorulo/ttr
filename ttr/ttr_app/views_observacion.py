@@ -18,43 +18,44 @@ def agregar(request):
 
         print request.POST
 
-        listacotejo = request.POST.get('listacotejo[]')
-        print "listacotejo "
-        print listacotejo
-        listacotejo = json.loads(listacotejo)
+        listaobs = request.POST.get('listaobs[]')
+        print "listaobs "
+        print listaobs
+        listaobs = json.loads(listaobs)
 
-        new_listacotejo = ListaCotejo(
+        new_listaobs = ListaObservacion(
             titulo=titulo,
             autor_id=int(autor),
             asignatura_id=int(asignatura),
             oficial=(oficial.lower()=="true"),
         )
-        new_listacotejo.save()
+        new_listaobs.save()
 
-        for idx, indicador in enumerate(listacotejo):
+        for idx, indicador in enumerate(listaobs):
             print "nuevo indicador"
             print indicador
             """
             'text' : text,
-            'checked' : checked,
+            'value' : value,
             'index' : meta_index
             """
             ind_text = indicador['text']
-            ind_checked = indicador['checked']
-            new_indicador = IndicadorCotejo(
-                listacotejo_id=new_listacotejo.pk,
+            ind_value = indicador['value']
+            new_indicador = IndicadorListaObs(
+                listaobs_id=new_listaobs.pk,
                 texto=ind_text,
-                check=ind_checked
+                valor=ind_value
             )
             new_indicador.save()
         
         return HttpResponse('true')
-    return render(request,'Instrumento/Cotejo/cotejo_agregar.html')
+    return render(request,'Instrumento/Observacion/obs_agregar.html', 
+        {"ind_choices" : IndicadorListaObs.TIPO_CHOICES })
 
 def ver(request):
     idx = request.GET.get('id')
-    the_cotejo = ListaCotejo.objects.get(pk=int(idx))
-    the_indicadores = IndicadorCotejo.objects.filter(listacotejo_id=the_cotejo.pk)
+    the_obs = ListaObservacion.objects.get(pk=int(idx))
+    the_indicadores = IndicadorListaObs.objects.filter(listaobs_id=the_obs.pk)
     print the_indicadores
-    return render(request,'Instrumento/Cotejo/cotejo_ver.html', 
-        { 'cotejo':the_cotejo, 'indicadores' : the_indicadores })
+    return render(request,'Instrumento/Observacion/obs_ver.html', 
+        { 'obs':the_obs, 'indicadores' : the_indicadores })

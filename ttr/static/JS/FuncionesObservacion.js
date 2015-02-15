@@ -1,6 +1,6 @@
-var COTEJO_MAX_ROWS = 10;
+var OBS_MAX_ROWS = 10;
 function add_row() {
-    if ($('.row').length >= COTEJO_MAX_ROWS) {
+    if ($('.row').length >= OBS_MAX_ROWS) {
         return;
     }
     var $tbody = $('#tbody');
@@ -20,32 +20,33 @@ function add_row() {
         "<td>"+
         "<input type=\"text\" value=\"4\" />"+
         "</td>");
-    $new_row.append(
-        "<td>"+
-        "<input type=\"checkbox\" />"+
-        "</td>");
-    // <td>
-    //     <input type="text" value="4" />
-    // </td>
-    // <td>
-    //     <input type="checkbox" />
-    // </td>
+
+    $new_select = $("<select></select>");
+    for (var key = 0; key < ind_choices.length; key++) {
+        var ind_choice = ind_choices[key];
+        $new_select.append(
+            "<option value="+key+">"+ind_choice+"</option>"
+        );
+    };
+    $new_td = $("<td></td>");
+    $new_td.append($new_select);
+    $new_row.append($new_td);
     $tbody.append($new_row);
 }
 function delete_row($obj) {
     var parentRow = $obj.parent().parent();
     parentRow.remove();
 }
-function send_listacotejo() {
-    var listacotejo = [];
+function send_listaobs() {
+    var listaobs = [];
     $('.row').each(function(indexRow, val){
         var $thisRow = $(this);
         var text = $thisRow.find('input[type=text]').val();
-        var checked = $thisRow.find('input[type=checkbox]').is(':checked');
+        var value = $thisRow.find('select').val();
         var meta_index = $thisRow.attr('meta:index');
-        listacotejo[indexRow] = {
+        listaobs[indexRow] = {
             'text' : text,
-            'checked' : checked,
+            'value' : value,
             'index' : meta_index
         };
     });
@@ -54,10 +55,10 @@ function send_listacotejo() {
         'autor' : $('#autor').val(),
         'asignatura' : $('#asignatura').val(),
         'oficial' : $('#oficial').is(':checked'),
-        'listacotejo[]' : JSON.stringify(listacotejo),
+        'listaobs[]' : JSON.stringify(listaobs),
         "csrfmiddlewaretoken": $.cookie("csrftoken")
     };
-    $.post('/instrumento/listacotejo/agregar', obj, function(data){
+    $.post('/instrumento/listaobs/agregar', obj, function(data){
         if (data == "true")
             window.location.href = "/index";
     });
@@ -72,7 +73,7 @@ $(document).ready(function() {
         delete_row($(this));
     });
     $('#save').click(function(event) {
-        send_listacotejo();
+        send_listaobs();
     });
     $('button').button();
 });

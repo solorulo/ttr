@@ -120,17 +120,25 @@ class IndicadorCotejo(models.Model):
 class ListaObservacion(InstrumentoEvaluacion):
 	pass
 
-class CategoriaListaObs(models.Model):
+class IndicadorListaObs(models.Model):
 	listaobs = models.ForeignKey(ListaObservacion)
 	texto = models.CharField(max_length=60, null=True, blank=True)
 
-	def __unicode__(self):              # __unicode__ on Python 2
-		return self.texto
-
-class IndicadorListaObs(models.Model):
-	categoriaobs = models.ForeignKey(CategoriaListaObs)
-	texto = models.CharField(max_length=60, null=True, blank=True)
-	valor = models.IntegerField() 
+	SIN_VALOR 	= 0
+	MUY_MALO 	= 1
+	MALO 		= 2
+	REGULAR 	= 3
+	BUENO 		= 4
+	EXCELENTE 	= 5
+	TIPO_CHOICES = (
+		(SIN_VALOR, "Sin valorar"),
+		(MUY_MALO, "Muy malo"),
+		(MALO, "Malo"),
+		(REGULAR, "Regular"),
+		(BUENO, "Bueno"),
+		(EXCELENTE, "Excelente"),
+	)
+	valor = models.IntegerField(choices=TIPO_CHOICES, default=SIN_VALOR) 
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.texto
@@ -140,3 +148,14 @@ class EvaluacionInstrumento(models.Model):
 	user = models.ForeignKey(MyUser)
 	instrumento = models.ForeignKey(InstrumentoEvaluacion)
 	valor = models.IntegerField() #definir valor maximo y minimo
+
+	fecha_creacion = models.DateTimeField(auto_now_add=True)
+	fecha_modif = models.DateTimeField(auto_now=True)
+
+class ComentarioInstrumento(models.Model):
+	user = models.ForeignKey(MyUser)
+	instrumento = models.ForeignKey(InstrumentoEvaluacion)
+	texto = models.CharField(max_length=65535, null=True, blank=True)
+	
+	fecha_creacion = models.DateTimeField(auto_now_add=True)
+	fecha_modif = models.DateTimeField(auto_now=True)

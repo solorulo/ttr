@@ -57,7 +57,11 @@ urlpatterns = patterns('',
     url(r'^instrumento/rubrica/ver/?$', 'ttr_app.views_rubrica.ver'),
     url(r'^instrumento/listacotejo/agregar/?$', 'ttr_app.views_cotejo.agregar'),
     url(r'^instrumento/listacotejo/ver/?$', 'ttr_app.views_cotejo.ver'),
-    # url(r'^instrumento/listaobservacion/agregar/?$', ''),
+    url(r'^instrumento/listaobs/agregar/?$', 'ttr_app.views_observacion.agregar'),
+    url(r'^instrumento/listaobs/ver/?$', 'ttr_app.views_observacion.ver'),
+
+    url(r'^instrumento/comentario/?$', 'ttr_app.views_comments.comment'),
+    url(r'^instrumento/comentarios/?$', 'ttr_app.views_comments.get_comments'),
     # url(r'^instrumento/borrar', ''),
 
     url(r'^usuario/ver$', 'ttr_app.views.visualizarUsuario'),

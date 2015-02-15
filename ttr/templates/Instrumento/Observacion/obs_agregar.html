@@ -2,8 +2,14 @@
 <html lang="es">
 
 <head>
-    {% include "includes/head.html" with title="Registrar lista de cotejo" %}
+    {% include "includes/head.html" with title="Registrar lista de observación" %}
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <script type="text/javascript">
+    var ind_choices = [];
+    {% for key, item in ind_choices %} 
+    ind_choices[{{ key }}] = "{{item}}";
+    {% endfor %}
+    </script>
 </head>
 
 <body>
@@ -31,7 +37,11 @@
                         <input type="text" value="4" />
                     </td>
                     <td>
-                        <input type="checkbox" />
+                        <select>
+                            {% for key, item in ind_choices %} 
+                            <option value="{{ key }}">{{item}}</option>
+                            {% endfor %}
+                        </select>
                     </td>
                 </tr>
                 <tr class="row" meta:index="2">
@@ -42,7 +52,11 @@
                         <input type="text" value="4" />
                     </td>
                     <td>
-                        <input type="checkbox" />
+                        <select>
+                            {% for key, item in ind_choices %} 
+                            <option value="{{ key }}">{{item}}</option>
+                            {% endfor %}
+                        </select>
                     </td>
                 </tr>
             </tbody>
@@ -52,7 +66,7 @@
         
     </section>
 
-    <script type="text/javascript" src="/static/js/FuncionesCotejo.js"></script>
+    <script type="text/javascript" src="/static/js/FuncionesObservacion.js"></script>
     {% include "includes/footer.html" %}
 </body>
 

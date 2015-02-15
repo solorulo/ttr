@@ -109,7 +109,7 @@ function send_rubrica() {
         'titulo' : $('#titulo').val(),
         'autor' : $('#autor').val(),
         'asignatura' : $('#asignatura').val(),
-        'oficial' : $('#oficial').val(),
+        'oficial' : $('#oficial').is(':checked'),
         'pod_vals[]' : JSON.stringify(ponderaciones_vals),
         'cats[]' : JSON.stringify(categorias),
         'pods[]' : JSON.stringify(ponderaciones),

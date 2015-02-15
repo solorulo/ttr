@@ -11,6 +11,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 def agregar(request):
     if request.method == "POST":
+        titulo = request.POST.get('titulo')
+        autor = request.POST.get('autor')
+        asignatura = request.POST.get('asignatura')
+        oficial = request.POST.get('oficial')
+        
         print request.POST
         pod_vals = request.POST.get('pod_vals[]')
         print "pod_vals "
@@ -24,15 +29,11 @@ def agregar(request):
         print "pods "
         print pods
         pods = json.loads(pods)
-        titulo = request.POST.get('titulo')
-        autor = request.POST.get('autor')
-        asignatura = request.POST.get('asignatura')
-        oficial = request.POST.get('oficial')
 
         new_rubrica = Rubrica(
             titulo=titulo,
-            autor_id=autor,
-            asignatura_id=asignatura,
+            autor_id=int(autor),
+            asignatura_id=int(asignatura),
             oficial=(oficial=="true"),
         )
         new_rubrica.save()
