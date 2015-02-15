@@ -1,0 +1,231 @@
+/* === Form Typography === */  
+
+  
+fieldset {
+    font-family: sans-serif;
+    border: 2px solid #800040;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    width: 60%;
+    box-shadow: 0 0 20px #999;
+}
+
+fieldset legend {
+    background: #800040;
+    color: #fff;
+    padding: 5px 10px ;
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 5px #ddd;
+    margin-left: 10px;
+
+}
+
+.usuario_form table{
+    border-spacing: 10px 10px;
+     border-collapse: separate
+ }
+
+.usuario_form h2, .usuario_form label {  
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-size: 12 px;
+    
+
+}  
+  
+
+  
+/* === List Styles === */  
+.usuario_form ul {  
+    width: 750px;  
+    list-style-type: none;  
+    list-style-position: outside;  
+    margin: 0px;  
+    padding: 0px;  
+}  
+  
+.usuario_form li {  
+    padding: 12px;  
+    border-bottom: 1px solid #eee;  
+    position: relative;  
+}  
+  
+    .usuario_form li:first-child, .usuario_form li:last-child {  
+        border-bottom: 1px solid #777;  
+    }  
+  
+/* === Form Header === */  
+.usuario_form h2 {  
+    margin: 0;  
+    display: inline;  
+}  
+  
+.required_notification {  
+    color: #d45252;  
+    margin: 5px 0 0 0;  
+    display: inline;  
+    float: right;  
+}  
+  
+/* === Form Elements === */  
+.usuario_form label {  
+    width: 150px;  
+    margin-top: 3px;  
+    display: inline-block;  
+    float: left;  
+    padding: 3px;  
+    
+}  
+  
+.usuario_form input {  
+    height: 14px;  
+    width: 220px;  
+    padding: 5px 8px;  
+} 
+.usuario_form select {  
+    height: 22px;  
+    width: 270px;  
+    /*padding: 5px 8px;  */
+}   
+  
+.usuario_form textarea {  
+    padding: 8px;  
+    width: 300px;  
+}  
+  
+.usuario_form button {  
+    margin-left: 156px;  
+}  
+  
+/* form element visual styles */  
+.usuario_form input, .usuario_form textarea {  
+    border: 1px solid #aaa;  
+     
+    border-radius: 2px;  
+    padding-right: 30px;  
+    -moz-transition: padding .25s;  
+    -webkit-transition: padding .25s;  
+    -o-transition: padding .25s;  
+    transition: padding .25s;  
+}  
+  
+    .usuario_form input:focus, .usuario_form textarea:focus {  
+        background-color: #FFF;  
+        border: 1px solid #555;  
+        /*box-shadow: 0 0 3px #aaa;  
+        padding-right: 70px;  */
+    }  
+  
+    /* === HTML5 validation styles === */  
+    .usuario_form input:required, .usuario_form textarea:required, .usuario_form select:required {  
+        background: #fff; 
+            background:url(required.png) no-repeat 240px 5px #F0F0EF;
+    background:url(../img/required.png) no-repeat 240px 5px, -webkit-gradient(linear, left top, left bottom, from(#E3E3E3), to(#FFFFFF)); /* Saf4+, Chrome */
+    background:url(../img/required.png) no-repeat 240px 5px, -webkit-linear-gradient(top, #E3E3E3, #FFFFFF); /* Chrome 10+, Saf5.1+ */
+    background:url(../img/required.png) no-repeat 240px 5px, -moz-linear-gradient(top, #E3E3E3, #FFFFFF); /* FF3.6+ */
+    background:url(../img/required.png) no-repeat 240px 5px, -ms-linear-gradient(top, #E3E3E3, #FFFFFF); /* IE10 */
+    background:url(../img/required.png) no-repeat 240px 5px, -o-linear-gradient(top, #E3E3E3, #FFFFFF); /* Opera 11.10+ */
+    }  
+
+
+        .usuario_form input:required:valid, .usuario_form textarea:required:valid, .usuario_form select:required:valid {  
+            /*background: #94FF94 url(images/valid.png) no-repeat 98% center;  
+            box-shadow: 0 0 5px #5cd053;  
+            border-color: #28921f; */ 
+                background:url(valid.png) no-repeat 240px 5px #F0F0EF;
+    background:url(../img/valid.png) no-repeat 240px 5px, -webkit-gradient(linear, left top, left bottom, from(#E3E3E3), to(#FFFFFF)); /* Saf4+, Chrome */
+    background:url(../img/valid.png) no-repeat 240px 5px, -webkit-linear-gradient(top, #E3E3E3, #FFFFFF); /* Chrome 10+, Saf5.1+ */
+    background:url(../img/valid.png) no-repeat 240px 5px, -moz-linear-gradient(top, #E3E3E3, #FFFFFF); /* FF3.6+ */
+    background:url(../img/valid.png) no-repeat 240px 5px, -ms-linear-gradient(top, #E3E3E3, #FFFFFF); /* IE10 */
+    background:url(../img/valid.png) no-repeat 240px 5px, -o-linear-gradient(top, #E3E3E3, #FFFFFF); /* Opera 11.10+ */
+        }  
+
+    .usuario_form input:focus:invalid, .usuario_form textarea:focus:invalid, .usuario_form select:focus:invalid {  
+        /*background: #800040; 
+        box-shadow: 0 0 5px #d45252;  
+        border-color: #b03535;  
+        color: #fff; 
+        font-weight: bold;*/
+            background:url(invalid.png) no-repeat 240px 5px #F0F0EF;
+    background:url(../img/invalid.png) no-repeat 240px 5px, -webkit-gradient(linear, left top, left bottom, from(#E3E3E3), to(#FFFFFF)); /* Saf4+, Chrome */
+    background:url(../img/invalid.png) no-repeat 240px 5px, -webkit-linear-gradient(top, #E3E3E3, #FFFFFF); /* Chrome 10+, Saf5.1+ */
+    background:url(../img/invalid.png) no-repeat 240px 5px, -moz-linear-gradient(top, #E3E3E3, #FFFFFF); /* FF3.6+ */
+    background:url(../img/invalid.png) no-repeat 240px 5px, -ms-linear-gradient(top, #E3E3E3, #FFFFFF); /* IE10 */
+    background:url(../img/invalid.png) no-repeat 240px 5px, -o-linear-gradient(top, #E3E3E3, #FFFFFF); /* Opera 11.10+ */
+    } 
+
+    .usuario_form input::-webkit-input-placeholder {
+      color: fff;
+    }
+    .usuario_form input:-moz-placeholder {
+      color: red; 
+    }
+    .usuarui_form input:-ms-input-placeholder { 
+      color: red; 
+    }
+    /* 
+    .usuario_form input:required:invalid, .usuario_form textarea:required:invalid{
+
+        background: #D63333;;  
+        box-shadow: 0 0 5px #d45252;  
+        border-color: #b03535;  
+          color: #fff; 
+          font-weight: bold;
+    }*/
+  
+/* === Form hints === */  
+.form_hint {  
+    background: #d45252;  
+    border-radius: 3px 3px 3px 3px;  
+      color: #fff; 
+    margin-left: 8px;  
+    padding: 1px 6px;  
+    z-index: 999; /* hints stay above all other elements */  
+    position: absolute; /* allows proper formatting if hint is two lines */  
+    display: none;  
+}  
+  
+    .form_hint::before {  
+        content: "\25C0";  
+          color: #fff;  
+        position: absolute;  
+        top: 1px;  
+        left: -6px;  
+    }  
+  
+.usuario_form input:focus + .form_hint {  
+    display: inline;  
+}  
+  
+.usuario_form input:required:valid + .form_hint {  
+     color: #fff; 
+}  
+  
+    .usuario_form input:required:valid + .form_hint::before {  
+          color: #fff; 
+    }  
+  
+/* === Button Style === */  
+button.submit {  
+     /*background: -webkit-linear-gradient(top, #fff, #fff);  
+    background: -moz-linear-gradient(top, #fff, #fff);  
+    background: -ms-linear-gradient(top, #fff, #fff);  
+    background: -o-linear-gradient(top, #fff, #fff);  
+    background: linear-gradient(top, #fff, #fff);  */
+     background: #800040;
+    color: #fff;
+    padding: 5px 5px ;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 3px #ddd;
+    margin-left: 5px; 
+}  
+  
+    button.submit:hover {  
+        opacity: .85;  
+        cursor: pointer;  
+    }  
+  
+    button.submit:active {  
+    
