@@ -11,7 +11,10 @@
 	    {%endif%}
 	    <section>
 		 <div id="contenido" align="center">
-		 	<form method="post" action="/usuario/consultar/modificar"  class="modificarUsuario">
+		 	<form method="post" action="/usuario/consultar/modificar"  class="estilo_form">
+		 		<center>
+		 		<fieldset align="center">
+   				<legend >Editar Usuario:</legend>
 		 		{% csrf_token %}
 		 		<input type="hidden" id="id" name="id" value="{{usuario.pk}}">
 		 		<label for="username">Nombre de Usuario: </label>
@@ -35,7 +38,8 @@
 				<label for="rol">Rol: </label>
 		 		<input type="text" id="rol" name="rol" required value="{{usuario.rol}}"><br>
 		 		<input type="submit" Value="Editar" id="btnSubmit">
-
+		 	</fieldset>
+		 </center>
 		 	</form>
 		 </div>
 		 </section>

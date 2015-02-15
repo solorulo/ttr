@@ -17,24 +17,64 @@
                         <p style="color:red;">El tiempo de tu sesión ha acabado</p>
                     {% endif %}
 
-                <form method="post" action="/academia/consultar/modificar" >
                 {% csrf_token %}
+                <form method="post" action="/academia/consultar/modificar" >
+                    <center>
+                        <fieldset align="center">
+                        <legend >Editar Academia:</legend>
+                        <center>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="hidden" name="id" value="{{academia.pk}}">
+                                        <label for="nombreD">Nombre de la Academia: </label>
 
-                <input type="hidden" name="id" value="{{academia.pk}}">
-                <label for="nombreD">Nombre de la Academia: </label>
-                <input type="text"  name="nombreD" required value="{{academia.nombre}}"><br>
-                <label for="departamentoD">Departamento de la academia: </label>
-                <select data-placeholder="Departamento" name="departamentoD">
-                    <option value></option>
-                    {% for departamento in listaDepartamentos %}
-                        {% if academia.depto_id == departamento.pk  %}
-                            <option value="{{ departamento.pk }}" selected>{{departamento.nombre}}</option> 
-                        {% else %}
-                            <option value="{{ departamento.pk }}">{{departamento.nombre}}</option> 
-                        {% endif %} 
-                    {% endfor %}
-                </select><br>
-                <input type="submit" Value="Guardar Academia" >
+                                    </td>
+                                    <td>
+                                        <input type="text"  name="nombreD" required value="{{academia.nombre}}">
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="departamentoD">Departamento de la academia: </label>
+                                    </td>
+                                    <td>
+                                        <select data-placeholder="Departamento" name="departamentoD">
+                                        <option value></option>
+                                            {% for departamento in listaDepartamentos %}
+                                                {% if academia.depto_id == departamento.pk  %}
+                                                    <option value="{{ departamento.pk }}" selected>{{departamento.nombre}}</option> 
+                                                {% else %}
+                                                    <option value="{{ departamento.pk }}">{{departamento.nombre}}</option> 
+                                                {% endif %} 
+                                            {% endfor %}
+                                        </select>
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <center>
+                                            <button id="btnSubmit" type="submit" class="submit">Guardar Academia </button>
+                                            
+                                        </center>
+                                    </td>
+                                </tr>
+                            </table>
+                        </center>
+                        </fieldset>
+                    </center>
             </form>
     </div>
     </section>

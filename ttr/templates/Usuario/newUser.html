@@ -17,7 +17,7 @@
     <section>
 		 
 	 	<form method="post" action="/usuario/agregar"  class="
-	 	usuario_form">
+	 	estilo_form">
 	 		{% csrf_token %}
 	 		<center>
 	 		<fieldset align="center">
@@ -70,8 +70,8 @@
 					 		<label for="asignatura">Asignatura: </label>
 					 	</td>
 					  	<td>
-					 		<select data-placeholder="Asignaturas"  class="chosen-select" multiple="true" name="asignaturas">
-					 			<option value></option>
+					 		<select data-placeholder="Asignaturas"  
+					 		 multiple name="asignaturas">
 						 		{% for asignatura in asignaturas %}
 								<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option>    
 								{% endfor %}
@@ -83,27 +83,19 @@
 					 		<label for="rol">Rol: </label>
 					 	</td>
 					  	<td>
-							<select data-placeholder="Choose a Country..." class="chosen-select" multiple style="width:350px;" tabindex="4">
-					            <option value=""></option>
-					            <option value="United States">United States</option>
-					            <option value="United Kingdom">United Kingdom</option>
-					            <option value="Afghanistan">Afghanistan</option>
-					            <option value="Aland Islands">Aland Islands</option>
-					            <option value="Albania">Albania</option>
-					            <option value="Algeria">Algeria</option>
-					            <option value="American Samoa">American Samoa</option>
-					            <option value="Andorra">Andorra</option>
-					            <option value="Angola">Angola</option>
-					            <option value="Anguilla">Anguilla</option>
-					            <option value="Antarctica">Antarctica</option>
-					            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+							<select style="width:350px;" tabindex="4" name="rol" id="rol">
+					        
+					            <option value="3">Profesor</option>
+					            <option value="2">Administrador Local</option>
+					            <option value="1">Administrador Institucional</option>
+					            
 							</select>
 					 	</td>
 					</tr>
 					<tr>
 					 	<td colspan=2 align="center">
 					 		<br>
-					 		<button id="btnSubmit" type="submit" class="submit">Crear Usuario </button>
+					 		<button id="btnSubmit" type="submit" class="submit">Registrar Usuario </button>
 					 	</td>
 					</tr>
 				</table>

@@ -13,6 +13,10 @@
     {%endif%}
     <section>
 		<div id="contenido" align="center">
+			<form class="estilo_form">
+				<center>
+		 		<fieldset align="center">
+   				<legend >Visualizar Usuarios:</legend>
 			<table >
 				{%csrf_token%}
 				{% for usuario in usuarios %}
@@ -25,6 +29,9 @@
 				</tr>
 				{% endfor %}
 			</table>
+				</fieldset>
+			</center>
+		</form>
 		</div>
 	</section>
 		{% include "includes/footer.html" %}
