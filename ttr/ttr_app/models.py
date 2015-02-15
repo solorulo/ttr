@@ -4,17 +4,17 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import math
 
-"""
-Modelo personalizado de usuario que permite campos mas grandes
-"""
 class MyUser(User):
-	ADMINISTRADOR = 0
-	PROFESOR = 1
-	SUPER_ADMIN = 2
+	"""
+	Modelo personalizado de usuarios
+	"""
+	SUPER_ADMIN = 1
+	ADMINISTRADOR = 2
+	PROFESOR = 3
 	TIPO_CHOICES = (
 		(ADMINISTRADOR, "Administrador"),
 		(PROFESOR, "Profesor"),
-		(SUPER_ADMIN, "SUPER_ADMIN"),
+		(SUPER_ADMIN, "Super Administrador"),
 	)
 	rol = models.IntegerField(choices=TIPO_CHOICES, default=PROFESOR)
 
@@ -28,6 +28,11 @@ class MyUser(User):
 
 class Plantel(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
+	url_logo = models.CharField(max_length=65535, null=True, blank=True)
+	mision = models.CharField(max_length=65535, null=True, blank=True)
+	vision = models.CharField(max_length=65535, null=True, blank=True)
+	usuarios = models.ManyToManyField(MyUser)
+
 	MEDIA_SUP = 1
 	SUPERIOR = 2
 	NIVEL_CHOICES = (

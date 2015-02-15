@@ -30,10 +30,10 @@ def comment (request):
 
 def get_comments(request):
     idx = request.GET.get('id')
-    the_cinsts = ComentarioInstrumento.objects
+    the_cinsts = (ComentarioInstrumento.objects
         .filter(instrumento_id=int(idx))
         .order_by('-fecha_creacion')
-        .select_related()
+        .select_related())
     res = []
     for cint in the_cinsts:
         res.append({

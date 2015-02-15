@@ -4,9 +4,6 @@
 <head>
     {% include "includes/head.html" with title="Ver lista de cotejo" %}
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
-    <script type="text/javascript">
-    var id_inst = {{cotejo.pk}};
-    </script>
 </head>
 
 <body>
@@ -60,14 +57,7 @@
         <!-- <button id="save">Guardar</button> -->
         
     </section>
-        <div id="comment_add">
-            <textarea placeholder="Comentario acerca del instrumento"></textarea><br/>
-            <button>Comentar</button>
-        </div>
-        <div id="comments_section">
-            
-        </div>
-    <script type="text/javascript" src="/static/js/FuncionesComentarios.js"></script>
+    {% include "includes/Instrumento/comments.html" %}
 
     {% include "includes/footer.html" %}
 </body>

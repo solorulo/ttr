@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     url(r'^login/?$', 'ttr_app.views.login'),
     url(r'^logout/?$', 'ttr_app.views.logout'),
 
-    # url(r'^buscar/?$', 'ttr_app.views_buscar.buscar'),
+    url(r'^buscar/?$', 'ttr_app.views_buscar.buscar'),
 
     url(r'^general/?$', 'ttr_app.views.general'),
     url(r'^superior/?$', 'ttr_app.views.superior'),

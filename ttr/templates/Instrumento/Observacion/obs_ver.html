@@ -59,15 +59,10 @@
         <!-- <button id="save">Guardar</button> -->
         
     </section>
-        <div id="comment_add">
-            <textarea placeholder="Comentario acerca del instrumento"></textarea><br/>
-            <button>Comentar</button>
-        </div>
-        <div id="comments_section">
-            
-        </div>
+    
+    {% include "includes/Instrumento/comments.html" %}
 
-    <script type="text/javascript" src="/static/js/FuncionesComentarios.js"></script>
+    <script type="text/javascript" src="/static/js/FuncionesObservacion.js"></script>
     {% include "includes/footer.html" %}
 </body>
 
