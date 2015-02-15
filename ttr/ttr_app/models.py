@@ -10,9 +10,11 @@ Modelo personalizado de usuario que permite campos mas grandes
 class MyUser(User):
 	ADMINISTRADOR = 0
 	PROFESOR = 1
+	SUPER_ADMIN = 2
 	TIPO_CHOICES = (
 		(ADMINISTRADOR, "Administrador"),
 		(PROFESOR, "Profesor"),
+		(SUPER_ADMIN, "SUPER_ADMIN"),
 	)
 	rol = models.IntegerField(choices=TIPO_CHOICES, default=PROFESOR)
 
@@ -67,6 +69,14 @@ class Clases (models.Model):
 
 #####################
 class InstrumentoEvaluacion(models.Model):
+	GENERAL = 0
+	PLANTEL = 1
+	TIPO_CHOICES = (
+		(GENERAL, "General"),
+		(PLANTEL, "Plantel"),
+	)
+	level_show = models.IntegerField(choices=TIPO_CHOICES, default=PLANTEL)
+
 	titulo = models.CharField(max_length=60, null=True, blank=True)
 	fecha_creacion = models.DateTimeField(auto_now_add=True)
 	autor = models.ForeignKey(MyUser, related_name="instrumento_autor")
