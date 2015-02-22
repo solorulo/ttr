@@ -4,6 +4,24 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import math
 
+class Plantel(models.Model):
+	nombre = models.CharField(max_length=60, null=True, blank=True)
+	url_logo = models.CharField(max_length=65535, null=True, blank=True)
+	mision = models.CharField(max_length=65535, null=True, blank=True)
+	vision = models.CharField(max_length=65535, null=True, blank=True)
+	# usuarios = models.ManyToManyField(MyUser)
+
+	MEDIA_SUP = 1
+	SUPERIOR = 2
+	NIVEL_CHOICES = (
+		(MEDIA_SUP, "Media Superior"),
+		(SUPERIOR, "Superior"),
+	)
+	nivel = models.IntegerField(choices=NIVEL_CHOICES, default=SUPERIOR)
+
+	def __unicode__(self):              # __unicode__ on Python 2
+		return self.nombre or ''
+
 class MyUser(User):
 	"""
 	Modelo personalizado de usuarios
@@ -17,6 +35,7 @@ class MyUser(User):
 		(SUPER_ADMIN, "Super Administrador"),
 	)
 	rol = models.IntegerField(choices=TIPO_CHOICES, default=PROFESOR)
+	plantel = models.ForeignKey(Plantel)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.get_full_name()
@@ -25,24 +44,6 @@ class MyUser(User):
 		if self.pk is None:
 			self.set_password(self.password)
 		super(MyUser, self).save(*args, **kwargs)
-
-class Plantel(models.Model):
-	nombre = models.CharField(max_length=60, null=True, blank=True)
-	url_logo = models.CharField(max_length=65535, null=True, blank=True)
-	mision = models.CharField(max_length=65535, null=True, blank=True)
-	vision = models.CharField(max_length=65535, null=True, blank=True)
-	usuarios = models.ManyToManyField(MyUser)
-
-	MEDIA_SUP = 1
-	SUPERIOR = 2
-	NIVEL_CHOICES = (
-		(MEDIA_SUP, "Media Superior"),
-		(SUPERIOR, "Superior"),
-	)
-	nivel = models.IntegerField(choices=NIVEL_CHOICES, default=SUPERIOR)
-
-	def __unicode__(self):              # __unicode__ on Python 2
-		return self.nombre or ''
 
 class Departamento(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
