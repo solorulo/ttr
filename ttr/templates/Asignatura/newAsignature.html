@@ -10,32 +10,68 @@
     {% include "includes/header.html"  %}
     {%endif%}
     <section>
-       <div id="contenido" align="center">
-                <form method="post" action="/asignatura/agregar"  class="nuevaAsignatura">
-                    {% csrf_token %}
+
+        {% csrf_token %}
                     {% if wrong_data %}
                             <p style="color:red;">El tiempo de tu sesión ha acabado</p>
                         {% endif %}
 
-                    <label for="nombreA">Nombre de Asignatura: </label>
-                    <input type="text" id="nombreA" name="nombreA" required><br>
-                    <label for="autorA">Autor:</label>
-                    <input type="text" id="autorA" name="autorA" required><br>
-                    <label for="academiaA">Academia: </label>
-                    <select data-placeholder="Departamento" name="academiaA">
-                        <option value></option>
-                        {% for academia in listaAcademias %}
-                        <option value="{{ academia.pk }}">{{academia.nombre}}</option>    
-                        {% endfor %}
-                    </select><br>
-                    <label for="rol">Presidente: </label>
-                    <select data-placeholder="Presidente" name="presidenteA">
-                        <option value></option>
-                        {% for presidente in usuarios %}
-                        <option value="{{ presidente.pk }}">{{presidente.first_name}}</option>    
-                        {% endfor %}
-                    </select><br>
-                    <input type="submit" Value="Registrar Asignatura" id="btnRegistrarA">
+       <div id="contenido" align="center">
+                <form method="post" action="/asignatura/agregar"  class="estilo_form">
+                    <fieldset align="center">
+                        <legend >Nueva Unidad de Aprendizaje:</legend>
+                        <center>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label for="nombreA">Nombre de Asignatura: </label>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="nombreA" name="nombreA" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="autorA">Autor:</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="autorA" name="autorA" required><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="academiaA">Academia: </label>
+                                    </td>
+                                    <td>
+                                        <select data-placeholder="Departamento" name="academiaA">
+                                        {% for academia in listaAcademias %}
+                                        <option value="{{ academia.pk }}">{{academia.nombre}}</option>    
+                                        {% endfor %}
+                                    </select><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="rol">Presidente: </label>
+                                    </td>
+                                    <td>
+                                        <select data-placeholder="Presidente" name="presidenteA">
+                                            {% for presidente in usuarios %}
+                                            <option value="{{ presidente.pk }}">{{presidente.first_name}}</option>    
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <center>                                 
+                                            <button id="btnSubmit" type="submit" class="submit">Registrar Asignatura </button>
+                                        </center>
+                                    </td>
+                                </tr>
+                            </table>
+                        </center>
+                    </fieldset>
                 </form>
              </div>
     </section>         

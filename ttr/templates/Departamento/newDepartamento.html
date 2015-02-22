@@ -10,19 +10,37 @@
     {% include "includes/header.html"  %}
     {%endif%}
     <section>
-   <div id="contenido" align="center">
-            <form method="post" action="/departamento/agregar"  >
-                {% csrf_token %}
-                {% if wrong_data %}
-                        <p style="color:red;">El tiempo de tu sesión ha acabado</p>
-                    {% endif %}
-                <input type="hidden" name="id" value="{{plantel.pk}}">    
-                <label for="nombreDepartamento">Nombre del Departamento: </label>
-                <input type="text"  name="nombreDepartamento" required><br>
-               
-                <input type="submit" Value="Registrar Departamento" >
+   
+            <form method="post" action="/departamento/agregar" class="estilo_form" >
+            {% csrf_token %}
+            {% if wrong_data %}
+            <p style="color:red;">El tiempo de tu sesión ha acabado</p>
+            {% endif %}
+                <center>
+                    <fieldset align="center">
+                        <legend >Registro de Departamento:</legend>
+                            <div id="contenido" align="center">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" name="id" value="{{plantel.pk}}">    
+                                            <label for="nombreDepartamento">Nombre del Departamento: </label>
+                                        </td>
+                                        <td>
+                                            <input type="text"  name="nombreDepartamento" required>
+                                        </td>
+                                    <tr>
+                                        <td colspan="2" height="20" style="height: 40px; ">
+                                            <center>
+                                                <button id="btnSubmit" type="submit" class="submit">Registrar Departamento</button>
+                                            <center>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                    </fieldset>
+                <cente>
             </form>
-    </div>
     </section>
     {% include "includes/footer.html" %}
 </body>

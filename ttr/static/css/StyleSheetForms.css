@@ -22,12 +22,12 @@ fieldset legend {
 
 }
 
-.usuario_form table{
+.estilo_form table{
     border-spacing: 10px 10px;
      border-collapse: separate
  }
 
-.usuario_form h2, .usuario_form label {  
+.estilo_form h2, .estilo_form label {  
     font-family: Georgia, Times, "Times New Roman", serif;
     font-size: 12 px;
     
@@ -37,7 +37,7 @@ fieldset legend {
 
   
 /* === List Styles === */  
-.usuario_form ul {  
+.estilo_form ul {  
     width: 750px;  
     list-style-type: none;  
     list-style-position: outside;  
@@ -45,18 +45,18 @@ fieldset legend {
     padding: 0px;  
 }  
   
-.usuario_form li {  
+.estilo_form li {  
     padding: 12px;  
     border-bottom: 1px solid #eee;  
     position: relative;  
 }  
   
-    .usuario_form li:first-child, .usuario_form li:last-child {  
+    .estilo_form li:first-child, .estilo_form li:last-child {  
         border-bottom: 1px solid #777;  
     }  
   
 /* === Form Header === */  
-.usuario_form h2 {  
+.estilo_form h2 {  
     margin: 0;  
     display: inline;  
 }  
@@ -69,7 +69,7 @@ fieldset legend {
 }  
   
 /* === Form Elements === */  
-.usuario_form label {  
+.estilo_form label {  
     width: 150px;  
     margin-top: 3px;  
     display: inline-block;  
@@ -78,28 +78,28 @@ fieldset legend {
     
 }  
   
-.usuario_form input {  
-    height: 14px;  
+.estilo_form input {  
+    margin: 0 auto;  
     width: 220px;  
     padding: 5px 8px;  
 } 
-.usuario_form select {  
+.estilo_form select {  
     height: 22px;  
     width: 270px;  
     /*padding: 5px 8px;  */
 }   
   
-.usuario_form textarea {  
+.estilo_form textarea {  
     padding: 8px;  
     width: 300px;  
 }  
   
-.usuario_form button {  
+.estilo_form button {  
     margin-left: 156px;  
 }  
   
 /* form element visual styles */  
-.usuario_form input, .usuario_form textarea {  
+.estilo_form input, .estilo_form textarea {  
     border: 1px solid #aaa;  
      
     border-radius: 2px;  
@@ -110,7 +110,7 @@ fieldset legend {
     transition: padding .25s;  
 }  
   
-    .usuario_form input:focus, .usuario_form textarea:focus {  
+    .estilo_form input:focus, .estilo_form textarea:focus {  
         background-color: #FFF;  
         border: 1px solid #555;  
         /*box-shadow: 0 0 3px #aaa;  
@@ -118,7 +118,7 @@ fieldset legend {
     }  
   
     /* === HTML5 validation styles === */  
-    .usuario_form input:required, .usuario_form textarea:required, .usuario_form select:required {  
+    .estilo_form input:required, .estilo_form textarea:required, .estilo_form select:required {  
         background: #fff; 
             background:url(required.png) no-repeat 240px 5px #F0F0EF;
     background:url(../img/required.png) no-repeat 240px 5px, -webkit-gradient(linear, left top, left bottom, from(#E3E3E3), to(#FFFFFF)); /* Saf4+, Chrome */
@@ -129,7 +129,7 @@ fieldset legend {
     }  
 
 
-        .usuario_form input:required:valid, .usuario_form textarea:required:valid, .usuario_form select:required:valid {  
+        .estilo_form input:required:valid, .estilo_form textarea:required:valid, .estilo_form select:required:valid {  
             /*background: #94FF94 url(images/valid.png) no-repeat 98% center;  
             box-shadow: 0 0 5px #5cd053;  
             border-color: #28921f; */ 
@@ -141,7 +141,7 @@ fieldset legend {
     background:url(../img/valid.png) no-repeat 240px 5px, -o-linear-gradient(top, #E3E3E3, #FFFFFF); /* Opera 11.10+ */
         }  
 
-    .usuario_form input:focus:invalid, .usuario_form textarea:focus:invalid, .usuario_form select:focus:invalid {  
+    .estilo_form input:focus:invalid, .estilo_form textarea:focus:invalid, .estilo_form select:focus:invalid {  
         /*background: #800040; 
         box-shadow: 0 0 5px #d45252;  
         border-color: #b03535;  
@@ -155,17 +155,17 @@ fieldset legend {
     background:url(../img/invalid.png) no-repeat 240px 5px, -o-linear-gradient(top, #E3E3E3, #FFFFFF); /* Opera 11.10+ */
     } 
 
-    .usuario_form input::-webkit-input-placeholder {
+    .estilo_form input::-webkit-input-placeholder {
       color: fff;
     }
-    .usuario_form input:-moz-placeholder {
+    .estilo_form input:-moz-placeholder {
       color: red; 
     }
     .usuarui_form input:-ms-input-placeholder { 
       color: red; 
     }
     /* 
-    .usuario_form input:required:invalid, .usuario_form textarea:required:invalid{
+    .estilo_form input:required:invalid, .estilo_form textarea:required:invalid{
 
         background: #D63333;;  
         box-shadow: 0 0 5px #d45252;  
@@ -194,15 +194,15 @@ fieldset legend {
         left: -6px;  
     }  
   
-.usuario_form input:focus + .form_hint {  
+.estilo_form input:focus + .form_hint {  
     display: inline;  
 }  
   
-.usuario_form input:required:valid + .form_hint {  
+.estilo_form input:required:valid + .form_hint {  
      color: #fff; 
 }  
   
-    .usuario_form input:required:valid + .form_hint::before {  
+    .estilo_form input:required:valid + .form_hint::before {  
           color: #fff; 
     }  
   

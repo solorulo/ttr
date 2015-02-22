@@ -19,11 +19,33 @@
 
                 <form method="post" action="/departamento/consultar/modificar"  >
                 {% csrf_token %}
-
-                <input type="hidden" id="id" name="id" value="{{depto.pk}}">
-                <label for="nombreA">Nombre del Departamento: </label>
-                <input type="text" id="nombreA" name="nombreA" required value="{{depto.nombre}}"><br>
-                <input type="submit" Value="Guardar Departamento" id="btnRegistrarA">
+                <center>
+                    <fieldset align="center">
+                        <legend >Editar Departamento:</legend>
+                            <table align="center">
+                                <tr>
+                                    <td> 
+                                        <input type="hidden" id="id" name="id" value="{{depto.pk}}">
+                                        <label for="nombreA">Nombre del Departamento: </label>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="nombreA" name="nombreA" required value="{{depto.nombre}}"><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <center>
+                                        <button id="btnSubmit" type="submit" class="submit">Guardar Departamento </button>
+                                    </td>
+                                </tr>
+                            </table>
+                    </fieldset>
+                </center>
             </form>
     </div>
     </section>
