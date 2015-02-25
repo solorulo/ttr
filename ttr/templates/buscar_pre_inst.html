@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% include "includes/head.html" with title="Buscar" %}
+    <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+</head>
+
+<body>
+    {% csrf_token %}
+    {% include "includes/header.html" %}
+    <section>
+        
+        <div>
+            <form>
+            {#{% csrf_token %}#}
+            <select name="typeq">
+                {% for rtypeq in TYPESQ %}
+                    <option value="{{ rtypeq.type }}" {% ifequal typeq rtypeq.type %}selected{% endifequal %}>{{ rtypeq.text }}</option>
+                {% endfor%}
+            </select>
+            <input id="query" name="query" type="text" value="{{query}}" />
+            <button id="search">Buscar</button>
+            </form>
+        </div>
+        <div id="search_content">
+            <form id="form_data">
+                <input id="pk" type="hidden" value="{{ pk }}" />
+                <input id="name" type="hidden" value="{{ name }}" />
+            </form>
+            <table>
+                <thead>
+                    {% if results %}
+                    <tr>
+                        <th colspan="4">Resultados:</th>
+                    </tr>
+                    {% endif %}
+                </thead>
+                <tbody>
+                    <!--
+                    <tr>
+                        <td>Resultado 1</td>
+                        <td><button>Editar</button></td>
+                        <td><button>Eliminar</button></td>
+                    </tr>
+                    -->
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result.nombre }}</td>
+                        <td><button onclick="showResult(&quot;{{ result.url_search }}&quot;, {{result.pk}}, &quot;{{ typeq|urlencode }}&quot;, &quot;{{ result.nombre|urlencode }}&quot;);">Ver instrumentos</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </section>
+    <script type="text/javascript">
+    function showResult(url_search, pk, typeq, name) {
+        window.location.href=url_search + "?id=" + pk + "&type=" + typeq + "&name="+name;
+    }
+    </script>
+    {% include "includes/footer.html" %}
+</body>
+
+</html>

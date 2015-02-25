@@ -26,6 +26,7 @@ class MyUser(User):
 	"""
 	Modelo personalizado de usuarios
 	"""
+	full_name = models.CharField(max_length=60, null=True, blank=True)
 	SUPER_ADMIN = 1
 	ADMINISTRADOR = 2
 	PROFESOR = 3
@@ -43,6 +44,7 @@ class MyUser(User):
 	def save(self, *args, **kwargs):
 		if self.pk is None:
 			self.set_password(self.password)
+		self.full_name = self.get_full_name()
 		super(MyUser, self).save(*args, **kwargs)
 
 class Departamento(models.Model):
