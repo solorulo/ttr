@@ -3,40 +3,67 @@
 <head>
 {% include "includes/head.html" with title="Inicio de Sesión" %}
 </head>
-<body>
+
+    <script type="text/javascript">
+
+        function cargaError(){
+
+        var objBoton='<%=btnError.ClientID%>'
+
+        if({{error}}.length!=0)
+            objBoton.click();
+        }
+
+    </script>
+<body onload="cargaError();">
     
 
     {% include "includes/header.html" %}
-    <section>
-        <form method="post"  class="usuario_form">
+    <section >
+        <form method="post" class="estilo_form" >
             {% csrf_token %}
-                {% if wrong_data %}
+              
                     <div>
-                        <p style="color:red;">Revisa tus datos</p>
+                        <p style="color:red;">{{error}}</p>
                     </div>
-                {% endif %}
-             <div>
-                <div>
-                    <p>
-                        <label for="login">Email:</label>
-                        <input type="text" name="username" id="username" value="name@example.com">
-                    </p>
-                </div>
-                <div> 
-                    <p>
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" id="password" value="4815162342">
-                    </p>
-                </div>
-                <div>
-                    <p class="login-submit">
-                      <button type="submit" class="login-button">Login</button>
-                    </p>
-                </div>
-                <div>
-                    <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
-                </div>
-            </div>
+                
+                <center>
+                    <fieldset align="center">
+                            <legend >Iniciar Sesión:</legend>
+                                <center>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <label for="login">Email:</label>
+                                            </td>
+                                            <td>
+                                                <input type="email" name="username" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="password">Password:</label>
+                                            </td>
+                                            <td>
+                                                <input type="password" name="password" id="password" value="" placeholder="password">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <center><button type="submit" id="btnSubmit" class="submit">Ingresar</button><p align="right"><a class="popup-with-form" href="#test-form">Recuperar Contraseña</a></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" align="right">
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                    </fieldset>
+                </center>
+     
+
 
 
             {% if next %}
@@ -44,8 +71,101 @@
             {% endif %}
         </form>
     </section>
+
+
+
+
+    <!-- DIV para recuperar CONTRASEÑA -->
+    <div id="test-form" class="white-popup-block mfp-hide">
+        <form class="estilo_form">
+            
+            <fieldset style="border:0; margin: 0 auto;" >
+                <center>
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <center><b>Recuperar Contraseña</center>
+                            </td>
+                        </tr>
+                            <td colspan="2">
+                                Puedes recuperar tu contraseña, sólo introduce tu nombre de usuario y enseguida <br> te enviaremos un correo con tu nueva contraseña
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="email">E-mail</label>
+                            </td>
+                            <td>
+                                <input id="email" name="email" type="email" placeholder="example@domain.com" required="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <br>
+                                <center><button id="btnSubmit" type="submit" class="submit">Recuperar </button></center>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </fieldset>
+        </form>
+        </div>
+
+
+    <!-- DIV para mensajes de error -->
+    <div id="test-form" class="white-popup-block mfp-hide">
+        <form class="estilo_form">
+            
+            <fieldset style="border:0; margin: 0 auto;" >
+                <center>
+                    <p>{{error}}</p>
+                </center>
+            </fieldset>
+        </form>
+        </div>
+
+
+
     <script type="text/javascript">
-    $('button').button();
+    $(document).ready(function() {
+    $('.popup-with-form').magnificPopup({
+        type: 'inline',
+        focus: '#name',
+
+        // When elemened is focused, some mobile browsers in some cases zoom in
+        // It looks not nice, so we disable it:
+        callbacks: {
+            beforeOpen: function() {
+                if($(window).width() < 700) {
+                    this.st.focus = false;
+                } else {
+                    this.st.focus = '#name';
+                }
+            }
+        }
+    });
+});
+    </script>
+
+        <script type="text/javascript">
+    $(document).ready(function() {
+    $('.btnError').magnificPopup({
+        type: 'inline',
+        focus: '#name',
+
+        // When elemened is focused, some mobile browsers in some cases zoom in
+        // It looks not nice, so we disable it:
+        callbacks: {
+            beforeOpen: function() {
+                if($(window).width() < 700) {
+                    this.st.focus = false;
+                } else {
+                    this.st.focus = '#name';
+                }
+            }
+        }
+    });
+});
     </script>
     {% include "includes/footer.html" %}
 </body>
