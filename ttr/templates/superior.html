@@ -7,12 +7,31 @@
     {% include "includes/header.html" %}
     <section>
     <center>
-        ${listaPlanteles}
+        {{listaPlanteles.0.url_logo}}
     <p style="color: #800040;font-weight: bold;">Escoge el plantel al que perteneces: </p>
 
     <table border=3>
+
+    {% for escuela in listaPlanteles %}
+        {% if forloop.counter|divisibleby:4 %}
+            <td ><center><img src="/static/{{escuela.url_logo}}"  widht="320" height="150" onClick="iniciaEscuela({{escuela.pk}},'sup');"></center></td>
+            </tr>
+        {% elif forloop.counter0|divisibleby:4 %}
+        
+            <tr>
+            <td ><center><img src="/static/{{escuela.url_logo}}" widht="320" height="150" onClick="iniciaEscuela({{escuela.pk}},'sup');"></center></td>
+        {% elif forloop.last %}
+
+            <td ><center><img src="/static/{{escuela.url_logo}}" widht="320" height="150" onClick="iniciaEscuela({{escuela.pk}},'sup');"></center></td> </tr>
+        {%else%}
+             <td ><center><img src="/static/{{escuela.url_logo}}" widht="320" height="150" onClick="iniciaEscuela({{escuela.pk}},'sup');"></center></td> 
+        {%endif%}
+    {% endfor %}
+
+    
+    {% comment %}
         <tr>
-            <td ><center><img src="/static/img/superior/sup1.jpg" widht="320" height="150" onClick="iniciaEscuela(1,'sup');"></center></td>
+            <td ><center><img src="/static/{{listaPlanteles.0.url_logo}}" widht="320" height="150" onClick="iniciaEscuela(1,'sup');"></center></td>
             <td ><center><img src="/static/img/superior/sup2.jpg" widht="320" height="150" onClick="iniciaEscuela(2,'sup');"></center></td>
             <td ><center><img src="/static/img/superior/sup3.jpg"  widht="320" height="150" onClick="iniciaEscuela(3,'sup');"></center></td>
             <td ><center><img src="/static/img/superior/sup4.jpg"  widht="320" height="150" onClick="iniciaEscuela(4,'sup');"></center></td>
@@ -53,6 +72,7 @@
             <td><center><center></td>
             <td><center><center></td>
         </tr>
+        {% endcomment %}
     </table>
     <center>    
 

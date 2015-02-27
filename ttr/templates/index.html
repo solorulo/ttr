@@ -6,7 +6,27 @@
 <body>
     {% include "includes/header.html" %}
     <section>
-        
+    	<center>
+	        <table>
+	        	<tr>
+	        		<td rowspan="2">
+	        			<figure id="avatar">
+					        <img src="/static/{{request.session.url}}" width="400" height="200"/>
+					    </figure>
+	        		</td>
+	        		<td width="400">
+	        			<div>MISIÓN: </div>
+	        			{{mision}}
+	        		</td>
+	        	</tr>
+	        	<tr>
+	        		<td width="400">
+	        			<div>VISIÓN: </DIV>
+	        			{{vision}}
+	        		</td>
+	        	</tr>
+	        </table>
+	    </center>
     </section>
     {% include "includes/footer.html" %}
 </body>
