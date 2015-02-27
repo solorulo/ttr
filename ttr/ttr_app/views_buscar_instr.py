@@ -107,6 +107,7 @@ def buscar_insts (request):
             "name" : name,
             "oficial" : oficial,
             "order" : order,
+            "url_inst" : '/instrumento',
             'TYPESORDER': get_types_order(),
         })
     return render(request,'buscar_inst.html')

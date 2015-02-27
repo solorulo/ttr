@@ -48,7 +48,7 @@ urlpatterns = patterns('',
     url(r'^academia/consultar/modificar/?$','ttr_app.views.editarAcademia'),
 
     # url(r'^instrumentos/', ''),
-    # url(r'^instrumento/', ''),
+    url(r'^instrumento/$', 'ttr_app.views_instrumento.instrumento'),
     # url(r'^instrumento/agregar', ''),
     url(r'^instrumentos/buscar/$', 'ttr_app.views_buscar_instr.buscar'),
     url(r'^instrumentos/buscar/mostrar$', 'ttr_app.views_buscar_instr.buscar_insts'),

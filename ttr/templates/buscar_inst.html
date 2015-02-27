@@ -59,7 +59,7 @@
                     {% for result in results %}
                     <tr>
                         <td>{{ result.titulo }}</td>
-                        <td><button onclick="window.location.href=&quot;{{ result.url_search }}?id={{result.pk}}&amp;type={{ typeq }}&amp;name={{ result.name|urlencode }}&quot;;">Consultar</button></td>
+                        <td><button onclick="showInstrumento(&quot;{{ url_inst }}&quot;, {{result.pk}});">Consultar</button></td>
                         <td><button>Descargar</button></td>
                         <td><input type="checkbox" onclick="return false;" {% if result.oficial %} checked{% endif %} /></td>
                         <td>
@@ -78,6 +78,11 @@
         </div>
         
     </section>
+    <script type="text/javascript">
+    function showInstrumento(url, pk) {
+        window.location.href=url + "?id=" + pk;
+    }
+    </script>
     <script type="text/javascript">
         $(document).ready(function(event) {
             $('#oficial').click(function(event) {
