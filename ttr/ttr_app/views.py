@@ -19,8 +19,10 @@ def general(request):
 
         return render(request, 'general.html', {'navegacionG':1})
 def superior(request):
+    listaPlanteles = Plantel.objects.get(nivel=2)
     return render(request, 'superior.html', {'navegacionG':1})
 def mediosuperior(request):
+    listaPlanteles = Plantel.objects.get(nivel=1)
     return render(request, 'medioSuperior.html', {'navegacionG':1})
 
 def estructura(request):
