@@ -3,12 +3,10 @@ from django.conf.urls import patterns, include, url
 from django.views.generic.base import RedirectView
 
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'ttr.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
 
@@ -72,5 +70,12 @@ urlpatterns = patterns('',
     url(r'^usuario/borrar$', 'ttr_app.views.eliminarUsuario'),
     url(r'^usuario/consultar/?$','ttr_app.views.consultarUsuario'),
     url(r'^usuario/consultar/modificar/?$','ttr_app.views.editarUsuario')
+
+
+    # Reseteo de password TODO verificar si van a funcionar
+    # url(r'^forgot_password/$',auth_views.password_reset,name='forgot_password1'),
+    # url(r'^forgot_password/done/$',auth_views.password_reset_done,name='forgot_password2'),
+    # url(r'^forgot_password/confirm/(?P<uidb64>[-\w]+)/(?P<token>[-\w]+)/$',auth_views.password_reset_confirm,name='forgot_password3'),
+    # url(r'^forgot_password/complete/$',auth_views.password_reset_complete,name='forgot_password4'),
 
 )

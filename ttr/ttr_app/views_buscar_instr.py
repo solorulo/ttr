@@ -16,6 +16,13 @@ def get_types_query():
         { "type":"docente", "text":"Docente"},
     ]
 
+def get_types_order():
+    return [
+        { "type":"no", "text":"--"},
+        { "type":"asc", "text":"Ascendente"},
+        { "type":"dsc", "text":"Descendente"},
+    ]
+
 def buscar(request):
     """
     Unidad de aprendizaje
@@ -66,21 +73,42 @@ def buscar_insts (request):
         type_search = request.GET.get('type', '')
         idx = request.GET.get('id')
         # name = request.GET.get('name')
+        oficial = request.GET.get('oficial', '')
+        order = request.GET.get('order')
 
         instrumentos_db = InstrumentoEvaluacion.objects.all()
         valores_db = EvaluacionInstrumento.objects.all()
+        name = None
 
         if type_search == 'asignatura':
             instrumentos_db = instrumentos_db.filter(asignatura_id=int(idx))
+            objectx = Asignatura.objects.get(pk=int(idx))
+            name = objectx.nombre
         elif type_search == 'docente':
             instrumentos_db = instrumentos_db.filter(autor_id=int(idx))
+            objectx = MyUser.objects.get(pk=int(idx))
+            name = objectx.get_full_name()
+
+        if oficial.lower() == 'true':
+            instrumentos_db = instrumentos_db.filter(oficial=True)
+
+        if order == 'asc':
+            instrumentos_db = instrumentos_db.order_by('titulo')
+        elif order == 'dsc':
+            instrumentos_db = instrumentos_db.order_by('-titulo')
+
         instrumentos_db = instrumentos_db.annotate(valoracion=Avg('evaluacioninstrumento__valor'))
 
-        return render(request,'buscar_pre_inst.html', {
+        return render(request,'buscar_inst.html', {
             # "name" : name,
             "idx" : idx,
+            "type_search" : type_search,
             "results" : instrumentos_db,
+            "name" : name,
+            "oficial" : oficial,
+            "order" : order,
+            'TYPESORDER': get_types_order(),
         })
-    return render(request,'buscar_pre_inst.html')
+    return render(request,'buscar_inst.html')
 
 

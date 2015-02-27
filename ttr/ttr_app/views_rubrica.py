@@ -106,4 +106,4 @@ def ver(request):
     print the_ponds
     print fpods
     return render(request,'Instrumento/Rubrica/rubrica_ver.html', 
-        { 'rubrica':the_rubrica, 'cats' : the_cats, 'pods' : fpods, 'pod_vals' : the_ponds })
+        { 'instrumento':the_rubrica, 'cats' : the_cats, 'pods' : fpods, 'pod_vals' : the_ponds })

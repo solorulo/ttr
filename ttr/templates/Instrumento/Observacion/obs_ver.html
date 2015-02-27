@@ -5,7 +5,7 @@
     {% include "includes/head.html" with title="Ver lista de observación" %}
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
     <script type="text/javascript">
-    var id_inst = {{obs.pk}};
+    var id_inst = {{instrumento.pk}};
     </script>
 </head>
 
@@ -13,10 +13,10 @@
     {% csrf_token %}
     {% include "includes/header.html" %}
     <section>
-        <label>Título </label><input id="titulo" type="text" placeholder="titulo" value="{{obs.titulo}}" /><br/>
-        <label>Autor </label><input id="autor" type="text" placeholder="autor" value="{{obs.autor.pk}}" /><br/>
-        <label>Unidad de aprendizaje </label><input id="asignatura" type="text" placeholder="unidad de apredizaje" value="{{obs.asignatura.nombre}}" /><br/>
-        <label>Oficial </label><input id="oficial" type="checkbox" placeholder="oficial" {%if obs.oficial %}checked {% endif %}/><br/>
+        <label>Título </label><input id="titulo" type="text" placeholder="titulo" value="{{instrumento.titulo}}" /><br/>
+        <label>Autor </label><input id="autor" type="text" placeholder="autor" value="{{instrumento.autor.pk}}" /><br/>
+        <label>Unidad de aprendizaje </label><input id="asignatura" type="text" placeholder="unidad de apredizaje" value="{{instrumento.asignatura.nombre}}" /><br/>
+        <label>Oficial </label><input id="oficial" type="checkbox" placeholder="oficial" {%if instrumento.oficial %}checked {% endif %}/><br/>
         <!-- <button id="add_row">Agregar fila</button>
         <button id="add_column">Agregar columna</button> -->
         <table>
@@ -60,7 +60,7 @@
         
     </section>
     
-    {% include "includes/Instrumento/comments.html" %}
+    {% include "Instrumento/comments.html" %}
 
     <script type="text/javascript" src="/static/js/FuncionesObservacion.js"></script>
     {% include "includes/footer.html" %}

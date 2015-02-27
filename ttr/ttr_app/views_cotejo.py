@@ -57,4 +57,4 @@ def ver(request):
     the_indicadores = IndicadorCotejo.objects.filter(listacotejo_id=the_cotejo.pk)
     print the_indicadores
     return render(request,'Instrumento/Cotejo/cotejo_ver.html', 
-        { 'cotejo':the_cotejo, 'indicadores' : the_indicadores })
+        { 'instrumento':the_cotejo, 'indicadores' : the_indicadores })

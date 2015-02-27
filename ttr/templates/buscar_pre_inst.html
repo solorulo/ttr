@@ -47,7 +47,7 @@
                     {% for result in results %}
                     <tr>
                         <td>{{ result.nombre }}</td>
-                        <td><button onclick="showResult(&quot;{{ result.url_search }}&quot;, {{result.pk}}, &quot;{{ typeq|urlencode }}&quot;, &quot;{{ result.nombre|urlencode }}&quot;);">Ver instrumentos</button></td>
+                        <td><button onclick="showResult(&quot;{{ result.url_search }}&quot;, {{result.pk}}, &quot;{{ typeq|urlencode }}&quot;);">Ver instrumentos</button></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -56,8 +56,8 @@
         
     </section>
     <script type="text/javascript">
-    function showResult(url_search, pk, typeq, name) {
-        window.location.href=url_search + "?id=" + pk + "&type=" + typeq + "&name="+name;
+    function showResult(url_search, pk, typeq) {
+        window.location.href=url_search + "?id=" + pk + "&type=" + typeq;
     }
     </script>
     {% include "includes/footer.html" %}
