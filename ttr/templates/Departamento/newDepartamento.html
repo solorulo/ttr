@@ -4,11 +4,9 @@
     {% include "includes/head.html" with title="Registrar Nuevo Departamento" %}
 </head>
 <body>
-    {%if user.myuser.is_authenticated %}
-    {% include "includes/header_login.html"  %}
-    {%else%}
+
     {% include "includes/header.html"  %}
-    {%endif%}
+    
     <section>
    
             <form method="post" action="/departamento/agregar" class="estilo_form" >
