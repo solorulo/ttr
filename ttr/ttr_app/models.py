@@ -27,13 +27,13 @@ class MyUser(User):
 	Modelo personalizado de usuarios
 	"""
 	full_name = models.CharField(max_length=60, null=True, blank=True)
-	SUPER_ADMIN = 1
+	# SUPER_ADMIN = 1
 	ADMINISTRADOR = 2
 	PROFESOR = 3
 	TIPO_CHOICES = (
 		(ADMINISTRADOR, "Administrador"),
 		(PROFESOR, "Profesor"),
-		(SUPER_ADMIN, "Super Administrador"),
+		# (SUPER_ADMIN, "Super Administrador"),
 	)
 	rol = models.IntegerField(choices=TIPO_CHOICES, default=PROFESOR)
 	plantel = models.ForeignKey(Plantel)
