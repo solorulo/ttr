@@ -4,14 +4,12 @@
     {% include "includes/head.html" with title="Registrar nueva unidad de aprendizaje" %}
 </head>
 <body>
-    {%if user.myuser.is_authenticated %}
-    {% include "includes/header_login.html"  %}
-    {%else%}
+
     {% include "includes/header.html"  %}
-    {%endif%}
+
     <section>
 
-        {% csrf_token %}
+        
                     {% if wrong_data %}
                             <p style="color:red;">El tiempo de tu sesión ha acabado</p>
                         {% endif %}
@@ -20,6 +18,8 @@
                 <form method="post" action="/asignatura/agregar"  class="estilo_form">
                     <fieldset align="center">
                         <legend >Nueva Unidad de Aprendizaje:</legend>
+                        {% csrf_token %}
+                        <input type="hidden" id="autorA" name="autorA" required  value="{{request.session.id}}" >
                         <center>
                             <table>
                                 <tr>
@@ -30,14 +30,7 @@
                                         <input type="text" id="nombreA" name="nombreA" required>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <label for="autorA">Autor:</label>
-                                    </td>
-                                    <td>
-                                        <input type="text" id="autorA" name="autorA" required><br>
-                                    </td>
-                                </tr>
+                               
                                 <tr>
                                     <td>
                                         <label for="academiaA">Academia: </label>

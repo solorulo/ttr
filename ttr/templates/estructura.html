@@ -24,11 +24,9 @@
 </head>
 
 <body>
-    {%if user.myuser.is_authenticated %}
-    {% include "includes/header_login.html"  %}
-    {%else%}
+    
     {% include "includes/header.html"  %}
-    {%endif%}
+    
     <section>
         <div id="tree">
             <div class="treeColumn">

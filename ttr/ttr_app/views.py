@@ -141,7 +141,7 @@ def estructura_json(request, node, node_id):
 def newAsignature(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     listaAcademias= Academia.objects.all().values("pk","nombre")
     listaUsuarios= MyUser.objects.all().values("pk","first_name")
@@ -150,12 +150,14 @@ def newAsignature(request):
 def registrarAsignatura(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     if not 'nombreA' in request.POST:
         return render(request, 'newAsignature.html',{'wrong_data':True})
     nombreAsignatura= request.POST.get("nombreA", None)
-    autor= request.POST.get("autorA",None)
+
+    request.user.myuser.pk
+    autor= request.user.myuser.pk
     academia= request.POST.get("academiaA",None)
     presidente= request.POST.get("presidenteA", None)
 
@@ -228,16 +230,16 @@ def editarAsignatura(request):
 def newDepartamento(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     return render(request,'Departamento/newDepartamento.html')
 
 def registrarDepartamento(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
-    plantel=request.session["plantel"]
+    plantel=request.session["id_plantel"]
     nombreDepartamento= request.POST.get("nombreDepartamento", None)
 
     new_Departamento = Departamento(
@@ -250,7 +252,7 @@ def registrarDepartamento(request):
 def verDepartamentos(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     listaDepartamento= Departamento.objects.all()
     return render(request,'Departamento/verDepartamentos.html',{"listaDepartamentos":listaDepartamento})
@@ -258,7 +260,7 @@ def verDepartamentos(request):
 def eliminarDepartamento(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     id=request.POST.get("id",None)
     deleteDepartamento = Departamento.objects.get(pk=id)
@@ -268,7 +270,7 @@ def eliminarDepartamento(request):
 def consultarDepartamento(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     id=request.GET.get("id",None)
     depto=Departamento.objects.get(pk=id)
@@ -277,7 +279,7 @@ def consultarDepartamento(request):
 def editarDepartamento(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     nombreDepartamento = request.POST.get("nombreA", None)    
 
@@ -293,7 +295,7 @@ def editarDepartamento(request):
 def newAcademia(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     listaDepartamentos= Departamento.objects.all()
     return render(request, 'Academia/newAcademia.html', {"listaDepartamentos":listaDepartamentos})
@@ -301,7 +303,7 @@ def newAcademia(request):
 def registrarAcademia(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol ==3):
         return HttpResponseRedirect("/general")
 
     nombreAcademia = request.POST.get("nombreAcademia", None)
@@ -318,7 +320,7 @@ def registrarAcademia(request):
 def verAcademias(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     listaAcademias= Academia.objects.all()
     return render(request,'Academia/verAcademias.html',{"listaAcademias":listaAcademias})
@@ -326,7 +328,7 @@ def verAcademias(request):
 def eliminarAcademia(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     id=request.POST.get("id",None)
     deleteAcademia = Academia.objects.get(pk=id)
@@ -336,7 +338,7 @@ def eliminarAcademia(request):
 def consultarAcademia(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
 
     id=request.GET.get("id",None)
@@ -348,7 +350,7 @@ def consultarAcademia(request):
 def editarAcademia(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     nombreAcademia = request.POST.get("nombreD", None)
     departamento = request.POST.get("departamentoD",None)
@@ -367,7 +369,7 @@ def editarAcademia(request):
 def newUser(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
     return render(request,'Usuario/newUser.html', {"asignaturas": listaAsignaturas})
@@ -375,7 +377,7 @@ def newUser(request):
 def registrarUsuario(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     
     nombreUser = request.POST.get("username", None)
@@ -386,12 +388,16 @@ def registrarUsuario(request):
     asignaturas = request.POST.getlist("asignaturas", None)
     rol = request.POST.get("rol",None)
 
+    plantel=request.session["id_plantel"]
+
+
     new_user = MyUser(
             username=nombreUser,
             first_name=nombres,
             last_name=aPaterno +" "+ aMaterno,
             password=password,
-            rol=int(rol)
+            rol=int(rol),
+            plantel_id=int(plantel),
         )
     new_user.save()
 
@@ -409,7 +415,7 @@ def registrarUsuario(request):
 def visualizarUsuario(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     listaUsuarios=MyUser.objects.filter(rol=MyUser.PROFESOR)
     return render(request,"Usuario/visualizarUsuario.html", {"usuarios": listaUsuarios})
@@ -417,7 +423,7 @@ def visualizarUsuario(request):
 def eliminarUsuario(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     id=request.POST.get("id",None)
     deleteUser = MyUser.objects.get(pk=id)
@@ -427,7 +433,7 @@ def eliminarUsuario(request):
 def consultarUsuario(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol == 3):
         return HttpResponseRedirect("/general")
     id=request.GET.get("id",None)
     usuario=MyUser.objects.get(pk=id)
@@ -438,7 +444,7 @@ def consultarUsuario(request):
 def editarUsuario(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == 2):
+    elif (request.user.myuser.rol ==3):
         return HttpResponseRedirect("/general")
     
     nombreUser = request.POST.get("username", None)
