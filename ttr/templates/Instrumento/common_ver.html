@@ -1,5 +1,6 @@
 {% ifequal instrumento.autor user.myuser %}
 <button onclick="editarInstrumento({{instrumento.pk}}, '{{ inst_type }}');return false;">Editar</button>
+<br/>
 {% endifequal %}
 <label>T&iacute;tulo: {{ instrumento.titulo}}</label><br/>
 <label>Autor: {{ instrumento.autor.get_full_name }}</label><br/>
@@ -16,8 +17,23 @@
     	id="oficial" type="checkbox" 
     	placeholder="oficial" 
     	{% if instrumento.oficial %}checked {% endif %}
-    	{% ifnotequal user.myuser.rol ROLES.ADMINISTRADOR %}onclick="return false;" 
+    	{% ifnotequal instrumento.presidente.pk user.myuser.pk %}onclick="return false;" 
     	{% else %}onclick="saveOficial();" 
     	{% endifnotequal %} 
     />
+    <script type="text/javascript">
+    function saveOficial() {
+    	$.ajax({
+	        url: '/instrumento/?id='+id_inst+"&oficial="$('#oficial').is(':checked'),
+	        type: 'GET',
+	        success: load_comments,
+	        error: function() {
+	            alert("Error");
+	        },
+	        headers: {
+	            'X-CSRFToken': $.cookie("csrftoken")
+	        },
+	    });
+    }
+    </script>
 </label><br/>

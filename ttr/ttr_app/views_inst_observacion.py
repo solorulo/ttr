@@ -23,6 +23,11 @@ def agregar(request):
         print listaobs
         listaobs = json.loads(listaobs)
 
+        try:
+            autor = request.user.myuser.pk
+        except:
+            pass
+
         new_listaobs = ListaObservacion(
             titulo=titulo,
             autor_id=int(autor),

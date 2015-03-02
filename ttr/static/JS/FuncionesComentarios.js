@@ -22,8 +22,10 @@ function load_comments(data) {
         var texto = obj.texto;
         var user = obj.user;
         $('#comments_section').append(
+            "<article class='comment'>" +
             "<div><b>" + user.full_name + "</b></div>" +
-            "<div>" + texto + "</div>" 
+            "<div>" + texto + "</div>" +
+            "</article>"
         );
     };
 }
