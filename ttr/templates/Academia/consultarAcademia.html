@@ -10,13 +10,13 @@
     <section>
    <div id="contenido" align="center">
             
-                {% csrf_token %}
+               
                 {% if wrong_data %}
                         <p style="color:red;">El tiempo de tu sesión ha acabado</p>
                     {% endif %}
 
-                {% csrf_token %}
-                <form method="post" action="/academia/consultar/modificar" >
+                 <form method="post" action="/academia/consultar/modificar" >
+                     {% csrf_token %}
                     <center>
                         <fieldset align="center">
                         <legend >Editar Academia:</legend>

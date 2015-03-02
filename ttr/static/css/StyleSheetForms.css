@@ -83,11 +83,7 @@ fieldset legend {
     width: 220px;  
     padding: 5px 8px;  
 } 
-.estilo_form select {  
-    height: 22px;  
-    width: 270px;  
-    /*padding: 5px 8px;  */
-}   
+
   
 .estilo_form textarea {  
     padding: 8px;  

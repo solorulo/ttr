@@ -67,7 +67,7 @@ urlpatterns = patterns('',
     url(r'^usuario/ver/?$', 'ttr_app.views.visualizarUsuario'),
     url(r'^usuario/nuevo/?$', 'ttr_app.views.newUser'),
     url(r'^usuario/agregar/?$', 'ttr_app.views.registrarUsuario'),
-    url(r'^usuario/borrar$', 'ttr_app.views.eliminarUsuario'),
+    url(r'^usuario/borrar/?$', 'ttr_app.views.eliminarUsuario'),
     url(r'^usuario/consultar/?$','ttr_app.views.consultarUsuario'),
     url(r'^usuario/consultar/modificar/?$','ttr_app.views.editarUsuario')
 
