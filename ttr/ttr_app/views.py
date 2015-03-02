@@ -398,7 +398,7 @@ def eliminarAcademia(request):
 def consultarAcademia(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == myuser.PROFESOR):
+    elif (request.user.myuser.rol == MyUser.PROFESOR):
         return HttpResponseRedirect("/general")
 
     id=request.GET.get("id",None)
