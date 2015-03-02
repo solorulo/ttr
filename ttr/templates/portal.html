@@ -1,0 +1,238 @@
+<HTML>
+	<HEAD>
+		<TITLE>TESLEDGE</TITLE>
+		<link rel="stylesheet" href="/static/css/estilos_portal.css"/>
+		<link rel="stylesheet" href="/static/css/tabs/styleTABS.css"/>
+		<!--<link rel="stylesheet" href="/static/css/estilos_tab.scss"/>-->
+		<script type="text/javascript" src="/static/js/FuncionesGeneral.js"></script>
+
+		
+	</HEAD>
+<BODY class="estilo_portal">
+	<CENTER>
+		<TABLE class="tabla" >
+			<TR>
+				<TH colspan="2" class="encabezado" valign="middle">
+					<h1 class="titulo">Herramienta de Gestión del Conocimiento para la Evaluación del Desempeño del Estudiante</h1>
+				</TH>
+			</TR>
+			<TR>
+				<TD width="100" align="center" style="padding-top: 16px;">
+					<center>
+						<img src="/static/img/tesledge.png">
+					</center>
+					
+				</TD>
+				<TD style="text-align: justify;"  width="300">
+					<strong class="strong">Descripción:</strong><br>
+					<p class="parrafo"><b>Este es un proyecto creado para gestionar el conocimiento para la evaluación del desempeño del estudiante,
+					mediante la compartición de instrumentos de evaluación creados por profesores para diferentes asignaturas
+					y actividades.</b></p>
+
+				</TD>
+			</TR>
+			<TR>
+				<TD colspan="2">
+						<div id="tab-box">
+						    <div id="tab-1" class="tab">
+						        <span><a href="#tab-1">Nivel Superior</a></span>
+						        <span>
+						        <center>
+						        	<br>
+							        <table border="0" >
+									    {% for escuela in listaPlantelesSUP %}
+									        {% if forloop.counter|divisibleby:2 %}
+									            <td valign="middle" align="left" width="330">
+									         		<table width="330">
+									            		<tr>
+									            			<td valign="middle" align="left" width="60">
+									            				<img src="/static/{{escuela.url_logo}}"   height="35" onClick="iniciaEscuela({{escuela.pk}},'sup');">
+									            			</td>
+									            			<td valign="middle" style="border-bottom: 2px solid #297AC1;">
+									            				<a href="#" onclick="iniciaEscuela({{escuela.pk}},'sup');" 
+									            				style="text-decoration:none">
+
+
+									            					{{escuela.nombre}}
+
+
+									            				</a>
+									            			</td>
+									            		</tr>
+									            	</table>
+									            
+									            </td>
+									            </tr>
+									        {% elif forloop.counter0|divisibleby:2 %}
+									            <tr>
+									            <td valign="middle" align="left" width="330">
+									            	<table width="330">
+									            		<tr>
+									            			<td valign="middle" align="left" width="60">
+									            				<img src="/static/{{escuela.url_logo}}" height="35" onClick="iniciaEscuela({{escuela.pk}},'sup');">
+									            			</td>
+									            			<td valign="middle" style="border-bottom: 2px solid #297AC1;">
+									            				<a href="#" onclick="iniciaEscuela({{escuela.pk}},'sup');"
+									            				style="text-decoration:none">
+
+
+									            					{{escuela.nombre}}</a>
+									            			</td>
+									            		</tr>
+									            	</table>
+									            			
+												</td>
+									        {% elif forloop.last %}
+
+									            <td valign="middle" align="left" width="330">
+									            	<table width="330">
+									            		<tr>
+									            			<td valign="middle" align="left" width="60">
+									            				<img src="/static/{{escuela.url_logo}}"  height="35" onClick="iniciaEscuela({{escuela.pk}},'sup');">
+									            			</td>
+									            			<td valign="middle" style="border-bottom: 2px solid #297AC1;">
+									            				<a href="#" onclick="iniciaEscuela({{escuela.pk}},'sup');"
+									            				style="text-decoration:none"
+
+									            				>{{escuela.nombre}}</a>
+									            			</td>
+									            		</tr>
+									            	</table>
+									    		</td> </tr>
+									        {%else%}
+									             <td valign="middle" align="left" width="330">
+									            	<table width="330">
+									            		<tr>
+									            			<td valign="middle" align="left" width="60">
+									            				<img src="/static/{{escuela.url_logo}}"  height="35" onClick="iniciaEscuela({{escuela.pk}},'sup');"> 
+									            			</td>
+									            			<td valign="middle" style="border-bottom: 2px solid #297AC1;">
+									            				<a href="#" onclick="iniciaEscuela({{escuela.pk}},'sup');"
+									            				style="text-decoration:none"
+									            				>{{escuela.nombre}}</a>
+									            			</td>
+									            		</tr>
+									            	</table>
+									             </td>
+									        {%endif%}
+									    {% endfor %}
+								    </table>
+    							</center>
+    							</span>
+						    </div>
+						    <div id="tab-2" class="tab">
+						        <span><a href="#tab-2">Nivel Medio Superior</a></span>
+						        <span>
+						        	<center>
+						        	<br>
+							        <table border="0" >
+									    {% for escuela in listaPlantelesMED %}
+									        {% if forloop.counter|divisibleby:2 %}
+									            <td valign="middle" align="left" width="330">
+									         		<table width="330">
+									            		<tr>
+									            			<td valign="middle" align="left" width="60">
+									            				<img src="/static/{{escuela.url_logo}}"   height="35" onClick="iniciaEscuela({{escuela.pk}},'sup');">
+									            			</td>
+									            			<td valign="middle" style="border-bottom: 2px solid #297AC1;">
+									            				<a href="#" onclick="iniciaEscuela({{escuela.pk}},'sup');" 
+									            				style="text-decoration:none">
+
+
+									            					{{escuela.nombre}}
+
+
+									            				</a>
+									            			</td>
+									            		</tr>
+									            	</table>
+									            
+									            </td>
+									            </tr>
+									        {% elif forloop.counter0|divisibleby:2 %}
+									            <tr>
+									            <td valign="middle" align="left" width="330">
+									            	<table width="330">
+									            		<tr>
+									            			<td valign="middle" align="left" width="60">
+									            				<img src="/static/{{escuela.url_logo}}" height="35" onClick="iniciaEscuela({{escuela.pk}},'sup');">
+									            			</td>
+									            			<td valign="middle" style="border-bottom: 2px solid #297AC1;">
+									            				<a href="#" onclick="iniciaEscuela({{escuela.pk}},'sup');"
+									            				style="text-decoration:none">
+
+
+									            					{{escuela.nombre}}</a>
+									            			</td>
+									            		</tr>
+									            	</table>
+									            			
+												</td>
+									        {% elif forloop.last %}
+
+									            <td valign="middle" align="left" width="330">
+									            	<table width="330">
+									            		<tr>
+									            			<td valign="middle" align="left" width="60">
+									            				<img src="/static/{{escuela.url_logo}}"  height="35" onClick="iniciaEscuela({{escuela.pk}},'sup');">
+									            			</td>
+									            			<td valign="middle" style="border-bottom: 2px solid #297AC1;">
+									            				<a href="#" onclick="iniciaEscuela({{escuela.pk}},'sup');"
+									            				style="text-decoration:none"
+
+									            				>{{escuela.nombre}}</a>
+									            			</td>
+									            		</tr>
+									            	</table>
+									    		</td> </tr>
+									        {%else%}
+									             <td valign="middle" align="left" width="330">
+									            	<table width="330">
+									            		<tr>
+									            			<td valign="middle" align="left" width="60">
+									            				<img src="/static/{{escuela.url_logo}}"  height="35" onClick="iniciaEscuela({{escuela.pk}},'sup');"> 
+									            			</td>
+									            			<td valign="middle" style="border-bottom: 2px solid #297AC1;">
+									            				<a href="#" onclick="iniciaEscuela({{escuela.pk}},'sup');"
+									            				style="text-decoration:none"
+									            				>{{escuela.nombre}}</a>
+									            			</td>
+									            		</tr>
+									            	</table>
+									             </td>
+									        {%endif%}
+									    {% endfor %}
+								    </table>
+    							</center>
+						        </span>
+						    </div>
+						    
+						</div>
+
+				</TD>
+			</TR>
+			<tr>
+				<td colspan="2">
+					<br>
+					<hr width="100%" class="style-seven">
+				</td>
+			</tr>
+			<tr align="center">
+				<td align="center" colspan="2">
+					<center>
+						<table align="center">
+							<tr>
+								<td align="center">
+									<center>
+									<img src="/static/img/logo_IPN01.png" />
+								</center>
+								</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+			</tr>
+		</TABLE>
+	</CENTER>
+</BODY>
+</HTML>
