@@ -72,7 +72,7 @@ class Asignatura(models.Model):
 		return self.nombre
 
 class Clases (models.Model):
-	asignaturas = models.ManyToManyField(Asignatura null=True, blank=True)
+	asignaturas = models.ManyToManyField(Asignatura blank=True)
 	user = models.OneToOneField(MyUser, primary_key=True)
 
 #####################
