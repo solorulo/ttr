@@ -2,8 +2,10 @@
 <html lang="es">
 
 <head>
-    {% include "includes/head.html" with title="Buscar" %}
+    {% include "includes/head.html" with title="Buscar instrumento" %}
+    <link rel="stylesheet" href="/static/rateyo/jquery.rateyo.css"/>
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="/static/rateyo/jquery.rateyo.js"></script>
 </head>
 
 <body>
@@ -47,7 +49,28 @@
                     {% for result in results %}
                     <tr>
                         <td>{{ result.nombre }}</td>
-                        <td><button onclick="showResult(&quot;{{ result.url_search }}&quot;, {{result.pk}}, &quot;{{ typeq|urlencode }}&quot;);">Ver instrumentos</button></td>
+                        {% ifequal typeq 'instrumento' %}
+                        <td>{{ result.type }}</td>
+                        <td>
+                            <div id="resultrating{{result.pk}}" class=".rating"></div>
+                            <script type="text/javascript">
+                            $('#resultrating{{result.pk}}').rateYo({
+                                rating : {% firstof result.valoracion '0' %},
+                                readOnly: true,
+                            });
+                            </script>
+                        </td>
+                        <td>
+                        <button onclick="return false;" class="submit">Descargar</button>
+                        </td>
+                        <td>
+                        <button onclick="showResult(&quot;{{ result.url_search }}&quot;, {{result.pk}}, &quot;{{ typeq|urlencode }}&quot;);" class="submit">Consultar</button>
+                        </td>
+                        {% else %}
+                        <td>
+                        <button onclick="showResult(&quot;{{ result.url_search }}&quot;, {{result.pk}}, &quot;{{ typeq|urlencode }}&quot;);" class="submit">Ver instrumentos</button>
+                        </td>
+                        {% endifequal %}
                     </tr>
                     {% endfor %}
                 </tbody>

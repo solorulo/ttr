@@ -77,11 +77,13 @@ class Clases (models.Model):
 
 #####################
 class InstrumentoEvaluacion(models.Model):
-	GENERAL = 0
+	INSTITUCIONAL = 0
 	PLANTEL = 1
+	PERSONAL = 2
 	TIPO_CHOICES = (
-		(GENERAL, "General"),
+		(INSTITUCIONAL, "Institucional"),
 		(PLANTEL, "Plantel"),
+		(PERSONAL, "Personal"),
 	)
 	level_show = models.IntegerField(choices=TIPO_CHOICES, default=PLANTEL)
 

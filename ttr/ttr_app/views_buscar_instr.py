@@ -14,6 +14,7 @@ def get_types_query():
     return [
         { "type":"asignatura", "text":"Unidad de aprendizaje"},
         { "type":"docente", "text":"Docente"},
+        { "type":"instrumento", "text":"Instrumento"},
     ]
 
 def get_types_order():
@@ -27,6 +28,7 @@ def buscar(request):
     """
     Unidad de aprendizaje
     Docente
+    Instrumentos
     """
     results = []
     if request.method == "GET":
@@ -57,6 +59,29 @@ def buscar(request):
                     "pk" : user.pk,
                     "nombre" : user.get_full_name(),
                     "url_search" : "./mostrar",
+                })
+        elif (type_query.lower() == 'instrumento'):
+            instrumentos_db = InstrumentoEvaluacion.objects.all()
+            instrumentos_db = instrumentos_db.filter(titulo__icontains=query).annotate(valoracion=Avg('evaluacioninstrumento__valor'))
+            for inst in instrumentos_db:
+                type_inst = ''
+                stype_inst = ''
+                if inst.rubrica:
+                    type_inst = 'Rúbrica'
+                    stype_inst = 'rubrica'
+                elif inst.listacotejo:
+                    type_inst = 'Lista de cotejo'
+                    stype_inst = 'listacotejo'
+                elif inst.listaobservacion:
+                    type_inst = 'Guía de observación'
+                    stype_inst = 'listaobs'
+                results.append({
+                    "pk" : inst.pk,
+                    "nombre" : inst.titulo,
+                    "type" : type_inst,
+                    "stype" : stype_inst,
+                    "valoracion" : inst.valoracion,
+                    "url_search" : "/instrumento",
                 })
         return render(request,'buscar_pre_inst.html', { 
             'TYPESQ': get_types_query(),

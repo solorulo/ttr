@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    {% include "includes/head.html" with title="Buscar" %}
+    {% include "includes/head.html" with title="Buscar instrumento" %}
     <link rel="stylesheet" href="/static/rateyo/jquery.rateyo.css"/>
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="/static/rateyo/jquery.rateyo.js"></script>
@@ -41,8 +41,8 @@
                     {% if results %}
                     <tr>
                         <th>Instrumentos de evaluación: </th>
-                        <th></th>
-                        <th></th>
+                        <th>Tipo</th>
+                        <th colspan="2"></th>
                         <th>Oficial</th>
                         <th>Valoración</th>
                     </tr>
@@ -59,6 +59,11 @@
                     {% for result in results %}
                     <tr>
                         <td>{{ result.titulo }}</td>
+                        <td>
+                            {% if result.rubrica %}Rúbrica{% endif %}
+                            {% if result.listacotejo %}Lista de contejo{% endif %}
+                            {% if result.listaobservacion %}Guía de observación{% endif %}
+                        </td>
                         <td><button onclick="showInstrumento(&quot;{{ url_inst }}&quot;, {{result.pk}});">Consultar</button></td>
                         <td><button>Descargar</button></td>
                         <td><input type="checkbox" onclick="return false;" {% if result.oficial %} checked{% endif %} /></td>
