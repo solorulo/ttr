@@ -19,7 +19,7 @@
         {%endif%}
     </figure>
         <nav>
-            {%ifequal 2 user.myuser.rol%}
+            {%ifequal ROLES.ADMINISTRADOR user.myuser.rol%}
             <ul>
                 <li>Nuevo</li>
                 <li><a href="/usuario/consultar">Usuarios</a></li>
@@ -28,7 +28,7 @@
                 <li><a href="/logout">Cerrar Sesión</a></li>
             </ul>
             {%else%}
-                {%ifequal 3 user.myuser.rol%}
+                {%ifequal ROLES.PROFESOR user.myuser.rol%}
                     <ul>
                         <li><a href="/miperfil/">Mi Perfil</a></li>
                         <li><a href="/estructura/">Estructura Académica</a></li>
