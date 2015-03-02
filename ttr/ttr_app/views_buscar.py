@@ -68,11 +68,12 @@ def buscar(request):
                 })
         elif (type_query.lower() == 'usuario'):
             users_db = MyUser.objects.all()
-            users_db = users_db if not query else users_db.filter(nombre__icontains=query)
-            for obj in asignaturas_db:
+            users_db = users_db if not query else users_db.filter(full_name__icontains=query)
+            for obj in users_db:
                 results.append({
                     "pk" : obj.pk,
                     "name" : obj.get_full_name(),
+                    "rol": obj.get_rol_display(),
                     "url_modif" : "/usuario/consultar/",
                     "url_delete" : "/usuario/borrar/",
                 })

@@ -1,0 +1,39 @@
+.estilo_portal .tabla{
+    border: 0px;
+    width: 800px;
+ }
+
+.estilo_portal .titulo {  
+    font-size: 26px;
+    color:  #6C0C2B;
+}
+
+.estilo_portal .strong{
+	color: #0560C9;
+}  	
+
+.estilo_portal .parrafo{
+	color:#3478C7;
+}
+
+.estilo_portal .encabezado{
+	height: 90px;
+	background-color: #EDEDED;
+
+
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+	font: monospace;  
+
+
+}
+
+.estilo_portal hr.style-seven {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc);
+    background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc);
+    background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc);
+    background-image:      -o-linear-gradient(left, #ccc, #333, #ccc);
+}

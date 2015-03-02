@@ -9,49 +9,51 @@
 <body>
     {% csrf_token %}
     {% include "includes/header.html" %}
-    <section>
-        
-        <div>
-            <form>
-            {#{% csrf_token %}#}
-            <select name="typeq">
-                {% for rtypeq in TYPESQ %}
-                    <option value="{{ rtypeq.type }}" {% ifequal typeq rtypeq.type %}selected{% endifequal %}>{{ rtypeq.text }}</option>
-                {% endfor%}
-            </select>
-            <input id="query" name="query" type="text" value="{{query}}" />
-            <button id="search">Buscar</button>
-            </form>
-        </div>
-        <div id="search_content">
-            <table>
-                <thead>
-                    {% if results %}
-                    <th>
-                        <td colspan="3">Resultados:</td>
-                    </th>
-                    {% endif %}
-                </thead>
-                <tbody>
-                    <!--
-                    <tr>
-                        <td>Resultado 1</td>
-                        <td><button>Editar</button></td>
-                        <td><button>Eliminar</button></td>
-                    </tr>
-                    -->
-                    {% for result in results %}
-                    <tr>
-                        <td>{{ result.name }}</td>
-                        <td><button onclick="window.location.href=&quot;{{ result.url_modif }}?id={{result.pk}}&quot;;">Editar</button></td>
-                        <td><button onclick="window.location.href=&quot;{{ result.url_delete }}?id={{result.pk}}&quot;;">Eliminar</button></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        
-    </section>
+         <center>
+            <section>
+                <fieldset >
+                <legend align="center">Búsqueda</legend>   
+                    <div >
+                        <form>
+                        {#{% csrf_token %}#}
+                        <select name="typeq">
+                            {% for rtypeq in TYPESQ %}
+                                <option value="{{ rtypeq.type }}" {% ifequal typeq rtypeq.type %}selected{% endifequal %}>{{ rtypeq.text }}</option>
+                            {% endfor%}
+                        </select>
+                        <input id="query" name="query" type="text" value="{{query}}" />
+                        <button id="search">Buscar</button>
+                        </form>
+                    </div>
+                    <br><br>
+                    <div align="center">
+                        <table  CELLSPACING="10" width"100%">
+                            <tbody width"100%">
+                                <tr>
+                                    <td align="center">Resultados</td>
+                                    {%ifequal typeq "usuario"%}
+                                    <td align="center">Rol</td>
+                                    {%endifequal%}
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                
+                                {% for result in results %}
+                                <tr>
+                                    <td>{{ result.name }}</td>
+                                    {%ifequal typeq "usuario"%}
+                                    <td>{{ result.rol }}</td>
+                                    {%endifequal%}
+                                    <td><button onclick="window.location.href=&quot;{{ result.url_modif }}?id={{result.pk}}&quot;;">Editar</button></td>
+                                    <td><button onclick="window.location.href=&quot;{{ result.url_delete }}?id={{result.pk}}&quot;;">Eliminar</button></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>    
+            </section>
+        </center>  
     {% include "includes/footer.html" %}
 </body>
 
