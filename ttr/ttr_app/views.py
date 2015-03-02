@@ -28,8 +28,8 @@ def mediosuperior(request):
     return render(request, 'medioSuperior.html', {'navegacionG':1})
 
 def estructura(request):
-
-    return render(request, 'estructura.html')
+    listaDocentes= MyUser.objects.filter(rol=MyUser.PROFESOR).values("pk","full_name")
+    return render(request, 'estructura.html',{'docentes':listaDocentes})
 
 def indexInter(request):
 
@@ -119,13 +119,15 @@ def get_estructura_json(node, node_id):
             res.append({
                 'id' : 'depto' + str(depto.pk),
                 'parent' : '#',
-                'text' : depto.nombre
+                'text' : depto.nombre,
+                'icon': "/static/img/iconos/departamento.png"
                 })
         for academia in academias:
             res.append({
                 'id' : 'academia' + str(academia.pk),
                 'parent' : 'depto'+str(academia.depto.pk),
-                'text' : academia.nombre
+                'text' : academia.nombre,
+                'icon': "/static/img/iconos/academia.png"
                 })
     elif node == 'academia':
         asignaturas = Asignatura.objects.filter(academia__pk=int(node_id))
@@ -133,7 +135,8 @@ def get_estructura_json(node, node_id):
             res.append({
                 'id' : 'asignatura' + str(asignatura.pk),
                 'parent' : '#',
-                'text' : asignatura.nombre
+                'text' : asignatura.nombre,
+                'icon': "/static/img/iconos/asignatura.png"
                 })
     elif node == 'asignatura':
         clases = Clases.objects.filter(asignaturas__id=int(node_id))
@@ -141,7 +144,8 @@ def get_estructura_json(node, node_id):
             res.append({
                 'id' : 'user' + str(clase.user.pk),
                 'parent' : '#',
-                'text' : clase.user.get_full_name()
+                'text' : clase.user.get_full_name(),
+                'icon': "/static/img/iconos/docente.png"
                 })
 
     return res
@@ -240,10 +244,38 @@ def editarAsignatura(request):
     listaAsignaturas= Asignatura.objects.all()
     return render(request,'Asignatura/verAsignaturas.html',{"asignaturas":listaAsignaturas})
 
+def agregarDocente(request):
+    if(not request.user.is_authenticated()):
+        return HttpResponseRedirect("/general")
+    elif (request.user.myuser.rol == MyUser.ADMINISTRADOR):
+        docentes = request.POST.getlist("docentes", None)
+        idAsignatura= request.POST.get("asignatura",None)
+
+        for docente in docentes:
+            asignarAsignatura, created=Clases.objects.get_or_create(user_id=docente
+            )
+            asignarAsignatura.asignaturas.add(int(idAsignatura))
+    
+    return HttpResponseRedirect("/estructura/")
+
+def quitarDocente(request):
+    if(not request.user.is_authenticated()):
+        return HttpResponseRedirect("/general")
+    elif (request.user.myuser.rol == MyUser.ADMINISTRADOR):
+        idDocente = request.POST.get("docente", None)
+        idAsignatura= request.POST.get("asignatura",None)
+
+        quitarAsignatura=Clases.objects.get(user_id=idDocente)
+        quitarAsignatura.asignaturas.remove(int(idAsignatura))
+
+    return HttpResponseRedirect("/estructura/")
+
+
+
 def newDepartamento(request):
     if(not request.user.is_authenticated()):
         return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == myuser.PROFESOR):
+    elif (request.user.myuser.rol == MyUser.PROFESOR):
         return HttpResponseRedirect("/general")
     return render(request,'Departamento/newDepartamento.html')
 
