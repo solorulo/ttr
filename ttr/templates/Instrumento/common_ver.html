@@ -4,6 +4,13 @@
 <label>T&iacute;tulo: {{ instrumento.titulo}}</label><br/>
 <label>Autor: {{ instrumento.autor.get_full_name }}</label><br/>
 <label>Unidad de aprendizaje: {{ instrumento.asignatura.nombre}}</label><br/>
+<label><div id="resultrating{{instrumento.pk}}" class=".rating"></div>
+    <script type="text/javascript">
+    $('#resultrating{{instrumento.pk}}').rateYo({
+        rating : {% firstof instrumento.valoracion '0' %},
+        readOnly: true,
+    });
+    </script></label><br/>
 <label>Oficial: 
     <input 
     	id="oficial" type="checkbox" 

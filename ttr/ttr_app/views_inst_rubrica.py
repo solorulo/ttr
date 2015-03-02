@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import IntegrityError
 from django.contrib.auth.models import User
+from django.db.models import Q, Avg
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.core.exceptions import PermissionDenied
@@ -99,7 +100,7 @@ def agregar(request):
 
 def ver(request):
     idx = request.GET.get('id')
-    the_rubrica = Rubrica.objects.get(pk=int(idx))
+    the_rubrica = Rubrica.objects.annotate(valoracion=Avg('evaluacioninstrumento__valor')).get(pk=int(idx))
     the_cats = CategoriaRubrica.objects.filter(rubrica_id=the_rubrica.pk)
     the_ponds = PonderacionRubrica.objects.filter(rubrica_id=the_rubrica.pk)
     fpods = CriterioRubrica.objects.filter(rubrica_id=the_rubrica.pk)
