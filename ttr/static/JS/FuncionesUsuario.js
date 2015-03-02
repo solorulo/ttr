@@ -6,7 +6,7 @@ function eliminarUsuario( id ) {
     },
     function(data){
       if (data == "true") {
-      	window.location.reload();
+      	reloadJtree();
       }
     });
 }

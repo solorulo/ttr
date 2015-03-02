@@ -4,21 +4,64 @@
 <head>
     {% include "includes/head.html" with title="Estructura Académica" %}
     <link rel="stylesheet" href="/static/jstree/themes/default/style.min.css"/>
+    <link rel="stylesheet" href="/static/chosen/chosen.css"/>
+    <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <script src="/static/chosen/chosen.jquery.js"></script>
     <script src="/static/jstree/jstree.min.js"></script>
+    <script src="/static/JS/FuncionesDepartamento.js"></script>
+    <script src="/static/JS/FuncionesAcademia.js"></script>
+    <script src="/static/JS/FuncionesAsignatura.js"></script>
+    <script src="/static/JS/FuncionesUsuario.js"></script>
     <style type="text/css">
     	.treeColumn {
     		display: inline-block;
-    		width:33%;
     		vertical-align: top;
             height: 30%;
+            width: 33%
+            padding: 5px;
     	}
         #tree{
             height: 200px;
         }
         #contenedor{
             text-align: center;
-            border: 1px solid red;
 
+        }
+        .boton{
+            margin-right:3em;
+        }
+        .jstree-default a { 
+    white-space:normal !important; height: auto; 
+        }
+        .jstree-anchor {
+            height: auto !important;
+        }
+        .jstree-default li > ins { 
+            vertical-align:top; 
+        }
+        .jstree-leaf {
+            height: auto;
+        }
+        .jstree-leaf a{
+            height: auto !important;
+        }
+        #base{
+            margin-left: 2em;
+            margin-right: 2em;
+        }
+        #sign{
+            margin-left: 3em;
+        }
+        .caption{
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+        #field-diseño{
+            
+            margin: 1em 0em;
+            width:100%;
+            padding: 0px;
+            border : 0px solid #800040;
         }
     </style>
 </head>
@@ -26,20 +69,32 @@
 <body>
     
     {% include "includes/header.html"  %}
-    
-    <section>
-        <div id="tree">
-            <div class="treeColumn">
-                <div id="base"></div>
+   <fieldset id="field-diseño">
+    <legend align="center">Registro de Usuario:</legend>
+        <section class="caption">
+            <table width="100%">
+                <tr>
+                    <td width="40%"> <p align="center"><strong>Departamento / Academia</strong></p></td>
+                    <td width="20%"><p align="center"><strong>Unidad de Aprendizaje</strong></p></td>
+                    <td width="40%"><p align="center"><strong>Docentes</strong></p></td>
+                </tr>
+            </table>
+        </section>    
+        <section class="caption">
+            <div id="tree">
+
+                <div class="treeColumn" id="colum1">      
+                    <div id="base"></div>
+                </div>
+                <div class="treeColumn" id="colum2">    
+                    <div id="academia"></div>
+                </div>
+                <div class="treeColumn" id="colum3">    
+                    <div id="sign"></div>
+                </div>
             </div>
-            <div class="treeColumn">
-                <div id="academia"></div>
-            </div>
-            <div class="treeColumn">
-                <div id="sign"></div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </fieldset>
 
     <script type="text/javascript">
 
@@ -51,16 +106,32 @@
         var selected = data.selected[0];
         // var node_selected = data.instance.get_node(selected)
         // console.log(node_selected);
-        console.log(selected);
+        console.log(selected);http://localhost:8000/estructura#
         // fillDivTree('#cont2', tree2Select);
         if (startsWith(selected,"depto")) {
-            $(document).ready(function(){
-                  var button = $("<button>Aceptar</button>").click(function(){
-                    $("p").append(" <b>Appended text</b>");
-                  });
-                  $('#contenedor').append(button);
-                  
-             });
+            
+            {%ifequal ROLES.ADMINISTRADOR user.myuser.rol%}
+
+                $(document).ready(function(){
+                      var button = $("<button class='boton submit'>Editar Datos</button>").click(function(){
+                        consultarDepartamento(selected.slice("depto".length));
+                        
+                      });
+                      $('#contenedor').empty();
+                      $('#contenedor').append(button);
+                      
+                 });
+
+                $(document).ready(function(){
+                      var button = $("<button class='submit'>Eliminar</button>").click(function(){
+                        eliminarDepartamento(selected.slice("depto".length));
+                        
+                      });
+                     
+                      $('#contenedor').append(button);
+                      
+                 });
+            {%endifequal%}
 
 
         };
@@ -83,13 +154,28 @@
 
             });
 
-         $(document).ready(function(){
-                  var button = $("<button>Aceptar</button>").click(function(){
-                    $("p").append(" <b>Appended text</b>");
+        {%ifequal ROLES.ADMINISTRADOR user.myuser.rol%}
+            $(document).ready(function(){
+                  var button = $("<button class='boton submit'>Editar Datos</button>").click(function(){
+                    consultarAcademia(selected.slice("academia".length));
+                    
                   });
+                  $('#contenedor').empty();
                   $('#contenedor').append(button);
                   
-        });
+             });
+
+            $(document).ready(function(){
+                  var button = $("<button class='submit'>Eliminar</button>").click(function(){
+                    eliminarAcademia(selected.slice("academia".length));
+                    
+                  });
+                 
+                  $('#contenedor').append(button);
+                  
+             });
+        {%endifequal%}
+
     }
 
     function academiaSelect(e, data) {
@@ -115,28 +201,132 @@
 
             });
 
-         $(document).ready(function(){
-                  var button = $("<button>Asignatura</button>").click(function(){
-                    $("p").append(" <b>Appended text</b>");
+        {%ifequal ROLES.ADMINISTRADOR user.myuser.rol%}
+            $(document).ready(function(){
+                  var button = $("<button class='boton submit'>Editar Datos</button>").click(function(){
+                    consultarAsignatura(selected.slice("asignatura".length));
+                    
                   });
                   $('#contenedor').empty();
                   $('#contenedor').append(button);
                   
-        });
+             });
+
+            $(document).ready(function(){
+                  var button = $("<button class='boton submit'>Eliminar</button>").click(function(){
+                    
+                    eliminarAsignatura(selected.slice("asignatura".length));
+                    
+                  });
+                 
+                  $('#contenedor').append(button);
+                  
+             });
+            $(document).ready(function(){
+                  var button = $("<button class='popup-with-form submit' href='#test-form' >Agregar docente</button>")
+                  .magnificPopup({
+                        type: 'inline',
+                        focus: '#name',
+
+                        // When elemened is focused, some mobile browsers in some cases zoom in
+                        // It looks not nice, so we disable it:
+                        callbacks: {
+                            beforeOpen: function() {
+                                if($(window).width() < 700) {
+                                    this.st.focus = false;
+                                } else {
+                                    this.st.focus = '#name';
+                                }
+                                $('#agregardocentes').click(function(event) {
+                                    $('#idAsignatura').val(selected.slice("asignatura".length));
+                                });
+                            }
+                        }
+                    });
+                
+                 
+                  $('#contenedor').append(button);
+                  
+             });
+        {%else%}
+            $(document).ready(function(){
+                      var button = $("<button class='boton submit'>Ver instrumentos</button>").click(function(){
+                        
+                        
+                      });
+                      $('#contenedor').empty();
+                      $('#contenedor').append(button);
+                      
+            });
+        {%endifequal%}
+
        
     }
 
     function signSelect(e, data) {
         var selected = data.selected[0];
         console.log(selected);
-        $(document).ready(function(){
-                  var button = $("<button>Profesor</button>").click(function(){
-                    $("p").append(" <b>Appended text</b>");
+        
+        {%ifequal ROLES.ADMINISTRADOR user.myuser.rol%}
+            $(document).ready(function(){
+                      var button = $("<button class='boton submit'>Editar Datos</button>").click(function(){
+                        consultarUsuario(selected.slice("user".length));
+                        
+                      });
+                      $('#contenedor').empty();
+                      $('#contenedor').append(button);
+                      
+                 });
+
+            $(document).ready(function(){
+                  var button = $("<button class='boton submit'>Eliminar</button>").click(function(){
+                    
+                    eliminarUsuario(selected.slice("user".length));
+                    
                   });
-                  $('#contenedor').empty();
+                 
                   $('#contenedor').append(button);
                   
-                });
+             });
+            $(document).ready(function(){
+                  var button = $("<button class='popup-with-form submit' href='#test-form2'>Quitar docente</button>").magnificPopup({
+                        type: 'inline',
+                        focus: '#name',
+
+                        // When elemened is focused, some mobile browsers in some cases zoom in
+                        // It looks not nice, so we disable it:
+                        callbacks: {
+                            beforeOpen: function() {
+                                if($(window).width() < 700) {
+                                    this.st.focus = false;
+                                } else {
+                                    this.st.focus = '#name';
+                                }
+                                $('#quitardocentes').click(function(event) {
+                                    $('#idDocente').val(selected.slice("user".length));
+                                     var selectAsign = $('#academia').jstree('get_selected')[0];
+                                    console.log(selectAsign);
+                                    $('#idAsignatura').val(selectAsign.slice("asignatura".length));
+                                });
+                            }
+                        }
+                    });
+                 
+                  $('#contenedor').append(button);
+                  
+             });
+
+        {%else%}
+            $(document).ready(function(){
+                      var button = $("<button class='boton submit'>Ver instrumentos</button>").click(function(){
+                        
+                        
+                      });
+                      $('#contenedor').empty();
+                      $('#contenedor').append(button);
+                      
+            });
+        {%endifequal%}
     }
     // fillDivTree('#cont1', tree1Select);
     $('#base').on('changed.jstree', baseSelect).jstree({
@@ -151,10 +341,107 @@
                 }
                 
             });
+
+    function reloadJtree(){
+        $('#base').jstree('refresh');
+        $('#academia').jstree('refresh');
+        $('#sign').jstree('refresh');
+
+    }
     </script>
     <div id="contenedor">
-
     </div>
+
+    <!-- DIV para recuperar AGREGAR DOCENTE -->
+    <div id="test-form" class="white-popup-block mfp-hide">
+        <form method="post" action="/asignatura/agregardocente">
+            {% csrf_token %}
+            <fieldset style="border:0; margin: 0 auto;" >
+                <center>
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <center><b>Agregar Docente a la Unidad de Aprendizaje</center><br>
+                            </td>
+                        </tr>
+                            <td colspan="5">
+                                Agregue los docentes disponibles a la unidad de aprendizaje<br><br>
+                             <input id="idAsignatura" type="hidden" name="asignatura"/>   
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="docentes">Docentes</label>
+                            </td>
+                            <td>
+                             <select  data-placeholder="Seleccione docentes" name="docentes" multiple style="width:300px;" tabindex="4">
+                                {% for docente in docentes %}
+                                <option value="{{ docente.pk }}">{{docente.full_name}}</option>
+                                {% endfor %}
+                              </select>   
+                              
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <br>
+                                <center>
+                                    <button id="agregardocentes" type="submit" class="submit">Agregar docentes</button>
+                                    <button onclick="$.magnificPopup.close(); return false;" class="submit">Cancelar</button>
+                                </center>
+                            </td>
+                        </tr>
+                    </table>
+
+                </center>
+            </fieldset>
+
+                              
+        </form>
+         
+        </div>
+
+
+    <!-- DIV para QUITAR DOCENTE -->
+    <div id="test-form2" class="white-popup-block mfp-hide">
+        <form method="post" action="/asignatura/quitardocente" class="estilos_form">
+            {% csrf_token %}
+            <fieldset style="border:0; margin: 0 auto;" >
+                <center>
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <center><b>Quitar Docente a la Unidad de Aprendizaje</center><br>
+                            </td>
+                        </tr>
+                            <td colspan="5">
+                                ¿Esta seguro de quitar el docente de la unidad de aprendizaje?<br><br>
+                             <input id="idDocente" type="hidden" name="docente"/> 
+                             <input id="idAsignatura" type="hidden" name="asignatura"/>   
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <br>
+                                <center>
+                                    <button id="quitardocentes" type="submit" class="submit">Aceptar</button>
+                                    <button onclick="$.magnificPopup.close(); return false;" class="submit">Cancelar</button>
+                                </center>
+                            </td>
+                        </tr>
+                    </table>
+
+                </center>
+            </fieldset>
+
+                              
+        </form>
+         
+        </div>
+
+
     {% include "includes/footer.html" %}
 </body>
 

@@ -32,6 +32,8 @@ urlpatterns = patterns('',
     url(r'^asignatura/borrar/?$','ttr_app.views.eliminarAsignatura'),
     url(r'^asignatura/consultar/?$','ttr_app.views.consultarAsignatura'),
     url(r'^asignatura/consultar/modificar/?$','ttr_app.views.editarAsignatura'),
+    url(r'^asignatura/agregardocente/?$','ttr_app.views.agregarDocente'),
+    url(r'^asignatura/quitardocente/?$','ttr_app.views.quitarDocente'),
 
     url(r'^departamento/nuevo/?$','ttr_app.views.newDepartamento'),
     url(r'^departamento/agregar/?$','ttr_app.views.registrarDepartamento'),
@@ -67,7 +69,7 @@ urlpatterns = patterns('',
     url(r'^usuario/ver/?$', 'ttr_app.views.visualizarUsuario'),
     url(r'^usuario/nuevo/?$', 'ttr_app.views.newUser'),
     url(r'^usuario/agregar/?$', 'ttr_app.views.registrarUsuario'),
-    url(r'^usuario/borrar$', 'ttr_app.views.eliminarUsuario'),
+    url(r'^usuario/borrar/?$', 'ttr_app.views.eliminarUsuario'),
     url(r'^usuario/consultar/?$','ttr_app.views.consultarUsuario'),
     url(r'^usuario/consultar/modificar/?$','ttr_app.views.editarUsuario')
 
