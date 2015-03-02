@@ -83,11 +83,7 @@ fieldset legend {
     width: 220px;  
     padding: 5px 8px;  
 } 
-.estilo_form select {  
-    height: 22px;  
-    width: 270px;  
-    /*padding: 5px 8px;  */
-}   
+  
   
 .estilo_form textarea {  
     padding: 8px;  
@@ -118,7 +114,7 @@ fieldset legend {
     }  
   
     /* === HTML5 validation styles === */  
-    .estilo_form input:required, .estilo_form textarea:required, .estilo_form select:required {  
+    .estilo_form input:required, .estilo_form textarea:required  {  
         background: #fff; 
             background:url(required.png) no-repeat 240px 5px #F0F0EF;
     background:url(../img/required.png) no-repeat 240px 5px, -webkit-gradient(linear, left top, left bottom, from(#E3E3E3), to(#FFFFFF)); /* Saf4+, Chrome */
@@ -129,7 +125,7 @@ fieldset legend {
     }  
 
 
-        .estilo_form input:required:valid, .estilo_form textarea:required:valid, .estilo_form select:required:valid {  
+        .estilo_form input:required:valid, .estilo_form textarea:required:valid {  
             /*background: #94FF94 url(images/valid.png) no-repeat 98% center;  
             box-shadow: 0 0 5px #5cd053;  
             border-color: #28921f; */ 
@@ -141,7 +137,7 @@ fieldset legend {
     background:url(../img/valid.png) no-repeat 240px 5px, -o-linear-gradient(top, #E3E3E3, #FFFFFF); /* Opera 11.10+ */
         }  
 
-    .estilo_form input:focus:invalid, .estilo_form textarea:focus:invalid, .estilo_form select:focus:invalid {  
+    .estilo_form input:focus:invalid, .estilo_form textarea:focus:invalid {  
         /*background: #800040; 
         box-shadow: 0 0 5px #d45252;  
         border-color: #b03535;  
