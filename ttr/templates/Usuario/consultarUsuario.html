@@ -78,7 +78,16 @@
 								<label for="rol">Rol: </label>
 							</td>
 							<td>
-		 						<input type="text" id="rol" name="rol" required value="{{usuario.rol}}"><br>
+								<select>
+                            	{% for key, item in ROLES_CHOICES %} 
+                            		{% ifequal usuario.rol key %}
+								 		<option value="{{ key }}" style="width:350px;" tabindex="4" name="rol" id="rol" selected>{{item}}</option>
+									{% else %}
+										<option value="{{ key }}" style="width:350px;" tabindex="4" name="rol" id="rol">{{item}}</option>
+									{% endifequal %} 
+                            	{% endfor %}
+                        		</select>
+								
 		 					</td>
 		 				</tr>
 		 				<tr>

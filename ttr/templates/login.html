@@ -4,29 +4,56 @@
 {% include "includes/head.html" with title="Inicio de Sesión" %}
 </head>
 
-    <script type="text/javascript">
 
-        function cargaError(){
-
-        var objBoton='<%=btnError.ClientID%>'
-
-        if({{error}}.length!=0)
-            objBoton.click();
-        }
-
-    </script>
-<body onload="cargaError();">
+<body>
     
 
     {% include "includes/header.html" %}
     <section >
         <form method="post" class="estilo_form" >
-            {% csrf_token %}
-              
-                    <div>
-                        <p style="color:red;">{{error}}</p>
-                    </div>
-                
+
+
+                {% if error %}
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $.magnificPopup.open({
+                        items: {
+                            src: '<center><div id="test-form" class="white-popup-block ">\
+                                    <form class="estilo_form">\
+                                        <fieldset  >\
+                                            <center>\
+                                                <table>\
+                                                    <tr>\
+                                                        <td >\
+                                                            <center><img src="/static/img/iconos/error.png"></center>\
+                                                        </td>\
+                                                        <td >\
+                                                            <center>\
+                                                                {{error}}\
+                                                            </center\
+                                                        </td>\
+                                                    </tr>\
+                                                    <tr>\
+                                                        <td colspan="2">\
+                                                            <center><button type="submit" class="submit" onclick="$.magnificPopup.close();">Aceptar</button>\
+                                                        </td>\
+                                                    </tr>\
+                                                </center>\
+                                                </table>\
+                                            </center>\
+                                        </fieldset>\
+                                    </form>\
+                                </div></center>'
+                        },
+                        type: 'inline'
+
+                      // You may add options here, they're exactly the same as for $.fn.magnificPopup call
+                      // Note that some settings that rely on click event (like disableOn or midClick) will not work here
+                    }, 0);
+                });
+            </script>
+    {% endif %}
+            {% csrf_token %}                           
                 <center>
                     <fieldset align="center">
                             <legend >Iniciar Sesión:</legend>
@@ -51,6 +78,7 @@
                                         <tr>
                                             <td colspan="2">
                                                 <center><button type="submit" id="btnSubmit" class="submit">Ingresar</button><p align="right"><a class="popup-with-form" href="#test-form">Recuperar Contraseña</a></p>
+                                                </center>
                                             </td>
                                         </tr>
                                         <tr>
@@ -93,7 +121,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="email">E-mail</label>
+                                <label for="email">E-mail:</label>
                             </td>
                             <td>
                                 <input id="email" name="email" type="email" placeholder="example@domain.com" required="">
@@ -102,7 +130,9 @@
                         <tr>
                             <td colspan="2">
                                 <br>
-                                <center><button id="btnSubmit" type="submit" class="submit">Recuperar </button></center>
+                                <center><button id="btnSubmit" type="submit" class="submit">Recuperar </button>&nbsp;
+                                <button type="submit" class="submit" onclick="$.magnificPopup.close();">Cancelar</button>
+                            </center>
                             </td>
                         </tr>
                     </table>
