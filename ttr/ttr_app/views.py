@@ -483,8 +483,13 @@ def consultarUsuario(request):
     id=request.GET.get("id",None)
     usuario=MyUser.objects.get(pk=id)
     listaAsignaturas=Asignatura.objects.all()
-    clases = Clases.objects.get(user_id=id)
-    return render(request,"Usuario/consultarUsuario.html", {"usuario": usuario, "asignaturas": listaAsignaturas, "clases":clases.asignaturas.all()})
+    clases = None
+    asignaturas = None
+    if usuario.rol == MyUser.PROFESOR:
+        clases = Clases.objects.get(user_id=id)
+        asignaturas = clases.asignaturas.all()
+
+    return render(request,"Usuario/consultarUsuario.html", {"usuario": usuario, "asignaturas": listaAsignaturas, "clases":asignaturas})
 
 def editarUsuario(request):
     if(not request.user.is_authenticated()):
@@ -497,7 +502,6 @@ def editarUsuario(request):
     nombres = request.POST.get("nombres",None)
     apellidos = request.POST.get("apellidos",None)
     asignaturas = request.POST.getlist("asignaturas", None)
-    rol = request.POST.get("rol",None)    
 
     id=request.POST.get("id",None)
     usuario=MyUser.objects.get(pk=id)
@@ -506,8 +510,7 @@ def editarUsuario(request):
     usuario.first_name=nombres
     usuario.last_name=apellidos
     usuario.password=password
-    usuario.rol=int(rol)
-
+    
     usuario.save()
 
     asignarAsignatura=Clases.objects.get(user_id=id)

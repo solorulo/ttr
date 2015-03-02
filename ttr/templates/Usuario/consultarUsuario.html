@@ -30,7 +30,7 @@
 		 						<label for="password">Contraseña: </label>
 		 					</td>
 		 					<td>
-		 						<input type="password" id="password" name="password" required ><br>
+		 						<input type="password" id="password" name="password" ><br>
 		 					</td>
 		 				</tr>
 		 				<tr>
@@ -38,7 +38,7 @@
 		 						<label for="password2">Repite tu Contraseña: </label>
 		 					</td>
 		 					<td>
-		 						<input type="password" id="password2" name="password2" required>
+		 						<input type="password" id="password2" name="password2" >
 		 					</td>
 		 				</tr>
 		 				<tr>
@@ -78,7 +78,7 @@
 								<label for="rol">Rol: </label>
 							</td>
 							<td>
-								<select>
+								<select name>
                             	{% for key, item in ROLES_CHOICES %} 
                             		{% ifequal usuario.rol key %}
 								 		<option value="{{ key }}" style="width:350px;" tabindex="4" name="rol" id="rol" selected>{{item}}</option>
