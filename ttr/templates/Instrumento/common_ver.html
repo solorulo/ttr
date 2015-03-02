@@ -1,0 +1,15 @@
+{% ifequal instrumento.autor user.myuser %}
+<button onclick="editarInstrumento({{instrumento.pk}}, '{{ inst_type }}');return false;">Editar</button>
+{% endifequal %}
+<label>Título: {{instrumento.titulo}}</label><br/>
+<label>Autor: {{instrumento.autor.get_full_name }}</label><br/>
+<label>Unidad de aprendizaje: {{instrumento.asignatura.nombre}}</label><br/>
+<label>Oficial: 
+    <input id="oficial" type="checkbox" placeholder="oficial" {%if instrumento.oficial %}checked {% endif %}
+    {% ifnotequal user.myuser.rol ROLES.ADMINISTRADOR %}
+    onclick="return false;"
+    {% else %}
+    onclick="saveOficial();"
+    {% endifnotequal %} 
+    />
+</label><br/>

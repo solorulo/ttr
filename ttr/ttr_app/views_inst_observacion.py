@@ -50,7 +50,10 @@ def agregar(request):
         
         return HttpResponse('true')
     return render(request,'Instrumento/Observacion/obs_agregar.html', 
-        {"ind_choices" : IndicadorListaObs.TIPO_CHOICES })
+        {
+            "ind_choices" : IndicadorListaObs.TIPO_CHOICES,
+            "ASIGNATURAS" : Asignatura.objects.all(),
+        })
 
 def ver(request):
     idx = request.GET.get('id')

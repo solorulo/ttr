@@ -93,7 +93,9 @@ def agregar(request):
                 descripcion=pod_val)
             new_pond.save() 
         return HttpResponse('true')
-    return render(request,'Instrumento/Rubrica/rubrica_agregar.html')
+    return render(request,'Instrumento/Rubrica/rubrica_agregar.html', {
+        "ASIGNATURAS" : Asignatura.objects.all(),
+    })
 
 def ver(request):
     idx = request.GET.get('id')

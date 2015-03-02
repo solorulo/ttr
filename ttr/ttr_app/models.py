@@ -66,13 +66,13 @@ class Asignatura(models.Model):
 	fecha_creacion = models.DateTimeField(auto_now_add=True)
 	autor = models.ForeignKey(MyUser, related_name="asignatura_autor")
 	academia = models.ForeignKey(Academia)
-	presidente = models.ForeignKey(MyUser, related_name="asignatura_presidente")
+	presidente = models.ForeignKey(MyUser, related_name="asignatura_presidente", null=True, blank=True)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.nombre
 
 class Clases (models.Model):
-	asignaturas = models.ManyToManyField(Asignatura)
+	asignaturas = models.ManyToManyField(Asignatura null=True, blank=True)
 	user = models.OneToOneField(MyUser, primary_key=True)
 
 #####################
@@ -88,7 +88,7 @@ class InstrumentoEvaluacion(models.Model):
 	titulo = models.CharField(max_length=60, null=True, blank=True)
 	fecha_creacion = models.DateTimeField(auto_now_add=True)
 	autor = models.ForeignKey(MyUser, related_name="instrumento_autor")
-	asignatura = models.ForeignKey(Asignatura)
+	asignatura = models.ForeignKey(Asignatura, null=True, blank=True)
 	oficial = models.BooleanField(default=False)
 	fecha_modif = models.DateTimeField(auto_now=True)
 
