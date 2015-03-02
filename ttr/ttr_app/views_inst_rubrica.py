@@ -31,6 +31,11 @@ def agregar(request):
         print pods
         pods = json.loads(pods)
 
+        try:
+            autor = request.user.myuser.pk
+        except:
+            pass
+
         new_rubrica = Rubrica(
             titulo=titulo,
             autor_id=int(autor),

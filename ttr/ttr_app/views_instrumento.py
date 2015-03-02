@@ -14,8 +14,17 @@ def instrumento(request):
     url_redirect = '/'
     if (request.method == "GET"):
         idx = request.GET.get('id')
+        oficial = request.GET.get('oficial')
         inst = InstrumentoEvaluacion.objects.get(pk=int(idx))
         print inst
+        if oficial:
+            inst.oficial = (oficial.lower()=='true')
+            inst.save()
+            res = {
+                "result" : "true",
+                "oficial" : inst.oficial,
+            }
+            return HttpResponse(json.dumps(res), mimetype='application/json')
         if inst.rubrica:
             url_redirect = '/instrumento/rubrica/ver/?id='+idx
         elif inst.listacotejo:

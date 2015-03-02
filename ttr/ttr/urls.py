@@ -18,7 +18,8 @@ urlpatterns = patterns('',
 
     url(r'^buscar/?$', 'ttr_app.views_buscar.buscar'),
 
-    url(r'^general/?$', 'ttr_app.views.general'),
+    url(r'^portal/?$' ,'ttr_app.views.portal'),
+
     url(r'^superior/?$', 'ttr_app.views.superior'),
     url(r'^medioSuperior/?$', 'ttr_app.views.mediosuperior'),
 

@@ -11,15 +11,30 @@ import json
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
+def portal(request):
+    listaPlantelesSUP = Plantel.objects.filter(nivel=2)
+    listaPlantelesMED = Plantel.objects.filter(nivel=1)
+
+    if(request.user.is_authenticated()):
+        try:
+            id_plantel=request.user.myuser.plantel.pk
+            return HttpResponseRedirect("/index")
+        except:
+            listaPlantelesSUP = Plantel.objects.filter(nivel=2)
+            listaPlantelesMED = Plantel.objects.filter(nivel=1)
+            return render(request, 'portal.html',{'listaPlantelesSUP':listaPlantelesSUP,'listaPlantelesMED':listaPlantelesMED})
+    else:
+        return render(request, 'portal.html',{'listaPlantelesSUP':listaPlantelesSUP,'listaPlantelesMED':listaPlantelesMED})
+
 def general(request):
     if(request.user.is_authenticated()):
         try:
             id_plantel=request.user.myuser.plantel.pk
             return HttpResponseRedirect("/index")
         except:
-             return render(request, 'general.html')
+             return render(request, 'portal.html')
     else:
-        return render(request, 'general.html', {'navegacionG':1})
+        return render(request, 'portal.html', {'navegacionG':1})
 def superior(request):
     listaPlanteles = Plantel.objects.filter(nivel=2)
     return render(request, 'superior.html', {'navegacionG':1, 'listaPlanteles':listaPlanteles})
@@ -55,10 +70,10 @@ def index(request):
         try:
             id_plantel=request.user.myuser.plantel.pk
         except:
-            return HttpResponseRedirect("/general/")
+            return HttpResponseRedirect("/portal/")
     else:
         if(not "id_plantel" in request.session and not request.user.is_authenticated()):
-            return HttpResponseRedirect("/general")
+            return HttpResponseRedirect("/portal")
         else:
             id_plantel=request.session["id_plantel"]
             print "not auth"
