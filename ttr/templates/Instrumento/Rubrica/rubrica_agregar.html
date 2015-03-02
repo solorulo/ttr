@@ -4,16 +4,14 @@
 <head>
     {% include "includes/head.html" with title="Registrar Rúbrica" %}
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <link rel="stylesheet" href="/static/chosen/chosen.css"/>
 </head>
 
 <body>
     {% csrf_token %}
     {% include "includes/header.html" %}
     <section>
-        <label>Título </label><input id="titulo" type="text" placeholder="titulo" /><br/>
-        <label>Autor </label><input id="autor" type="text" placeholder="autor" /><br/>
-        <label>Unidad de aprendizaje </label><input id="asignatura" type="text" placeholder="unidad de apredizaje" /><br/>
-        <label>Oficial </label><input id="oficial" type="checkbox" placeholder="oficial" /><br/>
+        {% include "Instrumento/common_agregar.html" %}
         <button id="add_row">Agregar fila</button>
         <button id="add_column">Agregar columna</button>
         <table>
@@ -67,6 +65,12 @@
     {% include "Instrumento/comments.html" %}
 
     <script type="text/javascript" src="/static/js/FuncionesRubrica.js"></script>
+    <script type="text/javascript" src="/static/chosen/chosen.jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#asignatura').chosen();
+    });
+    </script>
     {% include "includes/footer.html" %}
 </body>
 

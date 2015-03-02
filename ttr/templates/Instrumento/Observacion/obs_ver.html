@@ -13,10 +13,7 @@
     {% csrf_token %}
     {% include "includes/header.html" %}
     <section>
-        <label>Título </label><input id="titulo" type="text" placeholder="titulo" value="{{instrumento.titulo}}" /><br/>
-        <label>Autor </label><input id="autor" type="text" placeholder="autor" value="{{instrumento.autor.pk}}" /><br/>
-        <label>Unidad de aprendizaje </label><input id="asignatura" type="text" placeholder="unidad de apredizaje" value="{{instrumento.asignatura.nombre}}" /><br/>
-        <label>Oficial </label><input id="oficial" type="checkbox" placeholder="oficial" {%if instrumento.oficial %}checked {% endif %}/><br/>
+        {% include "Instrumento/common_ver.html" with inst_type="listaobs" %}
         <!-- <button id="add_row">Agregar fila</button>
         <button id="add_column">Agregar columna</button> -->
         <table>

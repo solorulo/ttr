@@ -10,10 +10,7 @@
     {% csrf_token %}
     {% include "includes/header.html" %}
     <section>
-        <label>Título </label><input id="titulo" type="text" placeholder="titulo" /><br/>
-        <label>Autor </label><input id="autor" type="text" placeholder="autor" /><br/>
-        <label>Unidad de aprendizaje </label><input id="asignatura" type="text" placeholder="unidad de apredizaje" /><br/>
-        <label>Oficial </label><input id="oficial" type="checkbox" placeholder="oficial" /><br/>
+        {% include "Instrumento/common_agregar.html" %}
         <button id="add_row">Agregar fila</button>
         <table>
             <thead>

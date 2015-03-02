@@ -18,6 +18,11 @@ def agregar(request):
 
         print request.POST
 
+        try:
+            autor = request.user.myuser.pk
+        except:
+            pass
+
         listacotejo = request.POST.get('listacotejo[]')
         print "listacotejo "
         print listacotejo
@@ -49,7 +54,8 @@ def agregar(request):
             new_indicador.save()
         
         return HttpResponse('true')
-    return render(request,'Instrumento/Cotejo/cotejo_agregar.html')
+    return render(request,'Instrumento/Cotejo/cotejo_agregar.html',
+        { "ASIGNATURAS" : Asignatura.objects.all(), })
 
 def ver(request):
     idx = request.GET.get('id')

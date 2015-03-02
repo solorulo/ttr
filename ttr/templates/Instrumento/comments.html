@@ -1,9 +1,11 @@
 <script type="text/javascript">
 //var id_inst = {{instrumento.pk}};
 </script>
+{% if instrumento %}
 <div id="comment_add">
     <textarea placeholder="Comentario acerca del instrumento"></textarea><br/>
     <button>Comentar</button>
 </div>
+{% endif %}
 <div id="comments_section">
 </div>
