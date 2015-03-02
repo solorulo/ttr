@@ -25,10 +25,20 @@ def instrumento(request):
                 "oficial" : inst.oficial,
             }
             return HttpResponse(json.dumps(res), mimetype='application/json')
-        if inst.rubrica:
-            url_redirect = '/instrumento/rubrica/ver/?id='+idx
-        elif inst.listacotejo:
-            url_redirect = '/instrumento/listacotejo/ver/?id='+idx
-        elif inst.listaobservacion :
-            url_redirect = '/instrumento/listaobs/ver/?id=' + idx
+        try:
+            if inst.rubrica:
+                url_redirect = '/instrumento/rubrica/ver/?id='+idx
+        except:
+            pass
+        try:
+            if inst.listacotejo:
+                url_redirect = '/instrumento/listacotejo/ver/?id='+idx
+        except:
+            pass
+        try:
+            if inst.listaobservacion :
+                url_redirect = '/instrumento/listaobs/ver/?id=' + idx
+        except:
+            pass
+        
     return HttpResponseRedirect(url_redirect)
