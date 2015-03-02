@@ -55,11 +55,11 @@
                         <input type="text" value="4" />
                     </td> -->
                     {% for pod_val in pods %}
-                    {% ifequal pod_val.categoria.pk cat.pk%}
-                    <td class="column_val">
-                        {{pod_val.descripcion}}
-                    </td>
-                    {% endifequal %}
+                        {% ifequal pod_val.categoria.pk cat.pk%}
+                            <td class="column_val">
+                                {{pod_val.descripcion}}
+                            </td>
+                        {% endifequal %}
                     {% endfor %}
                 </tr>
                 {% endfor %}
