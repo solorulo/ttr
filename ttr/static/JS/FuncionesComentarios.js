@@ -33,7 +33,8 @@ function send_comment() {
     var obj = {
         'id' : id_inst,
         'text' : $('#comment_add textarea').val(),
-        //'user_id' : '2',
+
+        // 'user_id' : '2', //
         "csrfmiddlewaretoken": $.cookie("csrftoken")
     };
     $.post('/instrumento/comentario/', obj, function(data){
