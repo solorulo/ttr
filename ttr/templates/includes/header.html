@@ -18,10 +18,19 @@
             {%endif%}
         {%endif%}
     </figure>
-        <nav>
+  </header>
+<center>
+<nav>
             {%ifequal ROLES.ADMINISTRADOR user.myuser.rol%}
             <ul>
-                <li>Nuevo</li>
+                <li>Nuevo
+                    <ul>
+                      <li>Usuario</li>
+                      <li>Departamento</li>
+                      <li>Academia</li>
+                      <li>Unidad de Aprendizaje</li>
+                    </ul>
+                </li>
                 <li><a href="/buscar">Usuarios</a></li>
                 <li><a href="/estructura">Estructura Académica</a></li>
                 <li><a href="">Estadísticas</a></li>
@@ -44,5 +53,5 @@
                 {%endifequal%}
 
             {%endifequal%}
-        </nav>
-</header>
+<nav>
+</center>
