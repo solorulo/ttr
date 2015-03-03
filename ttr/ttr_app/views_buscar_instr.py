@@ -66,15 +66,26 @@ def buscar(request):
             for inst in instrumentos_db:
                 type_inst = ''
                 stype_inst = ''
-                if inst.rubrica:
-                    type_inst = 'Rúbrica'
-                    stype_inst = 'rubrica'
-                elif inst.listacotejo:
-                    type_inst = 'Lista de cotejo'
-                    stype_inst = 'listacotejo'
-                elif inst.listaobservacion:
-                    type_inst = 'Guía de observación'
-                    stype_inst = 'listaobs'
+                try:
+                    if inst.rubrica:
+                        type_inst = 'Rúbrica'
+                        stype_inst = 'rubrica'
+                except:
+                    pass
+                try:
+                    if inst.listacotejo:
+                        type_inst = 'Lista de cotejo'
+                        stype_inst = 'listacotejo'
+                except:
+                    pass
+                try:
+                    if inst.listaobservacion:
+                        type_inst = 'Guía de observación'
+                        stype_inst = 'listaobs'
+                except:
+                    pass
+                
+                
                 results.append({
                     "pk" : inst.pk,
                     "nombre" : inst.titulo,

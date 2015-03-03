@@ -1,0 +1,25 @@
+.busqueda
+{   
+    border: 5px solid black;
+    padding-top: 3em;
+    padding-bottom: 3em;
+    min-height:100%;
+    background: #ffffff;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    text-align: -webkit-center;
+}
+.contenedor_table{
+	margin-top: 2em;
+	text-align: center;
+	display: inline-block;
+	width: 80%;
+}
+table{
+	text-align: initial;
+	width: 100%;
+}
+.td_boton{
+	text-align: center;
+}
