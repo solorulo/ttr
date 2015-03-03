@@ -20,15 +20,15 @@
     </figure>
   </header>
 <center>
-<nav>
+<nav class="ul_nav">
             {%ifequal ROLES.ADMINISTRADOR user.myuser.rol%}
             <ul>
                 <li>Nuevo
                     <ul>
-                      <li>Usuario</li>
-                      <li>Departamento</li>
-                      <li>Academia</li>
-                      <li>Unidad de Aprendizaje</li>
+                      <li><a href="/usuario/nuevo/">Usuario</a></li>
+                      <li><a href="/departamento/nuevo/">Departamento</a></li>
+                      <li><a href="/academia/nuevo/">Academia</a></li>
+                      <li><a href="/asignatura/nuevo/">Unidad de Aprendizaje</a></li>
                     </ul>
                 </li>
                 <li><a href="/buscar">Usuarios</a></li>

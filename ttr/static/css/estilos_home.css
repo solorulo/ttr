@@ -7,7 +7,7 @@ body
 }
 header
 {
-    border: 1px solid black;
+    
     background: #ffffff;
     color: white;
     overflow: hidden;
@@ -51,39 +51,20 @@ header #logo img
     width: 66px;
 }
 
-/*
+
 nav
 {
-    background: #800040;
+    text-align: center;
     margin-top: 1.2em;
     position: relative;
-}
-nav ul
-{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-nav ul li
-{
-    display: inline-block;
-    margin: 0 5em 0 0;
-}
-nav ul li a
-{
-    color: white;
-    display: block;
-    padding: 0.5em;
-    text-decoration: none;
 }
 
 /*PRUEBA DE ESTILO MENU */
 
 
 
-ul {
-  text-align: left;
+.ul_nav {
+  text-align: -webkit-center;
   display: inline;
   margin: 0;
   padding: 15px 4px 17px 0;
@@ -92,7 +73,7 @@ ul {
   -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
-ul li {
+.ul_nav li {
   font: bold 12px/18px sans-serif;
   display: inline-block;
   margin-right: -4px;
@@ -107,22 +88,22 @@ ul li {
   -o-transition: all 0.2s;
   transition: all 0.2s;
 }
-ul li:hover {
+.ul_nav li:hover {
   background: #fff;
   color: #800040;
   text-decoration: none;
 }
-ul li a{
+.ul_nav li a{
 
  color: #ffffff;
  text-decoration: none;
 }
- ul li a:hover{
+.ul_nav li a:hover{
 
  color: #800040;
 
 }
-ul li ul {
+.ul_nav li ul {
   padding: 0;
 
   position: absolute;
@@ -141,14 +122,14 @@ ul li ul {
   -o-transition: opacity 0.2s;
   -transition: opacity 0.2s;
 }
-ul li ul li { 
+.ul_nav li ul li { 
   background: #C52A54; 
   display: block; 
   color: #fff;
   text-shadow: 0 -1px 0 #000;
 }
-ul li ul li:hover { background: #B2113C; }
-ul li:hover ul {
+.ul_nav li ul li:hover { background: #B2113C; }
+.ul_nav li:hover ul {
   display: block;
   opacity: 1;
   visibility: visible;
