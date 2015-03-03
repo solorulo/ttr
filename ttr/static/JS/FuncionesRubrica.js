@@ -28,11 +28,11 @@ function add_row() {
         delete_row($(this));
     });
     $td.append($button);
-    $td.append("<input type=\"text\"/ placeholder=\"Categoría\">");
+    $td.append("<input class=\"cat\" type=\"text\"/ placeholder=\"Categoría\">");
 
     $new_row.append($td);
     $('.column').each(function(idx, val){
-        $new_row.append("<td><input type=\"text\" value=\"4\" /></td>");
+        $new_row.append("<td class=\"column_val\" ><input type=\"text\" value=\"4\" /></td>");
     });
     $tbody.append($new_row);
     update_buttons();
@@ -53,8 +53,8 @@ function add_column(){
     
     $('#row_header').append($new_colh);
     $('.row').each(function(idx, val){
-        var $td = $('<td meta:new=\"true\"></td>');
-        $td.append("<input class=\"column_val\" type=\"text\" value=\"4\" />");
+        var $td = $('<td class=\"column_val\" meta:new=\"true\"></td>');
+        $td.append("<input type=\"text\" value=\"4\" />");
         $(this).append($td);
     });
     update_buttons();
