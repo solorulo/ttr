@@ -1,24 +1,26 @@
-<label>Título </label>
-<input id="titulo" type="text" placeholder="titulo" />
-<br/>
-<!-- <label>Autor </label>
-<input id="autor" type="text" placeholder="autor" />
-<br/> -->
-<label>Unidad de aprendizaje </label>
-<!-- <input id="asignatura" type="text" placeholder="unidad de apredizaje" /> -->
-<select data-placeholder="Unidad de aprendizaje" id="asignatura" >
-    <option>--</option>
-    {% for sign in ASIGNATURAS %}
-    <option value="{{ sign.pk }}">{{sign.nombre}}</option>    
-    {% endfor %}
-</select>
-<br/>
-<label>Oficial </label>
-<input id="oficial" type="checkbox" placeholder="oficial" />
-<br/>
-<!-- <label><div class="rating"></div>
-<script type="text/javascript">
-$('.rating').rateYo({
-	rating : 0
-});
-</script></label><br/> -->
+<div id="inst_head">
+	<label>Título </label>
+	<input id="titulo" type="text" placeholder="titulo" />
+	<br/>
+	<!-- <label>Autor </label>
+	<input id="autor" type="text" placeholder="autor" />
+	<br/> -->
+	<label>Unidad de aprendizaje </label>
+	<!-- <input id="asignatura" type="text" placeholder="unidad de apredizaje" /> -->
+	<select data-placeholder="Unidad de aprendizaje" id="asignatura" >
+	    <option>--</option>
+	    {% for sign in ASIGNATURAS %}
+	    <option value="{{ sign.pk }}">{{sign.nombre}}</option>    
+	    {% endfor %}
+	</select>
+	<br/>
+	<label>Oficial </label>
+	<input id="oficial" type="checkbox" placeholder="oficial" />
+	<br/>
+	<!-- <label><div class="rating"></div>
+	<script type="text/javascript">
+	$('.rating').rateYo({
+		rating : 0
+	});
+	</script></label><br/> -->
+</div>
