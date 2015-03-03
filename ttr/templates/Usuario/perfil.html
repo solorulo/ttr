@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+	{% include "includes/head.html" with title="Registrar nuevo usuario" %}
+	<link rel="stylesheet" href="/static/choosen/docsupport/style.css">
+    <link rel="stylesheet" href="/static/chosen/docsupport/prism.css">
+	<link rel="stylesheet" href="/static/chosen/chosen.css">
+
+
+	</head>
+	<body>
+	
+    {% include "includes/header.html"  %}
+    <section>
+
+    {% if mensaje %}
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$.magnificPopup.open({
+		            items: {
+		                src: '<div class="white-popup">Dynamically created popup</div>'
+		            },
+		            type: 'inline'
+
+		          // You may add options here, they're exactly the same as for $.fn.magnificPopup call
+		          // Note that some settings that rely on click event (like disableOn or midClick) will not work here
+		        }, 0);
+			});
+		</script>
+	{% endif %}
+
+<center>
+	<table width="80%">
+		<tr>
+			<td>
+				<strong>Nombre:</strong> Bruno García Laurrabaquio
+			</td>
+			<td>
+				<strong>E-mail:</strong> admin@escom.ipn.mx
+			</td>
+			<td>
+				<button id="btnSubmit" type="submit" class="submit">Cambiar Contraseña </button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>Jefe de Unidad de Aprendisaje:</strong> 
+			</td>
+			<td>
+				Ninguna
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<fieldset>
+					<legend align="center">Instrumentos de evaluación</legend>
+						<table>
+							<tr>
+								<td>
+									Nombre
+								</td>
+								<td>
+									Compartir
+								</td>
+								<td>
+									Descargar
+								</td>
+								<td>
+									Eliminar
+								</td>
+								<td>
+									Editar
+								</td>
+							</tr>
+						</table>
+				</fieldset>
+			</td>
+			<td>
+				<table>
+					<tr>
+						<td>
+							No.
+						</td>
+						<td>
+							Unidad de Aprendizaje
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</center>
+	</section>
+		 <script type="text/javascript">
+		 function validaPass(){
+		 	pass1= document.getElementById("password").value;
+		 	pass2= document.getElementById("password2").value;
+
+		 	
+		 	if(pass1==pass2){
+		 		return true;
+		 	}
+		 	else{
+		 		alert("La contraseña no coincide")
+		 		return false;
+		 	}
+		 }
+		 </script>
+		 {% include "includes/footer.html" %}
+		 <script src="../static/chosen/chosen.jquery.js" type="text/javascript"></script>
+		 <script type="text/javascript">
+	
+	    /*var config = {
+	      '.chosen-select'           : {},
+	      '.chosen-select-deselect'  : {allow_single_deselect:true},
+	      '.chosen-select-no-single' : {disable_search_threshold:10},
+	      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+	      '.chosen-select-width'     : {width:"95%"}
+	    }
+	    for (var selector in config) {
+	      $(selector).chosen(config[selector]);
+    }*/
+  		$( '.chosen-select').chosen();
+	</script>
+	 </body>
+</html>
