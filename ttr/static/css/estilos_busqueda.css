@@ -1,6 +1,5 @@
 .busqueda
 {   
-    border: 5px solid black;
     padding-top: 3em;
     padding-bottom: 3em;
     min-height:100%;
@@ -22,4 +21,24 @@ table{
 }
 .td_boton{
 	text-align: center;
+}
+.fieldset_contenedor{
+	font-family: sans-serif;
+    border: 2px solid #800040;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    width: 80%;
+    box-shadow: 0 0 20px #999;
+}
+
+.fieldset_contenedor legend {
+    background: #800040;
+    color: #fff;
+    padding: 5px 10px ;
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 5px #ddd;
+    margin-left: 10px;
+
 }

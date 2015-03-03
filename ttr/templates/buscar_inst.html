@@ -6,82 +6,84 @@
     <link rel="stylesheet" href="/static/rateyo/jquery.rateyo.css"/>
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="/static/rateyo/jquery.rateyo.js"></script>
+    <link rel="stylesheet" href="/static/css/estilos_busqueda.css" />
 </head>
 
 <body>
     {% csrf_token %}
     {% include "includes/header.html" %}
-    <section id="busqueda">
-        
-        <div>
-            <form>
-            {#{% csrf_token %}#}
-            </form>
-        </div>
-        <div id="search_content">
-            <form id="form_data">
-                <input id="pk" type="hidden" value="{{ pk }}" />
-                <input id="name" type="hidden" value="{{ name }}" />
-            </form>
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="1">Nombre: {{ name }}</th>
-                        <th colspan="3">
-                            <label>Oficiales:</label>
-                            <input id="oficial" name="oficial" form="form_data" type="checkbox" {% if oficial %} checked{% endif %} />
-                            <label>Ordenar por:</label>
-                            <select id="order" name="order" form="form_data">
-                                {% for rtypeorder in TYPESORDER %}
-                                    <option value="{{ rtypeorder.type }}" {% ifequal typeq rtypeorder.type %}selected{% endifequal %}>{{ rtypeorder.text }}</option>
-                                {% endfor%}
-                            </select>
-                        </th>
-                    </tr>
-                    {% if results %}
-                    <tr>
-                        <th>Instrumentos de evaluación: </th>
-                        <th>Tipo</th>
-                        <th colspan="2"></th>
-                        <th>Oficial</th>
-                        <th>Valoración</th>
-                    </tr>
-                    {% endif %}
-                </thead>
-                <tbody>
-                    <!--
-                    <tr>
-                        <td>Resultado 1</td>
-                        <td><button>Editar</button></td>
-                        <td><button>Eliminar</button></td>
-                    </tr>
-                    -->
-                    {% for result in results %}
-                    <tr>
-                        <td>{{ result.titulo }}</td>
-                        <td>
-                            {% if result.rubrica %}Rúbrica{% endif %}
-                            {% if result.listacotejo %}Lista de contejo{% endif %}
-                            {% if result.listaobservacion %}Guía de observación{% endif %}
-                        </td>
-                        <td><button onclick="showInstrumento(&quot;{{ url_inst }}&quot;, {{result.pk}});">Consultar</button></td>
-                        <td><button>Descargar</button></td>
-                        <td><input type="checkbox" onclick="return false;" {% if result.oficial %} checked{% endif %} /></td>
-                        <td>
-                            <div id="resultrating{{result.pk}}" class=".rating"></div>
-                            <script type="text/javascript">
-                            $('#resultrating{{result.pk}}').rateYo({
-                                rating : {% firstof result.valoracion '0' %},
-                                // readOnly: true,
-                            });
-                            </script>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        
+    <section class="busqueda">
+        <fieldset class="fieldset_contenedor">
+        <legend>Intrumentos de Evaluación</legend>
+            <div>
+                <form>
+                {#{% csrf_token %}#}
+                </form>
+            </div>
+            <div id="search_content" class="contenedor_table">
+                <form id="form_data">
+                    <input id="pk" type="hidden" value="{{ pk }}" />
+                    <input id="name" type="hidden" value="{{ name }}" />
+                </form>
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="1">Nombre: {{ name }}</th>
+                            <th colspan="3">
+                                <label>Oficiales:</label>
+                                <input id="oficial" name="oficial" form="form_data" type="checkbox" {% if oficial %} checked{% endif %} />
+                                <label>Ordenar por:</label>
+                                <select id="order" name="order" form="form_data">
+                                    {% for rtypeorder in TYPESORDER %}
+                                        <option value="{{ rtypeorder.type }}" {% ifequal typeq rtypeorder.type %}selected{% endifequal %}>{{ rtypeorder.text }}</option>
+                                    {% endfor%}
+                                </select>
+                            </th>
+                        </tr>
+                        {% if results %}
+                        <tr>
+                            <th>Instrumentos de evaluación: </th>
+                            <th>Tipo</th>
+                            <th colspan="2"></th>
+                            <th>Oficial</th>
+                            <th>Valoración</th>
+                        </tr>
+                        {% endif %}
+                    </thead>
+                    <tbody>
+                        <!--
+                        <tr>
+                            <td>Resultado 1</td>
+                            <td><button>Editar</button></td>
+                            <td><button>Eliminar</button></td>
+                        </tr>
+                        -->
+                        {% for result in results %}
+                        <tr>
+                            <td>{{ result.titulo }}</td>
+                            <td>
+                                {% if result.rubrica %}Rúbrica{% endif %}
+                                {% if result.listacotejo %}Lista de contejo{% endif %}
+                                {% if result.listaobservacion %}Guía de observación{% endif %}
+                            </td>
+                            <td class="td_boton"><button  onclick="showInstrumento(&quot;{{ url_inst }}&quot;, {{result.pk}});">Consultar</button></td>
+                            <td class="td_boton"><button >Descargar</button></td>
+                            <td class="td_boton"><input  type="checkbox" onclick="return false;" {% if result.oficial %} checked{% endif %} /></td>
+                            <td class="td_boton">
+                                <div id="resultrating{{result.pk}}" class=".rating"></div>
+                                <script type="text/javascript">
+                                $('#resultrating{{result.pk}}').rateYo({
+                                    rating : {% firstof result.valoracion '0' %},
+                                    // readOnly: true,
+                                });
+                                </script>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
     </section>
     <script type="text/javascript">
     function showInstrumento(url, pk) {
