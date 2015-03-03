@@ -20,7 +20,7 @@
             <thead>
                 <tr id="row_header">
                     <th colspan="2">Descripción</th>
-                    <th></th>
+                    <th>Valor</th>
                 </tr>
             </thead>
             <tbody id="tbody">
@@ -46,7 +46,9 @@
                         {{ ind.texto }}
                     </td>
                     <td>
-                        {{ ind.valor }}
+
+                        {{ ind.get_valor_display }}
+
                     </td>
                 </tr>
                 {% endfor %}

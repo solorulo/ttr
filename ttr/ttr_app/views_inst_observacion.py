@@ -65,5 +65,7 @@ def ver(request):
     the_obs = ListaObservacion.objects.get(pk=int(idx))
     the_indicadores = IndicadorListaObs.objects.filter(listaobs_id=the_obs.pk)
     print the_indicadores
-    return render(request,'Instrumento/Observacion/obs_ver.html', 
-        { 'instrumento':the_obs, 'indicadores' : the_indicadores })
+    return render(request,'Instrumento/Observacion/obs_ver.html', { 
+        'instrumento':the_obs, 
+        'indicadores' : the_indicadores, 
+    })
