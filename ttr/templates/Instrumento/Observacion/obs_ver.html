@@ -20,7 +20,7 @@
             <thead>
                 <tr id="row_header">
                     <th colspan="2">Descripción</th>
-                    <th></th>
+                    <th>Valor</th>
                 </tr>
             </thead>
             <tbody id="tbody">
@@ -43,10 +43,10 @@
                     <td>
                     </td>
                     <td>
-                        <input type="text" value="{{ ind.texto }}" />
+                        {{ ind.texto }}
                     </td>
                     <td>
-                        <input type="text" value="{{ ind.valor }}" />
+                        {{ ind.get_valor_display }}
                     </td>
                 </tr>
                 {% endfor %}
