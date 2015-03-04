@@ -531,7 +531,10 @@ def editarUsuario(request):
 
     listaUsuarios=MyUser.objects.filter(rol=MyUser.PROFESOR)
     return HttpResponseRedirect("/buscar")
+<<<<<<< HEAD
 
+=======
+>>>>>>> a05022d5dede0bbf2308bf603b76b8763618d2ab
 
 def miperfil(request):
     if(not request.user.is_authenticated() or request.user.myuser.rol==MyUser.ADMINISTRADOR):
@@ -544,4 +547,7 @@ def miperfil(request):
 
     listaInstrumentos=InstrumentoEvaluacion.objects.filter(autor=id_user)
     return render(request, 'Usuario/perfil.html',{"instrumentos":listaInstrumentos})
+<<<<<<< HEAD
 
+=======
+>>>>>>> a05022d5dede0bbf2308bf603b76b8763618d2ab
