@@ -5,34 +5,20 @@
 	<link rel="stylesheet" href="/static/choosen/docsupport/style.css">
     <link rel="stylesheet" href="/static/chosen/docsupport/prism.css">
 	<link rel="stylesheet" href="/static/chosen/chosen.css">
-
-
-	</head>
-	<body>
+	<link rel="stylesheet" href="/static/jquery-ui/jquery-ui.css">
+	  	<script src="/static/jquery-ui/jquery-ui.js"></script>
+		</head>
+	<body onload="verAsignaturas();">
 	
     {% include "includes/header.html"  %}
     <section>
 
-    {% if mensaje %}
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$.magnificPopup.open({
-		            items: {
-		                src: '<div class="white-popup">Dynamically created popup</div>'
-		            },
-		            type: 'inline'
 
-		          // You may add options here, they're exactly the same as for $.fn.magnificPopup call
-		          // Note that some settings that rely on click event (like disableOn or midClick) will not work here
-		        }, 0);
-			});
-		</script>
-	{% endif %}
-	 	<form method="post" action="/usuario/agregar"  class="estilo_form" onsubmit="return validaPass();">
-	 		{% csrf_token %}
+	 	<form method="post" action="/usuario/agregar"  class="estilo_form" onsubmit="return validarFormulario();">
+		 		 	 		{% csrf_token %}
 	 		<center>
 	 		<fieldset align="center">
-   			<legend >Registro de Usuario:</legend>
+   			<legend >Registro de Usuario</legend>
 	 		<div id="contenido" align="center">
 	 			<table>
 	 				<tr>
@@ -65,7 +51,7 @@
 					 		<label for="nombres">Nombre(s): </label>
 					 	</td>
 					  	<td>
-					 		<input type="text" id="nombres" name="nombres" required>
+					 		<input type="text" id="nombres" name="nombres"  onkeypress="no_caracteres(event);" required>
 					 	</td>
 					</tr>
 					<tr>
@@ -73,7 +59,7 @@
 					 		<label for="aPaterno">Apellido Paterno: </label>
 					 	</td>
 					  	<td>
-					 		<input type="text" id="aPaterno" name="aPaterno" required>
+					 		<input type="text" id="aPaterno" name="aPaterno" onkeypress="no_caracteres(event);" required>
 					 	</td>
 					</tr>
 					<tr>
@@ -81,49 +67,43 @@
 					 		<label for="aMaterno">Apellido Materno: </label>
 					 	</td>
 					  	<td>
-					 		<input type="text" id="aMaterno" name="aMaterno" required>
+					 		<input type="text" id="aMaterno" name="aMaterno" onkeypress="no_caracteres(event);" required>
 					 	</td>
 					</tr>
 					<tr>
-					 	<td>
-					 		<label for="asignatura">Asignatura: </label>
-					 	</td>
-					  	<td>
-					 		<select data-placeholder="Asignaturas"  
-					 		 multiple name="asignaturas">
-						 		{% for asignatura in asignaturas %}
-									<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option>    
-								{% endfor %}
-							</select>
-						</td>
-					</tr>
-					<tr>
-					 	<td>
+						<td>
 					 		<label for="rol">Rol: </label>
 					 	</td>
 					  	<td>
 
-					  		<select id="rol" name="rol">
+					  		<select id="rol" name="rol" onchange="verAsignaturas();">
                             	{% for key, item in ROLES_CHOICES %} 
                             		<option value="{{ key }}" style="width:350px;" tabindex="4" name="rol" id="rol">{{item}}</option>
                             	{% endfor %}
                         	</select>
 
-                        	<!--
-                        		<select style="width:350px;" tabindex="4" name="rol" id="rol">
-					        
-					            <option value="3">Profesor</option>
-					            <option value="2">Administrador Local</option>
-					            <option value="1">Administrador Institucional</option>
-					        
-							</select>
-							-->
+   					 	</td>
+					 	
+					</tr>
+					<tr>
+					 	<td>
+					 		<label id ="label_asig" for="asignatura">Asignatura: </label>
 					 	</td>
+					  	<td>
+					  		<div id="asig">
+						 		<select id="asignaturas" data-placeholder="Asignaturas"  
+						 		 multiple name="asignaturas" >
+							 		{% for asignatura in asignaturas %}
+										<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option>    
+									{% endfor %}
+								</select>
+							</div>
+						</td>
 					</tr>
 					<tr>
 					 	<td colspan=2 align="center">
 					 		<br>
-					 		<button id="btnSubmit" type="submit" class="submit">Registrar Usuario </button>
+					 		<button id="btnSubmit" type="submit" class="submit">Registrar</button>
 					 	</td>
 					</tr>
 				</table>
@@ -133,18 +113,80 @@
 		</form>
 	</section>
 		 <script type="text/javascript">
-		 function validaPass(){
+		 function no_caracteres(){
+		 	//validar ASCII letras
+		 	if ((event.keyCode < 65) || (event.keyCode > 90) && (event.keyCode < 97) || (event.keyCode > 122)
+   		 //acentos
+   		 && event.keyCode!=193 && event.keyCode!=201 && event.keyCode!=205 && event.keyCode!=211 && event.keyCode!=218
+   		 && event.keyCode!=225 && event.keyCode!=233 && event.keyCode!=237 && event.keyCode!=243 && event.keyCode!=250)
+   		
+   		 event.returnValue = false;
+       
+   		}
+		 
+		 function validarFormulario(){
 		 	pass1= document.getElementById("password").value;
 		 	pass2= document.getElementById("password2").value;
+		 	nombres=document.getElementById("nombres").value;
+		 	apPaterno=document.getElementById("aPaterno").value;
+		 	apMaterno=document.getElementById("aMaterno").value;
 
+		 	var validacion_1= /[0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\'\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/;
 		 	
-		 	if(pass1==pass2){
-		 		return true;
-		 	}
-		 	else{
-		 		alert("La contraseña no coincide")
+		 	if(pass1!=pass2){
+		 		document.getElementById("password").value="";
+		 		document.getElementById("password2").value="";
+		 		document.getElementById("password").focus();
+		 		$.magnificPopup.open({
+		                        items: {
+		                            src: '<center><div id="test-form" class="white-popup-block ">\
+		                                    <form class="estilo_form">\
+		                                        <fieldset  >\
+		                                            <center>\
+		                                                <table>\
+		                                                    <tr>\
+		                                                        <td >\
+		                                                            <center><img src="/static/img/iconos/error.png"></center>\
+		                                                        </td>\
+		                                                        <td >\
+		                                                            <center>\
+		                                                                Contraseñas incorrectas\
+		                                                            </center\
+		                                                        </td>\
+		                                                    </tr>\
+		                                                    <tr>\
+		                                                        <td colspan="2">\
+		                                                            <center><button class="submit" onclick="$.magnificPopup.close(); return false;">Aceptar</button>\
+		                                                        </td>\
+		                                                    </tr>\
+		                                                </center>\
+		                                                </table>\
+		                                            </center>\
+		                                        </fieldset>\
+		                                    </form>\
+		                                </div></center>'
+		                        },
+		                        type: 'inline'
+
+		                      // You may add options here, they're exactly the same as for $.fn.magnificPopup call
+		                      // Note that some settings that rely on click event (like disableOn or midClick) will not work here
+		                    }, 0);
+
 		 		return false;
 		 	}
+		 	return true;
+		 }
+
+		 function verAsignaturas(){
+		 	var tipo = document.getElementById("rol").value;
+		 	if(tipo==2){
+		 		document.getElementById('asig').style.display = 'none';
+		 		document.getElementById('label_asig').style.display = 'none';
+		 	}else{
+		 		document.getElementById('asig').style.display ='block';
+		 		document.getElementById('label_asig').style.display = 'block';
+		 	}
+
 		 }
 		 </script>
 		 {% include "includes/footer.html" %}
@@ -163,5 +205,91 @@
     }*/
   		$( '.chosen-select').chosen();
 	</script>
-	 </body>
+
+	{% ifequal mensaje "2" %}
+		            <script type="text/javascript">
+		                $(document).ready(function(){
+		                    $.magnificPopup.open({
+		                        items: {
+		                            src: '<center><div id="test-form" class="white-popup-block ">\
+		                                    <form class="estilo_form">\
+		                                        <fieldset  >\
+		                                            <center>\
+		                                                <table>\
+		                                                    <tr>\
+		                                                        <td >\
+		                                                            <center><img src="/static/img/iconos/error.png"></center>\
+		                                                        </td>\
+		                                                        <td >\
+		                                                            <center>\
+		                                                                Lo sentimos, parece que {{username}} pertenece a una cuenta ya existente\
+		                                                            </center\
+		                                                        </td>\
+		                                                    </tr>\
+		                                                    <tr>\
+		                                                        <td colspan="2">\
+		                                                            <center><button class="submit" onclick="$.magnificPopup.close(); return false;">Aceptar</button>\
+		                                                        </td>\
+		                                                    </tr>\
+		                                                </center>\
+		                                                </table>\
+		                                            </center>\
+		                                        </fieldset>\
+		                                    </form>\
+		                                </div></center>'
+		                        },
+		                        type: 'inline'
+
+		                      // You may add options here, they're exactly the same as for $.fn.magnificPopup call
+		                      // Note that some settings that rely on click event (like disableOn or midClick) will not work here
+		                    }, 0);
+		                });
+		            </script>
+	    		{% endifequal %}
+	    		{% ifequal mensaje "1" %}
+		            <script type="text/javascript">
+		                $(document).ready(function(){
+		                    $.magnificPopup.open({
+		                        items: {
+		                            src: '<center><div id="test-form" class="white-popup-block ">\
+		                                    <form class="estilo_form">\
+		                                        <fieldset  >\
+		                                            <center>\
+		                                                <table>\
+		                                                    <tr>\
+		                                                        <td >\
+		                                                            <center><img src="/static/img/iconos/error.png"></center>\
+		                                                        </td>\
+		                                                        <td >\
+		                                                            <center>\
+		                                                                Usuario registrado con éxito\
+		                                                            </center\
+		                                                        </td>\
+		                                                    </tr>\
+		                                                    <tr>\
+		                                                        <td colspan="2">\
+		                                                            <center><button class="submit" onclick="$.magnificPopup.close(); return false;">Aceptar</button>\
+		                                                        </td>\
+		                                                    </tr>\
+		                                                </center>\
+		                                                </table>\
+		                                            </center>\
+		                                        </fieldset>\
+		                                    </form>\
+		                                </div></center>'
+		                        },
+		                        type: 'inline'
+
+		                      // You may add options here, they're exactly the same as for $.fn.magnificPopup call
+		                      // Note that some settings that rely on click event (like disableOn or midClick) will not work here
+		                    }, 0);
+		                });
+		            </script>
+	    		{% endifequal %}
+
+
+	
+
+	</body>
+
 </html>

@@ -32,7 +32,7 @@ class MyUser(User):
 	PROFESOR = 3
 	TIPO_CHOICES = (
 		(ADMINISTRADOR, "Administrador"),
-		(PROFESOR, "Profesor"),
+		(PROFESOR, "Docente"),
 		# (SUPER_ADMIN, "Super Administrador"),
 	)
 	rol = models.IntegerField(choices=TIPO_CHOICES, default=PROFESOR)

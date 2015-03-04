@@ -120,7 +120,7 @@ def login(request):
                 return HttpResponseRedirect(next)
             return HttpResponseRedirect('/estructura')
         else:
-            return render(request, 'login.html', {'error': 'El usuario y/o constraseña no coinciden.' })
+            return render(request, 'login.html', {'error': 'El usuario y/o contraseña no coinciden.' })
     except:
         raise PermissionDenied
     return render(request, 'login.html', {'username':username})
@@ -217,7 +217,6 @@ def eliminarAsignatura(request):
     elif (request.user.myuser.rol == MyUser.PROFESOR):
         return HttpResponseRedirect("/general")
     id=request.POST.get("id",None)
-    print "Esto es " + id
     deleteAsignatura = Asignatura.objects.get(pk=id)
     deleteAsignatura.delete()
     return HttpResponse("true")
@@ -443,42 +442,39 @@ def registrarUsuario(request):
     nombreUser = request.POST.get("username", None)
     password = request.POST.get("password", None) 
     nombres = request.POST.get("nombres",None)
-    aPaterno = request.POST.get("aPaterno",None)
-    aMaterno = request.POST.get("aMaterno", None)
+    aPaterno = request.POST.get("aPaterno",'')
+    aMaterno = request.POST.get("aMaterno", '')
     asignaturas = request.POST.getlist("asignaturas", None)
     rol = request.POST.get("rol",None)
 
-    plantel=request.session["id_plantel"]
+    plantel=request.user.myuser.plantel
 
 
     new_user = MyUser(
             username=nombreUser,
             first_name=nombres,
             last_name=aPaterno +" "+ aMaterno,
-            password=password,
             rol=int(rol),
-            plantel_id=int(plantel),
+            plantel=plantel,
         )
-    new_user.save()
+    try:
+        new_user.save()
 
-    asignarAsignatura=Clases(
-        user=new_user
-    )
-    asignarAsignatura.save()
-    for asignatura in asignaturas:
-        asignarAsignatura.asignaturas.add(int(asignatura))
-    # asignarAsignatura.asignaturas.save()
+        asignarAsignatura=Clases(
+            user=new_user
+        )
+        asignarAsignatura.save()
+        for asignatura in asignaturas:
+            asignarAsignatura.asignaturas.add(int(asignatura))
+        # asignarAsignatura.asignaturas.save()
 
-    listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
-    return render(request,'Usuario/newUser.html', {"asignaturas": listaAsignaturas, "mensaje": "Usuario Registrado"})
-
-def visualizarUsuario(request):
-    if(not request.user.is_authenticated()):
-        return HttpResponseRedirect("/general")
-    elif (request.user.myuser.rol == MyUser.PROFESOR):
-        return HttpResponseRedirect("/general")
-    listaUsuarios=MyUser.objects.filter(rol=MyUser.PROFESOR)
-    return render(request,"Usuario/visualizarUsuario.html", {"usuarios": listaUsuarios})
+        listaAsignaturas=Asignatura.objects.all().values("pk","nombre")
+        return render(request,'Usuario/newUser.html', {"asignaturas": listaAsignaturas ,"mensaje": "1" })
+            
+    except:
+        listaAsignaturas=Asignatura.objects.all().values("pk","nombre")   
+        return render(request,'Usuario/newUser.html', {"asignaturas": listaAsignaturas, "mensaje": "2", "username":nombreUser})
+    
 
 def eliminarUsuario(request):
     if(not request.user.is_authenticated()):
@@ -524,8 +520,8 @@ def editarUsuario(request):
     usuario.username=nombreUser
     usuario.first_name=nombres
     usuario.last_name=apellidos
-    usuario.password=password
-    
+    usuario.set_password(password)
+
     usuario.save()
 
     asignarAsignatura=Clases.objects.get(user_id=id)
@@ -534,4 +530,4 @@ def editarUsuario(request):
         asignarAsignatura.asignaturas.add(int(asignatura))
 
     listaUsuarios=MyUser.objects.filter(rol=MyUser.PROFESOR)
-    return render(request,"Usuario/visualizarUsuario.html", {"usuarios": listaUsuarios})
+    return HttpResponseRedirect("/buscar")

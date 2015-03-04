@@ -101,3 +101,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.contrib.auth.context_processors.auth",'ttr_app.processor.roles',
 )
+
+# EMAIL SETTINGS
+
+EMAIL_HOST = "smpt.hotmail.com"
+EMAIL_PORT = "587"
+EMAIL_HOST_USER = "sanghelli_091291@hotmail.com"
+EMAIL_HOST_PASSWORD = "LYGMGL911209"
+EMAIL_USE_TLS = True
+ACCOUNT_EMAIL_VERIFICATION='none'

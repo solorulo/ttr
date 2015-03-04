@@ -72,7 +72,8 @@ urlpatterns = patterns('',
     url(r'^usuario/agregar/?$', 'ttr_app.views.registrarUsuario'),
     url(r'^usuario/borrar/?$', 'ttr_app.views.eliminarUsuario'),
     url(r'^usuario/consultar/?$','ttr_app.views.consultarUsuario'),
-    url(r'^usuario/consultar/modificar/?$','ttr_app.views.editarUsuario')
+    url(r'^usuario/consultar/modificar/?$','ttr_app.views.editarUsuario'),
+    url(r'^usuario/recuperarcontrasena/?$','ttr_app.views_enviar_email.enviar_correo')
 
 
     # Reseteo de password TODO verificar si van a funcionar
