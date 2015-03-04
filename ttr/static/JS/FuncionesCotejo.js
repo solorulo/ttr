@@ -18,7 +18,7 @@ function add_row() {
     $new_row.append($td);
     $new_row.append(
         "<td>"+
-        "<textarea class=\"text\" placeholder=\"Descripción\" />"+
+        "<textarea class=\"text\" placeholder=\"Descripción\" ></textarea>"+
         "</td>");
     $new_row.append(
         "<td>"+
@@ -26,7 +26,7 @@ function add_row() {
         "</td>");
     $new_row.append(
         "<td>"+
-        "<textarea class=\"observ\" placeholder=\"Observaciones\" />"+
+        "<textarea class=\"observ\" placeholder=\"Observaciones\" ></textarea>"+
         "</td>");
     // <td>
     //     <input type="text" value="4" />

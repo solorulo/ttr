@@ -28,11 +28,11 @@ function add_row() {
         delete_row($(this));
     });
     $td.append($button);
-    $td.append("<textarea class=\"cat\" placeholder=\"Categoría\" />");
+    $td.append("<textarea class=\"cat\" placeholder=\"Categoría\" ></textarea>");
 
     $new_row.append($td);
     $('.column').each(function(idx, val){
-        $new_row.append("<td class=\"column_val\" ><textarea class=\"text\" placeholder=\"Descripción ...\"/></td>");
+        $new_row.append("<td class=\"column_val\" ><textarea class=\"text\" placeholder=\"Descripción ...\"></textarea></td>");
     });
     $tbody.append($new_row);
     update_buttons();
@@ -49,12 +49,12 @@ function add_column(){
         delete_column($(this));
     });
     $new_colh.append($bt_delete_column);
-    $new_colh.append("<br/><textarea class=\"text\" placeholder=\"Columna\"/>");
+    $new_colh.append("<br/><textarea class=\"text\" placeholder=\"Columna\"></textarea>");
     
     $('#row_header').append($new_colh);
     $('.row').each(function(idx, val){
         var $td = $('<td class=\"column_val\" meta:new=\"true\"></td>');
-        $td.append("<textarea class=\"text\" placeholder=\"Descripción ...\"/>");
+        $td.append("<textarea class=\"text\" placeholder=\"Descripción ...\"></textarea>");
         $(this).append($td);
     });
     update_buttons();
