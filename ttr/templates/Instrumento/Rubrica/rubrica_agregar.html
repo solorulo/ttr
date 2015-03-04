@@ -40,10 +40,10 @@
                         <input class="cat" type="text" />
                     </td>
                     <td class="column_val">
-                        <input type="text" value="4" />
+                        <input type="text" value="" placeholder="Descripción" />
                     </td>
                     <td class="column_val">
-                        <input type="text" value="4" />
+                        <input type="text" value="" />
                     </td>
                 </tr>
                 <tr class="row" meta:index="2">
@@ -61,6 +61,13 @@
             </tbody>
         </table>
         <br/>
+        <label>Privacidad</label>
+        <select data-placeholder="Nivel de privacidad" id="level_show" >
+            <option>--</option>
+            {% for key,value in TYPESSHOW %}
+            <option value="{{ key }}">{{ value }}</option>    
+            {% endfor %}
+        </select>
         <button id="save">Guardar</button>
         
     </section>

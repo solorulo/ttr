@@ -2,6 +2,12 @@
 var id_inst = {{instrumento.pk}};
 </script>
 {% if instrumento %}
+	{% ifnotequal user.pk instrumento.autor.pk %}
+<div id="newrating"></div>
+<script type="text/javascript">
+$('#newrating').rateYo({ });
+</script>
+	{% endifnotequal %}
 <div id="comment_add">
     <textarea placeholder="Comentario acerca del instrumento"></textarea><br/>
     <button>Comentar</button>
