@@ -19,39 +19,46 @@
         {%endif%}
     </figure>
   </header>
-<center>
-<nav class="ul_nav">
-            {%ifequal ROLES.ADMINISTRADOR user.myuser.rol%}
-            <ul>
-                <li>Nuevo
+
+<table width="100%">
+    <tr>
+        <td>
+            <center>
+                <nav class="ul_nav">
+                    {%ifequal ROLES.ADMINISTRADOR user.myuser.rol%}
                     <ul>
-                      <li><a href="/usuario/nuevo/">Usuario</a></li>
-                      <li><a href="/departamento/nuevo/">Departamento</a></li>
-                      <li><a href="/academia/nuevo/">Academia</a></li>
-                      <li><a href="/asignatura/nuevo/">Unidad de Aprendizaje</a></li>
-                    </ul>
-                </li>
-                <li><a href="/buscar">Usuarios</a></li>
-                <li><a href="/estructura">Estructura Académica</a></li>
-                <li><a href="">Estadísticas</a></li>
-                <li><a href="/logout">Cerrar Sesión</a></li>
-            </ul>
-            {%else%}
-                {%ifequal ROLES.PROFESOR user.myuser.rol%}
-                    <ul>
-                        <li><a href="/miperfil/">Mi Perfil</a></li>
-                        <li><a href="/estructura/">Estructura Académica</a></li>
-                        <li><a href="/instrumentos/buscar/">Instrumentos de Evaluación</a></li>
+                        <li>Nuevo
+                            <ul>
+                              <li><a href="/usuario/nuevo/">Usuario</a></li>
+                              <li><a href="/departamento/nuevo/">Departamento</a></li>
+                              <li><a href="/academia/nuevo/">Academia</a></li>
+                              <li><a href="/asignatura/nuevo/">Unidad de Aprendizaje</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/buscar">Usuarios</a></li>
+                        <li><a href="/estructura">Estructura Académica</a></li>
+                        <li><a href="">Estadísticas</a></li>
                         <li><a href="/logout">Cerrar Sesión</a></li>
                     </ul>
-                {%else%}
-                    <ul>
-                        <li><a href="/login/">Iniciar sesión</a></li>
-                        <li><a href="/estructura/">Estructura Académica</a></li>
-                        <li><a href="/instrumentos/buscar/">Instrumentos de Evaluación</a></li>
-                    </ul>
-                {%endifequal%}
+                    {%else%}
+                        {%ifequal ROLES.PROFESOR user.myuser.rol%}
+                            <ul>
+                                <li><a href="/usuario/perfil/">Mi Perfil</a></li>
+                                <li><a href="/estructura/">Estructura Académica</a></li>
+                                <li>Instrumentos de Evaluación</li>
+                                <li><a href="/logout">Cerrar Sesión</a></li>
+                            </ul>
+                        {%else%}
+                            <ul>
+                                <li><a href="/login/">Iniciar sesión</a></li>
+                                <li><a href="/estructura/">Estructura Académica</a></li>
+                                <li><a href="/instrumentos/buscar/">Instrumentos de Evaluación</a></li>
+                            </ul>
+                        {%endifequal%}
 
-            {%endifequal%}
-<nav>
-</center>
+                    {%endifequal%}
+                <nav>
+            </center>
+        </td>
+    </tr>
+</table>
