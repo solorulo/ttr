@@ -81,9 +81,9 @@ class InstrumentoEvaluacion(models.Model):
 	PLANTEL = 1
 	PERSONAL = 2
 	TIPO_CHOICES = (
-		(INSTITUCIONAL, "Institucional"),
-		(PLANTEL, "Plantel"),
 		(PERSONAL, "Personal"),
+		(PLANTEL, "Plantel"),
+		(INSTITUCIONAL, "Institucional"),
 	)
 	level_show = models.IntegerField(choices=TIPO_CHOICES, default=PLANTEL)
 
