@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+    {% include "includes/head.html" with title="Estadísticas" %}
+	</head>
+
+	<body>
+		{% include "includes/header.html" %}
+
+		  <div id="search_content" class="contenedor_table">
+                <table>
+                        <tr>
+                        	<td>Tipo:</td>
+                        	<td>
+                        		<select name="typeq">
+		                            {% for rtypeq in TYPESQ %}
+		                                <option value="{{ rtypeq.type }}" {% ifequal typeq rtypeq.type %}selected{% endifequal %}>{{ rtypeq.text }}</option>
+		                            {% endfor%}
+		                        </select>
+		                     </td>
+
+		                     <td>Periodo:<td>
+		                     <td>
+		                     	<input type="date" name="rangoA"> A  <input type="date" name="rangoB">
+		                     </td>	
+
+                        
+                            <td class="td_boton"><button  onclick="showInstrumento(&quot;{{ url_inst }}&quot;, {{result.pk}});">Consultar</button></td>
+                            </td>
+                        </tr>
+                 </table>
+            </div>
