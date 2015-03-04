@@ -22,7 +22,7 @@ function add_row() {
     var $new_row = $("<tr class=\"row\" meta:new=\"true\"></tr>");
 
     var $td = $('<td></td>');
-    var $button = $("<button class=\"delete_row\">-</button>").button();
+    var $button = $("<button class=\"delete_row\">-</button>");
     $button.click(function(event) {
         event.preventDefault();
         delete_row($(this));
@@ -43,7 +43,7 @@ function add_column(){
     }
     var $tbody = $('#tbody');
     var $new_colh = $('<th class=\"column\" meta:new=\"true\"></th>');
-    var $bt_delete_column = $("<button class=\"delete_column\">-</button>").button();
+    var $bt_delete_column = $("<button class=\"delete_column\">-</button>");
     $bt_delete_column.click(function(event) {
         event.preventDefault();
         delete_column($(this));
@@ -140,5 +140,5 @@ $(document).ready(function() {
     $('#save').click(function(event) {
         send_rubrica();
     });
-    $('button').button();
+    // $('button').button();
 });
