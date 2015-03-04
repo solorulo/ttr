@@ -18,7 +18,7 @@ function add_row() {
     $new_row.append($td);
     $new_row.append(
         "<td>"+
-        "<input type=\"text\" value=\"4\" />"+
+        "<textarea class=\"text\" placeholder=\"Descripción ...\" />"+
         "</td>");
 
     $new_select = $("<select></select>");
@@ -41,7 +41,7 @@ function send_listaobs() {
     var listaobs = [];
     $('.row').each(function(indexRow, val){
         var $thisRow = $(this);
-        var text = $thisRow.find('input[type=text]').val();
+        var text = $thisRow.find('.text').val();
         var value = $thisRow.find('select').val();
         var meta_index = $thisRow.attr('meta:index');
         listaobs[indexRow] = {

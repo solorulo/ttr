@@ -28,11 +28,11 @@ function add_row() {
         delete_row($(this));
     });
     $td.append($button);
-    $td.append("<input class=\"cat\" type=\"text\"/ placeholder=\"Categoría\">");
+    $td.append("<textarea class=\"cat\" placeholder=\"Categoría\" />");
 
     $new_row.append($td);
     $('.column').each(function(idx, val){
-        $new_row.append("<td class=\"column_val\" ><input type=\"text\" value=\"4\" /></td>");
+        $new_row.append("<td class=\"column_val\" ><textarea class=\"text\" placeholder=\"Descripción ...\"/></td>");
     });
     $tbody.append($new_row);
     update_buttons();
@@ -49,12 +49,12 @@ function add_column(){
         delete_column($(this));
     });
     $new_colh.append($bt_delete_column);
-    $new_colh.append("<br/><input type=\"text\" value=\"4\" />");
+    $new_colh.append("<br/><textarea class=\"text\" placeholder=\"Columna\"/>");
     
     $('#row_header').append($new_colh);
     $('.row').each(function(idx, val){
         var $td = $('<td class=\"column_val\" meta:new=\"true\"></td>');
-        $td.append("<input type=\"text\" value=\"4\" />");
+        $td.append("<textarea class=\"text\" placeholder=\"Descripción ...\"/>");
         $(this).append($td);
     });
     update_buttons();
@@ -80,7 +80,7 @@ function send_rubrica() {
     $('.column').each(function(indexPondVal, val){
         var meta_index = $(this).attr('meta:index');
         var meta_new = $(this).attr('meta:new');
-        var input_text = $(this).children('input[type=text]').val();
+        var input_text = $(this).children('.text').val();
         ponderaciones_vals[indexPondVal] = {
             'index_pod' : meta_index,
             'meta_new' : meta_new,
@@ -97,7 +97,7 @@ function send_rubrica() {
         };
 
         $thisRow.children('.column_val').each(function(indexPond, val){
-            var val = $(this).children('input[type=text]').val();
+            var val = $(this).children('.text').val();
             ponderaciones.push ({
                 'index' : indexPond,
                 'cat' : indexRow,

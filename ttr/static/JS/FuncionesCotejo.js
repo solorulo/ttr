@@ -18,11 +18,15 @@ function add_row() {
     $new_row.append($td);
     $new_row.append(
         "<td>"+
-        "<input type=\"text\" value=\"4\" />"+
+        "<textarea class=\"text\" placeholder=\"Descripción\" />"+
         "</td>");
     $new_row.append(
         "<td>"+
         "<input type=\"checkbox\" />"+
+        "</td>");
+    $new_row.append(
+        "<td>"+
+        "<textarea class=\"observ\" placeholder=\"Observaciones\" />"+
         "</td>");
     // <td>
     //     <input type="text" value="4" />
@@ -40,11 +44,13 @@ function send_listacotejo() {
     var listacotejo = [];
     $('.row').each(function(indexRow, val){
         var $thisRow = $(this);
-        var text = $thisRow.find('input[type=text]').val();
+        var text = $thisRow.find('.text').val();
+        var observ = $thisRow.find('.observ').val();
         var checked = $thisRow.find('input[type=checkbox]').is(':checked');
         var meta_index = $thisRow.attr('meta:index');
         listacotejo[indexRow] = {
             'text' : text,
+            'observ' : observ,
             'checked' : checked,
             'index' : meta_index
         };

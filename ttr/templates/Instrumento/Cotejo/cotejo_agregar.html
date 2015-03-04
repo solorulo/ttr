@@ -15,8 +15,9 @@
         <table>
             <thead>
                 <tr id="row_header">
-                    <th colspan="2">Descripción</th>
-                    <th></th>
+                    <th colspan="2">Aspecto a evaluar</th>
+                    <th>Si/No</th>
+                    <th>Observación</th>
                 </tr>
             </thead>
             <tbody id="tbody">
@@ -25,10 +26,13 @@
                         <button class="delete_row">-</button>
                     </td>
                     <td>
-                        <input type="text" value="4" />
+                        <textarea class="text" placeholder="Descripción" />
                     </td>
                     <td>
                         <input type="checkbox" />
+                    </td>
+                    <td>
+                        <textarea class="observ" placeholder="Observaciones" />
                     </td>
                 </tr>
                 <tr class="row" meta:index="2">
@@ -40,6 +44,9 @@
                     </td>
                     <td>
                         <input type="checkbox" />
+                    </td>
+                    <td>
+                        <textarea class="observ" placeholder="Observaciones" />
                     </td>
                 </tr>
             </tbody>
