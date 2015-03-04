@@ -7,7 +7,7 @@ function add_row() {
     var $new_row = $("<tr class=\"row\" meta:new=\"true\"></tr>");
 
     var $td = $('<td></td>');
-    var $button = $("<button class=\"delete_row\">-</button>").button();
+    var $button = $("<button class=\"delete_row\">-</button>");
     $button.click(function(event) {
         event.preventDefault();
         delete_row($(this));
@@ -75,5 +75,5 @@ $(document).ready(function() {
     $('#save').click(function(event) {
         send_listaobs();
     });
-    $('button').button();
+    // $('button').button();
 });
