@@ -54,7 +54,7 @@ def agregar(request):
             'index_cat' : meta_index_cat
             """
             cat_val = cat['val']
-            cat_index = cat['index_cat']
+            # cat_index = cat['index_cat']
             new_cat = CategoriaRubrica(
                 texto=cat_val,
                 rubrica_id=new_rubrica.pk

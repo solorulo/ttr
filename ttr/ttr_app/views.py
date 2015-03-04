@@ -187,7 +187,7 @@ def registrarAsignatura(request):
         return render(request, 'newAsignature.html',{'wrong_data':True})
     nombreAsignatura= request.POST.get("nombreA", None)
 
-    request.user.myuser.pk
+
     autor= request.user.myuser.pk
     academia= request.POST.get("academiaA",None)
     presidente= request.POST.get("presidenteA", None)
@@ -530,4 +530,20 @@ def editarUsuario(request):
         asignarAsignatura.asignaturas.add(int(asignatura))
 
     listaUsuarios=MyUser.objects.filter(rol=MyUser.PROFESOR)
+<<<<<<< HEAD
     return HttpResponseRedirect("/buscar")
+=======
+    return render(request,"Usuario/visualizarUsuario.html", {"usuarios": listaUsuarios})
+
+def miperfil(request):
+    if(not request.user.is_authenticated() or request.user.myuser.rol==MyUser.ADMINISTRADOR):
+        return HttpResponseRedirect("/portal")
+    else: 
+        try:
+            id_user=request.user.myuser.pk
+        except:
+            HttpResponseRedirect("/portal")
+
+    listaInstrumentos=InstrumentoEvaluacion.objects.filter(autor=id_user)
+    return render(request, 'Usuario/perfil.html',{"instrumentos":listaInstrumentos})
+>>>>>>> 7edca05706a44bb24b13fc26f0078000d4f9cd1a
