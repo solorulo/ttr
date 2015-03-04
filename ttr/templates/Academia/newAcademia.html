@@ -12,10 +12,10 @@
           
         
          <div id="contenido" align="center">
-            <form method="post" action="/academia/agregar" class="estilo_form" >
+            <form method="post" action="/academia/agregar" class="estilo_form" onsubmit="return validarFormulario();" >
                 {% csrf_token %}
                 <fieldset align="center">
-                        <legend >Nueva Academia:</legend>
+                        <legend >Nueva Academia</legend>
                         <center>
                             <table>
                                 <tr>
@@ -23,7 +23,7 @@
                                         <label for="nombreAcademia">Nombre de la Academia: </label>
                                     </td>
                                     <td>
-                                        <input type="text"  name="nombreAcademia" required>
+                                        <input type="text" id="academia" name="nombreAcademia" required>
                                     </td>
                                 </tr>
                                 <tr>
@@ -42,7 +42,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <center>
-                                            <button id="btnSubmit" type="submit" class="submit">Registrar Academia </button>
+                                            <button id="btnSubmit" type="submit" class="submit">Registrar</button>
                                         </center>
                                     </td>
                                 </tr>
@@ -54,5 +54,23 @@
     </div>
     </section>
     {% include "includes/footer.html" %}
+    <script type="text/javascript">
+        function validarFormulario(){
+            academia_val=document.getElementById("academia").value;
+            var validacion_1= /[0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\'\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/;
+            
+            if(validacion_1.test(academia_val)){
+                alert("No introduzca caracteres especiales")
+                $('#academia').empty();
+                document.getElementById("academia").focus();
+
+                return false;
+            }
+
+            alert("Academia registrada")
+            return true;
+         }
+
+    </script>
 </body>
 </html>

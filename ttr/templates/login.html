@@ -13,7 +13,7 @@
         <form method="post" class="estilo_form" >
 
 
-                {% if error %}
+            {% if error %}
             <script type="text/javascript">
                 $(document).ready(function(){
                     $.magnificPopup.open({
@@ -56,7 +56,7 @@
             {% csrf_token %}                           
                 <center>
                     <fieldset align="center">
-                            <legend >Iniciar Sesión:</legend>
+                            <legend >Iniciar Sesión</legend>
                                 <center>
                                     <table>
                                         <tr>
@@ -90,9 +90,6 @@
                                 </center>
                     </fieldset>
                 </center>
-     
-
-
 
             {% if next %}
             <input type="hidden" name="next" value="{{next}}" />
@@ -105,8 +102,8 @@
 
     <!-- DIV para recuperar CONTRASEÑA -->
     <div id="test-form" class="white-popup-block mfp-hide">
-        <form class="estilo_form">
-            
+        <form class="estilo_form" method="post" action="/usuario/recuperarcontrasena" >
+          {% csrf_token %} 
             <fieldset style="border:0; margin: 0 auto;" >
                 <center>
                     <table>

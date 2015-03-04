@@ -14,7 +14,7 @@
                     <p style="color:red;">El tiempo de tu sesión ha acabado</p>
                 {% endif %}
 
-                <form method="post" action="/asignatura/consultar/modificar"  class="modificarAsignatura">
+                <form method="post" action="/asignatura/consultar/modificar"  class="modificarAsignatura" onsubmit="return validarFormulario();">
                 {% csrf_token %}
 
                 <input type="hidden" name="id" value="{{asignatura.pk}}">
@@ -46,10 +46,28 @@
                         
                     {% endfor %}
                 </select><br>
-                <input type="submit" Value="Guardar Asignatura" id="btnRegistrarA">
+                <input type="submit" Value="Guardar Cambios" id="btnRegistrarA">
             </form>
     </div>
     </section>
     {% include "includes/footer.html" %}
+    <script type="text/javascript">
+        function validarFormulario(){
+            nombreA=document.getElementById("nombreA").value;
+            var validacion_1= /[0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\'\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/;
+            
+            if(validacion_1.test(nombreA)){
+                alert("No introduzca caracteres especiales")
+                $('#nombreA').empty();
+                document.getElementById("nombreA").focus();
+
+                return false;
+            }
+
+            alert("Los datos de la unidad de aprendizaje han sido actualizados")
+            return true;
+         }
+
+    </script>
 </body>
 </html>

@@ -9,10 +9,10 @@
 	    
 	    <section>
 		 <div id="contenido" align="center">
-		 	<form method="post" action="/usuario/consultar/modificar"  class="estilo_form" onsubmit="return validaPass();">
+		 	<form method="post" action="/usuario/consultar/modificar"  class="estilo_form" onsubmit="return validarFormulario();">
 		 		<center>
 		 		<fieldset align="center">
-   				<legend >Editar Usuario:</legend>
+   				<legend >Editar Usuario</legend>
 		 		{% csrf_token %}
 		 		<center>
 		 			<table>
@@ -22,7 +22,7 @@
 		 						<label for="username">Nombre de Usuario: </label>
 		 					</td>
 		 					<td>
-		 						<input type="text" id="username" name="username" required value="{{usuario.username}}"><br>
+		 						<input type="text" id="username" name="username" readonly value="{{usuario.username}}"><br>
 		 					</td>
 		 				</tr>
 		 				<tr>
@@ -38,7 +38,7 @@
 		 						<label for="password2">Repite tu Contraseña: </label>
 		 					</td>
 		 					<td>
-		 						<input type="password" id="password2" name="password2" >
+		 						<input type="password" id="password2" name="password2" onkeypress="no_caracteres(event);">
 		 					</td>
 		 				</tr>
 		 				<tr>
@@ -46,7 +46,7 @@
 		 						<label for="nombres">Nombre(s): </label>
 		 					</td>
 		 					<td>
-		 						<input type="text" id="nombres" name="nombres" required value="{{usuario.first_name}}"><br>
+		 						<input type="text" id="nombres" name="nombres" onkeypress="no_caracteres(event);" required value="{{usuario.first_name}}"><br>
 		 					</td>
 		 				</tr>
 		 				<tr>
@@ -54,46 +54,42 @@
 		 						<label for="aPaterno">Apellidos: </label>
 		 					</td>
 		 					<td>
-		 						<input type="text" id="apellidos" name="apellidos" required value="{{usuario.last_name}}"><br>
+		 						<input type="text" id="apellidos" name="apellidos" required value="{{usuario.last_name}}" onkeypress="no_caracteres(event);"><br>
 		 					</td>
 		 				</tr>
-		 				<tr>
-		 					<td>
-		 						<label for="asignatura">Asignatura: </label>
-		 					</td>
-		 					<td>
-						 		<select data-placeholder="Asignaturas" multiple="true" name="asignaturas">
-							 		{% for asignatura in asignaturas %}
-								 		{% if asignatura in clases  %}
-								 		<option value="{{ asignatura.pk }}" selected>{{asignatura.nombre}}</option> 
-										{% else %}
-										<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option> 
-										{% endif %}  
-									{% endfor %}
-								</select><br>
-							</td>
-						</tr>
+
 						<tr>
 							<td>
-								<label for="rol">Rol: </label>
-							</td>
-							<td>
-								<select name>
-                            	{% for key, item in ROLES_CHOICES %} 
-                            		{% ifequal usuario.rol key %}
-								 		<option value="{{ key }}" style="width:350px;" tabindex="4" name="rol" id="rol" selected>{{item}}</option>
-									{% else %}
-										<option value="{{ key }}" style="width:350px;" tabindex="4" name="rol" id="rol">{{item}}</option>
-									{% endifequal %} 
-                            	{% endfor %}
-                        		</select>
-								
+		 						<label for="rol">Rol: </label>
 		 					</td>
+		 					<td>
+		 						<input type="text" id="rol" name="rol" readonly value="{{usuario.get_rol_display}}"><br>
+		 					</td>
+														
 		 				</tr>
+		 				{% ifequal usuario.rol ROLES.DOCENTE %}
+
+			 				<tr>
+			 					<td>
+			 						<label for="asignatura">Asignatura: </label>
+			 					</td>
+			 					<td>
+							 		<select data-placeholder="Asignaturas" multiple="true" name="asignaturas">
+								 		{% for asignatura in asignaturas %}
+									 		{% if asignatura in clases  %}
+									 		<option value="{{ asignatura.pk }}" selected>{{asignatura.nombre}}</option> 
+											{% else %}
+											<option value="{{ asignatura.pk }}">{{asignatura.nombre}}</option> 
+											{% endif %}  
+										{% endfor %}
+									</select><br>
+								</td>
+							</tr>
+						{% endifequal %}
 		 				<tr>
 		 					<td colspan="2">
 		 						<center>
-		 							<button id="btnSubmit" type="submit" class="submit">Editar</button>
+		 							<button id="btnSubmit" type="submit" class="submit">Guardar Cambios</button>
 		 						</center>
 		 					</td>
 		 				</tr>
@@ -104,21 +100,122 @@
 		 	</form>
 		 </div>
 		 </section>
-		 <script type="text/javascript">
-		 function validaPass(){
-		 	pass1= document.getElementById("password").value;
-		 	pass2= document.getElementById("password2").value;
 
-		 	
-		 	if(pass1==pass2){
-		 		return true;
-		 	}
-		 	else{
-		 		alert("La contraseña no coincide")
-		 		return false;
-		 	}
-		 }
+		 <script type="text/javascript">
+
+		  function no_caracteres(){
+		 	//validar ASCII letras
+		 	if ((event.keyCode < 65) || (event.keyCode > 90) && (event.keyCode < 97) || (event.keyCode > 122)
+   		 //acentos
+   		 && event.keyCode!=193 && event.keyCode!=201 && event.keyCode!=205 && event.keyCode!=211 && event.keyCode!=218
+   		 && event.keyCode!=225 && event.keyCode!=233 && event.keyCode!=237 && event.keyCode!=243 && event.keyCode!=250)
+   		
+   		 event.returnValue = false;
+       
+   		}
+			 function validarFormulario(){
+			 	pass1= document.getElementById("password").value;
+			 	pass2= document.getElementById("password2").value;
+			 	nombres=document.getElementById("nombres").value;
+			 	apellidos=document.getElementById("apellidos").value;
+
+			 	var validacion_1= /[0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\'\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/;
+			 	
+			 	if(pass1!=pass2){
+			 		document.getElementById("password").value="";
+			 		document.getElementById("password2").value="";
+			 		document.getElementById("password").focus();
+			 		$.magnificPopup.open({
+			                        items: {
+			                            src: '<center><div id="test-form" class="white-popup-block ">\
+			                                    <form class="estilo_form">\
+			                                        <fieldset  >\
+			                                            <center>\
+			                                                <table>\
+			                                                    <tr>\
+			                                                        <td >\
+			                                                            <center><img src="/static/img/iconos/error.png"></center>\
+			                                                        </td>\
+			                                                        <td >\
+			                                                            <center>\
+			                                                                Contraseñas incorrectas\
+			                                                            </center\
+			                                                        </td>\
+			                                                    </tr>\
+			                                                    <tr>\
+			                                                        <td colspan="2">\
+			                                                            <center><button class="submit" onclick="$.magnificPopup.close(); return false;">Aceptar</button>\
+			                                                        </td>\
+			                                                    </tr>\
+			                                                </center>\
+			                                                </table>\
+			                                            </center>\
+			                                        </fieldset>\
+			                                    </form>\
+			                                </div></center>'
+			                        },
+			                        type: 'inline'
+
+			                      // You may add options here, they're exactly the same as for $.fn.magnificPopup call
+			                      // Note that some settings that rely on click event (like disableOn or midClick) will not work here
+		                    }, 0);
+			 		return false;
+			 	}
+			 	else if(validacion_1.test(nombres)){
+			 		alert("No introduzca caracteres especiales")
+			 		$('#nombres').empty();
+			 		document.getElementById("nombres").focus();
+
+			 		return false;
+			 	}else if(validacion_1.test(apellidos)){
+			 		alert("No introduzca caracteres especiales")
+			 		document.getElementById("apellidos").focus();
+			 		return false;
+			 	}
+
+			 	return true;
+			 }
 		 </script>
+	    		{% ifequal mensaje "1" %}
+		            <script type="text/javascript">
+		                $(document).ready(function(){
+		                    $.magnificPopup.open({
+		                        items: {
+		                            src: '<center><div id="test-form" class="white-popup-block ">\
+		                                    <form class="estilo_form">\
+		                                        <fieldset  >\
+		                                            <center>\
+		                                                <table>\
+		                                                    <tr>\
+		                                                        <td >\
+		                                                            <center><img src="/static/img/iconos/error.png"></center>\
+		                                                        </td>\
+		                                                        <td >\
+		                                                            <center>\
+		                                                                Los datos del usuario han sido actualizados\
+		                                                            </center\
+		                                                        </td>\
+		                                                    </tr>\
+		                                                    <tr>\
+		                                                        <td colspan="2">\
+		                                                            <center><button class="submit" onclick="$.magnificPopup.close(); return false;">Aceptar</button>\
+		                                                        </td>\
+		                                                    </tr>\
+		                                                </center>\
+		                                                </table>\
+		                                            </center>\
+		                                        </fieldset>\
+		                                    </form>\
+		                                </div></center>'
+		                        },
+		                        type: 'inline'
+
+		                      // You may add options here, they're exactly the same as for $.fn.magnificPopup call
+		                      // Note that some settings that rely on click event (like disableOn or midClick) will not work here
+		                    }, 0);
+		                });
+		            </script>
+	    		{% endifequal %}
 		{% include "includes/footer.html" %}
 	 </body>
 </html>
