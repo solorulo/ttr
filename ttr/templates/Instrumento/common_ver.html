@@ -1,31 +1,45 @@
-{% ifequal instrumento.autor user.myuser %}
-<button onclick="editarInstrumento({{instrumento.pk}}, '{{ inst_type }}');return false;">Editar</button>
+
+<label class="separar">T&iacute;tulo: {{ instrumento.titulo}}</label>
+<label class="separar">Autor: {{ instrumento.autor.get_full_name }}</label>
+<label>Unidad de aprendizaje: {{ instrumento.asignatura.nombre}}</label><br/><br/>
+
+
+<table width="40%">
+    <tr>
+        <td>
+            <button class="submit" onclick="return false;">Descargar</button>
+        </td>
+        <td>
+            <label><div id="resultrating{{instrumento.pk}}" class="rating"></div>
+                <script type="text/javascript">
+                $('#resultrating{{instrumento.pk}}').rateYo({
+                    rating : {% firstof instrumento.valoracion '0' %},
+                    {% ifequal user.pk instrumento.autor.pk %}
+                    readOnly: true,
+                    {% endifequal %}
+                });
+                </script></label>
+        </td>
+        <td>
+            <label>Oficial: 
+                <input 
+                    id="oficial" type="checkbox" 
+                    placeholder="oficial" 
+                    {% if instrumento.oficial %}checked {% endif %}
+                    {% ifnotequal instrumento.asignatura.presidente.pk user.myuser.pk %}onclick="return false;" 
+                    {% else %}onclick="saveOficial();" 
+                    {% endifnotequal %} 
+                />
+            </label>
+        </td>
+    </tr>
+</table>
 <br/>
-{% endifequal %}
-<button onclick="return false;">Descargar</button>
-<br/>
-<label>T&iacute;tulo: {{ instrumento.titulo}}</label><br/>
-<label>Autor: {{ instrumento.autor.get_full_name }}</label><br/>
-<label>Unidad de aprendizaje: {{ instrumento.asignatura.nombre}}</label><br/>
-<label><div id="resultrating{{instrumento.pk}}" class="rating"></div>
-    <script type="text/javascript">
-    $('#resultrating{{instrumento.pk}}').rateYo({
-        rating : {% firstof instrumento.valoracion '0' %},
-        {% ifequal user.pk instrumento.autor.pk %}
-        readOnly: true,
-        {% endifequal %}
-    });
-    </script></label><br/>
-<label>Oficial: 
-    <input 
-    	id="oficial" type="checkbox" 
-    	placeholder="oficial" 
-    	{% if instrumento.oficial %}checked {% endif %}
-    	{% ifnotequal instrumento.asignatura.presidente.pk user.myuser.pk %}onclick="return false;" 
-    	{% else %}onclick="saveOficial();" 
-    	{% endifnotequal %} 
-    />
-</label>
+ {% ifequal instrumento.autor user.myuser %}
+<button class="submit" onclick="editarInstrumento({{instrumento.pk}}, '{{ inst_type }}');return false;">Editar</button>
+
+{% endifequal %}   
+
     <script type="text/javascript">
     function saveOficial() {
         $.ajax({
@@ -41,4 +55,3 @@
         });
     }
     </script>
-<br/>
