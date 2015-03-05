@@ -42,6 +42,7 @@ function delete_row($obj) {
 }
 function send_listacotejo() {
     var listacotejo = [];
+    var pk_inst = $('#pk_inst').val();
     $('.row').each(function(indexRow, val){
         var $thisRow = $(this);
         var text = $thisRow.find('.text').val();
@@ -63,7 +64,10 @@ function send_listacotejo() {
         'listacotejo[]' : JSON.stringify(listacotejo),
         "csrfmiddlewaretoken": $.cookie("csrftoken")
     };
-    $.post('/instrumento/listacotejo/agregar', obj, function(data){
+    var url = (pk_inst) ? 
+        '/instrumento/listacotejo/editar?id='+pk_inst : 
+        '/instrumento/listacotejo/agregar';
+    $.post(url, obj, function(data){
         if (data == "true")
             window.location.href = "/index";
     });

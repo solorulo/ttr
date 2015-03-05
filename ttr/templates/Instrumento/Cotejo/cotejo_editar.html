@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    {% include "includes/head.html" with title="Registrar lista de cotejo" %}
+    {% include "includes/head.html" with title="Editar lista de cotejo" %}
     <link rel="stylesheet" href="/static/chosen/chosen.css"/>
     <link rel="stylesheet" href="/static/rateyo/jquery.rateyo.css"/>
     <link rel="stylesheet" href="/static/css/estilos_rubrica.css"/>
@@ -15,8 +15,8 @@
     {% include "includes/header.html" %}
     <section>
         <fieldset>
-        <legend align="center">Nueva Lista de Cotejo</legend>
-                {% include "Instrumento/common_agregar.html" %}
+        <legend align="center">Lista de Cotejo</legend>
+                {% include "Instrumento/common_editar.html" %}
                 <br><br>
                 <button id="add_row" class="submit">Agregar fila</button>
                 <br><br>
@@ -29,34 +29,22 @@
                         </tr>
                     </thead>
                     <tbody id="tbody">
-                        <tr class="row" meta:index="1">
+                        {% for ind in indicadores %}
+                        <tr class="row" meta:index="{{ind.pk}}">
                             <td>
                                 <button class="delete_row submit">-</button>
                             </td>
                             <td>
-                                <textarea class="text" placeholder="Descripción" ></textarea>
+                                <textarea class="text" placeholder="Descripción" >{{ ind.texto}}</textarea>
                             </td>
                             <td class="checkbox_center">
-                                <input type="checkbox" class="checkbox_center" />
+                                <input type="checkbox" class="checkbox_center" {%if ind.check %}checked {% endif %}/>
                             </td>
                             <td>
-                                <textarea class="observ" placeholder="Observaciones" ></textarea>
+                                <textarea class="observ" placeholder="Observaciones" >{{ ind.observaciones }}</textarea>
                             </td>
                         </tr>
-                        <tr class="row" meta:index="2">
-                            <td>
-                                <button class="delete_row submit">-</button>
-                            </td>
-                            <td>
-                                <textarea class="text" placeholder="Descripción" ></textarea>
-                            </td>
-                            <td class="checkbox_center">
-                                <input type="checkbox" />
-                            </td>
-                            <td>
-                                <textarea class="observ" placeholder="Observaciones" ></textarea>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
                 <br/>
