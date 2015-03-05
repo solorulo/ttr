@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% include "includes/head.html" with title="Editar guía de observación" %}
+    <link rel="stylesheet" href="/static/chosen/chosen.css"/>
+    <link rel="stylesheet" href="/static/rateyo/jquery.rateyo.css"/>
+    <link rel="stylesheet" href="/static/css/estilos_rubrica.css"/>
+    <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="/static/rateyo/jquery.rateyo.js"></script>
+    <script type="text/javascript">
+    var ind_choices = [];
+    {% for key, item in ind_choices %} 
+    ind_choices[{{ key }}] = "{{item}}";
+    {% endfor %}
+    </script>
+</head>
+
+<body>
+    {% csrf_token %}
+    {% include "includes/header.html" %}
+    <section>
+        <fieldset>
+        <legend align="center">Guía de Observación</legend>
+            {% include "Instrumento/common_editar.html" %}
+            <br><br>
+            <button id="add_row" class="submit">Agregar fila</button>
+            <br><br>
+            <table id="contenedor_instrumento">
+                <thead>
+                    <tr id="row_header">
+                        <th colspan="2">Descripción</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                    {% for ind in indicadores %}
+                    <tr class="row" meta:index="{{ind.pk}}">
+                        <td>
+                            <button class="delete_row submit">-</button>
+                        </td>
+                        <td>
+                            <textarea class="text" placeholder="Descripción..." >{{ ind.texto }}</textarea>
+                        </td>
+                        <td>
+                            <select>
+                                {% for key, item in ind_choices %} 
+                                {% ifequal ind.valor key %}
+                                <option value="{{ key }}" selected>{{item}}</option>
+                                {% else %}
+                                <option value="{{ key }}">{{item}}</option> 
+                                {% endifequal %} 
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br/>
+            <button id="save" class="submit">Guardar</button>
+    </section>
+
+    <script type="text/javascript" src="/static/js/FuncionesObservacion.js"></script>
+    <script type="text/javascript" src="/static/chosen/chosen.jquery.js"></script>
+    {% include "includes/footer.html" %}
+</body>
+
+</html>

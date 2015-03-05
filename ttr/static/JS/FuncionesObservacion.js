@@ -40,6 +40,7 @@ function delete_row($obj) {
 }
 function send_listaobs() {
     var listaobs = [];
+    var pk_inst = $('#pk_inst').val();
     $('.row').each(function(indexRow, val){
         var $thisRow = $(this);
         var text = $thisRow.find('.text').val();
@@ -59,7 +60,10 @@ function send_listaobs() {
         'listaobs[]' : JSON.stringify(listaobs),
         "csrfmiddlewaretoken": $.cookie("csrftoken")
     };
-    $.post('/instrumento/listaobs/agregar', obj, function(data){
+    var url = (pk_inst) ? 
+        '/instrumento/listaobs/editar?id='+pk_inst : 
+        '/instrumento/listaobs/agregar';
+    $.post(url, obj, function(data){
         if (data == "true")
             window.location.href = "/index";
     });

@@ -1,0 +1,46 @@
+<div id="inst_head">
+    <input id="pk_inst" type="hidden" value="{{ instrumento.pk }}" />
+	<label>Título </label>
+	<input id="titulo" type="text" placeholder="titulo" value="{{ instrumento.titulo }}" />
+	<label>Privacidad</label>
+    <select data-placeholder="Nivel de privacidad" id="level_show" >
+        {% for key,value in PRIVACIDAD_CHOICES %}
+        {% ifequal instrumento.level_show key %}
+        <option value="{{ key }}" selected>{{ value }}</option> 
+        {% else %}
+        <option value="{{ key }}">{{ value }}</option> 
+        {% endifequal %}   
+        {% endfor %}
+    </select>
+
+    <br><br>
+	<!-- <label>Autor </label>
+	<input id="autor" type="text" placeholder="autor" />
+	<br/> -->
+	<label>Unidad de aprendizaje </label>
+	<!-- <input id="asignatura" type="text" placeholder="unidad de apredizaje" /> -->
+	<select data-placeholder="Unidad de aprendizaje" id="asignatura" >
+	    <option>--</option>
+	    {% for sign in ASIGNATURAS %}
+	     
+
+        {% ifequal instrumento.asignatura sign %}
+        <option value="{{ sign.pk }}" selected>{{sign.nombre}}</option>  
+        {% else %}
+        <option value="{{ sign.pk }}">{{sign.nombre}}</option>  
+        {% endifequal %} 
+
+	    {% endfor %}
+	</select>
+
+	
+	<!-- <label>Oficial </label>
+	<input id="oficial" type="checkbox" placeholder="oficial" />
+	<br/> -->
+	<!-- <label><div class="rating"></div>
+	<script type="text/javascript">
+	$('.rating').rateYo({
+		rating : 0
+	});
+	</script></label><br/> -->
+</div>

@@ -14,8 +14,6 @@
     {% include "includes/header.html" %}
     <section>
         {% include "Instrumento/common_ver.html" with inst_type="listaobs" %}
-        <!-- <button id="add_row">Agregar fila</button>
-        <button id="add_column">Agregar columna</button> -->
         <table>
             <thead>
                 <tr id="row_header">
@@ -24,20 +22,6 @@
                 </tr>
             </thead>
             <tbody id="tbody">
-                <!--
-
-                <tr class="row" meta:index="1">
-                    <td>
-                        <button class="delete_row">-</button>
-                    </td>
-                    <td>
-                        <input type="text" value="4" />
-                    </td>
-                    <td>
-                        <input type="checkbox" />
-                    </td>
-                </tr>
-                 -->
                 {% for ind in indicadores %}
                 <tr class="row" meta:index="{{ind.pk}}">
                     <td>
@@ -46,9 +30,7 @@
                         {{ ind.texto }}
                     </td>
                     <td>
-
                         {{ ind.get_valor_display }}
-
                     </td>
                 </tr>
                 {% endfor %}

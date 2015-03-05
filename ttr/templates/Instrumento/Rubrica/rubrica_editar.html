@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% include "includes/head.html" with title="Editar Rúbrica" %}
+    <link rel="stylesheet" href="/static/chosen/chosen.css"/>
+    <link rel="stylesheet" href="/static/rateyo/jquery.rateyo.css"/>
+    <link rel="stylesheet" href="/static/css/estilos_rubrica.css"/>
+    <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="/static/rateyo/jquery.rateyo.js"></script>
+</head>
+
+<body>
+    {% csrf_token %}
+    {% include "includes/header.html" %}
+    <section>
+        <fieldset>
+        <legend align="center">Rúbrica</legend>
+            {% include "Instrumento/common_editar.html" %}
+            <div id="botones">
+                <button class="submit" id="add_row">Agregar fila</button>
+                <button class="submit" id="add_column">Agregar columna</button>
+            </div> 
+            <div id="contenedor_table">   
+                <table id="contenedor_instrumento">
+                    <thead>
+                        <tr id="row_header">
+                            <th>Aspectos a evaluar</th>
+
+                            {% for pod in pod_vals %}
+                            <th class="column" meta:index="{{pod.pk}}">
+                                <button class="delete_column submit">-</button>
+                                <br/>
+                                <textarea class="text column_titulo" placeholder="Columna" >{{pod.valor}}</textarea>
+                            </th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        {% for cat in cats %}
+                        <tr class="row" meta:index="{{cat.pk}}">
+                            <td>
+                                <button class="delete_row submit" meta:index="1">-</button>
+                                <textarea class="cat" placeholder="Categoría" >{{cat.texto}}</textarea>
+                            </td>
+                            {% for pod_val in pods %}
+                            {% ifequal pod_val.categoria.pk cat.pk%}
+                            <td class="column_val">
+                                <textarea class="text column_desc" placeholder="Descripción" >{{pod_val.descripcion}}</textarea>
+                            </td>
+                            {% endifequal %}
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+            <div id="contenedor_save" >
+                <button id="save" class="submit">Guardar</button>
+            </div>
+        </fieldset>  
+        
+    </section>
+
+    <script type="text/javascript" src="/static/js/FuncionesRubrica.js"></script>
+    <script type="text/javascript" src="/static/chosen/chosen.jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#asignatura').chosen();
+        $('#level_show').chosen();
+    });
+    {% include "includes/footer.html" %}
+</body>
+
+</html>

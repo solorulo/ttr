@@ -1,6 +1,11 @@
 {% ifequal instrumento.autor user.myuser %}
 <button onclick="editarInstrumento({{instrumento.pk}}, '{{ inst_type }}');return false;">Editar</button>
 <br/>
+<script type="text/javascript">
+    function editarInstrumento(pk, inst_type) {
+        window.location.href = "/instrumento/" + inst_type + "/editar?id="+pk;
+    }
+</script>
 {% endifequal %}
 <button onclick="return false;">Descargar</button>
 <br/>

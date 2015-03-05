@@ -77,6 +77,7 @@ function send_rubrica() {
     var ponderaciones_vals = [];
     var categorias = [];
     var ponderaciones = [];
+    var pk_inst = $('#pk_inst').val();
     $('.column').each(function(indexPondVal, val){
         var meta_index = $(this).attr('meta:index');
         var meta_new = $(this).attr('meta:new');
@@ -115,7 +116,10 @@ function send_rubrica() {
         'pods[]' : JSON.stringify(ponderaciones),
         "csrfmiddlewaretoken": $.cookie("csrftoken")
     };
-    $.post('/instrumento/rubrica/agregar', obj, function(data){
+    var url = (pk_inst) ? 
+        '/instrumento/rubrica/editar?id='+pk_inst : 
+        '/instrumento/rubrica/agregar';
+    $.post(url, obj, function(data){
         if (data == "true")
             window.location.href = "/index";
     });
