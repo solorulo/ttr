@@ -9,14 +9,14 @@
     
     <section>
    
-            <form method="post" action="/departamento/agregar" class="estilo_form" >
+            <form method="post" action="/departamento/agregar" onsubmit="return validarFormulario();" class="estilo_form" >
             {% csrf_token %}
             {% if wrong_data %}
             <p style="color:red;">El tiempo de tu sesión ha acabado</p>
             {% endif %}
                 <center>
                     <fieldset align="center">
-                        <legend >Registro de Departamento:</legend>
+                        <legend >Registro de Departamento</legend>
                             <div id="contenido" align="center">
                                 <table>
                                     <tr>
@@ -25,12 +25,12 @@
                                             <label for="nombreDepartamento">Nombre del Departamento: </label>
                                         </td>
                                         <td>
-                                            <input type="text"  name="nombreDepartamento" required>
+                                            <input type="text" id="depto" name="nombreDepartamento" required>
                                         </td>
                                     <tr>
                                         <td colspan="2" height="20" style="height: 40px; ">
                                             <center>
-                                                <button id="btnSubmit" type="submit" class="submit">Registrar Departamento</button>
+                                                <button id="btnSubmit" type="submit" class="submit">Registrar</button>
                                             <center>
                                         </td>
                                     </tr>
@@ -41,5 +41,23 @@
             </form>
     </section>
     {% include "includes/footer.html" %}
+    <script type="text/javascript">
+        function validarFormulario(){
+            depto=document.getElementById("depto").value;
+            var validacion_1= /[0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\'\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/;
+            
+            if(validacion_1.test(depto)){
+                alert("No introduzca caracteres especiales")
+                $('#depto').empty();
+                document.getElementById("depto").focus();
+
+                return false;
+            }
+
+            alert("Departamento registrado")
+            return true;
+         }
+
+    </script>
 </body>
 </html>

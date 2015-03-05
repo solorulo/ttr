@@ -1,0 +1,39 @@
+#inst_head{
+	text-align: -webkit-center;
+}
+#titulo{
+	margin-right: 50px;
+	margin-top: 25px;
+}#label_privacidad{
+	margin-left: 50px;
+}
+#botones{
+	text-align: -webkit-center;
+	margin-top: 20px;
+}
+#contenedor_table{
+
+	text-align: -webkit-center;
+	margin-top: 30px;
+}
+#contenedor_save{
+	text-align: -webkit-center;
+}
+#contenedor_instrumento{
+	background: #EDEDED;
+	border-radius: 10px;
+	padding-right: 10px;
+}
+.column_desc{
+	width: 95%;
+}
+.column_titulo{
+	width: 95%;
+}
+textarea{
+	border-radius: 5px;	
+}
+section{	
+	text-align: -webkit-center;
+	margin-top: 20px;
+}

@@ -5,6 +5,7 @@
     {% include "includes/head.html" with title="Registrar Rúbrica" %}
     <link rel="stylesheet" href="/static/chosen/chosen.css"/>
     <link rel="stylesheet" href="/static/rateyo/jquery.rateyo.css"/>
+    <link rel="stylesheet" href="/static/css/estilos_rubrica.css"/>
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="/static/rateyo/jquery.rateyo.js"></script>
 </head>
@@ -13,56 +14,65 @@
     {% csrf_token %}
     {% include "includes/header.html" %}
     <section>
-        {% include "Instrumento/common_agregar.html" %}
-        <button id="add_row">Agregar fila</button>
-        <button id="add_column">Agregar columna</button>
-        <table>
-            <thead>
-                <tr id="row_header">
-                    <th>Categoría</th>
-                    <th class="column" meta:index="1">
-                        <button class="delete_column">-</button>
-                        <br/>
-                        <input type="text" value="4" />
+        <fieldset>
+        <legend align="center">Nueva Rúbrica</legend>
+            {% include "Instrumento/common_agregar.html" %}
+            <div id="botones">
+                <button class="submit" id="add_row">Agregar fila</button>
+                <button class="submit" id="add_column">Agregar columna</button>
+            </div> 
+            <div id="contenedor_table">   
+                <table id="contenedor_instrumento">
+                    <thead>
+                        <tr id="row_header">
+                            <th>Categoría</th>
+                            <th class="column" meta:index="1">
+                                <button class="delete_column submit">-</button>
+                                <br/>
+                                <textarea class="text column_titulo" placeholder="Columna" ></textarea>
 
-                    </th>
-                    <th class="column" meta:index="2">
-                        <button class="delete_column">-</button>
-                        <br/>
-                        <input type="text" value="4" />
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="tbody">
-                <tr class="row" meta:index="1">
-                    <td>
-                        <button class="delete_row" meta:index="1">-</button>
-                        <input class="cat" type="text" />
-                    </td>
-                    <td class="column_val">
-                        <input type="text" value="4" />
-                    </td>
-                    <td class="column_val">
-                        <input type="text" value="4" />
-                    </td>
-                </tr>
-                <tr class="row" meta:index="2">
-                    <td>
-                        <button class="delete_row" meta:index="2">-</button>
-                        <input class="cat" type="text" />
-                    </td>
-                    <td class="column_val">
-                        <input type="text" value="4" />
-                    </td>
-                    <td class="column_val">
-                        <input type="text" value="4" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <br/>
-        <button id="save">Guardar</button>
-        
+                            </th>
+                            <th class="column" meta:index="2">
+                                <button class="delete_column submit">-</button>
+                                <br/>
+                                <textarea class="text column_titulo" placeholder="Columna" ></textarea>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <tr class="row" meta:index="1">
+                            <td>
+                                <button class="delete_row submit" meta:index="1">-</button>
+                                <textarea class="cat" placeholder="Categoría" ></textarea>
+                            </td>
+                            <td class="column_val">
+                                <textarea class="text column_desc" placeholder="Descripción" ></textarea>
+                            </td>
+                            <td class="column_val">
+                                <textarea class="text column_desc" placeholder="Descripción" ></textarea>
+                            </td>
+                        </tr>
+                        <tr class="row" meta:index="2">
+                            <td>
+                                <button class="delete_row submit" meta:index="2">-</button>
+                                <textarea class="cat" placeholder="Categoría" ></textarea>
+                            </td>
+                            <td class="column_val">
+                                <textarea class="text column_desc" placeholder="Descripción" ></textarea>
+                            </td>
+                            <td class="column_val">
+                                <textarea class="text column_desc" placeholder="Descripción" ></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+            <div id="contenedor_save" >
+                <button id="save" class="submit">Guardar</button>
+            </div>
+        </fieldset>    
+
     </section>
 
     <script type="text/javascript" src="/static/js/FuncionesRubrica.js"></script>

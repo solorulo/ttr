@@ -7,7 +7,7 @@ function add_row() {
     var $new_row = $("<tr class=\"row\" meta:new=\"true\"></tr>");
 
     var $td = $('<td></td>');
-    var $button = $("<button class=\"delete_row\">-</button>").button();
+    var $button = $("<button class=\"delete_row\">-</button>");
     $button.click(function(event) {
         event.preventDefault();
         delete_row($(this));
@@ -18,11 +18,15 @@ function add_row() {
     $new_row.append($td);
     $new_row.append(
         "<td>"+
-        "<input type=\"text\" value=\"4\" />"+
+        "<textarea class=\"text\" placeholder=\"Descripción\" ></textarea>"+
         "</td>");
     $new_row.append(
         "<td>"+
         "<input type=\"checkbox\" />"+
+        "</td>");
+    $new_row.append(
+        "<td>"+
+        "<textarea class=\"observ\" placeholder=\"Observaciones\" ></textarea>"+
         "</td>");
     // <td>
     //     <input type="text" value="4" />
@@ -40,11 +44,13 @@ function send_listacotejo() {
     var listacotejo = [];
     $('.row').each(function(indexRow, val){
         var $thisRow = $(this);
-        var text = $thisRow.find('input[type=text]').val();
+        var text = $thisRow.find('.text').val();
+        var observ = $thisRow.find('.observ').val();
         var checked = $thisRow.find('input[type=checkbox]').is(':checked');
         var meta_index = $thisRow.attr('meta:index');
         listacotejo[indexRow] = {
             'text' : text,
+            'observ' : observ,
             'checked' : checked,
             'index' : meta_index
         };
@@ -74,5 +80,5 @@ $(document).ready(function() {
     $('#save').click(function(event) {
         send_listacotejo();
     });
-    $('button').button();
+    // $('button').button();
 });

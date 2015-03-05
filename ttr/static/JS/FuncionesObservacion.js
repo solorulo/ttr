@@ -7,7 +7,7 @@ function add_row() {
     var $new_row = $("<tr class=\"row\" meta:new=\"true\"></tr>");
 
     var $td = $('<td></td>');
-    var $button = $("<button class=\"delete_row\">-</button>").button();
+    var $button = $("<button class=\"delete_row\">-</button>");
     $button.click(function(event) {
         event.preventDefault();
         delete_row($(this));
@@ -18,7 +18,7 @@ function add_row() {
     $new_row.append($td);
     $new_row.append(
         "<td>"+
-        "<input type=\"text\" value=\"4\" />"+
+        "<textarea class=\"text\" placeholder=\"Descripción ...\" ></textarea>"+
         "</td>");
 
     $new_select = $("<select></select>");
@@ -41,7 +41,7 @@ function send_listaobs() {
     var listaobs = [];
     $('.row').each(function(indexRow, val){
         var $thisRow = $(this);
-        var text = $thisRow.find('input[type=text]').val();
+        var text = $thisRow.find('.text').val();
         var value = $thisRow.find('select').val();
         var meta_index = $thisRow.attr('meta:index');
         listaobs[indexRow] = {
@@ -75,5 +75,5 @@ $(document).ready(function() {
     $('#save').click(function(event) {
         send_listaobs();
     });
-    $('button').button();
+    // $('button').button();
 });

@@ -32,7 +32,7 @@ class MyUser(User):
 	PROFESOR = 3
 	TIPO_CHOICES = (
 		(ADMINISTRADOR, "Administrador"),
-		(PROFESOR, "Profesor"),
+		(PROFESOR, "Docente"),
 		# (SUPER_ADMIN, "Super Administrador"),
 	)
 	rol = models.IntegerField(choices=TIPO_CHOICES, default=PROFESOR)
@@ -81,13 +81,14 @@ class InstrumentoEvaluacion(models.Model):
 	PLANTEL = 1
 	PERSONAL = 2
 	TIPO_CHOICES = (
-		(INSTITUCIONAL, "Institucional"),
-		(PLANTEL, "Plantel"),
 		(PERSONAL, "Personal"),
+		(PLANTEL, "Plantel"),
+		(INSTITUCIONAL, "Institucional"),
 	)
 	level_show = models.IntegerField(choices=TIPO_CHOICES, default=PLANTEL)
 
 	titulo = models.CharField(max_length=60, null=True, blank=True)
+	descripcion = models.CharField(max_length=65535, null=True, blank=True)
 	fecha_creacion = models.DateTimeField(auto_now_add=True)
 	autor = models.ForeignKey(MyUser, related_name="instrumento_autor")
 	asignatura = models.ForeignKey(Asignatura, null=True, blank=True)
@@ -102,14 +103,14 @@ class Rubrica (InstrumentoEvaluacion):
 	pass
 
 class CategoriaRubrica (models.Model):
-	texto = models.CharField(max_length=60, null=True, blank=True)
+	texto = models.CharField(max_length=65535, null=True, blank=True)
 	rubrica = models.ForeignKey(Rubrica)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.texto
 
 class PonderacionRubrica (models.Model):
-	valor = models.IntegerField()
+	valor = models.CharField(max_length=65535, null=True, blank=True)
 	rubrica = models.ForeignKey(Rubrica)
 
 	def __unicode__(self):              # __unicode__ on Python 2
@@ -131,7 +132,8 @@ class ListaCotejo (InstrumentoEvaluacion):
 class IndicadorCotejo(models.Model):
 	listacotejo = models.ForeignKey(ListaCotejo)
 	texto = models.CharField(max_length=60, null=True, blank=True)
-	check = models.BooleanField(default=False) #definir valor maximo y minimo #valor hecho, no realizado, pendiente
+	check = models.BooleanField(default=False) 
+	observaciones = models.CharField(max_length=65535, null=True, blank=True)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.texto

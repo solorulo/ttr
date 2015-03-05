@@ -22,20 +22,47 @@
             </div>
             <div id="search_content" class="contenedor_table">
                 <form id="form_data">
+                    <input id="type" name="type" type="hidden" value="{{ type_search }}" />
+                    {% ifnotequal type_search 'instrumento' %}
                     <input id="pk" type="hidden" value="{{ pk }}" />
                     <input id="name" type="hidden" value="{{ name }}" />
+                    {% endifnotequal %}
                 </form>
                 <table>
                     <thead>
                         <tr>
-                            <th colspan="1">Nombre: {{ name }}</th>
+                            <th colspan="1">
+                                {% ifnotequal type_search 'instrumento' %}
+                                Nombre: {{ name }}
+                                {% else %}
+                                <input id="name" name="query" type="text" value="{{ name }}" form="form_data"/>
+                                {% endifnotequal %}
+                            </th>
+                            {% ifequal type_search 'instrumento' %}
+                            <th>
+                                <select id="type_inst" name="type_inst" form="form_data">
+                                    {% for rtypeorder in TYPESINST %}
+                                    <option value="{{ rtypeorder.type }}" {% ifequal type_inst rtypeorder.type %}selected{% endifequal %}>{{ rtypeorder.text }}</option>
+                                    {% endfor%}
+                                </select>
+                            </th>
                             <th colspan="3">
+                            {% else %}
+                            <th colspan="4">
+                            {% endifequal%}
                                 <label>Oficiales:</label>
                                 <input id="oficial" name="oficial" form="form_data" type="checkbox" {% if oficial %} checked{% endif %} />
                                 <label>Ordenar por:</label>
                                 <select id="order" name="order" form="form_data">
                                     {% for rtypeorder in TYPESORDER %}
                                         <option value="{{ rtypeorder.type }}" {% ifequal typeq rtypeorder.type %}selected{% endifequal %}>{{ rtypeorder.text }}</option>
+                                    {% endfor%}
+                                </select>
+                            </th>
+                            <th>
+                                <select id="level_show" name="level_show" form="form_data">
+                                    {% for key, value in TYPESSHOW %}
+                                    <option value="{{ key }}" {% ifequal level_show key %}selected{% endifequal %}>{{ value }}</option>
                                     {% endfor%}
                                 </select>
                             </th>
@@ -63,7 +90,7 @@
                             <td>{{ result.titulo }}</td>
                             <td>
                                 {% if result.rubrica %}Rúbrica{% endif %}
-                                {% if result.listacotejo %}Lista de contejo{% endif %}
+                                {% if result.listacotejo %}Lista de cotejo{% endif %}
                                 {% if result.listaobservacion %}Guía de observación{% endif %}
                             </td>
                             <td class="td_boton"><button  onclick="showInstrumento(&quot;{{ url_inst }}&quot;, {{result.pk}});">Consultar</button></td>

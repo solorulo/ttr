@@ -22,17 +22,17 @@ function add_row() {
     var $new_row = $("<tr class=\"row\" meta:new=\"true\"></tr>");
 
     var $td = $('<td></td>');
-    var $button = $("<button class=\"delete_row\">-</button>").button();
+    var $button = $("<button class=\"delete_row\">-</button>");
     $button.click(function(event) {
         event.preventDefault();
         delete_row($(this));
     });
     $td.append($button);
-    $td.append("<input class=\"cat\" type=\"text\"/ placeholder=\"Categoría\">");
+    $td.append("<textarea class=\"cat\" placeholder=\"Categoría\" ></textarea>");
 
     $new_row.append($td);
     $('.column').each(function(idx, val){
-        $new_row.append("<td class=\"column_val\" ><input type=\"text\" value=\"4\" /></td>");
+        $new_row.append("<td class=\"column_val\" ><textarea class=\"text column_desc\" placeholder=\"Descripción ...\"></textarea></td>");
     });
     $tbody.append($new_row);
     update_buttons();
@@ -43,18 +43,18 @@ function add_column(){
     }
     var $tbody = $('#tbody');
     var $new_colh = $('<th class=\"column\" meta:new=\"true\"></th>');
-    var $bt_delete_column = $("<button class=\"delete_column\">-</button>").button();
+    var $bt_delete_column = $("<button class=\"delete_column\">-</button>");
     $bt_delete_column.click(function(event) {
         event.preventDefault();
         delete_column($(this));
     });
     $new_colh.append($bt_delete_column);
-    $new_colh.append("<br/><input type=\"text\" value=\"4\" />");
+    $new_colh.append("<br/><textarea class=\"text column_titulo\" placeholder=\"Columna\"></textarea>");
     
     $('#row_header').append($new_colh);
     $('.row').each(function(idx, val){
         var $td = $('<td class=\"column_val\" meta:new=\"true\"></td>');
-        $td.append("<input type=\"text\" value=\"4\" />");
+        $td.append("<textarea class=\"text column_titulo\" placeholder=\"Descripción ...\"></textarea>");
         $(this).append($td);
     });
     update_buttons();
@@ -80,7 +80,7 @@ function send_rubrica() {
     $('.column').each(function(indexPondVal, val){
         var meta_index = $(this).attr('meta:index');
         var meta_new = $(this).attr('meta:new');
-        var input_text = $(this).children('input[type=text]').val();
+        var input_text = $(this).children('.text').val();
         ponderaciones_vals[indexPondVal] = {
             'index_pod' : meta_index,
             'meta_new' : meta_new,
@@ -97,7 +97,7 @@ function send_rubrica() {
         };
 
         $thisRow.children('.column_val').each(function(indexPond, val){
-            var val = $(this).children('input[type=text]').val();
+            var val = $(this).children('.text').val();
             ponderaciones.push ({
                 'index' : indexPond,
                 'cat' : indexRow,
@@ -140,5 +140,5 @@ $(document).ready(function() {
     $('#save').click(function(event) {
         send_rubrica();
     });
-    $('button').button();
+    // $('button').button();
 });
