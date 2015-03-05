@@ -103,8 +103,8 @@
                         <tr>
                             <td colspan="2">
                                 <br>
-                                <center><button id="btnSubmit" type="submit" class="submit" onclick="nuevoI();">Continuar </button>&nbsp;
-                                <button type="submit" class="submit" onclick="$.magnificPopup.close();">Cancelar</button>
+                                <center><button id="btnSubmit" type="submit" class="submit" onclick="nuevoI();return false;">Continuar </button>&nbsp;
+                                <button type="submit" class="submit" onclick="$.magnificPopup.close();return false;">Cancelar</button>
                             </center>
                             </td>
                         </tr>
@@ -115,7 +115,11 @@
         </div>
 
 
-
+<style type="text/css">
+    .chosen-container.chosen-container-single {
+        width: 300px !important; /* or any value that fits your needs */
+    }
+</style>
 
 <script type="text/javascript">
     function nuevoI(){
@@ -125,18 +129,15 @@
 
         console.log(selectIndex);
 
-           if(selectIndex==0)
-                //window.location.href="/instrumento/rubrica/agregar/";
-                window.location.assign("/instrumento/rubrica/agregar");
-                
-                
-            else if(selectIndex==1)
-               window.location.assign="/instrumento/listacotejo/agregar/";
-
-                
-                
-            else if(selectIndex==2)
-                window.location.assign="/instrumento/listaobs/agregar/";
+            if(selectIndex==0){
+                window.location.href="/instrumento/rubrica/agregar/";
+            } 
+            else if(selectIndex==1) {
+                window.location.href="/instrumento/listacotejo/agregar/";
+            }
+            else if(selectIndex==2) {
+                window.location.href="/instrumento/listaobs/agregar/";
+            }
             
     }
 

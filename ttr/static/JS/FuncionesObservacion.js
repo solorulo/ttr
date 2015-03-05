@@ -32,6 +32,7 @@ function add_row() {
     $new_td.append($new_select);
     $new_row.append($new_td);
     $tbody.append($new_row);
+    $new_select.chosen();
 }
 function delete_row($obj) {
     var parentRow = $obj.parent().parent();

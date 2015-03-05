@@ -14,7 +14,7 @@
     {% include "includes/header.html" %}
     <section class="">
         <fieldset class="">
-        <legend>Intrumentos de Evaluación</legend>
+        <legend>Instrumentos de Evaluación</legend>
             <div>
                 <form>
                 {#{% csrf_token %}#}
@@ -85,6 +85,9 @@
                             <td><button>Eliminar</button></td>
                         </tr>
                         -->
+                        {% if not results%}
+                        <tr><td colspan="6">No hay resultados</td></tr>
+                        {% endif%}
                         {% for result in results %}
                         <tr>
                             <td>{{ result.titulo }}</td>
@@ -119,16 +122,16 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function(event) {
-            $('#oficial').click(function(event) {
-                event.preventDefault();
-                var isoficial = $('#oficial').is(':checked').toString();
-                var order = $('#order').val();
-                window.location.href = 
-                    "./mostrar?oficial=" + isoficial + 
-                    "&order=" + order +
-                    "&id=" + "{{idx|urlencode}}" +
-                    "&type=" + "{{type_search|urlencode}}";
-            });
+            // $('#oficial').click(function(event) {
+            //     event.preventDefault();
+            //     var isoficial = $('#oficial').is(':checked').toString();
+            //     var order = $('#order').val();
+            //     window.location.href = 
+            //         "./mostrar?oficial=" + isoficial + 
+            //         "&order=" + order +
+            //         "&id=" + "{{idx|urlencode}}" +
+            //         "&type=" + "{{type_search|urlencode}}";
+            // });
         });
     </script>
     {% include "includes/footer.html" %}
