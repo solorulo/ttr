@@ -23,6 +23,12 @@
             </select>
 
 	<br/>
+    <label>Privacidad</label>
+    <select name="level_show" data-placeholder="Nivel de privacidad" id="level_show" >
+        {% for key,value in PRIVACIDAD_CHOICES %}
+        <option value="{{ key }}">{{ value }}</option>    
+        {% endfor %}
+    </select>
 	<!-- <label>Oficial </label>
 	<input id="oficial" type="checkbox" placeholder="oficial" />
 	<br/> -->
