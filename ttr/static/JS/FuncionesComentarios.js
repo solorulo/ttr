@@ -23,7 +23,7 @@ function load_comments(data) {
         var user = obj.user;
         $('#comments_section').append(
             "<article class='comment'>" +
-            "<div><b>" + user.full_name + "</b></div>" +
+            "<div id='name_comentario'><b>" + user.full_name + "</b></div>" +
             "<div>" + texto + "</div>" +
             "</article>"
         );

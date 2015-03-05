@@ -98,6 +98,13 @@ def login(request):
             id_plantel=request.user.myuser.plantel.pk
         except:
             pass
+    if(request.user.is_authenticated()):
+        if(request.user.myuser.rol == MyUser.ADMINISTRADOR):
+            return render(request, 'index.html')
+    if(request.user.is_authenticated()):
+        if(request.user.myuser.rol == MyUser.PROFESOR):
+            return render(request,'index.html')
+
     if (request.method == 'GET' or 
         not 'username' in request.POST or 
         not 'password' in request.POST):
@@ -592,3 +599,12 @@ def cambiarPrivacidad(request):
     }
     return HttpResponse (json.dumps(respuesta), mimetype='application/json')
 
+def estadisticas(request):
+    if(not request.user.is_authenticated() or request.user.myuser.rol==MyUser.PROFESOR):
+        return HttpResponseRedirect("/portal")
+    else: 
+        try:
+            id_user=request.user.myuser.pk
+        except:
+            return HttpResponseRedirect("/portal")
+    return render(request, "Estadisticas/estadisticas.html")

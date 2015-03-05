@@ -54,26 +54,26 @@
                         <tr>
                             <td>{{ result.nombre }}</td>
                             {% ifequal typeq 'instrumento' %}
-                                <td>{{ result.type }}</td>
-                                <td>
-                                    <div id="resultrating{{result.pk}}" class=".rating"></div>
-                                    <script type="text/javascript">
-                                    $('#resultrating{{result.pk}}').rateYo({
-                                        rating : {% firstof result.valoracion '0' %},
-                                        readOnly: true,
-                                    });
-                                    </script>
-                                </td>
-                                <td class="td_boton">
-                                <button onclick="return false;" class="submit">Descargar</button>
-                                </td>
-                                <td class="td_boton"> 
-                                <button onclick="showResult(&quot;{{ result.url_search }}&quot;, {{result.pk}}, &quot;{{ typeq|urlencode }}&quot;);" class="submit">Consultar</button>
-                                </td>
+                            <td>{{ result.type }}</td>
+                            <td>
+                                <div id="resultrating{{result.pk}}" class=".rating"></div>
+                                <script type="text/javascript">
+                                $('#resultrating{{result.pk}}').rateYo({
+                                    rating : {% firstof result.valoracion '0' %},
+                                    readOnly: true,
+                                });
+                                </script>
+                            </td>
+                            <td class="td_boton">
+                            <button onclick="return false;" class="submit">Descargar</button>
+                            </td>
+                            <td class="td_boton"> 
+                            <button onclick="showResult(&quot;{{ result.url_search }}&quot;, {{result.pk}}, &quot;{{ typeq|urlencode }}&quot;);" class="submit">Consultar</button>
+                            </td>
                             {% else %}
-                                <td class="td_boton">
-                                <button onclick="showResult(&quot;{{ result.url_search }}&quot;, {{result.pk}}, &quot;{{ typeq|urlencode }}&quot;);" class="submit">Ver instrumentos</button>
-                                </td>
+                            <td class="td_boton">
+                            <button onclick="showResult(&quot;{{ result.url_search }}&quot;, {{result.pk}}, &quot;{{ typeq|urlencode }}&quot;);" class="submit">Ver instrumentos</button>
+                            </td>
                             {% endifequal %}
                         </tr>
                         {% endfor %}

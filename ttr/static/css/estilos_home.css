@@ -157,12 +157,12 @@ background: #ffffff;
 footer
 {
     background: #22BCE0;
-    color: rgba(255,255,255,0.7);
+    color: #ffffff;
     width: 100%;
     padding: 0.001em;
     text-align: center;
     font-size: 0.9em;
-    position: relative;
+    position: fixed;
     bottom: 0;
     left: 0;
 }

@@ -37,7 +37,7 @@
                         </li>
                         <li><a href="/buscar">Búsqueda</a></li>
                         <li><a href="/estructura">Estructura Académica</a></li>
-                        <li><a href="">Estadísticas</a></li>
+                        <li><a href="/estadisticas">Estadísticas</a></li>
                         <li><a href="/logout">Cerrar Sesión</a></li>
                     </ul>
                     {%else%}
@@ -47,7 +47,7 @@
                                 <li><a href="/estructura/">Estructura Académica</a></li>
                                 <li>Instrumentos de Evaluación
                                     <ul>
-                                        <li><a  class="popup-with-form" href="#test-form">Nuevo Instrumento</a></li>
+                                        <li><a  class="popup-nuevoI" href="#nuevo-ins">Nuevo Instrumento</a></li>
                                         <li><a href="/instrumentos/buscar">Buscar Instrumento</a></li>
                                     </ul>
                                 </li>
@@ -70,7 +70,7 @@
 
 
 
-    <div id="test-form" class="white-popup-block mfp-hide">
+    <div id="nuevo-ins" class="white-popup-block mfp-hide">
         <form class="estilo_form">
             
             <fieldset style="border:0; margin: 0 auto;" >
@@ -143,7 +143,7 @@
 
 
     $(document).ready(function() {
-    $('.popup-with-form').magnificPopup({
+    $('.popup-nuevoI').magnificPopup({
         type: 'inline',
         focus: '#name',
 

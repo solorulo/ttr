@@ -24,6 +24,13 @@
 	border-radius: 10px;
 	padding-right: 10px;
 }
+#contenedor_instrumento_ver{
+	background: #EDEDED;
+	border-radius: 10px;
+	padding-right: 10px;
+	
+}
+
 .column_desc{
 	width: 95%;
 }
@@ -39,9 +46,49 @@ section{
 }
 fieldset{
 	min-height: 300px;
-	max-width: 600px;
+	min-width: 600px;
 }
 
 .checkbox_center{
 	text-align: -webkit-center; 
+}
+.border{
+	min-height: 200px;
+	min-width: 150px;
+	border: 1px solid #800040;
+}
+button.submit {  
+     /*background: -webkit-linear-gradient(top, #fff, #fff);  
+    background: -moz-linear-gradient(top, #fff, #fff);  
+    background: -ms-linear-gradient(top, #fff, #fff);  
+    background: -o-linear-gradient(top, #fff, #fff);  
+    background: linear-gradient(top, #fff, #fff);  */
+     background: #800040;
+    color: #fff;
+    padding: 5px 5px ;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 3px #ddd;
+    margin-left: 5px; 
+}  
+.separar{
+	margin-right: 30px;
+}
+#comment_add{
+	text-align: -webkit-center;
+	margin-top: 20px;
+
+}
+.comment{
+	text-align: justify;
+	border: 1px solid #800040;
+	margin-bottom: 10px;
+	width: 70%;
+}
+#comments_section{
+	margin-top: 10px;
+	text-align: -webkit-center;
+}
+#name_comentario{
+	margin-bottom: 8px;
 }
