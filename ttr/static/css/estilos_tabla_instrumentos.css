@@ -1,0 +1,65 @@
+.tabla_ins table, table td.tablaU, table tr.tablaU {
+	padding:0px;
+	border-spacing: 0px;
+}
+
+.tabla_ins table {
+	border:0px black solid;
+	border-radius:5px;
+	min-width:400px;
+	font-family: Helvetica,Arial;
+}
+
+.tabla_ins table td.tablaU {
+	padding:6px;
+}
+
+.tabla_ins table tr.tablaU:first-child td.tablaU:first-child {
+	border-radius:5px 0px 0px 0px;
+}
+
+.tabla_ins table tr.tablaU:first-child td.tablaU:last-child {
+	border-radius:0px 5px 0px 0px;
+}
+
+.tabla_ins table tr.tablaU:last-child td.tablaU:first-child {
+	border-radius:0px 0px 0px 5px;
+}
+
+.tabla_ins table tr.tablaU:last-child td.tablaU:last-child {
+	border-radius:0px 0px 5px 0px;
+}
+
+.tabla_ins table td.tablaU:not(:last-child) {
+	border-right:1px #666 solid;
+}
+
+
+.tabla_ins table tr.tablaU:nth-child(2n) {
+	background: #ccc;
+}
+
+.tabla_ins table tr.tablaU:nth-child(2n+1){
+	background: #ccc;
+}
+
+.tabla_ins table.header tr.tablaU:not(:first-child):hover, table.tablaU:not(.header) tr.tablaU:hover {
+	background:#ccc;
+	color: #fff;
+}
+
+.tabla_ins table:not(.header) tr.tablaU {
+	text-align: left;
+}
+
+.tabla_ins table.header tr.tablaU:first-child {
+	font-weight: bold;
+	color:#fff;
+	background-color: #800040;
+	border-bottom:0px #000 solid;
+	text-align:left;
+}
+
+.tabla_ins table.header tr.tablaU:nth-child(n+2) {
+	text-align: left;
+}
