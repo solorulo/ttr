@@ -15,16 +15,7 @@
 	</select>
 
 	<label id="label_privacidad">Privacidad</label>
-            <select data-placeholder="Nivel de privacidad" id="level_show" >
-                <option>--</option>
-                {% for key,value in TYPESSHOW %}
-                <option value="{{ key }}">{{ value }}</option>    
-                {% endfor %}
-            </select>
-
-	<br/>
-    <label>Privacidad</label>
-    <select name="level_show" data-placeholder="Nivel de privacidad" id="level_show" >
+    <select data-placeholder="Nivel de privacidad" id="level_show" >
         {% for key,value in PRIVACIDAD_CHOICES %}
         <option value="{{ key }}">{{ value }}</option>    
         {% endfor %}

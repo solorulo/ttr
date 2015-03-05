@@ -3,7 +3,11 @@
 
 <head>
     {% include "includes/head.html" with title="Registrar lista de observación" %}
+    <link rel="stylesheet" href="/static/chosen/chosen.css"/>
+    <link rel="stylesheet" href="/static/rateyo/jquery.rateyo.css"/>
+    <link rel="stylesheet" href="/static/css/estilos_rubrica.css"/>
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="/static/rateyo/jquery.rateyo.js"></script>
     <script type="text/javascript">
     var ind_choices = [];
     {% for key, item in ind_choices %} 
@@ -17,8 +21,8 @@
     {% include "includes/header.html" %}
     <section>
         {% include "Instrumento/common_agregar.html" %}
-        <button id="add_row">Agregar fila</button>
-        <table>
+        <button id="add_row" class="submit">Agregar fila</button>
+        <table id="contenedor_instrumento">
             <thead>
                 <tr id="row_header">
                     <th colspan="2">Descripción</th>
@@ -59,11 +63,18 @@
             </tbody>
         </table>
         <br/>
-        <button id="save">Guardar</button>
+        <button id="save" class="submit">Guardar</button>
         
     </section>
 
     <script type="text/javascript" src="/static/js/FuncionesObservacion.js"></script>
+    <script type="text/javascript" src="/static/chosen/chosen.jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#asignatura').chosen();
+        $('#level_show').chosen();
+    });
+    </script>
     {% include "includes/footer.html" %}
 </body>
 
