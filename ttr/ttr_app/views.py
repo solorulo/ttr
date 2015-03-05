@@ -543,7 +543,51 @@ def miperfil(request):
         try:
             id_user=request.user.myuser.pk
         except:
-            HttpResponseRedirect("/portal")
+            return HttpResponseRedirect("/portal")
 
     listaInstrumentos=InstrumentoEvaluacion.objects.filter(autor=id_user)
-    return render(request, 'Usuario/perfil.html',{"instrumentos":listaInstrumentos})
+    listaUnidades= Clases.objects.get(user_id=id_user).asignaturas.all()
+    try:
+        unidadJefe= Asignatura.objects.get(presidente_id=id_user)
+    except:
+        unidadJefe="No es jefe de alguna Unidad de Aprendizaje"
+    print listaInstrumentos
+    return render(request, 'Usuario/perfil.html',{"instrumentos":listaInstrumentos, "unidades":listaUnidades, "jefe":unidadJefe})
+
+def cambiarPrivacidad(request):
+    
+    id=request.POST.get("id",None)
+    if not id:
+        mensaje="No existe este instrumento de evaluación"
+        respuesta={
+        "mensaje": mensaje,
+        "estatus": False,
+        }
+        return HttpResponse (json.dumps(respuesta), mimetype='application/json')
+
+    privacidad = request.POST.get("privacidad", None)
+
+    try:
+        instrumento=InstrumentoEvaluacion.objects.get(pk=id)
+    except:
+        mensaje="Este instrumento no existe en la base de datos"
+        respuesta={
+        "mensaje": mensaje,
+        "estatus": True,
+        }
+        return HttpResponse (json.dumps(respuesta), mimetype='application/json')
+
+
+    instrumento.level_show=int(privacidad)
+    try:
+        instrumento.save()
+        mensaje="Se ha cambiado el nivel de privacidad del instrumento de evaluación"
+    except:
+        mensaje="No se puede cambiar el tipo de privacidad"
+
+
+    respuesta={
+        "mensaje": mensaje,
+        "estatus": True,
+    }
+    return HttpResponse (json.dumps(respuesta), mimetype='application/json')

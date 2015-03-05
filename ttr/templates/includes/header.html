@@ -24,7 +24,7 @@
     <tr>
         <td>
             <center>
-                <nav class="ul_nav">
+                <nav class="ul_nav" width="">
                     {%ifequal ROLES.ADMINISTRADOR user.myuser.rol%}
                     <ul>
                         <li>Nuevo
@@ -45,7 +45,12 @@
                             <ul>
                                 <li><a href="/usuario/perfil/">Mi Perfil</a></li>
                                 <li><a href="/estructura/">Estructura Académica</a></li>
-                                <li>Instrumentos de Evaluación</li>
+                                <li>Instrumentos de Evaluación
+                                    <ul>
+                                        <li><a  class="popup-with-form" href="#test-form">Nuevo Instrumento</a></li>
+                                        <li><a href="/instrumentos/buscar">Buscar Instrumento</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="/logout">Cerrar Sesión</a></li>
                             </ul>
                         {%else%}
@@ -57,8 +62,101 @@
                         {%endifequal%}
 
                     {%endifequal%}
-                <nav>
+                </nav>
             </center>
         </td>
     </tr>
 </table>
+
+
+
+    <div id="test-form" class="white-popup-block mfp-hide">
+        <form class="estilo_form">
+            
+            <fieldset style="border:0; margin: 0 auto;" >
+                <center>
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <center><b>Crear Nuevo Instrumento de Evaluación</center>
+                            </td>
+                        </tr>
+                            <td colspan="2">
+                                Seleccione el tipo de instrumento de evaluación que desea crear:
+                    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="intrumento">Tipo de instrumento:</label>
+                            </td>
+                            <td>
+                                <select id="tipoIns" name="tipoIns" >
+                                    <option value="1" style="width:350px;" tabindex="4" name="" id=""> Rúbrica</option>
+                                    <option value="2" style="width:350px;" tabindex="4" name="" id=""> Lista de Cotejo</option>
+                                    <option value="3" style="width:350px;" tabindex="4" name="" id=""> Guía de Observación</option>
+
+                                </select>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <br>
+                                <center><button id="btnSubmit" type="submit" class="submit" onclick="nuevoI();">Continuar </button>&nbsp;
+                                <button type="submit" class="submit" onclick="$.magnificPopup.close();">Cancelar</button>
+                            </center>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </fieldset>
+        </form>
+        </div>
+
+
+
+
+<script type="text/javascript">
+    function nuevoI(){
+        obj=document.getElementById("TipoIns");
+        var selectIndex=document.getElementById("tipoIns").selectedIndex;
+        
+
+        console.log(selectIndex);
+
+           if(selectIndex==0)
+                //window.location.href="/instrumento/rubrica/agregar/";
+                window.location.assign("/instrumento/rubrica/agregar");
+                
+                
+            else if(selectIndex==1)
+               window.location.assign="/instrumento/listacotejo/agregar/";
+
+                
+                
+            else if(selectIndex==2)
+                window.location.assign="/instrumento/listaobs/agregar/";
+            
+    }
+
+
+    $(document).ready(function() {
+    $('.popup-with-form').magnificPopup({
+        type: 'inline',
+        focus: '#name',
+
+        // When elemened is focused, some mobile browsers in some cases zoom in
+        // It looks not nice, so we disable it:
+        callbacks: {
+            beforeOpen: function() {
+                if($(window).width() < 1000) {
+                    this.st.focus = false;
+                } else {
+                    this.st.focus = '#name';
+                }
+            }
+        }
+    });
+});
+    </script>

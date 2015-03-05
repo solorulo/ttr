@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-	{% include "includes/head.html" with title="Registrar nuevo usuario" %}
-	<link rel="stylesheet" href="/static/choosen/docsupport/style.css">
-    <link rel="stylesheet" href="/static/chosen/docsupport/prism.css">
-	<link rel="stylesheet" href="/static/chosen/chosen.css">
+	{% include "includes/head.html" with title="Perfil" %}
+
+	<link rel="stylesheet" href="/static/css/estilos_tabla_instrumentos.css">
+	 <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
 
 
 	</head>
@@ -18,7 +18,7 @@
 			$(document).ready(function(){
 				$.magnificPopup.open({
 		            items: {
-		                src: '<div class="white-popup">Dynamically created popup</div>'
+		                src: '<div class="white-popup">ESTO NO SE POR QUÉ SALE</div>'
 		            },
 		            type: 'inline'
 
@@ -30,75 +30,227 @@
 	{% endif %}
 
 <center>
-	<table width="80%">
+	<table width="80%" class="tabla_ins">
 		<tr>
+    		<th colspan="3" height="45">
+    			PERFIL
+    		</th>
+    	</tr>
+		<tr height="40">
 			<td>
-				<strong>Nombre:</strong> Bruno García Laurrabaquio
+				<strong>Nombre:</strong> {{user.myuser.full_name}}
 			</td>
 			<td>
-				<strong>E-mail:</strong> admin@escom.ipn.mx
+				<strong>E-mail:</strong> {{user.username}}
 			</td>
-			<td>
+			<td rowspan="2">
+				<center>
 				<button id="btnSubmit" type="submit" class="submit">Cambiar Contraseña </button>
+				<center>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<strong>Jefe de Unidad de Aprendisaje:</strong> 
+				<strong>Jefe de Unidad de Aprendizaje:</strong> 
 			</td>
 			<td>
-				Ninguna
-			</td>
-			<td>
+				{{jefe}}
 			</td>
 		</tr>
 		<tr>
 			<td>
 				&nbsp;
 			</td>
+			<td>
+			</td>
+			<td>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<fieldset>
+				<center>
+				<fieldset style="width: 95% !important;">
 					<legend align="center">Instrumentos de evaluación</legend>
-						<table>
-							<tr>
-								<td>
+					<center>
+						<table  class="tabla_ins header" width="90%">
+							<tr class="tablaU">
+								<td class="tablaU">
 									Nombre
 								</td>
-								<td>
+								<td class="tablaU">
 									Compartir
-								</td>
-								<td>
+								</td >
+								<td class="tablaU">
 									Descargar
 								</td>
-								<td>
+								<td class="tablaU">
 									Eliminar
 								</td>
-								<td>
+								<td class="tablaU">
 									Editar
 								</td>
 							</tr>
+							{% for instrumento in instrumentos %}
+						        <tr class="tablaU">
+						        	<td class="tablaU">
+						        		{{instrumento.titulo}}
+						        	</td>
+						        	<td class="tablaU">
+										<button id="btnSubmit" type="submit" class="submit popup-with-form" href="#test-form" onclick="asignarIDins({{instrumento.pk}})">Compartir </button>
+									
+									</td>
+									<td class="tablaU">
+										<button id="btnSubmit" type="submit" class="submit">Descargar </button>
+									</td>
+									<td class="tablaU">
+										<button id="btnSubmit" type="submit" class="submit">Eliminar </button>
+									</td>
+									<td class="tablaU">
+										<button id="btnSubmit" type="submit" class="submit">Editar</button>
+									</td>
+						        </tr>
+						    {% endfor %}
 						</table>
+					</center>
 				</fieldset>
+				</center>
 			</td>
 			<td>
-				<table>
-					<tr>
-						<td>
+				<center>
+				<table border="0" class="tabla_ins header" width="90%">
+					<tr class="tablaU">
+						<td class="tablaU">
 							No.
 						</td>
-						<td>
+						<td class="tablaU">
 							Unidad de Aprendizaje
 						</td>
 					</tr>
+					{% for unidad in unidades %}
+						        <tr class="tablaU">
+						        	<td class="tablaU">
+						        		{{forloop.counter}}
+						        	</td>
+						        	<td class="tablaU">
+										{{unidad.nombre}}
+									</td>
+						        </tr>
+						    {% endfor %}
 				</table>
+				</center>
 			</td>
 		</tr>
 	</table>
 </center>
+
+    <!-- DIV para Establecer nivel de privacidad/-->
+    <div id="test-form" class="white-popup-block mfp-hide">
+        <form class="estilo_form" >
+            
+            <fieldset style="border:0; margin: 0 auto;" >
+                <center>
+                    <table width="90%">
+
+                        <tr>
+                            <td colspan="2">
+                                <center><strong>Nivel de Privacidad</strong></center>
+                            </td>
+                        </tr>
+                            <td colspan="2">
+                               Establezca el nivel de privacidad de su instrumento de evaluación.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" width="40%">
+                            	<select id="rol" name="privacidad" onchange="cambiaPrivacidad(this);">
+                            	{% for key, item in PRIVACIDAD_CHOICES %} 
+                            		<option value="{{ key }}" style="width:350px;" tabindex="4" name="" id="privacidad"  >{{item}}</option>
+                            	{% endfor %}
+                        		</select>
+                            </td>
+                            <td width="60%">
+                            	<p id="textoPriv">El instrumento de evaluación será público a nivel institucional.</p>
+                               <!--<input type="text" id="textoPriv" width="100%" value="ALGO "/>-->
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <br>
+                                <center><button id="btnSubmit" type="submit" class="submit" onclick="cambiaP(); return false;">Establecer </button>&nbsp;
+                                <button type="submit" class="submit" onclick="$.magnificPopup.close();">Cancelar</button>
+                            </center>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </fieldset>
+        </form>
+        </div>
+		<script type="text/javascript">
+		    $(document).ready(function() {
+		    $('.popup-with-form').magnificPopup({
+		        type: 'inline',
+		        focus: '#name',
+
+		        // When elemened is focused, some mobile browsers in some cases zoom in
+		        // It looks not nice, so we disable it:
+		        callbacks: {
+		            beforeOpen: function() {
+		                if($(window).width() < 700) {
+		                    this.st.focus = false;
+		                } else {
+		                    this.st.focus = '#name';
+		                }
+		            }
+		        }
+		    });
+		});
+    </script>
+
+
 	</section>
-		 <script type="text/javascript">
+			<script type="text/javascript">
+			var id_instrumentoHiden;
+
+			function asignarIDins(instrumento){
+				id_instrumentoHiden=instrumento;
+
+			}
+			function cambiaP(){
+				 var obj = {
+		        'id' : id_instrumentoHiden,
+		        'privacidad' : $('#privacidad').val(),
+
+		        // 'user_id' : '2', //
+		        "csrfmiddlewaretoken": $.cookie("csrftoken")
+		    };
+		    $.post('/usuario/perfil/cambiarPrivacidad', obj, function(data){
+		        if (data.estatus == "true"){
+		        	alert(data.mensaje);
+		        	$.magnificPopup.close();
+		        }
+		        else alert(data.mensaje);
+		    });
+
+		 }
+
+		 function cambiaPrivacidad(obj) {
+
+		   var selectIndex=obj.selectedIndex;
+		   var selectValue=obj.options[selectIndex].text;
+		   
+		   
+
+		   if(selectIndex=={{PRIVACIDAD.INSTITUCIONAL}})
+		   		document.getElementById("textoPriv").innerHTML="El instrumento de evaluación será público a nivel institucional.";
+		   		
+		   	else if(selectIndex=={{PRIVACIDAD.PLANTEL}})
+		   		document.getElementById("textoPriv").innerHTML="EL instrumento de evaluación será público a nivel plantel.";
+		   		
+		   	else if(selectIndex=={{PRIVACIDAD.PERSONAL}})
+		   		document.getElementById("textoPriv").innerHTML="El instrumento sólo podrá consultarlo usted.";
+		 }
+
+
 		 function validaPass(){
 		 	pass1= document.getElementById("password").value;
 		 	pass2= document.getElementById("password2").value;
@@ -114,20 +266,7 @@
 		 }
 		 </script>
 		 {% include "includes/footer.html" %}
-		 <script src="../static/chosen/chosen.jquery.js" type="text/javascript"></script>
-		 <script type="text/javascript">
-	
-	    /*var config = {
-	      '.chosen-select'           : {},
-	      '.chosen-select-deselect'  : {allow_single_deselect:true},
-	      '.chosen-select-no-single' : {disable_search_threshold:10},
-	      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-	      '.chosen-select-width'     : {width:"95%"}
-	    }
-	    for (var selector in config) {
-	      $(selector).chosen(config[selector]);
-    }*/
-  		$( '.chosen-select').chosen();
-	</script>
+		 
+		 
 	 </body>
 </html>
