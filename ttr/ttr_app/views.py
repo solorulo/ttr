@@ -543,8 +543,11 @@ def miperfil(request):
             return HttpResponseRedirect("/portal")
 
     listaInstrumentos=InstrumentoEvaluacion.objects.filter(autor=id_user)
-    listaUnidades= Clases.objects.get(user_id=id_user).asignaturas.all()
+    listaUnidades=None
+    unidadJefe= None
+
     try:
+        listaUnidades= Clases.objects.get(user_id=id_user).asignaturas.all()
         unidadJefe= Asignatura.objects.get(presidente_id=id_user)
     except:
         unidadJefe="No es jefe de alguna Unidad de Aprendizaje"

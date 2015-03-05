@@ -38,7 +38,7 @@ fieldset legend {
   
 /* === List Styles === */  
 .estilo_form ul {  
-    width: 750px;  
+    /*width: 750px; */
     list-style-type: none;  
     list-style-position: outside;  
     margin: 0px;  
