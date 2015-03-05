@@ -32,7 +32,7 @@ function add_row() {
 
     $new_row.append($td);
     $('.column').each(function(idx, val){
-        $new_row.append("<td class=\"column_val\" ><textarea class=\"text\" placeholder=\"Descripción ...\"></textarea></td>");
+        $new_row.append("<td class=\"column_val\" ><textarea class=\"text column_desc\" placeholder=\"Descripción ...\"></textarea></td>");
     });
     $tbody.append($new_row);
     update_buttons();
@@ -49,12 +49,12 @@ function add_column(){
         delete_column($(this));
     });
     $new_colh.append($bt_delete_column);
-    $new_colh.append("<br/><textarea class=\"text\" placeholder=\"Columna\"></textarea>");
+    $new_colh.append("<br/><textarea class=\"text column_titulo\" placeholder=\"Columna\"></textarea>");
     
     $('#row_header').append($new_colh);
     $('.row').each(function(idx, val){
         var $td = $('<td class=\"column_val\" meta:new=\"true\"></td>');
-        $td.append("<textarea class=\"text\" placeholder=\"Descripción ...\"></textarea>");
+        $td.append("<textarea class=\"text column_titulo\" placeholder=\"Descripción ...\"></textarea>");
         $(this).append($td);
     });
     update_buttons();

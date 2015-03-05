@@ -1,7 +1,7 @@
 <div id="inst_head">
 	<label>Título </label>
 	<input id="titulo" type="text" placeholder="titulo" />
-	<br/>
+	
 	<!-- <label>Autor </label>
 	<input id="autor" type="text" placeholder="autor" />
 	<br/> -->
@@ -13,6 +13,15 @@
 	    <option value="{{ sign.pk }}">{{sign.nombre}}</option>    
 	    {% endfor %}
 	</select>
+
+	<label id="label_privacidad">Privacidad</label>
+            <select data-placeholder="Nivel de privacidad" id="level_show" >
+                <option>--</option>
+                {% for key,value in TYPESSHOW %}
+                <option value="{{ key }}">{{ value }}</option>    
+                {% endfor %}
+            </select>
+
 	<br/>
 	<!-- <label>Oficial </label>
 	<input id="oficial" type="checkbox" placeholder="oficial" />
