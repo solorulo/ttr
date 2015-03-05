@@ -96,8 +96,6 @@ def editar(request):
         except:
             return HttpResponse('false')
 
-
-
         new_listaobs.titulo=titulo
         new_listaobs.asignatura_id = int(asignatura)
         new_listaobs.oficial=(oficial.lower()=="true")
