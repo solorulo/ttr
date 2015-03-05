@@ -14,50 +14,52 @@
     {% csrf_token %}
     {% include "includes/header.html" %}
     <section>
-        {% include "Instrumento/common_agregar.html" %}
-        <button id="add_row" class="submit">Agregar fila</button>
-        <table id="contenedor_instrumento">
-            <thead>
-                <tr id="row_header">
-                    <th colspan="2">Criterio</th>
-                    <th>Si/No</th>
-                    <th>Observación</th>
-                </tr>
-            </thead>
-            <tbody id="tbody">
-                <tr class="row" meta:index="1">
-                    <td>
-                        <button class="delete_row">-</button>
-                    </td>
-                    <td>
-                        <textarea class="text" placeholder="Descripción" ></textarea>
-                    </td>
-                    <td>
-                        <input type="checkbox" />
-                    </td>
-                    <td>
-                        <textarea class="observ" placeholder="Observaciones" ></textarea>
-                    </td>
-                </tr>
-                <tr class="row" meta:index="2">
-                    <td>
-                        <button class="delete_row">-</button>
-                    </td>
-                    <td>
-                        <textarea class="text" placeholder="Descripción" ></textarea>
-                    </td>
-                    <td>
-                        <input type="checkbox" />
-                    </td>
-                    <td>
-                        <textarea class="observ" placeholder="Observaciones" ></textarea>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <br/>
-        <button id="save" class="submit">Guardar</button>
-        
+        <fieldset>
+        <legend align="center">Nueva Lista de Cotejo</legend>
+                {% include "Instrumento/common_agregar.html" %}
+                <button id="add_row" class="submit">Agregar fila</button>
+                <table id="contenedor_instrumento">
+                    <thead>
+                        <tr id="row_header">
+                            <th colspan="2">Criterio</th>
+                            <th>Si/No</th>
+                            <th>Observación</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <tr class="row" meta:index="1">
+                            <td>
+                                <button class="delete_row">-</button>
+                            </td>
+                            <td>
+                                <textarea class="text" placeholder="Descripción" ></textarea>
+                            </td>
+                            <td>
+                                <input type="checkbox" />
+                            </td>
+                            <td>
+                                <textarea class="observ" placeholder="Observaciones" ></textarea>
+                            </td>
+                        </tr>
+                        <tr class="row" meta:index="2">
+                            <td>
+                                <button class="delete_row">-</button>
+                            </td>
+                            <td>
+                                <textarea class="text" placeholder="Descripción" ></textarea>
+                            </td>
+                            <td>
+                                <input type="checkbox" />
+                            </td>
+                            <td>
+                                <textarea class="observ" placeholder="Observaciones" ></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <button id="save" class="submit">Guardar</button>
+        </fieldset>
     </section>
 
     <script type="text/javascript" src="/static/js/FuncionesCotejo.js"></script>
