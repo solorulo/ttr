@@ -14,20 +14,21 @@
 
 
 <script type="text/javascript">
+		
             var chart;
 
             var chartData = [
                 {
-                    "instrumento": "Rubrica",
-                    "visits": 200
+                    "instrumento": "Rúbrica",
+                    "visits": {{respuesta.rubricaC}}
                 },
                 {
-                    "instrumento": "lista",
-                    "visits": 300
+                    "instrumento": "Lista de Cotejo",
+                    "visits": {{respuesta.listaC}}
                 },
                 {
-                    "instrumento": "guia",
-                    "visits": 100
+                    "instrumento": "Guía de Observación",
+                    "visits": {{respuesta.guiaC}}
                 }
                 
             ];
@@ -70,11 +71,12 @@
 
                 chart.write("chartdiv");
             });
+	
         </script>
-       <!-- <script type="text/javascript">
-            var chart;
-            var chartData = [];
-            var chartCursor;
+        <script type="text/javascript">
+            var chart2;
+            var chartData2 = [];
+            var chartCursor2;
 
 
 
@@ -83,24 +85,24 @@
                 generateChartData();
 
                 // SERIAL CHART
-                chart = new AmCharts.AmSerialChart();
-                chart.pathToImages = "../amcharts/images/";
-                chart.dataProvider = chartData;
-                chart.categoryField = "date";
-                chart.balloon.bulletSize = 5;
+                chart2 = new AmCharts.AmSerialChart();
+                chart2.pathToImages = "/static/js/amcharts/images/";
+                chart2.dataProvider = chartData2;
+                chart2.categoryField = "date";
+                chart2.balloon.bulletSize = 5;
 
                 // listen for "dataUpdated" event (fired when chart is rendered) and call zoomChart method when it happens
-                chart.addListener("dataUpdated", zoomChart);
+                chart2.addListener("dataUpdated", zoomChart);
 
                 // AXES
                 // category
-                var categoryAxis = chart.categoryAxis;
-                categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
-                categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
-                categoryAxis.dashLength = 1;
-                categoryAxis.minorGridEnabled = true;
-                categoryAxis.twoLineMode = true;
-                categoryAxis.dateFormats = [{
+                var categoryAxis2 = chart2.categoryAxis;
+                categoryAxis2.parseDates = true; // as our data is date-based, we set parseDates to true
+                categoryAxis2.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
+                categoryAxis2.dashLength = 1;
+                categoryAxis2.minorGridEnabled = true;
+                categoryAxis2.twoLineMode = true;
+                categoryAxis2.dateFormats = [{
                     period: 'fff',
                     format: 'JJ:NN:SS'
                 }, {
@@ -126,49 +128,54 @@
                     format: 'YYYY'
                 }];
 
-                categoryAxis.axisColor = "#DADADA";
+                categoryAxis2.axisColor = "#DADADA";
 
                 // value
-                var valueAxis = new AmCharts.ValueAxis();
-                valueAxis.axisAlpha = 0;
-                valueAxis.dashLength = 1;
-                chart.addValueAxis(valueAxis);
+                var valueAxis2 = new AmCharts.ValueAxis();
+                valueAxis2.axisAlpha = 0;
+                valueAxis2.dashLength = 1;
+                chart2.addValueAxis(valueAxis2);
 
                 // GRAPH
-                var graph = new AmCharts.AmGraph();
-                graph.title = "red line";
-                graph.valueField = "visits";
-                graph.bullet = "round";
-                graph.bulletBorderColor = "#FFFFFF";
-                graph.bulletBorderThickness = 2;
-                graph.bulletBorderAlpha = 1;
-                graph.lineThickness = 2;
-                graph.lineColor = "#5fb503";
-                graph.negativeLineColor = "#efcc26";
-                graph.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
-                chart.addGraph(graph);
+                var graph2 = new AmCharts.AmGraph();
+                graph2.title = "red line";
+                graph2.valueField = "visits";
+                graph2.bullet = "round";
+                graph2.bulletBorderColor = "#FFFFFF";
+                graph2.bulletBorderThickness = 2;
+                graph2.bulletBorderAlpha = 1;
+                graph2.lineThickness = 2;
+                graph2.lineColor = "#5fb503";
+                graph2.negativeLineColor = "#efcc26";
+                graph2.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
+                chart2.addGraph(graph2);
 
                 // CURSOR
-                chartCursor = new AmCharts.ChartCursor();
-                chartCursor.cursorPosition = "mouse";
-                chartCursor.pan = true; // set it to fals if you want the cursor to work in "select" mode
-                chart.addChartCursor(chartCursor);
+                chartCursor2 = new AmCharts.ChartCursor();
+                chartCursor2.cursorPosition = "mouse";
+                chartCursor2.pan = true; // set it to fals if you want the cursor to work in "select" mode
+                chart2.addChartCursor(chartCursor2);
 
                 // SCROLLBAR
                 var chartScrollbar = new AmCharts.ChartScrollbar();
-                chart.addChartScrollbar(chartScrollbar);
+                chart2.addChartScrollbar(chartScrollbar);
 
-                chart.creditsPosition = "bottom-right";
+                chart2.creditsPosition = "bottom-right";
 
                 // WRITE
-                chart.write("chartdiv2");
+                chart2.write("chartdiv2");
             });
 
             // generate some random data, quite different range
+
+            /*ESTE HACE TODO*/
+
+            //Tenemos que sacar de la base de datos... el día y el número de registros
             function generateChartData() {
                 var firstDate = new Date();
                 firstDate.setDate(firstDate.getDate() - 500);
 
+           
                 for (var i = 0; i < 500; i++) {
                     // we create date objects here. In your data, you can have date strings
                     // and then set format of your dates using chart.dataDateFormat property,
@@ -178,7 +185,7 @@
 
                     var visits = Math.round(Math.random() * 40) - 20;
 
-                    chartData.push({
+                    chartData2.push({
                         date: newDate,
                         visits: visits
                     });
@@ -188,21 +195,21 @@
             // this method is called when chart is first inited as we listen for "dataUpdated" event
             function zoomChart() {
                 // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-                chart.zoomToIndexes(chartData.length - 40, chartData.length - 1);
+                chart2.zoomToIndexes(chartData2.length - 40, chartData2.length - 1);
             }
 
             // changes cursor mode from pan to select
             function setPanSelect() {
                 if (document.getElementById("rb1").checked) {
-                    chartCursor.pan = false;
-                    chartCursor.zoomable = true;
+                    chartCursor2.pan = false;
+                    chartCursor2.zoomable = true;
                 } else {
-                    chartCursor.pan = true;
+                    chartCursor2.pan = true;
                 }
-                chart.validateNow();
+                chart2.validateNow();
             }
 
-        </script>-->
+        </script>
 	<body>
 		{% include "includes/header.html" %}
 
@@ -224,7 +231,7 @@
                             <td class="td_boton">
                             	<strong> Tipo de Instrumento:</strong>
 	                            	<select name="tipoIns">
-	                            			<option value="0">TOdas</option>
+	                            			<option value="0">Todas</option>
 			                                <option value="1">Rúbrica</option>
 			                                <option value="2">Lista de Cotejo</option>
 			                                <option value="3">Guía de Observación</option>
@@ -235,25 +242,35 @@
                         	<td colspan="3">
                         		<br>
                         		<center>
-                        			<button class="submit">Consultar</button>
+                        			<button class="submit" onclick="generaBarras(); return false;">Consultar</button>
                         		</center>
                         	</td>
                         </tr>
                 </table>
                 <table width="80%">
                 	<tr>
-                		<td width="50%">
+                		<td>
+                			<strong>Total de Registros</strong>
+                		</td>
+                		
+                	</tr>
+
+                	<tr>
+                		<td width="50%" >
                 			<div id="chartdiv" style="width: 300; height: 200px;"></div>
                 		</td>
+                		<!--
                 		<td>
-                			<!--
+                			
                 			<div id="chartdiv2" style="width: 300; height: 200px;"></div>
 					        <div style="margin-left:35px;">
 					            <input type="radio" name="group" id="rb1" onclick="setPanSelect()">Select
 					            <input type="radio" checked="true" name="group" id="rb2" onclick="setPanSelect()">Pan
 							</div>
-						-->
+						
+
                 		</td>
+                	-->
                 	</tr>
                 </table>
             		</form>

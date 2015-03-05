@@ -607,4 +607,14 @@ def estadisticas(request):
             id_user=request.user.myuser.pk
         except:
             return HttpResponseRedirect("/portal")
-    return render(request, "Estadisticas/estadisticas.html")
+    
+    rubricasCount=Rubrica.objects.all().count()
+    listasCount= ListaCotejo.objects.all().count()
+    guiaCount= ListaObservacion.objects.all().count()
+    respuesta={
+        "rubricaC": rubricasCount,
+        "listaC": listasCount,
+        "guiaC": guiaCount,
+        }
+
+    return render(request, "Estadisticas/estadisticas.html", {"respuesta":respuesta})
