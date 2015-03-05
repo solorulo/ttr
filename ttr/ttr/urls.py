@@ -65,6 +65,8 @@ urlpatterns = patterns('',
 
     url(r'^instrumento/comentario/?$', 'ttr_app.views_comments.comment'),
     url(r'^instrumento/comentarios/?$', 'ttr_app.views_comments.get_comments'),
+
+
     # url(r'^instrumento/borrar', ''),
 
 
@@ -77,6 +79,7 @@ urlpatterns = patterns('',
     url(r'^usuario/recuperarcontrasena/?$','ttr_app.views_enviar_email.enviar_correo'),
 
     url(r'^usuario/perfil/?$','ttr_app.views.miperfil'),
+    url(r'^usuario/perfil/cambiarPrivacidad/?$','ttr_app.views.cambiarPrivacidad'),
 
 
     # Reseteo de password TODO verificar si van a funcionar

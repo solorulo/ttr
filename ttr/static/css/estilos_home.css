@@ -66,7 +66,7 @@ nav
 .ul_nav {
   text-align: -webkit-center;
   display: inline;
-  margin: 0;
+  margin: 0px;
   padding: 0px 0px 0px 0;
   list-style: none;
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
@@ -96,6 +96,10 @@ nav
   color: #800040;;
   text-decoration: none;
 }
+.ul_nav ul{
+  margin: 0px;
+  background: #800040; 
+}
 .ul_nav li a {
 
  color: #cccccc;
@@ -109,6 +113,7 @@ background: #ffffff;
 .ul_nav li ul {
   padding: 0;
 
+  margin: 0px;
   position: absolute;
   top: 33px;
   left: 0;
