@@ -26,7 +26,9 @@
             <br><br>
             <button id="add_row" class="submit">Agregar fila</button>
             <br><br>
+
             <div id="contenedor_table">
+                
                 <table id="contenedor_instrumento">
                     <thead>
                         <tr id="row_header">
@@ -40,7 +42,7 @@
                                 <button class="delete_row submit">-</button>
                             </td>
                             <td>
-                                <textarea class="text" ></textarea>
+                                <textarea class="text" placeholder="Descripción..." ></textarea>
                             </td>
                             <td>
                                 <select>
@@ -55,7 +57,7 @@
                                 <button class="delete_row submit">-</button>
                             </td>
                             <td>
-                                <textarea class="text" ></textarea>
+                                <textarea class="text" placeholder="Descripción..." ></textarea>
                             </td>
                             <td>
                                 <select>
@@ -70,17 +72,10 @@
             </div>
             <br/>
             <button id="save" class="submit">Guardar</button>
-            
     </section>
 
     <script type="text/javascript" src="/static/js/FuncionesObservacion.js"></script>
     <script type="text/javascript" src="/static/chosen/chosen.jquery.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#asignatura').chosen();
-        $('#level_show').chosen();
-    });
-    </script>
     {% include "includes/footer.html" %}
 </body>
 

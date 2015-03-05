@@ -37,7 +37,7 @@
                         </li>
                         <li><a href="/buscar">Búsqueda</a></li>
                         <li><a href="/estructura">Estructura Académica</a></li>
-                        <li><a href="">Estadísticas</a></li>
+                        <li><a href="/estadisticas">Estadísticas</a></li>
                         <li><a href="/logout">Cerrar Sesión</a></li>
                     </ul>
                     {%else%}
@@ -47,7 +47,7 @@
                                 <li><a href="/estructura/">Estructura Académica</a></li>
                                 <li>Instrumentos de Evaluación
                                     <ul>
-                                        <li><a  class="popup-with-form" href="#test-form">Nuevo Instrumento</a></li>
+                                        <li><a  class="popup-nuevoI" href="#nuevo-ins">Nuevo Instrumento</a></li>
                                         <li><a href="/instrumentos/buscar">Buscar Instrumento</a></li>
                                     </ul>
                                 </li>
@@ -70,7 +70,7 @@
 
 
 
-    <div id="test-form" class="white-popup-block mfp-hide">
+    <div id="nuevo-ins" class="white-popup-block mfp-hide">
         <form class="estilo_form">
             
             <fieldset style="border:0; margin: 0 auto;" >
@@ -103,8 +103,8 @@
                         <tr>
                             <td colspan="2">
                                 <br>
-                                <center><button id="btnSubmit" type="submit" class="submit" onclick="nuevoI();">Continuar </button>&nbsp;
-                                <button type="submit" class="submit" onclick="$.magnificPopup.close();">Cancelar</button>
+                                <center><button id="btnSubmit" type="submit" class="submit" onclick="nuevoI();return false;">Continuar </button>&nbsp;
+                                <button type="submit" class="submit" onclick="$.magnificPopup.close();return false;">Cancelar</button>
                             </center>
                             </td>
                         </tr>
@@ -115,7 +115,11 @@
         </div>
 
 
-
+<style type="text/css">
+    .chosen-container.chosen-container-single {
+        width: 300px !important; /* or any value that fits your needs */
+    }
+</style>
 
 <script type="text/javascript">
     function nuevoI(){
@@ -125,24 +129,21 @@
 
         console.log(selectIndex);
 
-           if(selectIndex==0)
-                //window.location.href="/instrumento/rubrica/agregar/";
-                window.location.assign("/instrumento/rubrica/agregar");
-                
-                
-            else if(selectIndex==1)
-               window.location.assign="/instrumento/listacotejo/agregar/";
-
-                
-                
-            else if(selectIndex==2)
-                window.location.assign="/instrumento/listaobs/agregar/";
+            if(selectIndex==0){
+                window.location.href="/instrumento/rubrica/agregar/";
+            } 
+            else if(selectIndex==1) {
+                window.location.href="/instrumento/listacotejo/agregar/";
+            }
+            else if(selectIndex==2) {
+                window.location.href="/instrumento/listaobs/agregar/";
+            }
             
     }
 
 
     $(document).ready(function() {
-    $('.popup-with-form').magnificPopup({
+    $('.popup-nuevoI').magnificPopup({
         type: 'inline',
         focus: '#name',
 
