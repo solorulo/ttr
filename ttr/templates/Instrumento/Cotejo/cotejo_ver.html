@@ -4,24 +4,34 @@
 <head>
     {% include "includes/head.html" with title="Ver lista de cotejo" %}
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <link rel="stylesheet" href="/static/rateyo/jquery.rateyo.css"/>
+    <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="/static/rateyo/jquery.rateyo.js"></script>
+    <link rel="stylesheet" href="/static/css/estilos_rubrica.css"/>
 </head>
 
 <body>
     {% csrf_token %}
     {% include "includes/header.html" %}
     <section>
-        {% include "Instrumento/common_ver.html" with inst_type="listacotejo" %}
+        <fieldset style="width:100%">
+        <legend align="center">Ver Lista de Cotejo</legend>
+        <center>
+            {% include "Instrumento/common_ver.html" with inst_type="listacotejo" %}
+        <center>
         <!-- <button id="add_row">Agregar fila</button>
         <button id="add_column">Agregar columna</button> -->
+        <div id="contenedor_table">
+        
         <table>
             <thead>
                 <tr id="row_header">
-                    <th colspan="1">Descripción</th>
-                    <th>Si/No</th>
+                    <th colspan="1" class="border">Descripción</th>
+                    <th class="columnn border">Si/No</th>
                     <th>Observaciones</th>
                 </tr>
             </thead>
-            <tbody id="tbody">
+            <tbody id="tbody" class="tbodyinst">
                 <!--
 
                 <tr class="row" meta:index="1">
@@ -42,7 +52,8 @@
                         {{ ind.texto}}
                     </td>
                     <td>
-                        <input type="checkbox" {%if ind.check %}checked {% endif %} onclick="return false;" />
+                        <center>
+                        <input type="checkbox" {%if ind.check %}checked {% endif %} onclick="return false;" /></center>
                     </td>
                     <td>
                         {% firstof ind.observaciones '' %}
@@ -52,6 +63,9 @@
             </tbody>
         </table>
         <br/>
+    </div>
+    </fieldset>
+
         <!-- <button id="save">Guardar</button> -->
         
     </section>

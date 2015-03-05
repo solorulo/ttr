@@ -3,6 +3,11 @@
 
 <head>
     {% include "includes/head.html" with title="Ver lista de observación" %}
+
+    <link rel="stylesheet" href="/static/rateyo/jquery.rateyo.css"/>
+    <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="/static/rateyo/jquery.rateyo.js"></script>
+    <link rel="stylesheet" href="/static/css/estilos_rubrica.css"/>
     <script type="text/javascript" src="/static/jquery-cookie/jquery.cookie.min.js"></script>
     <script type="text/javascript">
     var id_inst = {{instrumento.pk}};
@@ -13,17 +18,23 @@
     {% csrf_token %}
     {% include "includes/header.html" %}
     <section>
+        <fieldset style="width: 100%;">
+        <legend align="center">Ver Guía de Observación</legend>
+        <center>
         {% include "Instrumento/common_ver.html" with inst_type="listaobs" %}
-        <table>
+    </center>
+        <center>
+        <div id="contenedor_table">
+        <table id="contenedor_instrumento_ver">
             <thead>
                 <tr id="row_header">
                     <th colspan="2">Descripción</th>
-                    <th>Valor</th>
+                    <th class="column border">Valor</th>
                 </tr>
             </thead>
             <tbody id="tbody">
                 {% for ind in indicadores %}
-                <tr class="row" meta:index="{{ind.pk}}">
+                <tr class="row border" meta:index="{{ind.pk}}">
                     <td>
                     </td>
                     <td>
@@ -37,6 +48,9 @@
             </tbody>
         </table>
         <br/>
+    </div>
+</center>
+    </fieldset>
         <!-- <button id="save">Guardar</button> -->
         
     </section>
@@ -44,7 +58,7 @@
     {% include "Instrumento/comments.html" %}
 
     <script type="text/javascript" src="/static/js/FuncionesObservacion.js"></script>
-    {% include "includes/footer.html" %}
+    <!--{% include "includes/footer.html" %}-->
 </body>
 
 </html>
