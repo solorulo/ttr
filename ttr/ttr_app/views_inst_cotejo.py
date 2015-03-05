@@ -46,10 +46,12 @@ def agregar(request):
             """
             ind_text = indicador['text']
             ind_checked = indicador['checked']
+            observ = indicador['observ']
             new_indicador = IndicadorCotejo(
                 listacotejo_id=new_listacotejo.pk,
                 texto=ind_text,
-                check=ind_checked
+                check=ind_checked,
+                observaciones=observ,
             )
             new_indicador.save()
         
