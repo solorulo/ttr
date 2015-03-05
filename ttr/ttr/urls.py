@@ -59,7 +59,8 @@ urlpatterns = patterns('',
     url(r'^instrumentos/buscar/mostrar/?$', 'ttr_app.views_buscar_instr.buscar_insts'),
     # url(r'^pdf/', 'ttr_app.views_buscar_instr.some_view'),
 
-    url(r'^instrumento/eliminar/?$', 'ttr_app.views_instrumento.instrumento'),
+    url(r'^instrumento/rating/?$', 'ttr_app.views_instrumento.rating'),
+    url(r'^instrumento/eliminar/?$', 'ttr_app.views_instrumento.eliminar'),
 
     url(r'^instrumento/rubrica/agregar/?$', 'ttr_app.views_inst_rubrica.agregar'),
     url(r'^instrumento/rubrica/editar/?$', 'ttr_app.views_inst_rubrica.editar'),

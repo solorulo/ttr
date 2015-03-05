@@ -5,7 +5,22 @@ var id_inst = {{instrumento.pk}};
 	{% ifnotequal user.pk instrumento.autor.pk %}
 <div id="newrating"></div>
 <script type="text/javascript">
-$('#newrating').rateYo({ });
+function rateInstrument(rating) {
+	var inst_pk = {{instrumento.pk}};
+	var obj = {
+		"rating" : rating
+	};
+	$.post('/instrumento/rating?id='+inst_pk, obj, function(data){
+        if (data == "true")
+            window.location.href = "/index";
+    });
+}
+$('#newrating').rateYo({ 
+	onSet: function (rating, rateYoInstance) {
+ 
+      rateInstrument(rating);
+    }
+});
 </script>
 	{% endifnotequal %}
 <div id="comment_add" >

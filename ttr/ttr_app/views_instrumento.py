@@ -45,6 +45,22 @@ def instrumento(request):
         
     return HttpResponseRedirect(url_redirect)
 
+def rating(request):
+    url_redirect = '/'
+    if (request.method == "POST"):
+        idx = request.GET.get('id')
+        rating = request.POST.get('rating')
+        inst = get_object_or_404(InstrumentoEvaluacion, pk=int(idx))
+        evaluacion = EvaluacionInstrumento(
+            user_id=request.user.pk,
+            instrumento_id=inst.pk,
+            valor=rating,
+        )
+        evaluacion.save()
+        return HttpResponse('true')
+        
+    return HttpResponse('false')
+
 def eliminar(request):
     url_redirect = '/'
     if (request.method == "POST"):
