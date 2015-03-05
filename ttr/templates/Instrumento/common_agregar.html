@@ -1,7 +1,14 @@
 <div id="inst_head">
 	<label>Título </label>
 	<input id="titulo" type="text" placeholder="titulo" />
-	
+	<label>Privacidad</label>
+    <select data-placeholder="Nivel de privacidad" id="level_show" >
+        {% for key,value in PRIVACIDAD_CHOICES %}
+        <option value="{{ key }}">{{ value }}</option>    
+        {% endfor %}
+    </select>
+
+    <br><br>
 	<!-- <label>Autor </label>
 	<input id="autor" type="text" placeholder="autor" />
 	<br/> -->
@@ -14,12 +21,7 @@
 	    {% endfor %}
 	</select>
 
-	<label id="label_privacidad">Privacidad</label>
-    <select data-placeholder="Nivel de privacidad" id="level_show" >
-        {% for key,value in PRIVACIDAD_CHOICES %}
-        <option value="{{ key }}">{{ value }}</option>    
-        {% endfor %}
-    </select>
+	
 	<!-- <label>Oficial </label>
 	<input id="oficial" type="checkbox" placeholder="oficial" />
 	<br/> -->

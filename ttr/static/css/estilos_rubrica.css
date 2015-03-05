@@ -4,8 +4,8 @@
 #titulo{
 	margin-right: 50px;
 	margin-top: 25px;
-}#label_privacidad{
-	margin-left: 50px;
+}#level_show{
+	margin-right: 50px;
 }
 #botones{
 	text-align: -webkit-center;
@@ -36,4 +36,12 @@ textarea{
 section{	
 	text-align: -webkit-center;
 	margin-top: 20px;
+}
+fieldset{
+	min-height: 300px;
+	max-width: 600px;
+}
+
+.checkbox_center{
+	text-align: -webkit-center; 
 }

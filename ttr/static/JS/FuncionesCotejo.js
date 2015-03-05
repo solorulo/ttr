@@ -7,7 +7,7 @@ function add_row() {
     var $new_row = $("<tr class=\"row\" meta:new=\"true\"></tr>");
 
     var $td = $('<td></td>');
-    var $button = $("<button class=\"delete_row\">-</button>");
+    var $button = $("<button class=\"delete_row submit\">-</button>");
     $button.click(function(event) {
         event.preventDefault();
         delete_row($(this));
@@ -21,7 +21,7 @@ function add_row() {
         "<textarea class=\"text\" placeholder=\"Descripción\" ></textarea>"+
         "</td>");
     $new_row.append(
-        "<td>"+
+        "<td class='checkbox_center'>"+
         "<input type=\"checkbox\" />"+
         "</td>");
     $new_row.append(
