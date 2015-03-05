@@ -100,13 +100,13 @@
 									
 									</td>
 									<td class="tablaU">
-										<button id="btnSubmit" type="submit" class="submit">Descargar </button>
+										<button id="btnSubmit" type="submit" class="submit" onclick="return false;">Descargar </button>
 									</td>
 									<td class="tablaU">
-										<button id="btnSubmit" type="submit" class="submit">Eliminar </button>
+										<button id="btnSubmit" type="submit" class="submit" onclick="eliminarInstrumento({{instrumento.pk}});return false;">Eliminar </button>
 									</td>
 									<td class="tablaU">
-										<button id="btnSubmit" type="submit" class="submit">Editar</button>
+										<button id="btnSubmit" type="submit" class="submit" onclick="editarInstrumento({{instrumento.pk}});return false;">Editar</button>
 									</td>
 						        </tr>
 						    {% endfor %}
@@ -176,7 +176,7 @@
                             <td colspan="2">
                                 <br>
                                 <center><button id="btnSubmit" type="submit" class="submit" onclick="cambiaP(); return false;">Establecer </button>&nbsp;
-                                <button type="submit" class="submit" onclick="$.magnificPopup.close();">Cancelar</button>
+                                <button type="submit" class="submit" onclick="$.magnificPopup.close(); return false;">Cancelar</button>
                             </center>
                             </td>
                         </tr>
@@ -213,7 +213,14 @@
 
 			function asignarIDins(instrumento){
 				id_instrumentoHiden=instrumento;
-
+			}
+			function verInstrumento(pk) {
+				var url = "/instrumento?id="+pk;
+				window.location.href = url;
+			}
+			function editarInstrumento(pk) {
+				var url = "/instrumento?edit=true&id="+pk;
+				window.location.href = url;
 			}
 			function cambiaP(){
 				 var obj = {

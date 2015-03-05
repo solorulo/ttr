@@ -53,11 +53,13 @@ urlpatterns = patterns('',
     url(r'^academia/consultar/modificar/?$','ttr_app.views.editarAcademia'),
 
     # url(r'^instrumentos/', ''),
-    url(r'^instrumento/$', 'ttr_app.views_instrumento.instrumento'),
+    url(r'^instrumento/?$', 'ttr_app.views_instrumento.instrumento'),
     # url(r'^instrumento/agregar', ''),
-    url(r'^instrumentos/buscar/$', 'ttr_app.views_buscar_instr.buscar'),
-    url(r'^instrumentos/buscar/mostrar$', 'ttr_app.views_buscar_instr.buscar_insts'),
+    url(r'^instrumentos/buscar/?$', 'ttr_app.views_buscar_instr.buscar'),
+    url(r'^instrumentos/buscar/mostrar/?$', 'ttr_app.views_buscar_instr.buscar_insts'),
     # url(r'^pdf/', 'ttr_app.views_buscar_instr.some_view'),
+
+    url(r'^instrumento/eliminar/?$', 'ttr_app.views_instrumento.instrumento'),
 
     url(r'^instrumento/rubrica/agregar/?$', 'ttr_app.views_inst_rubrica.agregar'),
     url(r'^instrumento/rubrica/editar/?$', 'ttr_app.views_inst_rubrica.editar'),
