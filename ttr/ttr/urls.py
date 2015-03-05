@@ -23,6 +23,8 @@ urlpatterns = patterns('',
     url(r'^superior/?$', 'ttr_app.views.superior'),
     url(r'^medioSuperior/?$', 'ttr_app.views.mediosuperior'),
 
+    url(r'^estadisticas/?$', 'ttr_app.views.estadisticas'),
+
     url(r'^estructura/?$', 'ttr_app.views.estructura'),
     url(r'^estructura/json/(?P<node>\w+)(/(?P<node_id>\d{1,5}))?$', 'ttr_app.views.estructura_json'),
     url(r'^estructura/json/$', 'ttr_app.views.estructura_json'),
