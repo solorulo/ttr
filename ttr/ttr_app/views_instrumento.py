@@ -18,7 +18,7 @@ def instrumento(request):
         edit = request.GET.get('edit')
         oficial = request.GET.get('oficial')
         inst = get_object_or_404(InstrumentoEvaluacion, pk=int(idx))
-        print inst
+        print (inst)
         if oficial:
             inst.oficial = (oficial.lower()=='true')
             inst.save()
@@ -66,7 +66,7 @@ def eliminar(request):
     if (request.method == "POST"):
         idx = request.GET.get('id')
         inst = get_object_or_404(InstrumentoEvaluacion, pk=int(idx))
-        print inst
+        print (inst)
         inst.delete()
         return HttpResponse('false')
         

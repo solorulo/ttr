@@ -18,18 +18,18 @@ def agregar(request):
         asignatura = request.POST.get('asignatura')
         oficial = request.POST.get('oficial')
         
-        print request.POST
+        print (request.POST)
         pod_vals = request.POST.get('pod_vals[]')
-        print "pod_vals "
-        print pod_vals
+        print ("pod_vals ")
+        print (pod_vals)
         pod_vals = json.loads(pod_vals)
         cats = request.POST.get('cats[]')
-        print "cats "
-        print cats
+        print ("cats ")
+        print (cats)
         cats = json.loads(cats)
         pods = request.POST.get('pods[]')
-        print "pods "
-        print pods
+        print ("pods ")
+        print (pods)
         pods = json.loads(pods)
 
         try:
@@ -49,7 +49,7 @@ def agregar(request):
         ponderacion_vals = {}
         for idx1, cat in enumerate(cats):
             print ("nueva cat")
-            print cat
+            print (cat)
             """
             'val' : cat,
             'index_cat' : meta_index_cat
@@ -65,7 +65,7 @@ def agregar(request):
 
         for idx, pod_val in enumerate(pod_vals):
             print ("nueva pond_val")
-            print pod_val
+            print (pod_val)
             """
             'index_pod' : meta_index,
             'meta_new' : meta_new,
@@ -83,7 +83,7 @@ def agregar(request):
 
         for idx, pod in enumerate(pods):
             print ("nueva pond")
-            print pod
+            print (pod)
             """
             'index' : indexPond,
             'cat' : indexRow,
@@ -110,10 +110,10 @@ def ver(request):
     the_cats = CategoriaRubrica.objects.filter(rubrica_id=the_rubrica.pk)
     the_ponds = PonderacionRubrica.objects.filter(rubrica_id=the_rubrica.pk)
     fpods = CriterioRubrica.objects.filter(rubrica_id=the_rubrica.pk)
-    print the_rubrica
-    print the_cats
-    print the_ponds
-    print fpods
+    print (the_rubrica)
+    print (the_cats)
+    print (the_ponds)
+    print (fpods)
     return render(request,'Instrumento/Rubrica/rubrica_ver.html', { 
         'instrumento':the_rubrica, 
         'cats' : the_cats, 
@@ -129,18 +129,18 @@ def editar(request):
         asignatura = request.POST.get('asignatura')
         oficial = request.POST.get('oficial')
         
-        print request.POST
+        print (request.POST)
         pod_vals = request.POST.get('pod_vals[]')
-        print "pod_vals "
-        print pod_vals
+        print ("pod_vals ")
+        print (pod_vals)
         pod_vals = json.loads(pod_vals)
         cats = request.POST.get('cats[]')
-        print "cats "
-        print cats
+        print ("cats ")
+        print (cats)
         cats = json.loads(cats)
         pods = request.POST.get('pods[]')
-        print "pods "
-        print pods
+        print ("pods ")
+        print (pods)
         pods = json.loads(pods)
 
         try:
@@ -163,7 +163,7 @@ def editar(request):
         CategoriaRubrica.objects.filter(rubrica_id=new_rubrica.pk).delete()
         for idx1, cat in enumerate(cats):
             print ("nueva cat")
-            print cat
+            print (cat)
             """
             'val' : cat,
             'index_cat' : meta_index_cat
@@ -180,7 +180,7 @@ def editar(request):
         PonderacionRubrica.objects.filter(rubrica_id=new_rubrica.pk).delete()
         for idx, pod_val in enumerate(pod_vals):
             print ("nueva pond_val")
-            print pod_val
+            print (pod_val)
             """
             'index_pod' : meta_index,
             'meta_new' : meta_new,
@@ -199,7 +199,7 @@ def editar(request):
         CriterioRubrica.objects.filter(rubrica_id=new_rubrica.pk).delete()
         for idx, pod in enumerate(pods):
             print ("nueva pond")
-            print pod
+            print (pod)
             """
             'index' : indexPond,
             'cat' : indexRow,
@@ -222,10 +222,10 @@ def editar(request):
         the_cats = CategoriaRubrica.objects.filter(rubrica_id=the_rubrica.pk)
         the_ponds = PonderacionRubrica.objects.filter(rubrica_id=the_rubrica.pk)
         fpods = CriterioRubrica.objects.filter(rubrica_id=the_rubrica.pk)
-        print the_rubrica
-        print the_cats
-        print the_ponds
-        print fpods
+        print (the_rubrica)
+        print (the_cats)
+        print (the_ponds)
+        print (fpods)
         return render(request,'Instrumento/Rubrica/rubrica_editar.html', {
             "ASIGNATURAS" : Asignatura.objects.all(),
             'instrumento':the_rubrica, 

@@ -29,8 +29,8 @@ def buscar(request):
     if request.method == "GET":
         type_query = request.GET.get('typeq', '')
         query = request.GET.get('query', '')
-        print type_query
-        print query
+        print (type_query)
+        print (query)
         if (type_query.lower() == 'departamento'):
             deptos_db = Departamento.objects.all()
             deptos_db = deptos_db if not query else deptos_db.filter(nombre__icontains=query)

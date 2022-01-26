@@ -17,12 +17,12 @@ def agregar(request):
         asignatura = request.POST.get('asignatura')
         oficial = request.POST.get('oficial')
 
-        print request.POST
+        print (request.POST)
 
         listaobs = request.POST.get('listaobs[]')
-        print "listaobs "
+        print ("listaobs ")
         listaobs = json.loads(listaobs)
-        print listaobs
+        print (listaobs)
 
         try:
             autor = request.user.myuser.pk
@@ -38,8 +38,8 @@ def agregar(request):
         new_listaobs.save()
 
         for idx, indicador in enumerate(listaobs):
-            print "nuevo indicador"
-            print indicador
+            print ("nuevo indicador")
+            print (indicador)
             """
             'text' : text,
             'value' : value,
@@ -65,7 +65,7 @@ def ver(request):
     idx = request.GET.get('id')
     the_obs = get_object_or_404(ListaObservacion, pk=int(idx))
     the_indicadores = IndicadorListaObs.objects.filter(listaobs_id=the_obs.pk)
-    print the_indicadores
+    print (the_indicadores)
     return render(request,'Instrumento/Observacion/obs_ver.html', { 
         'instrumento':the_obs, 
         'indicadores' : the_indicadores, 
@@ -79,12 +79,12 @@ def editar(request):
         asignatura = request.POST.get('asignatura')
         oficial = request.POST.get('oficial')
 
-        print request.POST
+        print (request.POST)
 
         listaobs = request.POST.get('listaobs[]')
-        print "listaobs "
+        print ("listaobs ")
         listaobs = json.loads(listaobs)
-        print listaobs
+        print (listaobs)
 
         new_listaobs = None
         try:
@@ -103,19 +103,19 @@ def editar(request):
 
         IndicadorListaObs.objects.filter(listaobs_id=new_listaobs.pk).delete()
         for idx, indicador in enumerate(listaobs):
-            print "nuevo indicador"
-            print indicador
+            print ("nuevo indicador")
+            print (indicador)
             """
             'text' : text,
             'value' : value,
             'index' : meta_index
             """
             ind_text = indicador['text']
-            print "ind_text "+ind_text
+            print ("ind_text "+ind_text)
             ind_value = indicador['value']
-            print "ind_value "+ind_value
+            print ("ind_value "+ind_value)
             ind_index = None if not 'index' in indicador else indicador['index']
-            print "ind_index "+ind_index
+            print ("ind_index "+ind_index)
             new_indicador = IndicadorListaObs(
                 listaobs_id=new_listaobs.pk,
                 texto=ind_text,
@@ -126,7 +126,7 @@ def editar(request):
     elif request.method == 'GET':
         the_obs = get_object_or_404(ListaObservacion, pk=int(idx))
         the_indicadores = IndicadorListaObs.objects.filter(listaobs_id=the_obs.pk)
-        print the_indicadores
+        print (the_indicadores)
         return render(request,'Instrumento/Observacion/obs_editar.html', { 
             'instrumento':the_obs, 
             'indicadores' : the_indicadores, 

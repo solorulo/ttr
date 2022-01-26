@@ -36,7 +36,7 @@ class MyUser(User):
 		# (SUPER_ADMIN, "Super Administrador"),
 	)
 	rol = models.IntegerField(choices=TIPO_CHOICES, default=PROFESOR)
-	plantel = models.ForeignKey(Plantel)
+	plantel = models.ForeignKey(Plantel, null=True, on_delete=models.SET_NULL)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.get_full_name()
@@ -49,14 +49,14 @@ class MyUser(User):
 
 class Departamento(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
-	plantel = models.ForeignKey(Plantel)
+	plantel = models.ForeignKey(Plantel, null=True, on_delete=models.SET_NULL)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.nombre or ''
 
 class Academia(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
-	depto = models.ForeignKey(Departamento)
+	depto = models.ForeignKey(Departamento, null=True, on_delete=models.SET_NULL)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.nombre
@@ -64,16 +64,16 @@ class Academia(models.Model):
 class Asignatura(models.Model):
 	nombre = models.CharField(max_length=60, null=True, blank=True)
 	fecha_creacion = models.DateTimeField(auto_now_add=True)
-	autor = models.ForeignKey(MyUser, related_name="asignatura_autor")
-	academia = models.ForeignKey(Academia)
-	presidente = models.ForeignKey(MyUser, related_name="asignatura_presidente", null=True, blank=True)
+	autor = models.ForeignKey(MyUser, related_name="asignatura_autor", null=True, on_delete=models.SET_NULL)
+	academia = models.ForeignKey(Academia, null=True, on_delete=models.SET_NULL)
+	presidente = models.ForeignKey(MyUser, related_name="asignatura_presidente", null=True, blank=True, on_delete=models.SET_NULL)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.nombre
 
 class Clases (models.Model):
 	asignaturas = models.ManyToManyField(Asignatura, blank=True)
-	user = models.OneToOneField(MyUser, primary_key=True)
+	user = models.OneToOneField(MyUser, primary_key=True, on_delete=models.SET)
 
 #####################
 class InstrumentoEvaluacion(models.Model):
@@ -90,8 +90,8 @@ class InstrumentoEvaluacion(models.Model):
 	titulo = models.CharField(max_length=60, null=True, blank=True)
 	descripcion = models.CharField(max_length=65535, null=True, blank=True)
 	fecha_creacion = models.DateTimeField(auto_now_add=True)
-	autor = models.ForeignKey(MyUser, related_name="instrumento_autor")
-	asignatura = models.ForeignKey(Asignatura, null=True, blank=True)
+	autor = models.ForeignKey(MyUser, related_name="instrumento_autor", null=True, on_delete=models.SET_NULL)
+	asignatura = models.ForeignKey(Asignatura, null=True, blank=True, on_delete=models.SET_NULL)
 	oficial = models.BooleanField(default=False)
 	fecha_modif = models.DateTimeField(auto_now=True)
 
@@ -104,22 +104,22 @@ class Rubrica (InstrumentoEvaluacion):
 
 class CategoriaRubrica (models.Model):
 	texto = models.CharField(max_length=65535, null=True, blank=True)
-	rubrica = models.ForeignKey(Rubrica)
+	rubrica = models.ForeignKey(Rubrica, null=True, on_delete=models.SET_NULL)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.texto
 
 class PonderacionRubrica (models.Model):
 	valor = models.CharField(max_length=65535, null=True, blank=True)
-	rubrica = models.ForeignKey(Rubrica)
+	rubrica = models.ForeignKey(Rubrica, null=True, on_delete=models.SET_NULL)
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return str(self.valor)
 
 class CriterioRubrica (models.Model):
-	rubrica = models.ForeignKey(Rubrica)
-	ponderacion = models.ForeignKey(PonderacionRubrica)
-	categoria = models.ForeignKey(CategoriaRubrica)
+	rubrica = models.ForeignKey(Rubrica, null=True, on_delete=models.SET_NULL)
+	ponderacion = models.ForeignKey(PonderacionRubrica, null=True, on_delete=models.SET_NULL)
+	categoria = models.ForeignKey(CategoriaRubrica, null=True, on_delete=models.SET_NULL)
 	descripcion = models.CharField(max_length=60, null=True, blank=True)
 
 	def __unicode__(self):              # __unicode__ on Python 2
@@ -130,9 +130,9 @@ class ListaCotejo (InstrumentoEvaluacion):
 	pass
 
 class IndicadorCotejo(models.Model):
-	listacotejo = models.ForeignKey(ListaCotejo)
+	listacotejo = models.ForeignKey(ListaCotejo, null=True, on_delete=models.SET_NULL)
 	texto = models.CharField(max_length=60, null=True, blank=True)
-	check = models.BooleanField(default=False) 
+	check_field = models.BooleanField(default=False) 
 	observaciones = models.CharField(max_length=65535, null=True, blank=True)
 
 	def __unicode__(self):              # __unicode__ on Python 2
@@ -143,7 +143,7 @@ class ListaObservacion(InstrumentoEvaluacion):
 	pass
 
 class IndicadorListaObs(models.Model):
-	listaobs = models.ForeignKey(ListaObservacion)
+	listaobs = models.ForeignKey(ListaObservacion, null=True, on_delete=models.SET_NULL)
 	texto = models.CharField(max_length=60, null=True, blank=True)
 
 	SIN_VALOR 	= 0
@@ -167,16 +167,16 @@ class IndicadorListaObs(models.Model):
 
 #####################
 class EvaluacionInstrumento(models.Model):
-	user = models.ForeignKey(MyUser)
-	instrumento = models.ForeignKey(InstrumentoEvaluacion)
+	user = models.ForeignKey(MyUser, null=True, on_delete=models.SET_NULL)
+	instrumento = models.ForeignKey(InstrumentoEvaluacion, null=True, on_delete=models.SET_NULL)
 	valor = models.IntegerField() #definir valor maximo y minimo
 
 	fecha_creacion = models.DateTimeField(auto_now_add=True)
 	fecha_modif = models.DateTimeField(auto_now=True)
 
 class ComentarioInstrumento(models.Model):
-	user = models.ForeignKey(MyUser)
-	instrumento = models.ForeignKey(InstrumentoEvaluacion)
+	user = models.ForeignKey(MyUser, null=True, on_delete=models.SET_NULL)
+	instrumento = models.ForeignKey(InstrumentoEvaluacion, null=True, on_delete=models.SET_NULL)
 	texto = models.CharField(max_length=65535, null=True, blank=True)
 	
 	fecha_creacion = models.DateTimeField(auto_now_add=True)

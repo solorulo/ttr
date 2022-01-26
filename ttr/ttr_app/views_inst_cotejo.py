@@ -17,7 +17,7 @@ def agregar(request):
         asignatura = request.POST.get('asignatura')
         oficial = request.POST.get('oficial')
 
-        print request.POST
+        print (request.POST)
 
         try:
             autor = request.user.myuser.pk
@@ -25,8 +25,8 @@ def agregar(request):
             pass
 
         listacotejo = request.POST.get('listacotejo[]')
-        print "listacotejo "
-        print listacotejo
+        print ("listacotejo ")
+        print (listacotejo)
         listacotejo = json.loads(listacotejo)
 
         new_listacotejo = ListaCotejo(
@@ -38,8 +38,8 @@ def agregar(request):
         new_listacotejo.save()
 
         for idx, indicador in enumerate(listacotejo):
-            print "nuevo indicador"
-            print indicador
+            print ("nuevo indicador")
+            print (indicador)
             """
             'text' : text,
             'checked' : checked,
@@ -64,7 +64,7 @@ def ver(request):
     idx = request.GET.get('id')
     the_cotejo = ListaCotejo.objects.get(pk=int(idx))
     the_indicadores = IndicadorCotejo.objects.filter(listacotejo_id=the_cotejo.pk)
-    print the_indicadores
+    print (the_indicadores)
     return render(request,'Instrumento/Cotejo/cotejo_ver.html', 
         { 'instrumento':the_cotejo, 'indicadores' : the_indicadores })
 
@@ -77,11 +77,11 @@ def editar(request):
         asignatura = request.POST.get('asignatura')
         oficial = request.POST.get('oficial')
 
-        print request.POST
+        print (request.POST)
 
         listacotejo = request.POST.get('listacotejo[]')
-        print "listacotejo "
-        print listacotejo
+        print ("listacotejo ")
+        print (listacotejo)
         listacotejo = json.loads(listacotejo)
 
         try:
@@ -101,8 +101,8 @@ def editar(request):
 
         IndicadorCotejo.objects.filter(listacotejo_id=new_listacotejo.pk).delete()
         for idx, indicador in enumerate(listacotejo):
-            print "nuevo indicador"
-            print indicador
+            print ("nuevo indicador")
+            print (indicador)
             """
             'text' : text,
             'checked' : checked,
@@ -123,7 +123,7 @@ def editar(request):
     elif request.method == "GET":
         the_cotejo = get_object_or_404(ListaCotejo, pk=int(idx))
         the_indicadores = IndicadorCotejo.objects.filter(listacotejo_id=the_cotejo.pk)
-        print the_indicadores
+        print (the_indicadores)
         return render(request,'Instrumento/Cotejo/cotejo_editar.html', { 
             'instrumento':the_cotejo, 
             'indicadores' : the_indicadores,

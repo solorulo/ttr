@@ -34,8 +34,8 @@ def buscar(request):
     if request.method == "GET":
         type_query = request.GET.get('typeq', '')
         query = request.GET.get('query', '')
-        print type_query
-        print query
+        print (type_query)
+        print (query)
         if (type_query.lower() == 'asignatura'):
             asignaturas_db = Asignatura.objects.all()
             asignaturas_db = asignaturas_db if not query else asignaturas_db.filter(

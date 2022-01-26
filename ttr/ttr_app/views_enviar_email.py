@@ -16,7 +16,7 @@ from django.conf import settings
 def enviar_correo(request):
 	correo=request.POST.get("email",None)
 	Usuario=MyUser.objects.get(username=correo)
-	print "correo:"+ correo
+	print ("correo:"+ correo)
 	if Usuario is not None:
 		email_context={
 			'Recuperar Contrasena',
